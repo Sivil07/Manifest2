@@ -7,3 +7,40 @@
   margin: 0px;
   box-sizing: border-box;
 }
+
+:root {
+  --clr-page-bg: #f7f3ff;
+  --clr-lavender: #ded2f8;
+  --clr-white: #ffffff;
+  --clr-muted: rgb(95, 92, 92);
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--clr-page-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.task-content {
+  background-color: var(--clr-white);
+  border-radius: 1rem;
+  border: 1px solid var(--clr-lavender);
+  padding: 1rem;
+}
+
+
+.task-title {
+  font-weight: bold;
+}
+
+.task-reason {
+  color: var(--clr-muted);
+}
