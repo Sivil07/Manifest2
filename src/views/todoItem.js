@@ -12,11 +12,11 @@ class TodoItem extends HTMLElement {
         shadow.append(template.content.cloneNode(true));
     }
 
-    set todoData(user) {
+    set todoData(todo) {
         const title = this.shadowRoot.querySelector(".task-title");
         const reason = this.shadowRoot.querySelector(".task-reason");
-        title.textContent = user.title;
-        reason.textContent = user.reason;
+        title.textContent = todo.title;
+        reason.textContent = todo.reason;
     }
 }
 
