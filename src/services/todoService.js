@@ -31,6 +31,8 @@ class TodoService {
             const todo = this.#rebuildTodo(rawTodo);
             this.#todos.push(todo);
         }
+
+        if (savedData === null) this.#saveTodos();
     }
 }
 
