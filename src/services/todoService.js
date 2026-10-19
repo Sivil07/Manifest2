@@ -6,6 +6,10 @@ class TodoService {
     get allTodos() {
         return [...this.#todos];
     }
+
+    rebuildTodo(rawTodo) {
+        return new Todo(rawTodo);
+    }
       
     createTodo(todoData) {
         const todo = new Todo(todoData);
@@ -15,7 +19,16 @@ class TodoService {
     }
 
     saveTodos() {
-        localStorage.setItem("todo", JSON.stringify(this.#todos));
+        localStorage.setItem("todos", JSON.stringify(this.#todos));
+    }
+
+    loadTodos() {
+        this.#todos = [];
+        const arrayObject = JSON.parse(localStorage.getItem("todos"));
+        for (const rawTodo of arrayObject) {
+            const todo = this.rebuildTodo(rawTodo);
+            this.#todos.push(todo);
+        }
     }
 }
 
