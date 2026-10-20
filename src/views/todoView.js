@@ -5,6 +5,17 @@ class TodoView {
         this.todoAction = todoAction;
     }
 
+    displayTodoForm() {
+        const todoForm = document.createElement("todo-form");
+        this.todoDialog.appendChild(todoForm);
+        this.todoDialog.showModal();
+    }
+
+    closeTodoDialog(todoDialog) {
+        todoDialog.close();
+        this.todoDialog.innerHTML = "";
+    }
+
     displayTodos(todos) {
         this.todoList.innerHTML = "";
 
