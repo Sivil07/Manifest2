@@ -19,8 +19,38 @@ body {
   min-height: 100vh;
   background-color: var(--clr-page-bg);
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
+}
+
+#my-dialog {
+    margin: auto;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+#form-dialog {
+  display: grid;
+  gap: 1rem;
+  grid-template-areas: 
+    "Header"
+    "Title-Input"
+    "Reason-Input"
+    "Submit-Button";
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+#todo-action {
+  padding: 1rem;
+  font-size: 1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--clr-lavender);
 }
 
 #task-list {
