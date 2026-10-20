@@ -2,7 +2,25 @@ class TodoController {
     constructor(todoService, todoView) {
         this.todoService = todoService;
         this.todoView = todoView;
+
+        const todoAction = this.todoView.todoAction;
+        todoAction.addEventListener("click", () => {
+            this.todoView.displayTodoForm();
+        });
+
+        const todoDialog = this.todoView.todoDialog;
+        todoDialog.addEventListener("create-todo", (e) => {
+            const todoData = e.detail.todoDetails;
+            this.#processNewTodo(todoData);
+            todoView.closeTodoDialog(todoDialog);
+        });
     }
+
+    #processNewTodo(todoData) {
+        this.todoService.createTodo(todoData);
+        this.#refreshUI();
+    }
+
 
     initialize() {
         this.todoService.loadTodos();
