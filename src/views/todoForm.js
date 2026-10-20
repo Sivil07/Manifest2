@@ -4,11 +4,11 @@ template.innerHTML = `
     <h2 part="form-header">New Todo</h2>
     <div part="form-group">
         <label part="form-label" for="">What do you intend to do?</label>
-        <input type="text" placeholder="Call the dentist" name="title">
+        <input type="text" placeholder="Call the dentist" name="title" minlength="5" maxlength="20" required>
     </div>
     <div part="form-group">
         <label part="form-label" for="">Why does it matter?</label>
-        <input type="text" placeholder="Your reason" name="reason">
+        <input type="text" placeholder="Your reason" name="reason" minlength="5" maxlength="20" required>
     </div>
     <button part="form-submit" type="submit">Add Todo</button>
 </form>
