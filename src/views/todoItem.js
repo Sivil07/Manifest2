@@ -1,8 +1,8 @@
 const template = document.createElement("template");
 template.innerHTML = `
-<div class="task-content">
-    <p class="task-title"></p>
-    <p class="task-reason">/p>
+<div part="task-content">
+    <p part="task-title"></p>
+    <p part="task-reason">/p>
 </div>
 `
 class TodoItem extends HTMLElement {
@@ -13,8 +13,8 @@ class TodoItem extends HTMLElement {
     }
 
     set todoData(todo) {
-        const title = this.shadowRoot.querySelector(".task-title");
-        const reason = this.shadowRoot.querySelector(".task-reason");
+        const title = this.shadowRoot.querySelector('[part="task-title"]');
+        const reason = this.shadowRoot.querySelector('[part="task-reason"]');
         title.textContent = todo.title;
         reason.textContent = todo.reason;
     }

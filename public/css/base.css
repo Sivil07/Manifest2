@@ -29,18 +29,17 @@ body {
   gap: 1rem;
 }
 
-.task-content {
+todo-item::part(task-content) {
   background-color: var(--clr-white);
   border-radius: 1rem;
   border: 1px solid var(--clr-lavender);
   padding: 1rem;
 }
 
-
-.task-title {
+todo-item::part(task-title) {
   font-weight: bold;
 }
 
-.task-reason {
+todo-item::part(task-reason) {
   color: var(--clr-muted);
 }
