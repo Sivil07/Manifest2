@@ -1,15 +1,17 @@
 class TodoView {
-    constructor(parentContainer) {
-        this.parentContainer = parentContainer;
+    constructor(todoList, todoDialog, todoAction) {
+        this.todoList = todoList;
+        this.todoDialog = todoDialog;
+        this.todoAction = todoAction;
     }
 
     displayTodos(todos) {
-        this.parentContainer.innerHTML = "";
+        this.todoList.innerHTML = "";
 
         for (const todo of todos) {
             const todoItem = document.createElement("todo-item");
             todoItem.todoData = todo;
-            this.parentContainer.appendChild(todoItem);
+            this.todoList.appendChild(todoItem);
         }
     } 
 }
