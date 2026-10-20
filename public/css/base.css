@@ -31,6 +31,10 @@ body {
     border-radius: 1rem;
 }
 
+#my-dialog::backdrop {
+  backdrop-filter: blur(10px);
+}
+
 todo-form::part(form-dialog) {
   display: grid;
   gap: 1rem;
