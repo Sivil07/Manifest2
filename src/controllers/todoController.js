@@ -14,6 +14,10 @@ class TodoController {
             this.#processNewTodo(todoData);
             todoView.closeTodoDialog(todoDialog);
         });
+
+        todoDialog.addEventListener("close", () => {
+            todoView.closeTodoDialog(todoDialog)
+        })
     }
 
     #processNewTodo(todoData) {
