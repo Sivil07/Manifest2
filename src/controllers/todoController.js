@@ -19,19 +19,30 @@ class TodoController {
             const id = e.detail.id;
             const todo = this.todoService.findTodoById(id);
             this.todoView.displayTodoForm(todo);
-    
         });
 
         const todoDialog = this.todoView.todoDialog;
-        todoDialog.addEventListener("create-todo", (e) => {
+        todoDialog.addEventListener("save-todo", (e) => {
             const todoData = e.detail.todoDetails;
-            this.#processNewTodo(todoData);
-            todoView.closeTodoDialog(todoDialog);
+            const todoId = e.detail.todoId;
+            if (todoId) {
+                this.#processEditingTodo(todoId, todoData);
+                todoView.closeTodoDialog(todoDialog);
+
+            } else {
+                this.#processNewTodo(todoData);
+                todoView.closeTodoDialog(todoDialog);
+            }
         });
 
         todoDialog.addEventListener("close", () => {
             todoView.closeTodoDialog(todoDialog)
         })
+    }
+
+    #processEditingTodo(id, todoData) {
+        this.todoService.editTodo(id, todoData);
+        this.#refreshUI();
     }
 
     #processNewTodo(todoData) {
