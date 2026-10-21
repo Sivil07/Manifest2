@@ -1,9 +1,9 @@
 const template = document.createElement("template");
 template.innerHTML = `
-<div part="task-content">
-    <p part="task-title"></p>
-    <p part="task-reason">/p>
-</div>
+<button type="button" part="task-content">
+    <span part="task-title"></span>
+    <span part="task-reason"></span>
+</button>
 `
 class TodoItem extends HTMLElement {
     constructor() {
