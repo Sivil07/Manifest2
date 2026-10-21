@@ -15,17 +15,20 @@ template.innerHTML = `
 `
 
 class TodoForm extends HTMLElement {
+    #todoId;
+    
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: "open" });
         shadow.append(template.content.cloneNode(true));
     }
 
-    set formData({ title = "", reason = "" } = {}) {
+    set formData({ title = "", reason = "", id = undefined } = {}) {
         const titleInput = this.shadowRoot.querySelector(`[part="form-input-title"]`);
         const reasonInput = this.shadowRoot.querySelector(`[part="form-input-reason"]`);
         titleInput.value = title;
         reasonInput.value = reason;
+        this.#todoId = id;
     }
 
     connectedCallback() {
@@ -34,10 +37,11 @@ class TodoForm extends HTMLElement {
             e.preventDefault();
             const data = new FormData(form);
             const entries = Object.fromEntries(data.entries());
-            this.dispatchEvent( new CustomEvent( "create-todo", {
+            this.dispatchEvent( new CustomEvent( "save-todo", {
                 bubbles: true,
                 detail: {
-                    todoDetails: entries
+                    todoDetails: entries,
+                    todoId: this.#todoId
                 }
             }));
         })
