@@ -13,7 +13,14 @@ class TodoController {
             const id = e.detail.id;
             const todo = this.todoService.findTodoById(id);
             this.todoView.displayOneTodo(todo);
-        })
+        });
+
+        todoList.addEventListener("edit-todo-item", (e) => {
+            const id = e.detail.id;
+            const todo = this.todoService.findTodoById(id);
+            this.todoView.displayTodoForm(todo);
+    
+        });
 
         const todoDialog = this.todoView.todoDialog;
         todoDialog.addEventListener("create-todo", (e) => {
