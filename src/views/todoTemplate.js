@@ -12,6 +12,8 @@ template.innerHTML = `
 `
 
 class TodoTemplate extends HTMLElement {
+    #todoId;
+
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: "open" });
@@ -21,10 +23,9 @@ class TodoTemplate extends HTMLElement {
     set templateData(todoData) {
         const title = this.shadowRoot.querySelector(`[part="title"]`);
         const reason = this.shadowRoot.querySelector(`[part="reason"]`);
-        const editButton = this.shadowRoot.querySelector(`[part~="edit-todo"]`);
-        editButton.dataset.todoId = todoData.id;
         title.textContent = todoData.title;
         reason.textContent = todoData.reason;
+        this.#todoId = todoData.id;
     }
 
     connectedCallback() {
@@ -35,12 +36,11 @@ class TodoTemplate extends HTMLElement {
 
 
         const editButton = this.shadowRoot.querySelector(`[part~="edit-todo"]`);
-        editButton.addEventListener("click", (e) => {
-            const todoId = e.currentTarget.dataset.todoId;
+        editButton.addEventListener("click", () => {
             this.dispatchEvent( new CustomEvent("edit-todo-item", {
                 bubbles: true,
                 detail: {
-                    id: todoId
+                    id: this.#todoId
                 }
             }))
         })
