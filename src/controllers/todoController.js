@@ -21,6 +21,11 @@ class TodoController {
             this.todoView.displayTodoForm(todo);
         });
 
+        todoList.addEventListener("delete-todo-item", (e) => {
+            const id = e.detail.id;
+            this.#processDeletingTodo(id);
+        });
+
         const todoDialog = this.todoView.todoDialog;
         todoDialog.addEventListener("save-todo", (e) => {
             const todoData = e.detail.todoDetails;
@@ -38,6 +43,11 @@ class TodoController {
         todoDialog.addEventListener("close", () => {
             todoView.closeTodoDialog(todoDialog)
         })
+    }
+
+    #processDeletingTodo(id) {
+        this.todoService.deleteTodo(id);
+        this.#refreshUI();
     }
 
     #processEditingTodo(id, todoData) {
