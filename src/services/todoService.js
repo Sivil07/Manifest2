@@ -17,6 +17,12 @@ class TodoService {
         this.#todos.push(todo); 
         this.#saveTodos();
     }
+    
+    editTodo(id, todoData) {
+        const todo = this.findTodoById(id);
+        todo.updateTodo(todoData);
+        this.#saveTodos();
+    }
 
     findTodoById(id) {
         for (const todo of this.#todos) {
@@ -24,7 +30,6 @@ class TodoService {
                 return todo;
             }
         }
-
     }
 
     #saveTodos() {
