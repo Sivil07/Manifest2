@@ -30,7 +30,7 @@ class TodoView {
         const todoTemplate = document.createElement("todo-template");
         todoTemplate.id = "template";
         todoTemplate.templateData = todo;
-        document.body.appendChild(todoTemplate);
+        this.todoList.appendChild(todoTemplate);
     }
 }
 
