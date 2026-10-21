@@ -5,8 +5,7 @@ template.innerHTML = `
     <h1 part="title"></h1>
     <p part="reason"></p>
 </div>
-<button part="template-actions">Edit</button>
-
+<button part="template-actions edit-todo">Edit</button>
 `
 
 class TodoTemplate extends HTMLElement {
@@ -19,6 +18,8 @@ class TodoTemplate extends HTMLElement {
     set templateData(todoData) {
         const title = this.shadowRoot.querySelector(`[part="title"]`);
         const reason = this.shadowRoot.querySelector(`[part="reason"]`);
+        const editButton = this.shadowRoot.querySelector(`[part~="edit-todo"]`);
+        editButton.dataset.todoId = todoData.id;
         title.textContent = todoData.title;
         reason.textContent = todoData.reason;
     }
@@ -27,7 +28,7 @@ class TodoTemplate extends HTMLElement {
         const closeButton = this.shadowRoot.querySelector(`[part~="close-todo"]`);
         closeButton.addEventListener("click", () => {
             this.remove();
-        })
+        });
     }
 }
 
