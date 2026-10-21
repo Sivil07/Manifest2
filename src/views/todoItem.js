@@ -6,6 +6,7 @@ template.innerHTML = `
 </button>
 `
 class TodoItem extends HTMLElement {
+    #todoId;
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: "open" });
@@ -15,20 +16,18 @@ class TodoItem extends HTMLElement {
     set todoData(todo) {
         const title = this.shadowRoot.querySelector('[part="task-title"]');
         const reason = this.shadowRoot.querySelector('[part="task-reason"]');
-        const todoContent = this.shadowRoot.querySelector(`[part="task-content"]`);
-        todoContent.dataset.todoId = todo.id;
         title.textContent = todo.title;
         reason.textContent = todo.reason;
+        this.#todoId = todo.id;
     }
 
     connectedCallback() {
         const todoContent = this.shadowRoot.querySelector(`[part="task-content"]`);
-        todoContent.addEventListener("click", (e) => {
-            const todoId = e.currentTarget.dataset.todoId;
+        todoContent.addEventListener("click", () => {
             this.dispatchEvent( new CustomEvent( "view-todo-item", {
                 bubbles: true,
                 detail: {
-                    id: todoId
+                    id: this.#todoId
                 }
             }))
         })
