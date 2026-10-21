@@ -1,7 +1,7 @@
 const template = document.createElement("template");
 template.innerHTML = `
 <form part="form-dialog">
-    <h2 part="form-header">New Todo</h2>
+    <h2 part="form-header"></h2>
     <div part="form-group">
         <label part="form-label" for="">What do you intend to do?</label>
         <input part="form-input-title"  type="text" placeholder="Call the dentist" name="title" minlength="5" maxlength="20" required>
@@ -16,7 +16,7 @@ template.innerHTML = `
 
 class TodoForm extends HTMLElement {
     #todoId;
-    
+
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: "open" });
@@ -24,11 +24,13 @@ class TodoForm extends HTMLElement {
     }
 
     set formData({ title = "", reason = "", id = undefined } = {}) {
+        const header = this.shadowRoot.querySelector(`[part="form-header"]`);
         const titleInput = this.shadowRoot.querySelector(`[part="form-input-title"]`);
         const reasonInput = this.shadowRoot.querySelector(`[part="form-input-reason"]`);
         titleInput.value = title;
         reasonInput.value = reason;
         this.#todoId = id;
+        header.textContent = this.#todoId ? "Edit Todo" : "New Todo";
     }
 
     connectedCallback() {
