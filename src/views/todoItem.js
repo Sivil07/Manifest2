@@ -1,12 +1,18 @@
 const template = document.createElement("template");
 template.innerHTML = `
-<button type="button" part="task-content">
-    <span part="task-title"></span>
-    <span part="task-reason"></span>
-</button>
+<div part="task">
+    <label for="complete" part="task-check">
+        <input id="complete" type="checkbox" part="complete-todo">
+    </label>
+    <button type="button" part="task-content">
+        <span part="task-title"></span>
+        <span part="task-reason"></span>
+    </button>
+</div>
 `
 class TodoItem extends HTMLElement {
     #todoId;
+    
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: "open" });

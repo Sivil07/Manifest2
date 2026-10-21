@@ -26,9 +26,9 @@ body {
 }
 
 #my-dialog {
-    margin: auto;
-    padding: 2rem;
-    border-radius: 1rem;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 1rem;
 }
 
 #my-dialog::backdrop {
@@ -42,10 +42,10 @@ body {
   gap: 1rem;
   padding: 1.5rem;
   display: grid;
-  grid-template-areas: 
-  "Close-Template"
-  "Todo-Contents"
-  "Template-Actions";
+  grid-template-areas:
+    "Close-Template"
+    "Todo-Contents"
+    "Template-Actions";
   grid-template-rows: repeat(3, max-content);
 }
 
@@ -63,7 +63,7 @@ todo-template::part(button-group) {
 todo-form::part(form-dialog) {
   display: grid;
   gap: 1rem;
-  grid-template-areas: 
+  grid-template-areas:
     "Header"
     "Title-Input"
     "Reason-Input"
@@ -74,7 +74,6 @@ todo-form::part(form-header) {
   font-weight: bold;
   margin: 0;
 }
-
 
 todo-form::part(form-group) {
   display: flex;
@@ -103,11 +102,26 @@ todo-form::part(form-submit) {
   gap: 1rem;
 }
 
-todo-item::part(task-content) {
+todo-item::part(task) {
+  display: flex;
+  gap: 0.85rem;
   background-color: var(--clr-white);
-  border-radius: 1rem;
   border: 1px solid var(--clr-lavender);
-  padding: 1rem;
+  padding: 0.75rem;
+  border-radius: 1rem;
+}
+
+todo-item::part(complete-todo) {
+  accent-color: rebeccapurple; 
+}
+
+todo-item::part(complete-todo) {
+  margin: 0;
+}
+
+todo-item::part(task-content) {
+  border: none;
+  background-color: transparent;
   display: flex;
   flex-direction: column;
   text-align: left;
