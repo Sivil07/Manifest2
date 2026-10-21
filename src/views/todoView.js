@@ -24,7 +24,14 @@ class TodoView {
             todoItem.todoData = todo;
             this.todoList.appendChild(todoItem);
         }
-    } 
+    }
+    
+    displayOneTodo(todo) {
+        const todoTemplate = document.createElement("todo-template");
+        todoTemplate.id = "template";
+        todoTemplate.templateData = todo;
+        document.body.appendChild(todoTemplate);
+    }
 }
 
 export default TodoView;
