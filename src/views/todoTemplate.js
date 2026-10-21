@@ -23,6 +23,12 @@ class TodoTemplate extends HTMLElement {
         reason.textContent = todoData.reason;
     }
 
+    connectedCallback() {
+        const closeButton = this.shadowRoot.querySelector(`[part~="close-todo"]`);
+        closeButton.addEventListener("click", () => {
+            this.remove();
+        })
+    }
 }
 
 customElements.define("todo-template", TodoTemplate);
