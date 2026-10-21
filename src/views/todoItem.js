@@ -24,7 +24,7 @@ class TodoItem extends HTMLElement {
     connectedCallback() {
         const todoContent = this.shadowRoot.querySelector(`[part="task-content"]`);
         todoContent.addEventListener("click", (e) => {
-            const todoId = e.currentTarget.dataset.id;
+            const todoId = e.currentTarget.dataset.todoId;
             this.dispatchEvent( new CustomEvent( "view-todo-item", {
                 bubbles: true,
                 detail: {
