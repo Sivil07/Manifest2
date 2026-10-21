@@ -4,11 +4,11 @@ template.innerHTML = `
     <h2 part="form-header">New Todo</h2>
     <div part="form-group">
         <label part="form-label" for="">What do you intend to do?</label>
-        <input type="text" placeholder="Call the dentist" name="title" minlength="5" maxlength="20" required>
+        <input part="form-input-title"  type="text" placeholder="Call the dentist" name="title" minlength="5" maxlength="20" required>
     </div>
     <div part="form-group">
         <label part="form-label" for="">Why does it matter?</label>
-        <input type="text" placeholder="Your reason" name="reason" minlength="5" maxlength="20" required>
+        <input part="form-input-reason" type="text" placeholder="Your reason" name="reason" minlength="5" maxlength="20" required>
     </div>
     <button part="form-submit" type="submit">Add Todo</button>
 </form>
@@ -19,6 +19,13 @@ class TodoForm extends HTMLElement {
         super();
         const shadow = this.attachShadow({ mode: "open" });
         shadow.append(template.content.cloneNode(true));
+    }
+
+    set formData({ title = "", reason = "" } = {}) {
+        const titleInput = this.shadowRoot.querySelector(`[part="form-input-title"]`);
+        const reasonInput = this.shadowRoot.querySelector(`[part="form-input-reason"]`);
+        titleInput.value = title;
+        reasonInput.value = reason;
     }
 
     connectedCallback() {

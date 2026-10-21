@@ -5,8 +5,9 @@ class TodoView {
         this.todoAction = todoAction;
     }
 
-    displayTodoForm() {
+    displayTodoForm( todoData = {} ) {
         const todoForm = document.createElement("todo-form");
+        todoForm.formData = todoData;
         this.todoDialog.appendChild(todoForm);
         this.todoDialog.showModal();
     }
