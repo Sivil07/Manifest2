@@ -55,6 +55,11 @@ todo-template::part(template-actions) {
   border-radius: 0.5rem;
 }
 
+todo-template::part(button-group) {
+  display: flex;
+  gap: 1rem;
+}
+
 todo-form::part(form-dialog) {
   display: grid;
   gap: 1rem;

@@ -5,7 +5,10 @@ template.innerHTML = `
     <h1 part="title"></h1>
     <p part="reason"></p>
 </div>
-<button part="template-actions edit-todo">Edit</button>
+<div part="button-group">
+    <button part="template-actions edit-todo">Edit</button>
+    <button part="template-actions delete-todo">Delete</button>
+</div>
 `
 
 class TodoTemplate extends HTMLElement {
