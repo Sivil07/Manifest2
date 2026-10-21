@@ -35,6 +35,16 @@ class TodoTemplate extends HTMLElement {
         });
 
 
+        const deleteButton = this.shadowRoot.querySelector(`[part~="delete-todo"]`);
+        deleteButton.addEventListener("click", () => {
+            this.dispatchEvent( new CustomEvent( "delete-todo-item", {
+                bubbles: true,
+                detail: {
+                    id: this.#todoId
+                }
+            }))
+        });
+
         const editButton = this.shadowRoot.querySelector(`[part~="edit-todo"]`);
         editButton.addEventListener("click", () => {
             this.dispatchEvent( new CustomEvent("edit-todo-item", {
