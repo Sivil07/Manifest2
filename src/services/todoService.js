@@ -16,7 +16,15 @@ class TodoService {
         const todo = new Todo(todoData);
         this.#todos.push(todo); 
         this.#saveTodos();
-        return todo;
+    }
+
+    findTodoById(id) {
+        for (const todo of this.#todos) {
+            if (todo.id === id) {
+                return todo;
+            }
+        }
+
     }
 
     #saveTodos() {
