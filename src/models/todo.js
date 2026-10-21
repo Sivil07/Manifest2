@@ -4,6 +4,11 @@ class Todo {
         this.title = title;
         this.reason = reason;
     }
+
+    updateTodo({ title, reason }) {
+        this.title = title
+        this.reason = reason;
+    }
 }
 
 export default Todo;
