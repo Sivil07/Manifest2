@@ -8,6 +8,13 @@ class TodoController {
             this.todoView.displayTodoForm();
         });
 
+        const todoList = this.todoView.todoList;
+        todoList.addEventListener("view-todo-item", (e) => {
+            const id = e.detail.id;
+            const todo = this.todoService.findTodoById(id);
+            this.todoView.displayOneTodo(todo);
+        })
+
         const todoDialog = this.todoView.todoDialog;
         todoDialog.addEventListener("create-todo", (e) => {
             const todoData = e.detail.todoDetails;
