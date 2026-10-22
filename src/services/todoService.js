@@ -3,6 +3,7 @@ import { starterData } from "../starterData.js";
 
 class TodoService {
     #activeTodos = [];
+    #completedTodos = [];
 
     get allActiveTodos() {
         return [...this.#activeTodos];
@@ -37,6 +38,7 @@ class TodoService {
 
     #saveTodos() {
         localStorage.setItem("active-todos", JSON.stringify(this.#activeTodos));
+        localStorage.setItem("completed-todos", JSON.stringify(this.#completedTodos))
     }
 
     loadTodos() {
