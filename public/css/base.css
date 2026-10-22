@@ -35,35 +35,6 @@ body {
   backdrop-filter: blur(10px);
 }
 
-todo-form::part(form-dialog) {
-  display: grid;
-  gap: 1rem;
-  grid-template-areas:
-    "Header"
-    "Title-Input"
-    "Reason-Input"
-    "Submit-Button";
-}
-
-todo-form::part(form-header) {
-  font-weight: bold;
-  margin: 0;
-}
-
-todo-form::part(form-group) {
-  display: flex;
-  flex-direction: column;
-}
-
-todo-form::part(form-label) {
-  font-weight: bold;
-}
-
-todo-form::part(form-submit) {
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-}
-
 #todo-action {
   padding: 1rem;
   font-size: 1rem;
