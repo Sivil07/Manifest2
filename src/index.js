@@ -1,8 +1,9 @@
 import "../public/css/base.css";
 import "./views/todoItem/todoItem.css";
+import "./views/todoTemplate/todoTemplate.css";
 import "./views/todoItem/todoItem.js";
 import "./views/todoForm.js";
-import "./views/todoTemplate.js";
+import "./views/todoTemplate/todoTemplate.js";
 import TodoView from "./views/todoView.js";
 import TodoService from "./services/todoService.js";
 import TodoController from "./controllers/todoController.js";

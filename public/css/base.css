@@ -35,31 +35,6 @@ body {
   backdrop-filter: blur(10px);
 }
 
-#template {
-  position: fixed;
-  inset: 0;
-  background-color: var(--clr-white);
-  gap: 1rem;
-  padding: 1.5rem;
-  display: grid;
-  grid-template-areas:
-    "Close-Template"
-    "Todo-Contents"
-    "Template-Actions";
-  grid-template-rows: repeat(3, max-content);
-}
-
-todo-template::part(template-actions) {
-  width: max-content;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-}
-
-todo-template::part(button-group) {
-  display: flex;
-  gap: 1rem;
-}
-
 todo-form::part(form-dialog) {
   display: grid;
   gap: 1rem;
