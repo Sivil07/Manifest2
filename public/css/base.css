@@ -96,7 +96,7 @@ todo-form::part(form-submit) {
   border: 1px solid var(--clr-lavender);
 }
 
-#task-list {
+#active-todo-list {
   display: flex;
   flex-direction: column;
   gap: 1rem;

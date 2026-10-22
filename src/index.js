@@ -8,7 +8,7 @@ import TodoController from "./controllers/todoController.js";
 
 const todoService = new TodoService();
 const todoView = new TodoView(
-    document.querySelector("#task-list"),
+    document.querySelector("#active-todo-list"),
     document.querySelector("#my-dialog"),
     document.querySelector("#todo-action")
 );
