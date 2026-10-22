@@ -12,7 +12,7 @@ template.innerHTML = `
 `
 class TodoItem extends HTMLElement {
     #todoId;
-    
+
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: "open" });
@@ -28,6 +28,18 @@ class TodoItem extends HTMLElement {
     }
 
     connectedCallback() {
+        const todoInput = this.shadowRoot.querySelector(`[part="complete-todo"]`);
+        todoInput.addEventListener("change", (e) => {
+            const isChecked = e.target.checked;
+            this.dispatchEvent( new CustomEvent( "move-todo-item", {
+                bubbles: true,
+                detail: {
+                    hasBeenChecked: isChecked,
+                    is: this.#todoId
+                }
+            }))
+        })
+        
         const todoContent = this.shadowRoot.querySelector(`[part="task-content"]`);
         todoContent.addEventListener("click", () => {
             this.dispatchEvent( new CustomEvent( "view-todo-item", {
