@@ -10,7 +10,7 @@ template.innerHTML = `
         <label part="form-label" for="">Why does it matter?</label>
         <input part="form-input-reason" type="text" placeholder="Your reason" name="reason" minlength="5" maxlength="20" required>
     </div>
-    <button part="form-submit" type="submit">Add Todo</button>
+    <button part="form-submit" type="submit"></button>
 </form>
 `
 
@@ -27,10 +27,12 @@ class TodoForm extends HTMLElement {
         const header = this.shadowRoot.querySelector(`[part="form-header"]`);
         const titleInput = this.shadowRoot.querySelector(`[part="form-input-title"]`);
         const reasonInput = this.shadowRoot.querySelector(`[part="form-input-reason"]`);
+        const submitButton = this.shadowRoot.querySelector(`[part="form-submit"]`);
         titleInput.value = title;
         reasonInput.value = reason;
         this.#todoId = id;
         header.textContent = this.#todoId ? "Edit Todo" : "New Todo";
+        submitButton.textContent = this.#todoId ? "Edit Todo" : "Add Todo";
     }
 
     connectedCallback() {
