@@ -16,6 +16,7 @@ template.innerHTML = `
 
 class TodoForm extends HTMLElement {
     #todoId;
+    #todoChecked;
 
     constructor() {
         super();
@@ -23,7 +24,7 @@ class TodoForm extends HTMLElement {
         shadow.append(template.content.cloneNode(true));
     }
 
-    set formData({ title = "", reason = "", id = undefined } = {}) {
+    set formData({ title = "", reason = "", id = undefined, isChecked = false } = {}) {
         const header = this.shadowRoot.querySelector(`[part="form-header"]`);
         const titleInput = this.shadowRoot.querySelector(`[part="form-input-title"]`);
         const reasonInput = this.shadowRoot.querySelector(`[part="form-input-reason"]`);
@@ -31,6 +32,7 @@ class TodoForm extends HTMLElement {
         titleInput.value = title;
         reasonInput.value = reason;
         this.#todoId = id;
+        this.#todoChecked = isChecked;
         header.textContent = this.#todoId ? "Edit Todo" : "New Todo";
         submitButton.textContent = this.#todoId ? "Edit Todo" : "Add Todo";
     }
@@ -41,11 +43,15 @@ class TodoForm extends HTMLElement {
             e.preventDefault();
             const data = new FormData(form);
             const entries = Object.fromEntries(data.entries());
+            const todoPackage = {
+                todoEntries: entries,
+                todoId: this.#todoId,
+                todoChecked: this.#todoChecked,
+            }
             this.dispatchEvent( new CustomEvent( "save-todo", {
                 bubbles: true,
                 detail: {
-                    todoDetails: entries,
-                    todoId: this.#todoId
+                    todoPackage: todoPackage
                 }
             }));
         })
