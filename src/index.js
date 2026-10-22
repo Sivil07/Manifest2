@@ -1,5 +1,6 @@
 import "../public/css/base.css";
-import "./views/todoItem.js";
+import "./views/todoItem/todoItem.css";
+import "./views/todoItem/todoItem.js";
 import "./views/todoForm.js";
 import "./views/todoTemplate.js";
 import TodoView from "./views/todoView.js";

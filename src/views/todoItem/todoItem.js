@@ -25,6 +25,7 @@ class TodoItem extends HTMLElement {
         title.textContent = todo.title;
         reason.textContent = todo.reason;
         this.#todoId = todo.id;
+
     }
 
     connectedCallback() {
