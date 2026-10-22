@@ -41,16 +41,28 @@ class TodoService {
         localStorage.setItem("completed-todos", JSON.stringify(this.#completedTodos))
     }
 
+    classifyTodos(rawTodoArray) {
+        for (const rawTodo of rawTodoArray) {
+            const todo = new Todo(rawTodo);
+            if (todo.isChecked) {
+                this.#completedTodos.push(todo)
+            } else {
+                this.#activeTodos.push(todo)
+            }
+        }
+    }
+
     loadTodos() {
         this.#activeTodos = [];
-        const savedData = localStorage.getItem("active-todos");
-        const arrayObject = savedData === null ? starterActiveData : JSON.parse(savedData);
-        for (const rawTodo of arrayObject) {
-            const todo = new Todo(rawTodo);
-            this.#activeTodos.push(todo);
-        }
-
-        if (savedData === null) this.#saveTodos();
+        this.#completedTodos = [];
+        const savedActiveData = localStorage.getItem("active-todos");
+        const savedCompleteData = localStorage.getItem("completed-todos");
+        const activeArray = savedActiveData === null ? starterActiveData : JSON.parse(savedActiveData);
+        const completedArray = savedCompleteData === null ? starterCompletedData : JSON.parse(savedCompleteData);
+        this.classifyTodos(activeArray)
+        this.classifyTodos(completedArray)
+        if (savedActiveData === null) this.#saveTodos();
+        if (savedCompleteData === null) this.#saveTodos();
     }
 }
 
