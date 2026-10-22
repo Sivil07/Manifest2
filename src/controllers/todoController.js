@@ -8,22 +8,22 @@ class TodoController {
             this.todoView.displayTodoForm();
         });
 
-        const todoList = this.todoView.todoList;
-        todoList.addEventListener("view-todo-item", (e) => {
+        const todoActiveList = this.todoView.todoActiveList;
+        todoActiveList.addEventListener("view-todo-item", (e) => {
             const id = e.detail.id;
             const todoChecked = e.detail.todoChecked;
             const todo = this.todoService.findTodoById(id, todoChecked);
             this.todoView.displayOneTodo(todo);
         });
 
-        todoList.addEventListener("edit-todo-item", (e) => {
+        todoActiveList.addEventListener("edit-todo-item", (e) => {
             const id = e.detail.id;
             const todoChecked = e.detail.todoChecked;
             const todo = this.todoService.findTodoById(id, todoChecked);
             this.todoView.displayTodoForm(todo);
         });
 
-        todoList.addEventListener("delete-todo-item", (e) => {
+        todoActiveList.addEventListener("delete-todo-item", (e) => {
             const id = e.detail.id;
             const todoChecked = e.detail.todoChecked;
             this.#processDeletingTodo(id, todoChecked);
