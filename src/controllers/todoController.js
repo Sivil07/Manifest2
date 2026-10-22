@@ -12,21 +12,21 @@ class TodoController {
         todoList.addEventListener("view-todo-item", (e) => {
             const id = e.detail.id;
             const todoChecked = e.detail.todoChecked;
-            const todo = this.todoService.findTodoById(id);
+            const todo = this.todoService.findTodoById(id, todoChecked);
             this.todoView.displayOneTodo(todo);
         });
 
         todoList.addEventListener("edit-todo-item", (e) => {
             const id = e.detail.id;
             const todoChecked = e.detail.todoChecked;
-            const todo = this.todoService.findTodoById(id);
+            const todo = this.todoService.findTodoById(id, todoChecked);
             this.todoView.displayTodoForm(todo);
         });
 
         todoList.addEventListener("delete-todo-item", (e) => {
             const id = e.detail.id;
             const todoChecked = e.detail.todoChecked;
-            this.#processDeletingTodo(id);
+            this.#processDeletingTodo(id, todoChecked);
         });
 
         const todoDialog = this.todoView.todoDialog;
@@ -48,8 +48,8 @@ class TodoController {
         })
     }
 
-    #processDeletingTodo(id) {
-        this.todoService.deleteTodo(id);
+    #processDeletingTodo(id, todoChecked) {
+        this.todoService.deleteTodo(id, todoChecked);
         this.#refreshUI();
     }
 

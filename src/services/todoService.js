@@ -21,8 +21,8 @@ class TodoService {
         this.#saveActiveTodos();
     }
 
-    deleteTodo(id) {
-        const todo = this.findTodoById(id);
+    deleteTodo(id, todoChecked) {
+        const todo = this.findTodoById(id, todoChecked);
         const todoIndex = this.#activeTodos.indexOf(todo);
         this.#activeTodos.splice(todoIndex, 1);
         this.#saveActiveTodos();
