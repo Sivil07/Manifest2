@@ -2,10 +2,10 @@ import Todo from "../models/todo.js";
 import { starterData } from "../starterData.js";
 
 class TodoService {
-    #todos = [];
+    #activeTodos = [];
 
-    get allTodos() {
-        return [...this.#todos];
+    get allActiveTodos() {
+        return [...this.#activeTodos];
     }
 
     #rebuildTodo(rawTodo) {
@@ -14,7 +14,7 @@ class TodoService {
       
     createTodo(todoData) {
         const todo = new Todo(todoData);
-        this.#todos.push(todo); 
+        this.#activeTodos.push(todo); 
         this.#saveTodos();
     }
     
@@ -26,13 +26,13 @@ class TodoService {
 
     deleteTodo(id) {
         const todo = this.findTodoById(id);
-        const todoIndex = this.#todos.indexOf(todo);
-        this.#todos.splice(todoIndex, 1);
+        const todoIndex = this.#activeTodos.indexOf(todo);
+        this.#activeTodos.splice(todoIndex, 1);
         this.#saveTodos();
     }
 
     findTodoById(id) {
-        for (const todo of this.#todos) {
+        for (const todo of this.#activeTodos) {
             if (todo.id === id) {
                 return todo;
             }
@@ -40,16 +40,16 @@ class TodoService {
     }
 
     #saveTodos() {
-        localStorage.setItem("todos", JSON.stringify(this.#todos));
+        localStorage.setItem("todos", JSON.stringify(this.#activeTodos));
     }
 
     loadTodos() {
-        this.#todos = [];
+        this.#activeTodos = [];
         const savedData = localStorage.getItem("todos");
         const arrayObject = savedData === null ? starterData : JSON.parse(savedData);
         for (const rawTodo of arrayObject) {
             const todo = this.#rebuildTodo(rawTodo);
-            this.#todos.push(todo);
+            this.#activeTodos.push(todo);
         }
 
         if (savedData === null) this.#saveTodos();

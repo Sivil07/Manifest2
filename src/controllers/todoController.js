@@ -67,7 +67,7 @@ class TodoController {
     }
 
     #refreshUI() {
-        this.todoView.displayTodos(this.todoService.allTodos);
+        this.todoView.displayTodos(this.todoService.allActiveTodos);
     }
 }
 
