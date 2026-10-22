@@ -36,12 +36,12 @@ class TodoService {
     }
 
     #saveTodos() {
-        localStorage.setItem("todos", JSON.stringify(this.#activeTodos));
+        localStorage.setItem("active-todos", JSON.stringify(this.#activeTodos));
     }
 
     loadTodos() {
         this.#activeTodos = [];
-        const savedData = localStorage.getItem("todos");
+        const savedData = localStorage.getItem("active-todos");
         const arrayObject = savedData === null ? starterData : JSON.parse(savedData);
         for (const rawTodo of arrayObject) {
             const todo = new Todo(rawTodo);
