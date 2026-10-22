@@ -96,10 +96,22 @@ todo-form::part(form-submit) {
   border: 1px solid var(--clr-lavender);
 }
 
+#todo-lists {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
 #active-todo-list {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+#completed-todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem
 }
 
 todo-item::part(task) {
