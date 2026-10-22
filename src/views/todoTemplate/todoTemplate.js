@@ -1,9 +1,9 @@
 const template = document.createElement("template");
 template.innerHTML = `
 <button part="template-actions close-todo" type="button">X</button>
-<div part="todo-contents">
-    <h1 part="title"></h1>
-    <p part="reason"></p>
+<div part="template-contents">
+    <h1 part="template-title"></h1>
+    <p part="template-reason"></p>
 </div>
 <div part="button-group">
     <button part="template-actions edit-todo">Edit</button>
@@ -21,8 +21,8 @@ class TodoTemplate extends HTMLElement {
     }
 
     set templateData(todoData) {
-        const title = this.shadowRoot.querySelector(`[part="title"]`);
-        const reason = this.shadowRoot.querySelector(`[part="reason"]`);
+        const title = this.shadowRoot.querySelector(`[part="template-title"]`);
+        const reason = this.shadowRoot.querySelector(`[part="template-reason"]`);
         title.textContent = todoData.title;
         reason.textContent = todoData.reason;
         this.#todoId = todoData.id;

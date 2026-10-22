@@ -18,6 +18,19 @@ todo-template::part(template-actions) {
   border-radius: 0.5rem;
 }
 
+todo-template::part(template-contents) {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+todo-template::part(template-title) {
+    margin: 0;
+}
+
+todo-template::part(template-reason) {
+    margin: 0;
+}
 
 todo-template::part(button-group) {
   display: flex;
