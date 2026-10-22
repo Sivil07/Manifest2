@@ -1,5 +1,5 @@
 import Todo from "../models/todo.js";
-import { starterData } from "../starterData.js";
+import { starterActiveData, starterCompletedData } from "../starterData.js";
 
 class TodoService {
     #activeTodos = [];
@@ -44,7 +44,7 @@ class TodoService {
     loadTodos() {
         this.#activeTodos = [];
         const savedData = localStorage.getItem("active-todos");
-        const arrayObject = savedData === null ? starterData : JSON.parse(savedData);
+        const arrayObject = savedData === null ? starterActiveData : JSON.parse(savedData);
         for (const rawTodo of arrayObject) {
             const todo = new Todo(rawTodo);
             this.#activeTodos.push(todo);
