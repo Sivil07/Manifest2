@@ -8,16 +8,16 @@ class TodoService {
     get allActiveTodos() {
         return [...this.#activeTodos];
     }
-    
-    createTodo(todoData) {
-        const todo = new Todo(todoData);
+
+    createTodo(todoEntries) {
+        const todo = new Todo(todoEntries);
         this.#activeTodos.push(todo); 
         this.#saveActiveTodos();
     }
     
-    editTodo(id, todoData) {
-        const todo = this.findTodoById(id);
-        todo.updateTodo(todoData);
+    editTodo(id, todoChecked, todoEntries) {
+        const todo = this.findTodoById(id, todoChecked);
+        todo.updateTodo(todoEntries);
         this.#saveActiveTodos();
     }
 
@@ -28,12 +28,13 @@ class TodoService {
         this.#saveActiveTodos();
     }
 
-    getTargetList(todoChecked) {
+    #getTargetList(todoChecked) {
         return todoChecked ? this.#completedTodos : this.#activeTodos;
     }
 
-    findTodoById(id) {
-        for (const todo of this.#activeTodos) {
+    findTodoById(id, todoChecked) {
+        const targetArray = this.#getTargetList(todoChecked)
+        for (const todo of targetArray) {
             if (todo.id === id) {
                 return todo;
             }
