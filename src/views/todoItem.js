@@ -35,7 +35,7 @@ class TodoItem extends HTMLElement {
                 bubbles: true,
                 detail: {
                     hasBeenChecked: isChecked,
-                    is: this.#todoId
+                    todoId: this.#todoId
                 }
             }))
         })
