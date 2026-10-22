@@ -13,6 +13,7 @@ template.innerHTML = `
 
 class TodoTemplate extends HTMLElement {
     #todoId;
+    #todoChecked;
 
     constructor() {
         super();
@@ -26,6 +27,7 @@ class TodoTemplate extends HTMLElement {
         title.textContent = todoData.title;
         reason.textContent = todoData.reason;
         this.#todoId = todoData.id;
+        this.#todoChecked = todoData.isChecked;
     }
 
     connectedCallback() {
@@ -40,7 +42,8 @@ class TodoTemplate extends HTMLElement {
             this.dispatchEvent( new CustomEvent( "delete-todo-item", {
                 bubbles: true,
                 detail: {
-                    id: this.#todoId
+                    id: this.#todoId,
+                    todoChecked: this.#todoChecked
                 }
             }))
         });
@@ -50,7 +53,8 @@ class TodoTemplate extends HTMLElement {
             this.dispatchEvent( new CustomEvent("edit-todo-item", {
                 bubbles: true,
                 detail: {
-                    id: this.#todoId
+                    id: this.#todoId,
+                    todoChecked: this.#todoChecked
                 }
             }))
         })

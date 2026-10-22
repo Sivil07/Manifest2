@@ -8,7 +8,7 @@ class TodoService {
     get allActiveTodos() {
         return [...this.#activeTodos];
     }
-      
+    
     createTodo(todoData) {
         const todo = new Todo(todoData);
         this.#activeTodos.push(todo); 
@@ -26,6 +26,10 @@ class TodoService {
         const todoIndex = this.#activeTodos.indexOf(todo);
         this.#activeTodos.splice(todoIndex, 1);
         this.#saveActiveTodos();
+    }
+
+    getTargetList(todoChecked) {
+        return todoChecked ? this.#completedTodos : this.#activeTodos;
     }
 
     findTodoById(id) {

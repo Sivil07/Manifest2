@@ -12,6 +12,7 @@ template.innerHTML = `
 `
 class TodoItem extends HTMLElement {
     #todoId;
+    #todoChecked
 
     constructor() {
         super();
@@ -25,6 +26,7 @@ class TodoItem extends HTMLElement {
         title.textContent = todo.title;
         reason.textContent = todo.reason;
         this.#todoId = todo.id;
+        this.#todoChecked = todo.isChecked;
 
     }
 
@@ -35,8 +37,9 @@ class TodoItem extends HTMLElement {
             this.dispatchEvent( new CustomEvent( "move-todo-item", {
                 bubbles: true,
                 detail: {
-                    hasBeenChecked: isChecked,
-                    todoId: this.#todoId
+                    userChecked: isChecked,
+                    todoId: this.#todoId,
+                    todoChecked: this.#todoChecked
                 }
             }))
         })
@@ -46,7 +49,8 @@ class TodoItem extends HTMLElement {
             this.dispatchEvent( new CustomEvent( "view-todo-item", {
                 bubbles: true,
                 detail: {
-                    id: this.#todoId
+                    id: this.#todoId,
+                    todoChecked: this.#todoChecked
                 }
             }))
         })
