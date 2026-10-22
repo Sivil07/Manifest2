@@ -12,20 +12,20 @@ class TodoService {
     createTodo(todoData) {
         const todo = new Todo(todoData);
         this.#activeTodos.push(todo); 
-        this.#saveTodos();
+        this.#saveActiveTodos();
     }
     
     editTodo(id, todoData) {
         const todo = this.findTodoById(id);
         todo.updateTodo(todoData);
-        this.#saveTodos();
+        this.#saveActiveTodos();
     }
 
     deleteTodo(id) {
         const todo = this.findTodoById(id);
         const todoIndex = this.#activeTodos.indexOf(todo);
         this.#activeTodos.splice(todoIndex, 1);
-        this.#saveTodos();
+        this.#saveActiveTodos();
     }
 
     findTodoById(id) {
@@ -36,9 +36,12 @@ class TodoService {
         }
     }
 
-    #saveTodos() {
+    #saveActiveTodos() {
         localStorage.setItem("active-todos", JSON.stringify(this.#activeTodos));
-        localStorage.setItem("completed-todos", JSON.stringify(this.#completedTodos))
+    }
+
+    #saveCompletedTodos() {
+        localStorage.setItem("completed-todos", JSON.stringify(this.#completedTodos));
     }
 
     classifyTodos(rawTodoArray) {
@@ -61,8 +64,8 @@ class TodoService {
         const completedArray = savedCompleteData === null ? starterCompletedData : JSON.parse(savedCompleteData);
         this.classifyTodos(activeArray)
         this.classifyTodos(completedArray)
-        if (savedActiveData === null) this.#saveTodos();
-        if (savedCompleteData === null) this.#saveTodos();
+        if (savedActiveData === null) this.#saveActiveTodos();
+        if (savedCompleteData === null) this.#saveCompletedTodos();
     }
 }
 
