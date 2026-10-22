@@ -9,11 +9,6 @@ const starterActiveData = [
         reason: "Turn the idea in my notes into a plan",
         isChecked: false
     },
-    {
-        title: "Pay the bills",
-        reason: "Handle the monthly payments",
-        isChecked: true
-    }
 ]
 
 const starterCompletedData = [
