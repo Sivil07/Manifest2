@@ -31,14 +31,14 @@ class TodoController {
 
         const todoDialog = this.todoView.todoDialog;
         todoDialog.addEventListener("save-todo", (e) => {
-            const todoData = e.detail.todoDetails;
-            const todoId = e.detail.todoId;
-            if (todoId) {
-                this.#processEditingTodo(todoId, todoData);
+            const todoPackage = e.detail.todoPackage;
+
+            if (todoPackage.todoId) {
+                this.#processEditingTodo(todoPackage.todoId, todoPackage.todoChecked, todoPackage.todoEntries);
                 todoView.closeTodoDialog(todoDialog);
 
             } else {
-                this.#processNewTodo(todoData);
+                this.#processNewTodo(todoPackage.todoEntries);
                 todoView.closeTodoDialog(todoDialog);
             }
         });
@@ -53,13 +53,13 @@ class TodoController {
         this.#refreshUI();
     }
 
-    #processEditingTodo(id, todoData) {
-        this.todoService.editTodo(id, todoData);
+    #processEditingTodo(todoId, todoChecked, todoEntries) {
+        this.todoService.editTodo(todoId, todoChecked, todoEntries);
         this.#refreshUI();
     }
 
-    #processNewTodo(todoData) {
-        this.todoService.createTodo(todoData);
+    #processNewTodo(todoEntries) {
+        this.todoService.createTodo(todoEntries);
         this.#refreshUI();
     }
 
