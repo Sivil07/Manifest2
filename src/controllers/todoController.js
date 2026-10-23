@@ -36,6 +36,12 @@ class TodoController {
             this.#processDeletingTodo(id, todoChecked);
         });
 
+        const todoCompletedList = this.todoView.todoCompletedList;
+        todoCompletedList.addEventListener("clear-completed-todos", () => {
+            this.todoService.clearCompletedTodos();
+            this.#refreshUI();
+        })
+
         const todoDialog = this.todoView.todoDialog;
         todoDialog.addEventListener("save-todo", (e) => {
             const todoPackage = e.detail.todoPackage;
