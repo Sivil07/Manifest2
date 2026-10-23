@@ -79,6 +79,7 @@ class TodoController {
     #refreshUI() {
         this.todoView.displayActiveTodos(this.todoService.allActiveTodos);
         this.todoView.displayCompletedTodos(this.todoService.allCompletedTodos);
+        this.todoView.displayTodoCounter(this.todoService.numberOfCompletedTodos);
     }
 }
 
