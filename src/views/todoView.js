@@ -1,4 +1,6 @@
 class TodoView {
+    #completedTodos = []
+
     constructor(todoActiveList, todoCompletedList, todoDialog, todoAction) {
         this.todoActiveList = todoActiveList;
         this.todoCompletedList = todoCompletedList;
@@ -16,6 +18,23 @@ class TodoView {
     closeTodoDialog(todoDialog) {
         todoDialog.close();
         this.todoDialog.innerHTML = "";
+    }
+
+    #removeCompletedTodos() {
+        for (const completeTodo of this.#completedTodos) {
+            completeTodo.remove();
+        }
+    }
+
+    displayCompletedTodos(completedTodos) {
+        this.#removeCompletedTodos();
+
+        for (const completedTodo of completedTodos) {
+            const completedTodoItem = document.createElement("todo-item");
+            completedTodoItem.todoData = completedTodo;
+            this.#completedTodos.push(completedTodoItem);
+            this.todoCompletedList.appendChild(completedTodoItem);
+        }
     }
 
     displayActiveTodos(activeTodos) {
