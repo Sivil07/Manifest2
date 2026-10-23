@@ -13,6 +13,25 @@ class TodoService {
         return [...this.#completedTodos];
     }
 
+    moveTodo({previousUserChecked, newUserChecked, todoId, todoChecked}) {
+        const todo = this.findTodoById(todoId, todoChecked);
+        todo.updateChecked(newUserChecked);
+        const previousArray = previousUserChecked ? this.#completedTodos : this.#activeTodos;
+        const targetArray = newUserChecked ? this.#completedTodos : this.#activeTodos ;
+        // console.log("Previous Array")
+        // console.table(previousArray)
+        // console.log("Target Array")
+        // console.table(targetArray)
+        const todoIndex = previousArray.indexOf(todo);
+        previousArray.splice(todoIndex, 1);
+
+        targetArray.push(todo);
+        this.#saveActiveTodos()
+        this.#saveCompletedTodos();
+        // console.table(this.#activeTodos)
+        // console.table(this.#completedTodos)
+    }
+
     createTodo(todoEntries) {
         const todo = new Todo(todoEntries);
         this.#activeTodos.push(todo); 
