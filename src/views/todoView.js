@@ -24,6 +24,7 @@ class TodoView {
     
     displayTodoCounter(numberOfCompletedTodos) {
         if (this.#trackCounter !== undefined) this.#trackCounter.remove();
+        if (numberOfCompletedTodos === 0) return;
 
         const todoCounter = document.createElement("todo-counter");
         todoCounter.todoCount = numberOfCompletedTodos;
