@@ -1,7 +1,8 @@
 class TodoView {
     #completedTodos = []
 
-    constructor(todoActiveList, todoCompletedList, todoDialog, todoAction) {
+    constructor(todoLists, todoActiveList, todoCompletedList, todoDialog, todoAction) {
+        this.todoLists = todoLists;
         this.todoActiveList = todoActiveList;
         this.todoCompletedList = todoCompletedList;
         this.todoDialog = todoDialog;
