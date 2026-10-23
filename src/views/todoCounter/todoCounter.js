@@ -12,6 +12,11 @@ class TodoCounter extends HTMLElement {
         const shadow = this.attachShadow({ mode: "open" });
         shadow.append(template.content.cloneNode(true));
     }
+
+    set todoCount(numberOfCompletedTodos) {
+        const counter = this.shadowRoot.querySelector([`[part="counter"]`]);
+        counter.textContent = `Completed - ${numberOfCompletedTodos}`
+    }
 }
 
 customElements.define("todo-counter", TodoCounter);
