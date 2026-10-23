@@ -10,6 +10,10 @@ class Todo {
         this.title = title
         this.reason = reason;
     }
+
+    updateChecked(checkedData) {
+        this.isChecked = checkedData;
+    }
 }
 
 export default Todo;
