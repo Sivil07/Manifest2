@@ -1,5 +1,6 @@
 class TodoView {
     #completedTodos = []
+    #trackCounter;
 
     constructor(todoLists, todoActiveList, todoCompletedList, todoDialog, todoAction) {
         this.todoLists = todoLists;
@@ -19,6 +20,16 @@ class TodoView {
     closeTodoDialog(todoDialog) {
         todoDialog.close();
         this.todoDialog.innerHTML = "";
+    }
+    
+    displayTodoCounter(numberOfCompletedTodos) {
+        if (this.#trackCounter !== undefined) this.#trackCounter.remove();
+
+        const todoCounter = document.createElement("todo-counter");
+        todoCounter.todoCount = numberOfCompletedTodos;
+        this.#trackCounter = todoCounter;
+
+        this.todoCompletedList.prepend(todoCounter);
     }
 
     #removeCompletedTodos() {
