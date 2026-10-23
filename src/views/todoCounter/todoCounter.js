@@ -2,7 +2,7 @@ const template = document.createElement("template");
 template.innerHTML = `
 <div part="completed-counter">
     <span part="counter">1</span>
-    <button part="clear-todos">Clear Completed</button>
+    <button type="button" part="clear-todos">Clear Completed</button>
 </div> 
 `
 
@@ -16,6 +16,15 @@ class TodoCounter extends HTMLElement {
     set todoCount(numberOfCompletedTodos) {
         const counter = this.shadowRoot.querySelector([`[part="counter"]`]);
         counter.textContent = `Completed - ${numberOfCompletedTodos}`
+    }
+
+    connectedCallback() {
+        const clearTodos = this.shadowRoot.querySelector(`[part="clear-todos"]`);
+        clearTodos.addEventListener("click", () => {
+            this.dispatchEvent(new Event("clear-completed-todos", {
+                bubbles: true
+            }));
+        })
     }
 }
 
