@@ -13,7 +13,7 @@ class TodoController {
             const id = e.detail.id;
             const todoChecked = e.detail.todoChecked;
             const todo = this.todoService.findTodoById(id, todoChecked);
-            this.todoView.displayOneTodo(todo);
+            this.todoView.displayOneActiveTodo(todo);
         });
 
         todoActiveList.addEventListener("edit-todo-item", (e) => {
@@ -70,7 +70,7 @@ class TodoController {
     }
 
     #refreshUI() {
-        this.todoView.displayTodos(this.todoService.allActiveTodos);
+        this.todoView.displayActiveTodos(this.todoService.allActiveTodos);
     }
 }
 

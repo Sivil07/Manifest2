@@ -17,20 +17,20 @@ class TodoView {
         this.todoDialog.innerHTML = "";
     }
 
-    displayTodos(todos) {
+    displayActiveTodos(activeTodos) {
         this.todoActiveList.innerHTML = "";
 
-        for (const todo of todos) {
+        for (const activeTodo of activeTodos) {
             const todoItem = document.createElement("todo-item");
-            todoItem.todoData = todo;
+            todoItem.todoData = activeTodo;
             this.todoActiveList.appendChild(todoItem);
         }
     }
     
-    displayOneTodo(todo) {
+    displayOneActiveTodo(activeTodo) {
         const todoTemplate = document.createElement("todo-template");
         todoTemplate.id = "template";
-        todoTemplate.templateData = todo;
+        todoTemplate.templateData = activeTodo;
         this.todoActiveList.appendChild(todoTemplate);
     }
 }
