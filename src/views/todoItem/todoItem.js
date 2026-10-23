@@ -23,8 +23,10 @@ class TodoItem extends HTMLElement {
     set todoData(todo) {
         const title = this.shadowRoot.querySelector('[part="task-title"]');
         const reason = this.shadowRoot.querySelector('[part="task-reason"]');
+        const input = this.shadowRoot.querySelector(`[part="complete-todo"]`);
         title.textContent = todo.title;
         reason.textContent = todo.reason;
+        input.checked = todo.isChecked;
         this.#todoId = todo.id;
         this.#todoChecked = todo.isChecked;
 
@@ -33,13 +35,19 @@ class TodoItem extends HTMLElement {
     connectedCallback() {
         const todoInput = this.shadowRoot.querySelector(`[part="complete-todo"]`);
         todoInput.addEventListener("change", (e) => {
-            const isChecked = e.target.checked;
+            const newUserChecked = e.target.checked;
+            const previousUserChecked = true === newUserChecked ? false : true;
+            console.log(newUserChecked)
+            const todoPackage = {
+                previousUserChecked: previousUserChecked,
+                newUserChecked: newUserChecked,
+                todoId: this.#todoId,
+                todoChecked: this.#todoChecked
+            }
             this.dispatchEvent( new CustomEvent( "move-todo-item", {
                 bubbles: true,
                 detail: {
-                    userChecked: isChecked,
-                    todoId: this.#todoId,
-                    todoChecked: this.#todoChecked
+                    todoPackage: todoPackage
                 }
             }))
         })
