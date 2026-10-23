@@ -13,6 +13,10 @@ class TodoService {
         return [...this.#completedTodos];
     }
 
+    get numberOfCompletedTodos() {
+        return this.#completedTodos.length;
+    }
+
     moveTodo({previousUserChecked, newUserChecked, todoId, todoChecked}) {
         const todo = this.findTodoById(todoId, todoChecked);
         todo.updateChecked(newUserChecked);
