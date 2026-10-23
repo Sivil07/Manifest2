@@ -12,6 +12,7 @@ import TodoController from "./controllers/todoController.js";
 const todoService = new TodoService();
 const todoView = new TodoView(
     document.querySelector("#active-todo-list"),
+    document.querySelector("#completed-todo-list"),
     document.querySelector("#my-dialog"),
     document.querySelector("#todo-action")
 );
