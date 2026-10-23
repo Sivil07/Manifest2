@@ -8,6 +8,13 @@ class TodoController {
             this.todoView.displayTodoForm();
         });
 
+        const todoLists = this.todoView.todoLists;
+        todoLists.addEventListener("move-todo-item", (e) => {
+            const todoPackage = e.detail.todoPackage;
+            this.todoService.moveTodo(todoPackage);
+            this.#refreshUI();
+        });
+
         const todoActiveList = this.todoView.todoActiveList;
         todoActiveList.addEventListener("view-todo-item", (e) => {
             const id = e.detail.id;
