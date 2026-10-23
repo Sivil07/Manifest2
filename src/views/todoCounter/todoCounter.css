@@ -1,0 +1,12 @@
+todo-counter::part(completed-counter) {
+    display: flex;
+    justify-content: space-between;
+}
+
+todo-counter::part(clear-todos) {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
