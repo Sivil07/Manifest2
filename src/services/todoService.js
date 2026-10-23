@@ -9,6 +9,10 @@ class TodoService {
         return [...this.#activeTodos];
     }
 
+    get allCompletedTodos() {
+        return [...this.#completedTodos];
+    }
+
     createTodo(todoEntries) {
         const todo = new Todo(todoEntries);
         this.#activeTodos.push(todo); 
