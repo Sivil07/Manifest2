@@ -1,6 +1,32 @@
 import Todo from "../models/todo.js";
 import { starterActiveData, starterCompletedData } from "../starterData.js";
 
+/* 
+    The TodoService manages the app's todos: either creating, editing, moving, deleting or persisting them
+
+    This is the only layer that knows where todos are stored. The controller and the TodoView always 
+    ask the TodoService to perform operations internally without needing to interact with the storage
+    or todo objects themselves.
+
+    While the app runs, the todos are kept in memory as real Todo objects split between an active
+    and completed list. The localStorage persists the todos as JSON objects which causes them to lose
+    their "Todo" identify and behavior so the service rebuilds them into Todo instances on the first load.
+
+    If no saved data exists on the first load, the service uses the started data instead and persists it
+    so the UI has initial todos to work with.
+
+    Any change to the internal lists is saved to localStorage so the changes made can survive a reload
+    and as well as the controller using the service's getters to provided the TodoView with the 
+    updated data.
+
+    All operations (create, edit, delete, clear) modify the internal lists and the TodoView always 
+    reflects those changes when rendering the ui.
+
+    Overall, The TodoService manages the data itself whereas the TodoView is responsible for
+    how that data appears on screen.
+
+*/
+
 class TodoService {
     #activeTodos = [];
     #completedTodos = [];
