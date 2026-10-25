@@ -1,3 +1,35 @@
+/* 
+
+    The TodoController connects what the user does on screen to what the app
+    does with the todo data. It holds no todo data and renders nothing itself.
+
+    When the user interacts with components (editing, deleting, moving or 
+    creating todos, for example), the components dispatch custom events.
+    The controller listeners for these events and responds in two steps:
+    it asks the TodoService to update the data, the instructs the TodoView to
+    redraw the UI so the screen matches the current state.
+
+    All event listeners are attached once in the constructor to the static DOm
+    nodes provide by the view. This includes: the active/completed lists, the 
+    parent container of both lists, the dialog and the action button. Events
+    from individual todos travel up those elements, so no listener has to be 
+    added or removed as todos come and go.
+
+    The controller also manages the dialog. Opening the form, saving a todo and
+    closing the dialog are all actions the controller orchestrates. When a todo is
+    created or edited, the controller forwards the form's data to the service and 
+    refreshes the UI once change has been made to the state.
+
+    On initialization, the controller loads todos form the TodoService and renders
+    them using the TodoView. Every change to the data, whether trigger by the user or
+    startup logic, results in a full UI refresh to keep the screen in sync with the 
+    underlying data.
+
+    Overall, the TodoService manages the data, the TodoView renders the UI and 
+    the TodoController orchestrates the actions between them in response to the user.
+
+*/
+
 class TodoController {
     constructor(todoService, todoView) {
         this.todoService = todoService;
