@@ -1,3 +1,5 @@
+import { setMinDate } from "../../utils/date.js";
+
 const template = document.createElement("template");
 template.innerHTML = `
 <form part="form-dialog">
@@ -32,7 +34,9 @@ class TodoForm extends HTMLElement {
         const header = this.shadowRoot.querySelector(`[part="form-header"]`);
         const titleInput = this.shadowRoot.querySelector(`[part="form-input-title"]`);
         const reasonInput = this.shadowRoot.querySelector(`[part="form-input-reason"]`);
+        const dateInput = this.shadowRoot.querySelector(`[part="form-input-date"]`);
         const submitButton = this.shadowRoot.querySelector(`[part="form-submit"]`);
+        dateInput.min = setMinDate();
         titleInput.value = title;
         reasonInput.value = reason;
         this.#todoId = id;
