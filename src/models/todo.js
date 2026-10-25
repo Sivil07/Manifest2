@@ -10,7 +10,7 @@
         - The TodoService creates, stores, updates and saves Todos. Saved data is stored
           as JSON, so the service reconstructs real Todo instances when the app loads.
         - The TodoController passes references to a Todo's id or checked state between
-          the service and teh view in response to user actions.
+          the service and the view in response to user actions.
         - The TodoView and TodoItem display a Todo's data. The TodoItem is a snapshot of
           a Todo at the moment it was rendered and is recreated whenever the underlying Todo
           changes.
