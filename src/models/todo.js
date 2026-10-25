@@ -1,17 +1,27 @@
 /*
-    A single todo item on the user's todo list.
+    A todo defines the core piece of data that moves around the app. It represents
+    a single task in the user's list and stores the essential information that
+    describes the task. This includes: its id, the title, reason and if its 
+    completed. Defining this shape in one place ensures, the service, the controller
+    and the view all rely on the same fields when accessing todo data.
 
-    A Todo is the core piece of data that will move through
-    the app. 
+    A Todo knows nothing about how it is stored, displayed or interacted with. Each
+    part of the app handles it in its own way:
+        - The TodoService creates, stores, updates and saves Todos. Saved data is stored
+          as JSON, so the service reconstructs real Todo instances when the app loads.
+        - The TodoController passes references to a Todo's id or checked state between
+          the service and teh view in response to user actions.
+        - The TodoView and TodoItem display a Todo's data. The TodoItem is a snapshot of
+          a Todo at the moment it was rendered and is recreated whenever the underlying Todo
+          changes.
+          
+    The Todo's method's only update its own fields. Decisions about which lists a Todo belongs
+    to, how it moves between lists, and when it is saved are handled entirely by the TodoService.
     
-    Currently, it holds what the user entered (a title and reason)
-    and whether the todo is completed.
-    
-    Defining its shape here would mean the controller, service and 
-    views will all rely on this structure when accessing and 
-    manipulating its data.
-    
-    Everything was built around this item.
+    Overall, the Todo model serves as the source of truth for a single task. It defines that data
+    that flows through the system while the service manages its state, the view renders the UI
+    and the controller coordinates interactions between the UI and the state.
+
 */
 class Todo {
     constructor({ id = crypto.randomUUID(), title, reason, isChecked = false }) {
@@ -21,22 +31,11 @@ class Todo {
         this.isChecked = isChecked;
     }
 
-    /*   
-        Updates the title and reason using the values submitted in the form.
-        Used both when creating a todo and when editing one.    
-    */
     updateTodo({ title, reason }) {
         this.title = title
         this.reason = reason;
     }
 
-    /*  
-        Marks the todo as done (true) or not done (false).
-
-        This decides which list it will belong to. Either
-        the active todos or completed todos stored in the 
-        service.
-    */
     updateChecked(checkedData) {
         this.isChecked = checkedData;
     }
