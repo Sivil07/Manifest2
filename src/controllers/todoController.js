@@ -35,12 +35,12 @@ class TodoController {
         this.todoService = todoService;
         this.todoView = todoView;
 
-        const addTodoButton = this.todoView.todoAction;
+        const addTodoButton = this.todoView.addTodoButton;
         addTodoButton.addEventListener("click", () => {
             this.todoView.displayTodoForm();
         });
 
-        const todoListsContainer = this.todoView.todoLists;
+        const todoListsContainer = this.todoView.todoListsContainer;
         todoListsContainer.addEventListener("move-todo-item", (e) => {
             const todoPackage = e.detail.todoPackage;
             this.todoService.moveTodo(todoPackage);
