@@ -50,7 +50,7 @@ class TodoService {
 
     moveTodo({previousUserChecked, newUserChecked, todoId, todoChecked}) {
         const todo = this.findTodoById(todoId, todoChecked);
-        todo.toggleCompleted(newUserChecked);
+        todo.setCompletedStatus(newUserChecked);
         const previousArray = previousUserChecked ? this.#completedTodos : this.#activeTodos;
         const targetArray = newUserChecked ? this.#completedTodos : this.#activeTodos ;
 

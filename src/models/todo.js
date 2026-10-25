@@ -24,19 +24,21 @@
 
 */
 class Todo {
-    constructor({ id = crypto.randomUUID(), title, reason, isChecked = false }) {
+    constructor({ id = crypto.randomUUID(), title, reason, isChecked = false, dueDate }) {
         this.id = id;
         this.title = title;
         this.reason = reason;
         this.isChecked = isChecked;
+        this.dueDate = dueDate;
     }
 
-    applyUpdates({ title, reason }) {
+    applyUpdates({ title, reason, dueDate }) {
         this.title = title
         this.reason = reason;
+        this.dueDate = dueDate
     }
 
-    toggleCompleted(checkedData) {
+    setCompletedStatus(checkedData) {
         this.isChecked = checkedData;
     }
 }
