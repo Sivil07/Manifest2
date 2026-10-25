@@ -31,12 +31,12 @@ class Todo {
         this.isChecked = isChecked;
     }
 
-    updateTodo({ title, reason }) {
+    applyUpdates({ title, reason }) {
         this.title = title
         this.reason = reason;
     }
 
-    updateChecked(checkedData) {
+    toggleCompleted(checkedData) {
         this.isChecked = checkedData;
     }
 }

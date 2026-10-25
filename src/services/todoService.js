@@ -50,7 +50,7 @@ class TodoService {
 
     moveTodo({previousUserChecked, newUserChecked, todoId, todoChecked}) {
         const todo = this.findTodoById(todoId, todoChecked);
-        todo.updateChecked(newUserChecked);
+        todo.toggleCompleted(newUserChecked);
         const previousArray = previousUserChecked ? this.#completedTodos : this.#activeTodos;
         const targetArray = newUserChecked ? this.#completedTodos : this.#activeTodos ;
 
@@ -70,7 +70,7 @@ class TodoService {
     
     editTodo(id, todoChecked, todoEntries) {
         const todo = this.findTodoById(id, todoChecked);
-        todo.updateTodo(todoEntries);
+        todo.applyUpdates(todoEntries);
         this.#saveActiveTodos();
     }
 
