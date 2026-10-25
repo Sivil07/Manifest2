@@ -49,23 +49,20 @@ class TodoController {
 
         const todoActiveList = this.todoView.todoActiveList;
         todoActiveList.addEventListener("view-todo-item", (e) => {
-            const id = e.detail.id;
-            const isCompleted = e.detail.todoChecked;
-            const todo = this.todoService.findTodoById(id, isCompleted);
+            const todoPackage = e.detail.todoPackage;
+            const todo = this.todoService.findTodoById(todoPackage.todoId, todoPackage.isCompleted);
             this.todoView.displayOneActiveTodo(todo);
         });
 
         todoActiveList.addEventListener("edit-todo-item", (e) => {
-            const id = e.detail.id;
-            const isCompleted = e.detail.todoChecked;
-            const todo = this.todoService.findTodoById(id, isCompleted);
+            const todoPackage = e.detail.todoPackage;
+            const todo = this.todoService.findTodoById(todoPackage.todoId, todoPackage.isCompleted);
             this.todoView.displayTodoForm(todo);
         });
 
         todoActiveList.addEventListener("delete-todo-item", (e) => {
-            const id = e.detail.id;
-            const isCompleted = e.detail.todoChecked;
-            this.#handleDeleteTodo(id, isCompleted);
+            const todoPackage = e.detail.todoPackage;
+            this.#handleDeleteTodo(todoPackage.todoId, todoPackage.isCompleted);
         });
 
         const todoCompletedList = this.todoView.todoCompletedList;

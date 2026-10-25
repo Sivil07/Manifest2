@@ -64,7 +64,6 @@ class TodoItem extends HTMLElement {
         todoInput.addEventListener("change", (e) => {
             const newUserChecked = e.target.checked;
             const previousUserChecked = true === newUserChecked ? false : true;
-            console.log(newUserChecked)
             const todoPackage = {
                 previousUserChecked: previousUserChecked,
                 newUserChecked: newUserChecked,
@@ -81,11 +80,14 @@ class TodoItem extends HTMLElement {
         
         const todoContent = this.shadowRoot.querySelector(`[part="task-content"]`);
         todoContent.addEventListener("click", () => {
+            const todoPackage = {
+                todoId: this.#todoId,
+                isCompleted: this.#todoChecked
+            }
             this.dispatchEvent( new CustomEvent( "view-todo-item", {
                 bubbles: true,
                 detail: {
-                    id: this.#todoId,
-                    todoChecked: this.#todoChecked
+                    todoPackage: todoPackage
                 }
             }))
         })
