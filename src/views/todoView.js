@@ -33,15 +33,15 @@
 */
 
 class TodoView {
-    #completedTodos = []
-    #trackCounter;
+    #completedTodoElements = []
+    #counterElement;
 
-    constructor(todoLists, todoActiveList, todoCompletedList, todoDialog, todoAction) {
-        this.todoLists = todoLists;
+    constructor(todoListContainer, todoActiveList, todoCompletedList, todoDialog, addTodoButton) {
+        this.todoListContainer = todoListContainer;
         this.todoActiveList = todoActiveList;
         this.todoCompletedList = todoCompletedList;
         this.todoDialog = todoDialog;
-        this.todoAction = todoAction;
+        this.addTodoButton = addTodoButton;
     }
 
     displayTodoForm( todoData = {} ) {
@@ -57,29 +57,29 @@ class TodoView {
     }
     
     displayTodoCounter(numberOfCompletedTodos) {
-        if (this.#trackCounter !== undefined) this.#trackCounter.remove();
+        if (this.#counterElement !== undefined) this.#counterElement.remove();
         if (numberOfCompletedTodos === 0) return;
 
         const todoCounter = document.createElement("todo-counter");
         todoCounter.todoCount = numberOfCompletedTodos;
-        this.#trackCounter = todoCounter;
+        this.#counterElement = todoCounter;
 
         this.todoCompletedList.prepend(todoCounter);
     }
 
-    #removeCompletedTodos() {
-        for (const completeTodo of this.#completedTodos) {
+    #removeCompletedTodoElements() {
+        for (const completeTodo of this.#completedTodoElements) {
             completeTodo.remove();
         }
     }
 
     displayCompletedTodos(completedTodos) {
-        this.#removeCompletedTodos();
+        this.#removeCompletedTodoElements();
 
         for (const completedTodo of completedTodos) {
             const completedTodoItem = document.createElement("todo-item");
             completedTodoItem.todoData = completedTodo;
-            this.#completedTodos.push(completedTodoItem);
+            this.#completedTodoElements.push(completedTodoItem);
             this.todoCompletedList.appendChild(completedTodoItem);
         }
     }
