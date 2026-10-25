@@ -10,7 +10,7 @@ import { starterActiveData, starterCompletedData } from "../starterData.js";
 
     While the app runs, the todos are kept in memory as real Todo objects split between an active
     and completed list. The localStorage persists the todos as JSON objects which causes them to lose
-    their "Todo" identify and behavior so the service rebuilds them into Todo instances on the first load.
+    their "Todo" identify and behavior so the service rebuilds them into Todo instances on every load.
 
     If no saved data exists on the first load, the service uses the started data instead and persists it
     so the UI has initial todos to work with.
@@ -68,21 +68,21 @@ class TodoService {
         this.#saveActiveTodos();
     }
     
-    editTodo(id, todoChecked, todoEntries) {
-        const todo = this.findTodoById(id, todoChecked);
+    editTodo(id, isCompleted, todoEntries) {
+        const todo = this.findTodoById(id, isCompleted);
         todo.applyUpdates(todoEntries);
         this.#saveActiveTodos();
     }
 
-    deleteTodo(id, todoChecked) {
-        const todo = this.findTodoById(id, todoChecked);
+    deleteTodo(id, isCompleted) {
+        const todo = this.findTodoById(id, isCompleted);
         const todoIndex = this.#activeTodos.indexOf(todo);
         this.#activeTodos.splice(todoIndex, 1);
         this.#saveActiveTodos();
     }
 
-    #getTargetList(todoChecked) {
-        return todoChecked ? this.#completedTodos : this.#activeTodos;
+    #getTargetList(isCompleted) {
+        return isCompleted ? this.#completedTodos : this.#activeTodos;
     }
 
     findTodoById(id, todoChecked) {
@@ -102,9 +102,9 @@ class TodoService {
         localStorage.setItem("completed-todos", JSON.stringify(this.#completedTodos));
     }
 
-    classifyTodos(rawTodoArray) {
-        for (const rawTodo of rawTodoArray) {
-            const todo = new Todo(rawTodo);
+    #sortIntoLists(savedTodos) {
+        for (const savedTodo of savedTodos) {
+            const todo = new Todo(savedTodo);
             if (todo.isChecked) {
                 this.#completedTodos.push(todo)
             } else {
@@ -118,10 +118,10 @@ class TodoService {
         this.#completedTodos = [];
         const savedActiveData = localStorage.getItem("active-todos");
         const savedCompleteData = localStorage.getItem("completed-todos");
-        const activeArray = savedActiveData === null ? starterActiveData : JSON.parse(savedActiveData);
-        const completedArray = savedCompleteData === null ? starterCompletedData : JSON.parse(savedCompleteData);
-        this.classifyTodos(activeArray)
-        this.classifyTodos(completedArray)
+        const activeData = savedActiveData === null ? starterActiveData : JSON.parse(savedActiveData);
+        const completedData = savedCompleteData === null ? starterCompletedData : JSON.parse(savedCompleteData);
+        this.#sortIntoLists(activeData)
+        this.#sortIntoLists(completedData)
         if (savedActiveData === null) this.#saveActiveTodos();
         if (savedCompleteData === null) this.#saveCompletedTodos();
     }
