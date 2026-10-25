@@ -10,6 +10,10 @@ template.innerHTML = `
         <label part="form-label" for="">Why does it matter?</label>
         <input part="form-input-reason" type="text" placeholder="Your reason" name="reason" minlength="5" maxlength="20" required>
     </div>
+    <div part="form-group">
+        <label part="form-date" for="">Due Date</label>
+        <input part="form-input-date" type="date">
+    </div>
     <button part="form-submit" type="submit"></button>
 </form>
 `
