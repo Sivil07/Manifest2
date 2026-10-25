@@ -35,13 +35,13 @@ class TodoController {
         this.todoService = todoService;
         this.todoView = todoView;
 
-        const todoAction = this.todoView.todoAction;
-        todoAction.addEventListener("click", () => {
+        const addTodoButton = this.todoView.todoAction;
+        addTodoButton.addEventListener("click", () => {
             this.todoView.displayTodoForm();
         });
 
-        const todoLists = this.todoView.todoLists;
-        todoLists.addEventListener("move-todo-item", (e) => {
+        const todoListsContainer = this.todoView.todoLists;
+        todoListsContainer.addEventListener("move-todo-item", (e) => {
             const todoPackage = e.detail.todoPackage;
             this.todoService.moveTodo(todoPackage);
             this.#refreshUI();
@@ -50,22 +50,22 @@ class TodoController {
         const todoActiveList = this.todoView.todoActiveList;
         todoActiveList.addEventListener("view-todo-item", (e) => {
             const id = e.detail.id;
-            const todoChecked = e.detail.todoChecked;
-            const todo = this.todoService.findTodoById(id, todoChecked);
+            const isCompleted = e.detail.todoChecked;
+            const todo = this.todoService.findTodoById(id, isCompleted);
             this.todoView.displayOneActiveTodo(todo);
         });
 
         todoActiveList.addEventListener("edit-todo-item", (e) => {
             const id = e.detail.id;
-            const todoChecked = e.detail.todoChecked;
-            const todo = this.todoService.findTodoById(id, todoChecked);
+            const isCompleted = e.detail.todoChecked;
+            const todo = this.todoService.findTodoById(id, isCompleted);
             this.todoView.displayTodoForm(todo);
         });
 
         todoActiveList.addEventListener("delete-todo-item", (e) => {
             const id = e.detail.id;
-            const todoChecked = e.detail.todoChecked;
-            this.#processDeletingTodo(id, todoChecked);
+            const isCompleted = e.detail.todoChecked;
+            this.#handleDeleteTodo(id, isCompleted);
         });
 
         const todoCompletedList = this.todoView.todoCompletedList;
@@ -79,11 +79,11 @@ class TodoController {
             const todoPackage = e.detail.todoPackage;
 
             if (todoPackage.todoId) {
-                this.#processEditingTodo(todoPackage.todoId, todoPackage.todoChecked, todoPackage.todoEntries);
+                this.#handleEditTodo(todoPackage.todoId, todoPackage.todoChecked, todoPackage.todoEntries);
                 todoView.closeTodoDialog(todoDialog);
 
             } else {
-                this.#processNewTodo(todoPackage.todoEntries);
+                this.#handleCreateTodo(todoPackage.todoEntries);
                 todoView.closeTodoDialog(todoDialog);
             }
         });
@@ -93,17 +93,17 @@ class TodoController {
         })
     }
 
-    #processDeletingTodo(id, todoChecked) {
-        this.todoService.deleteTodo(id, todoChecked);
+    #handleDeleteTodo(id, isCompleted) {
+        this.todoService.deleteTodo(id, isCompleted);
         this.#refreshUI();
     }
 
-    #processEditingTodo(todoId, todoChecked, todoEntries) {
-        this.todoService.editTodo(todoId, todoChecked, todoEntries);
+    #handleEditTodo(todoId, isCompleted, todoEntries) {
+        this.todoService.editTodo(todoId, isCompleted, todoEntries);
         this.#refreshUI();
     }
 
-    #processNewTodo(todoEntries) {
+    #handleCreateTodo(todoEntries) {
         this.todoService.createTodo(todoEntries);
         this.#refreshUI();
     }
