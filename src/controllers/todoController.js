@@ -107,14 +107,14 @@ class TodoController {
 
 
     initialize() {
-        this.todoService.loadTodos();
+        this.todoService.load();
         this.#refreshUI();
     }
 
     #refreshUI() {
         this.todoView.displayActiveTodos(this.todoService.allActiveTodos);
         this.todoView.displayCompletedTodos(this.todoService.allCompletedTodos);
-        this.todoView.displayTodoCounter(this.todoService.numberOfCompletedTodos);
+        // this.todoView.displayTodoCounter(this.todoService.numberOfCompletedTodos);
     }
 }
 
