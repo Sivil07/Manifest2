@@ -69,7 +69,7 @@ class TodoController {
 
         todoActiveList.addEventListener("edit-todo-item", (e) => {
             const todoPackage = e.detail.todoPackage;
-            const todo = this.todoService.findTodoById(todoPackage.todoId, todoPackage.isCompleted);
+            const todo = this.todoService.findTodoById(todoPackage.todoId);
             this.todoView.displayTodoForm(todo);
         });
 
