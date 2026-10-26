@@ -16,7 +16,12 @@ function getCompletedByDayOfWeek(completedDate) {
     return day;
 }
 
+function getCurrentDate() {
+    return format( new Date(), "yyyy-MM-dd");
+}
+
 export {
     setMinDate,
-    getCompletedByDayOfWeek
+    getCompletedByDayOfWeek,
+    getCurrentDate
 }
