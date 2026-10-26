@@ -75,7 +75,7 @@ class TodoController {
 
         todoActiveList.addEventListener("delete-todo-item", (e) => {
             const todoPackage = e.detail.todoPackage;
-            this.#handleDeleteTodo(todoPackage.todoId, todoPackage.isCompleted);
+            this.#handleDeleteTodo(todoPackage.todoId);
         });
 
         const todoCompletedList = this.todoView.todoCompletedList;
@@ -103,8 +103,8 @@ class TodoController {
         })
     }
 
-    #handleDeleteTodo(id, isCompleted) {
-        this.todoService.deleteTodo(id, isCompleted);
+    #handleDeleteTodo(id) {
+        this.todoService.deleteTodo(id);
         this.#refreshUI();
     }
 

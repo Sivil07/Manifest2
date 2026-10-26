@@ -124,14 +124,11 @@ class TodoService {
         this.#saveAllTodos();
     }
 
-    // deleteTodo(id, isCompleted) {
-    //     const todo = this.findTodoById(id, isCompleted);
-    //     const todoIndex = this.#activeTodos.indexOf(todo);
-    //     this.#activeTodos.splice(todoIndex, 1);
-    //     this.#saveActiveTodos();
-    // }
-
-
+    deleteTodo(id) {
+        const todoIndex = this.#allTodos.findIndex((todo) => todo.id === id);
+        this.#allTodos.splice(todoIndex, 1);
+        this.#saveAllTodos();
+    }
 
     #saveAllTodos() {
         localStorage.setItem("all-todos", JSON.stringify(this.#allTodos));
