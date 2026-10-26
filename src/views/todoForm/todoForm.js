@@ -14,7 +14,7 @@ template.innerHTML = `
     </div>
     <div part="form-group">
         <label part="form-date" for="">Due Date</label>
-        <input part="form-input-date" type="date">
+        <input part="form-input-date" type="date" name="dueDate" required>
     </div>
     <button part="form-submit" type="submit"></button>
 </form>
@@ -51,6 +51,7 @@ class TodoForm extends HTMLElement {
             e.preventDefault();
             const data = new FormData(form);
             const entries = Object.fromEntries(data.entries());
+            console.log(entries)
             const todoPackage = {
                 todoEntries: entries,
                 todoId: this.#todoId,
