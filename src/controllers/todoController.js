@@ -56,7 +56,7 @@ class TodoController {
         const todoListsContainer = this.todoView.todoListsContainer;
         todoListsContainer.addEventListener("move-todo-item", (e) => {
             const todoPackage = e.detail.todoPackage;
-            this.todoService.moveTodo(todoPackage);
+            this.todoService.moveTodo(todoPackage.todoId, todoPackage.newCompletedStatus);
             this.#refreshUI();
         });
 

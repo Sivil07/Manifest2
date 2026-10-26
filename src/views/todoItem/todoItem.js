@@ -67,11 +67,9 @@ class TodoItem extends HTMLElement {
     connectedCallback() {
         const todoInput = this.shadowRoot.querySelector(`[part="complete-todo"]`);
         todoInput.addEventListener("change", (e) => {
-            const newUserChecked = e.target.checked;
-            const previousUserChecked = true === newUserChecked ? false : true;
+            const newCompletedStatus = e.target.checked;
             const todoPackage = {
-                previousUserChecked: previousUserChecked,
-                newUserChecked: newUserChecked,
+                newCompletedStatus: newCompletedStatus,
                 todoId: this.#todoId,
             }
             this.dispatchEvent( new CustomEvent( "move-todo-item", {
