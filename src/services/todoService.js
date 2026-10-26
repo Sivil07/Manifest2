@@ -29,11 +29,9 @@ import { getCurrentDate } from "../utils/date.js";
 */
 
 class TodoService {
-    // #activeTodos = [];
-    // #completedTodos = [];
     #allTodos = [];
     #currentFilter;
-
+    
     get allActiveTodos() {
 
         if (this.#currentFilter === "today") {
@@ -41,6 +39,10 @@ class TodoService {
             return this.#sortIntoActiveList(todayTodos);
         }
 
+        if (this.#currentFilter === "upcoming") {
+            const upcomingTodos = this.filterTodosByUpcoming();
+            return this.#sortIntoActiveList(upcomingTodos);
+        }
     }
 
     get allCompletedTodos() {
@@ -49,7 +51,12 @@ class TodoService {
             const todayTodos = this.filterTodosByToday()
             return this.#sortIntoCompletedList(todayTodos);
         }
-        
+
+        if (this.#currentFilter === "upcoming") {
+            const upcomingTodos = this.filterTodosByUpcoming();
+            return this.#sortIntoCompletedList(upcomingTodos);
+        }
+
     }
 
     // get numberOfCompletedTodos() {
@@ -88,6 +95,17 @@ class TodoService {
         })
         return filteredArray
     }
+
+    filterTodosByUpcoming() {
+        const filteredArray = []
+        const currentDate = getCurrentDate();
+        this.#allTodos.forEach((todo) => {
+            const todoDueDate = todo.dueDate;
+            if (todoDueDate !== currentDate) filteredArray.push(todo);
+        })
+        return filteredArray
+    }
+
 
     // createTodo(todoEntries) {
     //     const todo = new Todo(todoEntries);
