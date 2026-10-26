@@ -40,6 +40,19 @@ class TodoController {
             this.todoView.displayTodoForm();
         });
 
+        const todayButton = this.todoView.filterTodayButton;
+        todayButton.addEventListener("click", () => {
+            this.todoService.setFilter("today");
+            this.#refreshUI()
+        });
+
+        const upcomingButton = this.todoView.filterUpcomingButton;
+        upcomingButton.addEventListener("click", () => {
+            this.todoService.setFilter("upcoming");
+            this.#refreshUI();
+
+        })
+
         const todoListsContainer = this.todoView.todoListsContainer;
         todoListsContainer.addEventListener("move-todo-item", (e) => {
             const todoPackage = e.detail.todoPackage;
