@@ -72,19 +72,12 @@ class TodoService {
     //     this.#saveCompletedTodos();
     // }
 
-    // moveTodo({ previousUserChecked, newUserChecked, todoId, todoChecked }) {
-    //     const todo = this.findTodoById(todoId, todoChecked);
-    //     todo.setCompletedStatus(newUserChecked);
-    //     const previousArray = previousUserChecked ? this.#completedTodos : this.#activeTodos;
-    //     const targetArray = newUserChecked ? this.#completedTodos : this.#activeTodos;
 
-    //     const todoIndex = previousArray.indexOf(todo);
-    //     previousArray.splice(todoIndex, 1);
-
-    //     targetArray.push(todo);
-    //     this.#saveActiveTodos()
-    //     this.#saveCompletedTodos();
-    // }
+    moveTodo(todoId, newCompletedStatus) {
+        const todo = this.findTodoById(todoId)
+        todo.setCompletedStatus(newCompletedStatus);
+        this.#saveAllTodos();
+    }
 
     filterTodosByToday() {
         const filteredArray = []
