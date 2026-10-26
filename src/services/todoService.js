@@ -35,26 +35,21 @@ class TodoService {
     #currentFilter;
 
     get allActiveTodos() {
-        let emptyArray = []
 
         if (this.#currentFilter === "today") {
-            const unsortedArray = this.filterTodosByToday(emptyArray);
-            const activeArray = this.#sortIntoActiveList(unsortedArray);
-            return activeArray;
+            const todayTodos = this.filterTodosByToday()
+            return this.#sortIntoActiveList(todayTodos);
         }
 
-        // return [...this.#activeTodos];
     }
 
     get allCompletedTodos() {
-        let emptyArray = []
 
         if (this.#currentFilter === "today") {
-            const unsortedArray = this.filterTodosByToday(emptyArray);
-            const completedArray = this.#sortIntoCompletedList(unsortedArray);
-            return completedArray;
+            const todayTodos = this.filterTodosByToday()
+            return this.#sortIntoCompletedList(todayTodos);
         }
-        // return [...this.#completedTodos];
+        
     }
 
     // get numberOfCompletedTodos() {
@@ -84,7 +79,8 @@ class TodoService {
     //     this.#saveCompletedTodos();
     // }
 
-    filterTodosByToday(filteredArray) {
+    filterTodosByToday() {
+        const filteredArray = []
         const currentDate = getCurrentDate();
         this.#allTodos.forEach((todo) => {
             const todoDueDate = todo.dueDate;
