@@ -31,7 +31,7 @@ import { getCurrentDate } from "../utils/date.js";
 class TodoService {
     #allTodos = [];
     #currentFilter;
-    
+
     get allActiveTodos() {
 
         if (this.#currentFilter === "today") {
@@ -107,17 +107,22 @@ class TodoService {
     }
 
 
-    // createTodo(todoEntries) {
-    //     const todo = new Todo(todoEntries);
-    //     this.#activeTodos.push(todo);
-    //     this.#saveActiveTodos();
-    // }
+    createTodo(todoEntries) {
+        const todo = new Todo(todoEntries);
+        this.#allTodos.push(todo);
+        this.#saveAllTodos();
+    }
 
-    // editTodo(id, isCompleted, todoEntries) {
-    //     const todo = this.findTodoById(id, isCompleted);
-    //     todo.applyUpdates(todoEntries);
-    //     this.#saveActiveTodos();
-    // }
+    findTodoById(id) {
+        const todo = this.#allTodos.find((todo) => todo.id === id);
+        return todo;
+    }
+
+    editTodo(id, todoEntries) {
+        const todo = this.findTodoById(id);
+        todo.applyUpdates(todoEntries);
+        this.#saveAllTodos();
+    }
 
     // deleteTodo(id, isCompleted) {
     //     const todo = this.findTodoById(id, isCompleted);
@@ -126,41 +131,11 @@ class TodoService {
     //     this.#saveActiveTodos();
     // }
 
-    // #getTargetList(isCompleted) {
-    //     return isCompleted ? this.#completedTodos : this.#activeTodos;
-    // }
 
-    // findTodoById(id, todoChecked) {
-    //     const targetArray = this.#getTargetList(todoChecked)
-    //     for (const todo of targetArray) {
-    //         if (todo.id === id) {
-    //             return todo;
-    //         }
-    //     }
-    // }
-
-    // #saveActiveTodos() {
-    //     localStorage.setItem("active-todos", JSON.stringify(this.#activeTodos));
-    // }
-
-    // #saveCompletedTodos() {
-    //     localStorage.setItem("completed-todos", JSON.stringify(this.#completedTodos));
-    // }
 
     #saveAllTodos() {
         localStorage.setItem("all-todos", JSON.stringify(this.#allTodos));
     }
-
-    // #sortIntoLists(savedTodos) {
-    //     for (const savedTodo of savedTodos) {
-    //         const todo = new Todo(savedTodo);
-    //         if (todo.isChecked) {
-    //             this.#completedTodos.push(todo)
-    //         } else {
-    //             this.#activeTodos.push(todo)
-    //         }
-    //     }
-    // }
 
     #sortIntoActiveList(unsortedList) {
         const activeList = unsortedList.filter((savedTodo) => {
@@ -192,18 +167,6 @@ class TodoService {
 
     }
 
-    // loadTodos() {
-    //     this.#activeTodos = [];
-    //     this.#completedTodos = [];
-    //     const savedActiveData = localStorage.getItem("active-todos");
-    //     const savedCompleteData = localStorage.getItem("completed-todos");
-    //     const activeData = savedActiveData === null ? starterActiveData : JSON.parse(savedActiveData);
-    //     const completedData = savedCompleteData === null ? starterCompletedData : JSON.parse(savedCompleteData);
-    //     this.#sortIntoLists(activeData)
-    //     this.#sortIntoLists(completedData)
-    //     if (savedActiveData === null) this.#saveActiveTodos();
-    //     if (savedCompleteData === null) this.#saveCompletedTodos();
-    // }
 }
 
 export default TodoService;
