@@ -13,6 +13,12 @@ const starterActiveData = [
         isChecked: false,
         dueDate: setMinDate()
     },
+    {
+        title: "Review weekly expenses",
+        reason: "To stay aware of spending habits and keep expenses low",
+        isChecked: false,
+        dueDate: "2026-10-26"
+    }
 ]
 
 const starterCompletedData = [
@@ -27,6 +33,12 @@ const starterCompletedData = [
         reason: "To meal prep for this week",
         isChecked: true,
         dueDate: setMinDate()
+    },
+    {
+        title: "Review yesterday's lecture notes",
+        reason: "Strengthen understanding before moving on",
+        isChecked: true,
+        dueDate: "2026-10-26"
     }
 ]
 
