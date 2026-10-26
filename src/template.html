@@ -11,14 +11,16 @@
     <dialog id="my-dialog" closedby="any">
 
     </dialog>
-    <button type="button" id="todo-action">Create Todo</button>
+    <button type="button" id="filter-today" class="todo-action">Today</button>
+    <button type="button" id="filter-upcoming" class="todo-action">Upcoming</button>
+    <button type="button" id="add-todo" class="todo-action">Create Todo</button>
     <section id="todo-lists">
         <div id="active-todo-list">
 
         </div>
         <todo-item></todo-item>
         <div id="completed-todo-list">
-            <todo-counter></todo-counter>
+            <!-- <todo-counter></todo-counter> -->
             <!-- <div id="completed-counter">
                 <p id="counter">Completed - </p>
                 <button id="clear-todos">Clear Completed</button>

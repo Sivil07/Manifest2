@@ -17,7 +17,9 @@ const todoView = new TodoView(
     document.querySelector("#active-todo-list"),
     document.querySelector("#completed-todo-list"),
     document.querySelector("#my-dialog"),
-    document.querySelector("#todo-action")
+    document.querySelector("#add-todo"),
+    document.querySelector("#filter-today"),
+    document.querySelector("#filter-upcoming")
 );
 const todoController = new TodoController(todoService, todoView);
 

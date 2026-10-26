@@ -35,7 +35,7 @@ body {
   backdrop-filter: blur(10px);
 }
 
-#todo-action {
+.todo-action {
   padding: 1rem;
   font-size: 1rem;
   border-radius: 1rem;

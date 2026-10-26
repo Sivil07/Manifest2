@@ -36,12 +36,14 @@ class TodoView {
     #completedTodoElements = []
     #counterElement;
 
-    constructor(todoListsContainer, todoActiveList, todoCompletedList, todoDialog, addTodoButton) {
+    constructor(todoListsContainer, todoActiveList, todoCompletedList, todoDialog, addTodoButton, filterTodayButton, filterUpcomingButton) {
         this.todoListsContainer = todoListsContainer;
         this.todoActiveList = todoActiveList;
         this.todoCompletedList = todoCompletedList;
         this.todoDialog = todoDialog;
         this.addTodoButton = addTodoButton;
+        this.filterTodayButton = filterTodayButton;
+        this.filterUpcomingButton = filterUpcomingButton;
     }
 
     displayTodoForm( todoData = {} ) {
