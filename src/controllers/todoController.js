@@ -89,7 +89,7 @@ class TodoController {
             const todoPackage = e.detail.todoPackage;
 
             if (todoPackage.todoId) {
-                this.#handleEditTodo(todoPackage.todoId, todoPackage.todoChecked, todoPackage.todoEntries);
+                this.#handleEditTodo(todoPackage.todoId, todoPackage.todoEntries);
                 todoView.closeTodoDialog(todoDialog);
 
             } else {
@@ -108,8 +108,8 @@ class TodoController {
         this.#refreshUI();
     }
 
-    #handleEditTodo(todoId, isCompleted, todoEntries) {
-        this.todoService.editTodo(todoId, isCompleted, todoEntries);
+    #handleEditTodo(todoId, todoEntries) {
+        this.todoService.editTodo(todoId, todoEntries);
         this.#refreshUI();
     }
 
