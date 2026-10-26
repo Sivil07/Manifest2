@@ -1,5 +1,10 @@
 todo-item::part(task) {
-  display: flex;
+  display: grid;
+  grid-template-areas:
+    "Checkbox Todo-Content"
+    "Checkbox Todo-Tags";
+  grid-template-columns: max-content 1fr;
+  grid-template-rows: repeat(2, max-content);
   gap: 0.85rem;
   background-color: var(--clr-white);
   border: 1px solid var(--clr-lavender);
@@ -7,10 +12,18 @@ todo-item::part(task) {
   border-radius: 1rem;
 }
 
+/* Task Check Section */
+
+todo-item::part(task-check) {
+  grid-area: Checkbox;
+}
+
 todo-item::part(complete-todo) {
-  accent-color: rebeccapurple; 
+  accent-color: rebeccapurple;
   margin: 0;
 }
+
+/* Task Content Section */
 
 todo-item::part(task-content) {
   border: none;
@@ -20,8 +33,8 @@ todo-item::part(task-content) {
   text-align: left;
   gap: 0.85rem;
   cursor: pointer;
+  grid-area: Todo-Content;
 }
-
 
 todo-item::part(task-title) {
   font-weight: bold;
@@ -30,5 +43,25 @@ todo-item::part(task-title) {
 
 todo-item::part(task-reason) {
   color: var(--clr-muted);
+  margin: 0;
+}
+
+todo-item::part(checked) {
+  pointer-events: none;
+}
+
+/* Tags Section */
+
+todo-item::part(todo-tags) {
+  grid-area: Todo-Tags;
+}
+
+todo-item::part(tag) {
+  background-color: var(--clr-lavender);
+  color: var(--clr-logo-primary);
+  font-size: 0.8rem;
+  padding: 0.1rem 0.5rem;
+  font-weight: bold;
+  border-radius: 1rem;
   margin: 0;
 }
