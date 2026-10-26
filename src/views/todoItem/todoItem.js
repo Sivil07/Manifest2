@@ -1,3 +1,5 @@
+import { getCompletedByDayOfWeek } from "../../utils/date.js";
+
 /*
     A TodoItem is the on screen version of a single Todo object. A todo holds the
     data, and a TodoItem defines how that data appears and how the user interacts with
@@ -57,7 +59,7 @@ class TodoItem extends HTMLElement {
         const dueDate = this.shadowRoot.querySelector(`[part~="due-date"]`);
         title.textContent = todo.title;
         reason.textContent = todo.reason;
-        dueDate.textContent = todo.dueDate;
+        dueDate.textContent = getCompletedByDayOfWeek(todo.dueDate);
         input.checked = todo.isChecked;
 
         this.#todoId = todo.id;

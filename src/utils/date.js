@@ -11,6 +11,12 @@ function setMinDate() {
     return minDate;
 }
 
+function getCompletedByDayOfWeek(completedDate) {
+    const day = format( new Date(completedDate), "EEE"  )
+    return day;
+}
+
 export {
-    setMinDate
+    setMinDate,
+    getCompletedByDayOfWeek
 }
