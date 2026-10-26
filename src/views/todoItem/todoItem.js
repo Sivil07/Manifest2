@@ -35,6 +35,9 @@ template.innerHTML = `
         <span part="task-title"></span>
         <span part="task-reason"></span>
     </button>
+    <div part="todo-tags">
+        <span part="tag due-date"></span
+    </div>
 </div>
 `
 class TodoItem extends HTMLElement {
@@ -51,9 +54,12 @@ class TodoItem extends HTMLElement {
         const title = this.shadowRoot.querySelector('[part="task-title"]');
         const reason = this.shadowRoot.querySelector('[part="task-reason"]');
         const input = this.shadowRoot.querySelector(`[part="complete-todo"]`);
+        const dueDate = this.shadowRoot.querySelector(`[part~="due-date"]`);
         title.textContent = todo.title;
         reason.textContent = todo.reason;
+        dueDate.textContent = todo.dueDate;
         input.checked = todo.isChecked;
+
         this.#todoId = todo.id;
         this.#todoChecked = todo.isChecked;
 
