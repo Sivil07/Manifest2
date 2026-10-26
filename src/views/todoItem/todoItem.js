@@ -44,7 +44,6 @@ template.innerHTML = `
 `
 class TodoItem extends HTMLElement {
     #todoId;
-    #todoChecked
 
     constructor() {
         super();
@@ -63,8 +62,6 @@ class TodoItem extends HTMLElement {
         input.checked = todo.isChecked;
 
         this.#todoId = todo.id;
-        this.#todoChecked = todo.isChecked;
-
     }
 
     connectedCallback() {
@@ -76,7 +73,6 @@ class TodoItem extends HTMLElement {
                 previousUserChecked: previousUserChecked,
                 newUserChecked: newUserChecked,
                 todoId: this.#todoId,
-                todoChecked: this.#todoChecked
             }
             this.dispatchEvent( new CustomEvent( "move-todo-item", {
                 bubbles: true,
@@ -90,7 +86,6 @@ class TodoItem extends HTMLElement {
         todoContent.addEventListener("click", () => {
             const todoPackage = {
                 todoId: this.#todoId,
-                isCompleted: this.#todoChecked
             }
             this.dispatchEvent( new CustomEvent( "view-todo-item", {
                 bubbles: true,

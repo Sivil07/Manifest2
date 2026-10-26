@@ -63,7 +63,7 @@ class TodoController {
         const todoActiveList = this.todoView.todoActiveList;
         todoActiveList.addEventListener("view-todo-item", (e) => {
             const todoPackage = e.detail.todoPackage;
-            const todo = this.todoService.findTodoById(todoPackage.todoId, todoPackage.isCompleted);
+            const todo = this.todoService.findTodoById(todoPackage.todoId);
             this.todoView.displayOneActiveTodo(todo);
         });
 
