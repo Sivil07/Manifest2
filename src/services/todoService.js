@@ -30,33 +30,49 @@ import { getCurrentDate } from "../utils/date.js";
 
 class TodoService {
     #allTodos = [];
-    #currentFilter;
+    currentFilter;
 
     get allActiveTodos() {
+        return this.#allTodos.filter((todo) => {
+            const matchesCurrentFilter = this.#matchesFilter(todo);
+            const isCompleted = !todo.isChecked;
+            return matchesCurrentFilter && isCompleted;
+        })
 
-        if (this.#currentFilter === "today") {
-            const todayTodos = this.filterTodosByToday()
-            return this.#sortIntoActiveList(todayTodos);
-        }
+        // if (this.currentFilter === "today") {
+        //     const todayTodos = this.filterTodosByToday()
+        //     return this.#sortIntoActiveList(todayTodos);
+        // }
 
-        if (this.#currentFilter === "upcoming") {
-            const upcomingTodos = this.filterTodosByUpcoming();
-            return this.#sortIntoActiveList(upcomingTodos);
-        }
+        // if (this.currentFilter === "upcoming") {
+        //     const upcomingTodos = this.filterTodosByUpcoming();
+        //     return this.#sortIntoActiveList(upcomingTodos);
+        // }
     }
 
     get allCompletedTodos() {
+        return this.#allTodos.filter((todo) => {
+            const matchesCurrentFilter = this.#matchesFilter(todo);
+            const isCompleted = todo.isChecked;
+            return matchesCurrentFilter && isCompleted;
+        })
 
-        if (this.#currentFilter === "today") {
-            const todayTodos = this.filterTodosByToday()
-            return this.#sortIntoCompletedList(todayTodos);
-        }
+        // if (this.currentFilter === "today") {
+        //     const todayTodos = this.filterTodosByToday()
+        //     return this.#sortIntoCompletedList(todayTodos);
+        // }
 
-        if (this.#currentFilter === "upcoming") {
-            const upcomingTodos = this.filterTodosByUpcoming();
-            return this.#sortIntoCompletedList(upcomingTodos);
-        }
+        // if (this.currentFilter === "upcoming") {
+        //     const upcomingTodos = this.filterTodosByUpcoming();
+        //     return this.#sortIntoCompletedList(upcomingTodos);
+        // }
 
+    }
+
+    #matchesFilter(todo) {
+        const today = getCurrentDate();
+        if (this.currentFilter === "today") return todo.dueDate === today;
+        if (this.currentFilter === "upcoming") return todo.dueDate !== today;
     }
 
     // get numberOfCompletedTodos() {
@@ -64,7 +80,7 @@ class TodoService {
     // }
 
     setFilter(filterOption = "today") {
-        this.#currentFilter = filterOption
+        this.currentFilter = filterOption
     }
 
     // clearCompletedTodos() {
@@ -127,21 +143,21 @@ class TodoService {
         localStorage.setItem("all-todos", JSON.stringify(this.#allTodos));
     }
 
-    #sortIntoActiveList(unsortedList) {
-        const activeList = unsortedList.filter((savedTodo) => {
-            const todo = new Todo(savedTodo);
-            return !todo.isChecked;
-        })
-        return activeList
-    }
+    // #sortIntoActiveList(unsortedList) {
+    //     const activeList = unsortedList.filter((savedTodo) => {
+    //         const todo = new Todo(savedTodo);
+    //         return !todo.isChecked;
+    //     })
+    //     return activeList
+    // }
 
-    #sortIntoCompletedList(unsortedList) {
-        const completedList = unsortedList.filter((savedTodo) => {
-            const todo = new Todo(savedTodo);
-            return todo.isChecked;
-        })
-        return completedList
-    }
+    // #sortIntoCompletedList(unsortedList) {
+    //     const completedList = unsortedList.filter((savedTodo) => {
+    //         const todo = new Todo(savedTodo);
+    //         return todo.isChecked;
+    //     })
+    //     return completedList
+    // }
 
     load() {
         this.#allTodos = [];
