@@ -1,5 +1,5 @@
 import Todo from "../models/todo.js";
-import { starterActiveData, starterCompletedData, starterData } from "../starterData.js";
+import { starterData } from "../starterData.js";
 import { getCurrentDate } from "../utils/date.js";
 
 /* 
