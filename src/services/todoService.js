@@ -83,10 +83,19 @@ class TodoService {
         this.currentFilter = filterOption
     }
 
-    // clearCompletedTodos() {
-    //     this.#completedTodos = [];
-    //     this.#saveCompletedTodos();
-    // }
+    /* Removes todos that belong to the currentFilter after the user clicks "Clear Completed" */
+    clearCompletedTodos(filterOption) {
+        this.currentFilter = filterOption
+
+        const remainingTodos = this.#allTodos.filter((todo) => {
+            const isCompleted = todo.isChecked;
+            const matchesFilter = this.#matchesFilter(todo);
+            return !(isCompleted && matchesFilter);
+        });
+
+        this.#allTodos = remainingTodos;
+        this.#saveAllTodos();
+    }
 
 
     moveTodo(todoId, newCompletedStatus) {
