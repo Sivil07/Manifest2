@@ -39,15 +39,6 @@ class TodoService {
             return matchesCurrentFilter && isCompleted;
         })
 
-        // if (this.currentFilter === "today") {
-        //     const todayTodos = this.filterTodosByToday()
-        //     return this.#sortIntoActiveList(todayTodos);
-        // }
-
-        // if (this.currentFilter === "upcoming") {
-        //     const upcomingTodos = this.filterTodosByUpcoming();
-        //     return this.#sortIntoActiveList(upcomingTodos);
-        // }
     }
 
     get allCompletedTodos() {
@@ -56,16 +47,6 @@ class TodoService {
             const isCompleted = todo.isChecked;
             return matchesCurrentFilter && isCompleted;
         })
-
-        // if (this.currentFilter === "today") {
-        //     const todayTodos = this.filterTodosByToday()
-        //     return this.#sortIntoCompletedList(todayTodos);
-        // }
-
-        // if (this.currentFilter === "upcoming") {
-        //     const upcomingTodos = this.filterTodosByUpcoming();
-        //     return this.#sortIntoCompletedList(upcomingTodos);
-        // }
 
     }
 
@@ -88,8 +69,12 @@ class TodoService {
         this.currentFilter = filterOption
 
         const remainingTodos = this.#allTodos.filter((todo) => {
+            /* Check whether the todo is completed (true if the checkbox is checked) */
             const isCompleted = todo.isChecked;
+            /* Check whether the todo belongs to the current filter (today or upcoming) */
             const matchesFilter = this.#matchesFilter(todo);
+            /* Keep todos that are not completed in the current filter
+               So remove only todos that are both completed and match the filter */
             return !(isCompleted && matchesFilter);
         });
 
