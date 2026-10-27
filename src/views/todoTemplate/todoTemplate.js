@@ -10,6 +10,10 @@ template.innerHTML = `
         <h1 part="template-title"></h1>
         <p part="template-reason"></p>
     </div>
+    <div part="template-desc-container">
+        <span part="template-desc-header">description</span>
+        <p part="template-desc"></p>
+    </div>
     <div part="button-group">
         <button part="template-actions edit-todo">Edit</button>
         <button part="template-actions delete-todo">Delete</button>
@@ -33,9 +37,14 @@ class TodoTemplate extends HTMLElement {
         const title = this.shadowRoot.querySelector(`[part="template-title"]`);
         const reason = this.shadowRoot.querySelector(`[part="template-reason"]`);
         const dueDate = this.shadowRoot.querySelector(`[part~="template-due-date"]`);
+        const description = this.shadowRoot.querySelector(`[part="template-desc"]`);
         title.textContent = todoData.title;
         reason.textContent = todoData.reason;
         dueDate.textContent = getCompletedByDayOfWeek(todoData.dueDate);
+
+        const isEmptyString = todoData.description === undefined || todoData.description.length === 0;
+        description.textContent = (isEmptyString) ? "No Description yet" : todoData.description;
+
         this.#todoId = todoData.id;
     }
 
