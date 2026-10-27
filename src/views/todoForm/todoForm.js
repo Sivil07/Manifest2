@@ -13,7 +13,11 @@ template.innerHTML = `
         <input part="form-input-reason" type="text" placeholder="Your reason" name="reason" minlength="5" maxlength="20" required>
     </div>
     <div part="form-group">
-        <label part="form-date" for="">Due Date</label>
+        <label part="form-label" for="form-input-desc">Description (Optional)</label>
+        <textarea part="form-description" id="form-input-desc" name="desc" rows="4" minlength="5" maxlength="100"></textarea>
+    </div>
+    <div part="form-group">
+        <label part="form-label" for="">Due Date</label>
         <span part="form-reminder remove-reminder">Due today todos need a new date. Tomorrow is selected, but you can change it.</span>
         <input part="form-input-date" type="date" name="dueDate" required>
     </div>

@@ -5,6 +5,8 @@ todo-form::part(form-dialog) {
     "Header"
     "Title-Input"
     "Reason-Input"
+    "Description-Input"
+    "Date-Input"
     "Submit-Button";
 }
 
@@ -20,6 +22,10 @@ todo-form::part(form-group) {
 
 todo-form::part(form-label) {
   font-weight: bold;
+}
+
+todo-form::part(form-description) {
+  resize: none;
 }
 
 todo-form::part(form-submit) {
