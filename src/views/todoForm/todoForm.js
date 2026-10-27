@@ -1,4 +1,4 @@
-import { setMinDate } from "../../utils/date.js";
+import { setMinDate, getCurrentDate } from "../../utils/date.js";
 
 const template = document.createElement("template");
 template.innerHTML = `
@@ -36,12 +36,12 @@ class TodoForm extends HTMLElement {
         const dateInput = this.shadowRoot.querySelector(`[part="form-input-date"]`);
         const submitButton = this.shadowRoot.querySelector(`[part="form-submit"]`);
         dateInput.min = setMinDate();
-        dateInput.value = dueDate;
         titleInput.value = title;
         reasonInput.value = reason;
         this.#todoId = id;
         header.textContent = this.#todoId ? "Edit Todo" : "New Todo";
         submitButton.textContent = this.#todoId ? "Edit Todo" : "Add Todo";
+        dateInput.value = (dueDate !== "" && dueDate === getCurrentDate()) ? setMinDate() : dueDate;  
     }
 
     connectedCallback() {
