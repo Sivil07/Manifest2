@@ -6,22 +6,35 @@
   padding: 1.5rem;
   display: grid;
   grid-template-areas:
-    "Close-Template"
-    "Todo-Contents"
-    "Template-Actions";
-  grid-template-rows: repeat(3, max-content);
+  "Template-Contents Close-Container";
+  grid-template-columns: minmax(200px, 1fr) 1fr;
+  grid-template-rows: max-content;
 }
 
-todo-template::part(template-actions) {
+/* Close Container Section */
+
+todo-template::part(close-container) {
+  grid-area: Close-Container;
+  text-align: right;
+}
+
+/* Template Contents Section */
+
+todo-template::part(template-contents) {
+  grid-area: Template-Contents;
+  display: grid;
+  grid-template-areas: 
+  "Todo-Tags"
+  "Todo-Contents"
+  "Template-Actions";
+  grid-template-rows: repeat(3, max-content);
+  gap: 1rem;
+}
+
+ todo-template::part(template-actions) {
   width: max-content;
   padding: 0.5rem;
   border-radius: 0.5rem;
-}
-
-todo-template::part(template-contents) {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
 }
 
 todo-template::part(template-title) {
@@ -35,4 +48,4 @@ todo-template::part(template-reason) {
 todo-template::part(button-group) {
   display: flex;
   gap: 1rem;
-}
+} 

@@ -1,13 +1,20 @@
 const template = document.createElement("template");
 template.innerHTML = `
-<button part="template-actions close-todo" type="button">X</button>
 <div part="template-contents">
-    <h1 part="template-title"></h1>
-    <p part="template-reason"></p>
+    <div part="template-tags">
+        <span part="template-due-date"></span>
+    </div>
+    <div part="template-display">
+        <h1 part="template-title"></h1>
+        <p part="template-reason"></p>
+    </div>
+    <div part="button-group">
+        <button part="template-actions edit-todo">Edit</button>
+        <button part="template-actions delete-todo">Delete</button>
+    </div>
 </div>
-<div part="button-group">
-    <button part="template-actions edit-todo">Edit</button>
-    <button part="template-actions delete-todo">Delete</button>
+<div part="close-container">
+    <button part="template-actions close-template">X</button>
 </div>
 `
 
@@ -23,13 +30,15 @@ class TodoTemplate extends HTMLElement {
     set templateData(todoData) {
         const title = this.shadowRoot.querySelector(`[part="template-title"]`);
         const reason = this.shadowRoot.querySelector(`[part="template-reason"]`);
+        const dueDate = this.shadowRoot.querySelector(`[part~="template-due-date"]`);
         title.textContent = todoData.title;
         reason.textContent = todoData.reason;
+        dueDate.textContent = todoData.dueDate;
         this.#todoId = todoData.id;
     }
 
     connectedCallback() {
-        const closeButton = this.shadowRoot.querySelector(`[part~="close-todo"]`);
+        const closeButton = this.shadowRoot.querySelector(`[part~="close-template"]`);
         closeButton.addEventListener("click", () => {
             this.remove();
         });
