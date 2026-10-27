@@ -79,8 +79,9 @@ class TodoController {
         });
 
         const todoCompletedList = this.todoView.todoCompletedList;
-        todoCompletedList.addEventListener("clear-completed-todos", () => {
-            this.todoService.clearCompletedTodos();
+        todoCompletedList.addEventListener("clear-completed-todos", (e) => {
+            const todoPackage = e.detail.todoPackage;
+            this.todoService.clearCompletedTodos(todoPackage.currentFilter);
             this.#refreshUI();
         })
 
@@ -127,7 +128,10 @@ class TodoController {
     #refreshUI() {
         this.todoView.displayActiveTodos(this.todoService.allActiveTodos);
         this.todoView.displayCompletedTodos(this.todoService.allCompletedTodos);
-        // this.todoView.displayTodoCounter(this.todoService.numberOfCompletedTodos);
+        this.todoView.displayTodoCounter(
+            this.todoService.currentFilter, 
+            this.todoService.numberOfCompletedTodos
+        );
     }
 }
 
