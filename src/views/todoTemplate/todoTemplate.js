@@ -1,3 +1,5 @@
+import { getCompletedByDayOfWeek } from "../../utils/date.js";
+
 const template = document.createElement("template");
 template.innerHTML = `
 <div part="template-contents">
@@ -33,7 +35,7 @@ class TodoTemplate extends HTMLElement {
         const dueDate = this.shadowRoot.querySelector(`[part~="template-due-date"]`);
         title.textContent = todoData.title;
         reason.textContent = todoData.reason;
-        dueDate.textContent = todoData.dueDate;
+        dueDate.textContent = getCompletedByDayOfWeek(todoData.dueDate);
         this.#todoId = todoData.id;
     }
 
