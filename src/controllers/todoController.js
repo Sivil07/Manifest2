@@ -130,7 +130,7 @@ class TodoController {
         this.todoView.displayCompletedTodos(this.todoService.allCompletedTodos);
         this.todoView.displayTodoCounter(
             this.todoService.currentFilter, 
-            this.todoService.numberOfCompletedTodos
+            this.todoService.filteredCompletedCount
         );
     }
 }

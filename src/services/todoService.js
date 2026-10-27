@@ -31,6 +31,7 @@ import { getCurrentDate } from "../utils/date.js";
 class TodoService {
     #allTodos = [];
     currentFilter;
+    filteredCompletedCount;
 
     get allActiveTodos() {
         return this.#allTodos.filter((todo) => {
@@ -42,12 +43,13 @@ class TodoService {
     }
 
     get allCompletedTodos() {
-        return this.#allTodos.filter((todo) => {
+        const completedTodos = this.#allTodos.filter((todo) => {
             const matchesCurrentFilter = this.#matchesFilter(todo);
             const isCompleted = todo.isChecked;
             return matchesCurrentFilter && isCompleted;
         })
-
+        this.filteredCompletedCount = completedTodos.length;
+        return completedTodos
     }
 
     #matchesFilter(todo) {
@@ -55,10 +57,6 @@ class TodoService {
         if (this.currentFilter === "today") return todo.dueDate === today;
         if (this.currentFilter === "upcoming") return todo.dueDate !== today;
     }
-
-    // get numberOfCompletedTodos() {
-    //     return this.#completedTodos.length;
-    // }
 
     setFilter(filterOption = "today") {
         this.currentFilter = filterOption
@@ -136,22 +134,6 @@ class TodoService {
     #saveAllTodos() {
         localStorage.setItem("all-todos", JSON.stringify(this.#allTodos));
     }
-
-    // #sortIntoActiveList(unsortedList) {
-    //     const activeList = unsortedList.filter((savedTodo) => {
-    //         const todo = new Todo(savedTodo);
-    //         return !todo.isChecked;
-    //     })
-    //     return activeList
-    // }
-
-    // #sortIntoCompletedList(unsortedList) {
-    //     const completedList = unsortedList.filter((savedTodo) => {
-    //         const todo = new Todo(savedTodo);
-    //         return todo.isChecked;
-    //     })
-    //     return completedList
-    // }
 
     load() {
         this.#allTodos = [];
