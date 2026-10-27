@@ -35,32 +35,53 @@ class TodoController {
         this.todoService = todoService;
         this.todoView = todoView;
 
+        const todoDialog = this.todoView.todoDialog;
+
+        todoDialog.addEventListener("save-todo", (e) => {
+            const todoPackage = e.detail.todoPackage;
+
+            if (todoPackage.todoId) {
+                this.#handleEditTodo(todoPackage.todoId, todoPackage.todoEntries);
+                todoView.closeTodoDialog(todoDialog);
+
+            } else {
+                this.#handleCreateTodo(todoPackage.todoEntries);
+                todoView.closeTodoDialog(todoDialog);
+            }
+        });
+
+        todoDialog.addEventListener("close", () => {
+            todoView.closeTodoDialog(todoDialog)
+        });
+
         const addTodoButton = this.todoView.addTodoButton;
+        const todayButton = this.todoView.filterTodayButton;
+        const upcomingButton = this.todoView.filterUpcomingButton;
+
         addTodoButton.addEventListener("click", () => {
             this.todoView.displayTodoForm();
         });
 
-        const todayButton = this.todoView.filterTodayButton;
         todayButton.addEventListener("click", () => {
             this.todoService.setFilter("today");
             this.#refreshUI()
         });
 
-        const upcomingButton = this.todoView.filterUpcomingButton;
         upcomingButton.addEventListener("click", () => {
             this.todoService.setFilter("upcoming");
             this.#refreshUI();
-
         })
 
         const todoListsContainer = this.todoView.todoListsContainer;
+        const todoActiveList = this.todoView.todoActiveList;
+        const todoCompletedList = this.todoView.todoCompletedList;
+
         todoListsContainer.addEventListener("move-todo-item", (e) => {
             const todoPackage = e.detail.todoPackage;
             this.todoService.moveTodo(todoPackage.todoId, todoPackage.newCompletedStatus);
             this.#refreshUI();
         });
 
-        const todoActiveList = this.todoView.todoActiveList;
         todoActiveList.addEventListener("view-todo-item", (e) => {
             const todoPackage = e.detail.todoPackage;
             const todo = this.todoService.findTodoById(todoPackage.todoId);
@@ -78,30 +99,12 @@ class TodoController {
             this.#handleDeleteTodo(todoPackage.todoId);
         });
 
-        const todoCompletedList = this.todoView.todoCompletedList;
         todoCompletedList.addEventListener("clear-completed-todos", (e) => {
             const todoPackage = e.detail.todoPackage;
             this.todoService.clearCompletedTodos(todoPackage.currentFilter);
             this.#refreshUI();
         })
 
-        const todoDialog = this.todoView.todoDialog;
-        todoDialog.addEventListener("save-todo", (e) => {
-            const todoPackage = e.detail.todoPackage;
-
-            if (todoPackage.todoId) {
-                this.#handleEditTodo(todoPackage.todoId, todoPackage.todoEntries);
-                todoView.closeTodoDialog(todoDialog);
-
-            } else {
-                this.#handleCreateTodo(todoPackage.todoEntries);
-                todoView.closeTodoDialog(todoDialog);
-            }
-        });
-
-        todoDialog.addEventListener("close", () => {
-            todoView.closeTodoDialog(todoDialog)
-        })
     }
 
     #handleDeleteTodo(id) {
@@ -129,7 +132,7 @@ class TodoController {
         this.todoView.displayActiveTodos(this.todoService.allActiveTodos);
         this.todoView.displayCompletedTodos(this.todoService.allCompletedTodos);
         this.todoView.displayTodoCounter(
-            this.todoService.currentFilter, 
+            this.todoService.currentFilter,
             this.todoService.filteredCompletedCount
         );
     }
