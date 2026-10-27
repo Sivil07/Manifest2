@@ -34,17 +34,18 @@ class TodoForm extends HTMLElement {
         shadow.append(template.content.cloneNode(true));
     }
 
-    set formData({ title = "", reason = "", id = undefined, dueDate = "" } = {}) {
+    set formData({ title = "", reason = "", id = undefined, dueDate = "", description = "" } = {}) {
         const header = this.shadowRoot.querySelector(`[part="form-header"]`);
         const titleInput = this.shadowRoot.querySelector(`[part="form-input-title"]`);
         const reasonInput = this.shadowRoot.querySelector(`[part="form-input-reason"]`);
         const dateInput = this.shadowRoot.querySelector(`[part="form-input-date"]`);
         const submitButton = this.shadowRoot.querySelector(`[part="form-submit"]`);
+        const formDescription = this.shadowRoot.querySelector(`[part="form-description"]`)
         const formReminder = this.shadowRoot.querySelector(`[part~="form-reminder"]`);
-        console.log(formReminder)
         dateInput.min = setMinDate();
         titleInput.value = title;
         reasonInput.value = reason;
+        formDescription.value = description;
         this.#todoId = id;
         
         header.textContent = this.#todoId ? "Edit Todo" : "New Todo";
