@@ -7,22 +7,31 @@ template.innerHTML = `
 `
 
 class TodoCounter extends HTMLElement {
+    #currentFilter;
+    
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: "open" });
         shadow.append(template.content.cloneNode(true));
     }
 
-    set todoCount(numberOfCompletedTodos) {
+    set todoCount({currentFilter, completedTodoNum}) {
+        this.#currentFilter = currentFilter;
         const counter = this.shadowRoot.querySelector([`[part="counter"]`]);
-        counter.textContent = `Completed - ${numberOfCompletedTodos}`
+        counter.textContent = `Completed - ${completedTodoNum}`
     }
 
     connectedCallback() {
         const clearTodos = this.shadowRoot.querySelector(`[part="clear-todos"]`);
         clearTodos.addEventListener("click", () => {
-            this.dispatchEvent(new Event("clear-completed-todos", {
-                bubbles: true
+            const todoPackage = {
+                currentFilter: this.#currentFilter
+            }
+            this.dispatchEvent(new CustomEvent("clear-completed-todos", {
+                bubbles: true,
+                detail: {
+                    todoPackage: todoPackage
+                }
             }));
         })
     }
