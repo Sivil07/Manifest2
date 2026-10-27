@@ -31,12 +31,6 @@ todo-template::part(template-contents) {
   gap: 1rem;
 }
 
- todo-template::part(template-actions) {
-  width: max-content;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-}
-
 todo-template::part(template-title) {
     margin: 0;
 }
@@ -45,7 +39,26 @@ todo-template::part(template-reason) {
     margin: 0;
 }
 
+todo-template::part(template-desc-container) {
+  display: flex;
+  flex-direction: column;
+}
+
+todo-template::part(template-desc-header) {
+  margin: 0;
+}
+
+todo-template::part(template-desc) {
+  margin: 0;
+}
+
 todo-template::part(button-group) {
   display: flex;
   gap: 1rem;
 } 
+
+ todo-template::part(template-actions) {
+  width: max-content;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
