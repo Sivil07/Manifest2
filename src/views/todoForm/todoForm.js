@@ -14,6 +14,7 @@ template.innerHTML = `
     </div>
     <div part="form-group">
         <label part="form-date" for="">Due Date</label>
+        <span part="form-reminder remove-reminder">Due today todos need a new date. Tomorrow is selected, but you can change it.</span>
         <input part="form-input-date" type="date" name="dueDate" required>
     </div>
     <button part="form-submit" type="submit"></button>
@@ -35,13 +36,19 @@ class TodoForm extends HTMLElement {
         const reasonInput = this.shadowRoot.querySelector(`[part="form-input-reason"]`);
         const dateInput = this.shadowRoot.querySelector(`[part="form-input-date"]`);
         const submitButton = this.shadowRoot.querySelector(`[part="form-submit"]`);
+        const formReminder = this.shadowRoot.querySelector(`[part~="form-reminder"]`);
+        console.log(formReminder)
         dateInput.min = setMinDate();
         titleInput.value = title;
         reasonInput.value = reason;
         this.#todoId = id;
+        
         header.textContent = this.#todoId ? "Edit Todo" : "New Todo";
         submitButton.textContent = this.#todoId ? "Edit Todo" : "Add Todo";
-        dateInput.value = (dueDate !== "" && dueDate === getCurrentDate()) ? setMinDate() : dueDate;  
+        
+        const isDueToday = (dueDate !== "" && dueDate === getCurrentDate())
+        if (isDueToday) formReminder.setAttribute("part", "form-reminder")
+        dateInput.value = isDueToday ? setMinDate() : dueDate;  
     }
 
     connectedCallback() {

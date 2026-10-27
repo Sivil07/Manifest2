@@ -26,3 +26,7 @@ todo-form::part(form-submit) {
   padding: 0.5rem;
   border-radius: 0.5rem;
 }
+
+todo-form::part(remove-reminder) {
+  display: none;
+}
