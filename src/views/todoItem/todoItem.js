@@ -56,12 +56,15 @@ class TodoItem extends HTMLElement {
         const reason = this.shadowRoot.querySelector('[part="task-reason"]');
         const input = this.shadowRoot.querySelector(`[part="complete-todo"]`);
         const dueDate = this.shadowRoot.querySelector(`[part~="due-date"]`);
+        const taskContent = this.shadowRoot.querySelector(`[part~="task-content"]`)
         title.textContent = todo.title;
         reason.textContent = todo.reason;
         dueDate.textContent = getCompletedByDayOfWeek(todo.dueDate);
         input.checked = todo.isChecked;
-
+        
         this.#todoId = todo.id;
+
+        if (todo.isChecked) taskContent.setAttribute("part", "task-content checked")
     }
 
     connectedCallback() {
@@ -80,7 +83,7 @@ class TodoItem extends HTMLElement {
             }))
         })
         
-        const todoContent = this.shadowRoot.querySelector(`[part="task-content"]`);
+        const todoContent = this.shadowRoot.querySelector(`[part~="task-content"]`);
         todoContent.addEventListener("click", () => {
             const todoPackage = {
                 todoId: this.#todoId,
