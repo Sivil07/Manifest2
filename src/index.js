@@ -1,9 +1,9 @@
 import "../public/css/base.css";
-import "./views/todoItem/todoItem.css";
+import "./views/intentionItem/intentionItem.css";
 import "./views/todoTemplate/todoTemplate.css";
 import "./views/todoForm/todoForm.css";
 import "./views/todoCounter/todoCounter.css"
-import "./views/todoItem/todoItem.js";
+import "./views/intentionItem/intentionItem.js";
 import "./views/todoForm/todoForm.js";
 import "./views/todoTemplate/todoTemplate.js";
 import "./views/todoCounter/todoCounter.js";
