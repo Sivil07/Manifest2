@@ -50,14 +50,14 @@ class IntentionController {
         const intentionDialog = this.intentionView.intentionDialog;
 
         intentionDialog.addEventListener("save-todo", (e) => {
-            const intentionPackage = e.detail.todoPackage;
+            const intentionPackage = e.detail.intentionPackage;
 
-            if (intentionPackage.todoId) {
-                this.#handleEditIntention(intentionPackage.todoId, intentionPackage.todoEntries);
+            if (intentionPackage.intentionId) {
+                this.#handleEditIntention(intentionPackage.intentionId, intentionPackage.intentionEntries);
                 intentionView.closeIntentionDialog(intentionDialog);
 
             } else {
-                this.#handleCreateIntention(intentionPackage.todoEntries);
+                this.#handleCreateIntention(intentionPackage.intentionEntries);
                 intentionView.closeIntentionDialog(intentionDialog);
             }
         });

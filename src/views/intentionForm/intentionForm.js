@@ -25,8 +25,8 @@ template.innerHTML = `
 </form>
 `
 
-class TodoForm extends HTMLElement {
-    #todoId;
+class IntentionForm extends HTMLElement {
+    #intentionId;
 
     constructor() {
         super();
@@ -46,10 +46,10 @@ class TodoForm extends HTMLElement {
         titleInput.value = title;
         reasonInput.value = reason;
         formDescription.value = description;
-        this.#todoId = id;
+        this.#intentionId = id;
         
-        header.textContent = this.#todoId ? "Edit Todo" : "New Todo";
-        submitButton.textContent = this.#todoId ? "Edit Todo" : "Add Todo";
+        header.textContent = this.#intentionId ? "Edit Todo" : "New Todo";
+        submitButton.textContent = this.#intentionId ? "Edit Todo" : "Add Todo";
         
         const isDueToday = (dueDate !== "" && dueDate === getCurrentDate())
         if (isDueToday) formReminder.setAttribute("part", "form-reminder")
@@ -62,18 +62,18 @@ class TodoForm extends HTMLElement {
             e.preventDefault();
             const data = new FormData(form);
             const entries = Object.fromEntries(data.entries());
-            const todoPackage = {
-                todoEntries: entries,
-                todoId: this.#todoId,
+            const intentionPackage = {
+                intentionEntries: entries,
+                intentionId: this.#intentionId,
             }
             this.dispatchEvent( new CustomEvent( "save-todo", {
                 bubbles: true,
                 detail: {
-                    todoPackage: todoPackage
+                    intentionPackage: intentionPackage
                 }
             }));
         })
     }
 }
 
-customElements.define("todo-form", TodoForm);
+customElements.define("intention-form", IntentionForm);

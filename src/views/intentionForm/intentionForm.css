@@ -1,4 +1,4 @@
-todo-form::part(form-dialog) {
+intention-form::part(form-dialog) {
   display: grid;
   gap: 1rem;
   grid-template-areas:
@@ -10,29 +10,29 @@ todo-form::part(form-dialog) {
     "Submit-Button";
 }
 
-todo-form::part(form-header) {
+intention-form::part(form-header) {
   font-weight: bold;
   margin: 0;
 }
 
-todo-form::part(form-group) {
+intention-form::part(form-group) {
   display: flex;
   flex-direction: column;
 }
 
-todo-form::part(form-label) {
+intention-form::part(form-label) {
   font-weight: bold;
 }
 
-todo-form::part(form-description) {
+intention-form::part(form-description) {
   resize: none;
 }
 
-todo-form::part(form-submit) {
+intention-form::part(form-submit) {
   padding: 0.5rem;
   border-radius: 0.5rem;
 }
 
-todo-form::part(remove-reminder) {
+intention-form::part(remove-reminder) {
   display: none;
 }

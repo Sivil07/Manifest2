@@ -46,7 +46,7 @@ class IntentionView {
     }
 
     displayIntentionForm( intentionData = {} ) {
-        const intentionForm = document.createElement("todo-form");
+        const intentionForm = document.createElement("intention-form");
         intentionForm.formData = intentionData;
         this.intentionDialog.appendChild(intentionForm);
         this.intentionDialog.showModal();
