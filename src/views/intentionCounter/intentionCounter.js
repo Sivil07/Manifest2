@@ -22,7 +22,7 @@ class IntentionCounter extends HTMLElement {
     connectedCallback() {
         const clearTodos = this.shadowRoot.querySelector(`[part="clear-todos"]`);
         clearTodos.addEventListener("click", () => {
-            this.dispatchEvent(new Event("clear-completed-todos", {
+            this.dispatchEvent(new Event("clear-completed-intentions", {
                 bubbles: true
             }));
         })

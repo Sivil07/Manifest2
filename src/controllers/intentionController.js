@@ -111,7 +111,7 @@ class IntentionController {
             this.#handleDeleteIntention(intentionPackage.todoId);
         });
 
-        intentionCompletedList.addEventListener("clear-completed-todos", () => {
+        intentionCompletedList.addEventListener("clear-completed-intentions", () => {
             this.intentionService.clearCompletedFilteredIntentions();
             this.#refreshUI();
         })
