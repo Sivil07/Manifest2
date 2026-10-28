@@ -51,20 +51,20 @@ class IntentionItem extends HTMLElement {
         shadow.append(template.content.cloneNode(true));
     }
 
-    set todoData(todo) {
+    set intentionData(intention) {
         const title = this.shadowRoot.querySelector('[part="task-title"]');
         const reason = this.shadowRoot.querySelector('[part="task-reason"]');
         const input = this.shadowRoot.querySelector(`[part="complete-todo"]`);
         const dueDate = this.shadowRoot.querySelector(`[part~="due-date"]`);
         const taskContent = this.shadowRoot.querySelector(`[part~="task-content"]`)
-        title.textContent = todo.title;
-        reason.textContent = todo.reason;
-        dueDate.textContent = getCompletedByDayOfWeek(todo.dueDate);
-        input.checked = todo.isChecked;
+        title.textContent = intention.title;
+        reason.textContent = intention.reason;
+        dueDate.textContent = getCompletedByDayOfWeek(intention.dueDate);
+        input.checked = intention.isChecked;
         
-        this.#todoId = todo.id;
+        this.#todoId = intention.id;
 
-        if (todo.isChecked) taskContent.setAttribute("part", "task-content checked")
+        if (intention.isChecked) taskContent.setAttribute("part", "task-content checked")
     }
 
     connectedCallback() {

@@ -81,7 +81,7 @@ class IntentionView {
 
         for (const completedIntention of completedIntentions) {
             const completedIntentionItem = document.createElement("intention-item");
-            completedIntentionItem.todoData = completedIntention;
+            completedIntentionItem.intentionData = completedIntention;
             this.#completedIntentionElements.push(completedIntentionItem);
             this.intentionCompletedList.appendChild(completedIntentionItem);
         }
@@ -92,7 +92,7 @@ class IntentionView {
 
         for (const activeIntention of activeIntentions) {
             const intentionItem = document.createElement("intention-item");
-            intentionItem.todoData = activeIntention;
+            intentionItem.intentionData = activeIntention;
             this.intentionActiveList.appendChild(intentionItem);
         }
     }
