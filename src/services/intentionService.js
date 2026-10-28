@@ -42,9 +42,13 @@ import { getCurrentDate } from "../utils/date.js";
 class IntentionService {
     #allIntentions = [];
 
+    /* Defines which group the user is viewing. Either "today" or "upcoming" */
     currentFilter;
+
+    /* Defines the number of completed intentions in the current filter */
     filteredCompletedCount;
 
+    /* Incomplete intentions that match the current filter */
     get allActiveIntentions() {
         return this.#allIntentions.filter((intention) => {
             const matchesCurrentFilter = this.#matchesFilter(intention);
@@ -53,6 +57,7 @@ class IntentionService {
         })
     }
 
+    /* Complete intentions that match the current filter. Also updates the filterCompletedCount  */
     get allCompletedIntentions() {
         const completedIntentions = this.#allIntentions.filter((intention) => {
             const matchesCurrentFilter = this.#matchesFilter(intention);
@@ -63,12 +68,14 @@ class IntentionService {
         return completedIntentions
     }
 
+    /* Determines whether an intention belongs to the current filter based on the dueDate */
     #matchesFilter(intention) {
         const today = getCurrentDate();
         if (this.currentFilter === "today") return intention.dueDate === today;
         if (this.currentFilter === "upcoming") return intention.dueDate !== today;
     }
 
+    /* Chooses which group of intentions are shown */
     setFilter(filterOption = "today") {
         this.currentFilter = filterOption
     }
@@ -91,7 +98,9 @@ class IntentionService {
         this.#saveAllIntentions();
     }
 
-
+    /* Sets an intention's completed status. Nothing physically moves since all intentions 
+       shares one list. The getters place it in the active or completed list the next
+       time they're read. */
     moveIntention(intentionId, newCompletedStatus) {
         const intention = this.findIntentionById(intentionId)
         intention.setCompletedStatus(newCompletedStatus);
@@ -125,6 +134,8 @@ class IntentionService {
         localStorage.setItem("all-intentions", JSON.stringify(this.#allIntentions));
     }
 
+    /* Loads the saved intentions (or starter data on the first use), rebuilds them
+       as Intentions, and sets the filter to "today" */
     load() {
         this.#allIntentions = [];
         const savedAllIntentionData = localStorage.getItem("all-intentions")
