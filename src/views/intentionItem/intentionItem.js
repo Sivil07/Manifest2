@@ -75,7 +75,7 @@ class IntentionItem extends HTMLElement {
                 newCompletedStatus: newCompletedStatus,
                 intentionId: this.#intentionId,
             }
-            this.dispatchEvent( new CustomEvent( "move-todo-item", {
+            this.dispatchEvent( new CustomEvent( "move-intention-item", {
                 bubbles: true,
                 detail: {
                     intentionPackage: intentionPackage
@@ -88,7 +88,7 @@ class IntentionItem extends HTMLElement {
             const intentionPackage = {
                 intentionId: this.#intentionId,
             }
-            this.dispatchEvent( new CustomEvent( "view-todo-item", {
+            this.dispatchEvent( new CustomEvent( "view-intention-item", {
                 bubbles: true,
                 detail: {
                     intentionPackage: intentionPackage

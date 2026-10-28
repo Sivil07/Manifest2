@@ -88,13 +88,13 @@ class IntentionController {
         const intentionActiveList = this.intentionView.intentionActiveList;
         const intentionCompletedList = this.intentionView.intentionCompletedList;
 
-        intentionListContainer.addEventListener("move-todo-item", (e) => {
+        intentionListContainer.addEventListener("move-intention-item", (e) => {
             const intentionPackage = e.detail.intentionPackage;
             this.intentionService.moveIntention(intentionPackage.intentionId, intentionPackage.newCompletedStatus);
             this.#refreshUI();
         });
 
-        intentionActiveList.addEventListener("view-todo-item", (e) => {
+        intentionActiveList.addEventListener("view-intention-item", (e) => {
             const intentionPackage = e.detail.intentionPackage;
             const intention = this.intentionService.findIntentionById(intentionPackage.intentionId);
             this.intentionView.displayOneActiveIntention(intention);
