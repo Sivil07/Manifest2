@@ -1,36 +1,48 @@
 /* 
 
-    The TodoController connects what the user does on screen to what the app
-    does with the todo data. It holds no todo data and renders nothing itself.
+    The IntentionController connects what the user does on screen to what the app
+    does with the intention data. It holds no intention data and renders nothing itself.
+
 
     When the user interacts with components (editing, deleting, moving or 
-    creating todos, for example), the components dispatch custom events.
+    creating intentions, or switching between Today and Upcoming filters), 
+    the components dispatch custom events.
+    
     The controller listeners for these events and responds in two steps:
-    it asks the TodoService to update the data, the instructs the TodoView to
-    redraw the UI so the screen matches the current state.
+    it asks the IntentionService to update the data, then it instructs 
+    the IntentionView to redraw the UI so the screen matches the current state.
 
-    All event listeners are attached once in the constructor to the static DOm
-    nodes provide by the view. This includes: the active/completed lists, the 
-    parent container of both lists, the dialog and the action button. Events
-    from individual todos travel up those elements, so no listener has to be 
-    added or removed as todos come and go.
+    Actions that don't change any data skip the first step. Opening the 
+    form (to add or edit an intention) and viewing a single intention 
+    only ask the view to display something.
 
-    The controller also manages the dialog. Opening the form, saving a todo and
-    closing the dialog are all actions the controller orchestrates. When a todo is
-    created or edited, the controller forwards the form's data to the service and 
-    refreshes the UI once change has been made to the state.
+    All event listeners are attached once in the constructor to the static
+    dom nodes provide by the view. This includes: the active/completed list, 
+    the parent container of both lists, the dialog, the add button and the 
+    filter buttons. 
 
-    On initialization, the controller loads todos form the TodoService and renders
-    them using the TodoView. Every change to the data, whether trigger by the user or
-    startup logic, results in a full UI refresh to keep the screen in sync with the 
-    underlying data.
+    Events from individual intentions travel up those elements, so no listener has
+    to be added or removed as intentions come and go. Each event carries an 
+    intentionPackage holding what the controller needs to identify the 
+    intention (its id) and what changed.
 
-    Overall, the TodoService manages the data, the TodoView renders the UI and 
-    the TodoController orchestrates the actions between them in response to the user.
+    The controller also manages the form dialog. When the form is saved, an intention
+    that already has an id serves as an editing event. If it doesn't have an id, then
+    its considered a new intention. The controller forwards the form's data to the service,
+    refreshes the ui once the change has been made to the state, and closes the dialog. 
+
+    On initialization, the controller loads the intentions through the service (which
+    will start on the "today" filter) and renders them using the view. Every change to
+    the data or the filter results in a full UI refresh to keep the screen in sync with
+    the underlying data.
+
+    Overall, the IntentionService manages the data an decides which intentions belong to the current
+    filter, the IntentionView accepts data from the service to render the UI and the controller 
+    orchestrates the actions between them in response to the user.
 
 */
 
-class TodoController {
+class IntentionController {
     constructor(todoService, todoView) {
         this.todoService = todoService;
         this.todoView = todoView;
@@ -99,9 +111,8 @@ class TodoController {
             this.#handleDeleteTodo(todoPackage.todoId);
         });
 
-        todoCompletedList.addEventListener("clear-completed-todos", (e) => {
-            const todoPackage = e.detail.todoPackage;
-            this.todoService.clearCompletedFilteredIntentions(todoPackage.currentFilter);
+        todoCompletedList.addEventListener("clear-completed-todos", () => {
+            this.todoService.clearCompletedFilteredIntentions();
             this.#refreshUI();
         })
 
@@ -131,11 +142,8 @@ class TodoController {
     #refreshUI() {
         this.todoView.displayActiveTodos(this.todoService.allActiveIntentions);
         this.todoView.displayCompletedTodos(this.todoService.allCompletedIntentions);
-        this.todoView.displayTodoCounter(
-            this.todoService.currentFilter,
-            this.todoService.filteredCompletedCount
-        );
+        this.todoView.displayTodoCounter(this.todoService.filteredCompletedCount);
     }
 }
 
-export default TodoController;
+export default IntentionController;
