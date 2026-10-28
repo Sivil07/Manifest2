@@ -49,7 +49,7 @@ class IntentionController {
 
         const intentionDialog = this.intentionView.intentionDialog;
 
-        intentionDialog.addEventListener("save-todo", (e) => {
+        intentionDialog.addEventListener("save-intention", (e) => {
             const intentionPackage = e.detail.intentionPackage;
 
             if (intentionPackage.intentionId) {

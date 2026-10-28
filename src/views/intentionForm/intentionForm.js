@@ -66,7 +66,7 @@ class IntentionForm extends HTMLElement {
                 intentionEntries: entries,
                 intentionId: this.#intentionId,
             }
-            this.dispatchEvent( new CustomEvent( "save-todo", {
+            this.dispatchEvent( new CustomEvent( "save-intention", {
                 bubbles: true,
                 detail: {
                     intentionPackage: intentionPackage
