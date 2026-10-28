@@ -58,13 +58,12 @@ class TodoView {
         this.todoDialog.innerHTML = "";
     }
     
-    displayTodoCounter(filterOption, numberOfCompletedTodos) {
+    displayTodoCounter(numberOfCompletedTodos) {
         if (this.#counterElement !== undefined) this.#counterElement.remove();
         if (numberOfCompletedTodos === 0) return;
 
         const todoCounter = document.createElement("todo-counter");
         todoCounter.todoCount = {
-            currentFilter: filterOption,
             completedTodoNum: numberOfCompletedTodos
         }
         this.#counterElement = todoCounter;

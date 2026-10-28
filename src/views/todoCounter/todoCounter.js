@@ -7,7 +7,6 @@ template.innerHTML = `
 `
 
 class TodoCounter extends HTMLElement {
-    #currentFilter;
     
     constructor() {
         super();
@@ -15,8 +14,7 @@ class TodoCounter extends HTMLElement {
         shadow.append(template.content.cloneNode(true));
     }
 
-    set todoCount({currentFilter, completedTodoNum}) {
-        this.#currentFilter = currentFilter;
+    set todoCount({ completedTodoNum }) {
         const counter = this.shadowRoot.querySelector([`[part="counter"]`]);
         counter.textContent = `Completed - ${completedTodoNum}`
     }
@@ -24,14 +22,8 @@ class TodoCounter extends HTMLElement {
     connectedCallback() {
         const clearTodos = this.shadowRoot.querySelector(`[part="clear-todos"]`);
         clearTodos.addEventListener("click", () => {
-            const todoPackage = {
-                currentFilter: this.#currentFilter
-            }
-            this.dispatchEvent(new CustomEvent("clear-completed-todos", {
-                bubbles: true,
-                detail: {
-                    todoPackage: todoPackage
-                }
+            this.dispatchEvent(new Event("clear-completed-todos", {
+                bubbles: true
             }));
         })
     }

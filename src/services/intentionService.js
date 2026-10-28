@@ -81,8 +81,7 @@ class IntentionService {
     }
 
     /* Removes intentions that belong to the currentFilter after the user clicks "Clear Completed" */
-    clearCompletedFilteredIntentions(filterOption) {
-        this.currentFilter = filterOption
+    clearCompletedFilteredIntentions() {
 
         const remainingIntentions = this.#allIntentions.filter((intention) => {
             /* Check whether the intention is completed (true if the checkbox is checked) */
