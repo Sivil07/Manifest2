@@ -80,10 +80,10 @@ class IntentionView {
         this.#removeCompletedIntentionElements();
 
         for (const completedIntention of completedIntentions) {
-            const completedTodoItem = document.createElement("todo-item");
-            completedTodoItem.todoData = completedIntention;
-            this.#completedIntentionElements.push(completedTodoItem);
-            this.intentionCompletedList.appendChild(completedTodoItem);
+            const completedIntentionItem = document.createElement("intention-item");
+            completedIntentionItem.todoData = completedIntention;
+            this.#completedIntentionElements.push(completedIntentionItem);
+            this.intentionCompletedList.appendChild(completedIntentionItem);
         }
     }
 
@@ -91,7 +91,7 @@ class IntentionView {
         this.intentionActiveList.innerHTML = "";
 
         for (const activeIntention of activeIntentions) {
-            const intentionItem = document.createElement("todo-item");
+            const intentionItem = document.createElement("intention-item");
             intentionItem.todoData = activeIntention;
             this.intentionActiveList.appendChild(intentionItem);
         }

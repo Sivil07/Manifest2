@@ -42,7 +42,7 @@ template.innerHTML = `
     </div>
 </div>
 `
-class TodoItem extends HTMLElement {
+class IntentionItem extends HTMLElement {
     #todoId;
 
     constructor() {
@@ -98,4 +98,4 @@ class TodoItem extends HTMLElement {
     }
 }
 
-customElements.define("todo-item", TodoItem);
+customElements.define("intention-item", IntentionItem);

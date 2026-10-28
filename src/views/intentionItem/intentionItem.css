@@ -1,4 +1,4 @@
-todo-item::part(task) {
+intention-item::part(task) {
   display: grid;
   grid-template-areas:
     "Checkbox Todo-Content"
@@ -14,18 +14,18 @@ todo-item::part(task) {
 
 /* Task Check Section */
 
-todo-item::part(task-check) {
+intention-item::part(task-check) {
   grid-area: Checkbox;
 }
 
-todo-item::part(complete-todo) {
+intention-item::part(complete-todo) {
   accent-color: rebeccapurple;
   margin: 0;
 }
 
 /* Task Content Section */
 
-todo-item::part(task-content) {
+intention-item::part(task-content) {
   border: none;
   background-color: transparent;
   display: flex;
@@ -36,27 +36,27 @@ todo-item::part(task-content) {
   grid-area: Todo-Content;
 }
 
-todo-item::part(task-title) {
+intention-item::part(task-title) {
   font-weight: bold;
   margin: 0;
 }
 
-todo-item::part(task-reason) {
+intention-item::part(task-reason) {
   color: var(--clr-muted);
   margin: 0;
 }
 
-todo-item::part(checked) {
+intention-item::part(checked) {
   pointer-events: none;
 }
 
 /* Tags Section */
 
-todo-item::part(todo-tags) {
+intention-item::part(todo-tags) {
   grid-area: Todo-Tags;
 }
 
-todo-item::part(tag) {
+intention-item::part(tag) {
   background-color: var(--clr-lavender);
   color: var(--clr-logo-primary);
   font-size: 0.8rem;
