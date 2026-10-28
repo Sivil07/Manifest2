@@ -10,10 +10,10 @@ import "./views/todoCounter/todoCounter.js";
 import "./views/todoProgress/todoProgress.js";
 import "./views/todoProgress/todoProgress.css";
 import TodoView from "./views/todoView.js";
-import TodoService from "./services/todoService.js";
+import IntentionService from "./services/intentionService.js";
 import TodoController from "./controllers/todoController.js";
 
-const todoService = new TodoService();
+const intentionService = new IntentionService();
 const todoView = new TodoView(
     document.querySelector("#todo-lists"),
     document.querySelector("#active-todo-list"),
@@ -23,6 +23,6 @@ const todoView = new TodoView(
     document.querySelector("#filter-today"),
     document.querySelector("#filter-upcoming")
 );
-const todoController = new TodoController(todoService, todoView);
+const todoController = new TodoController(intentionService, todoView);
 
 todoController.initialize();

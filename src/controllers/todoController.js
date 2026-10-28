@@ -78,19 +78,19 @@ class TodoController {
 
         todoListsContainer.addEventListener("move-todo-item", (e) => {
             const todoPackage = e.detail.todoPackage;
-            this.todoService.moveTodo(todoPackage.todoId, todoPackage.newCompletedStatus);
+            this.todoService.moveIntention(todoPackage.todoId, todoPackage.newCompletedStatus);
             this.#refreshUI();
         });
 
         todoActiveList.addEventListener("view-todo-item", (e) => {
             const todoPackage = e.detail.todoPackage;
-            const todo = this.todoService.findTodoById(todoPackage.todoId);
+            const todo = this.todoService.findIntentionById(todoPackage.todoId);
             this.todoView.displayOneActiveTodo(todo);
         });
 
         todoActiveList.addEventListener("edit-todo-item", (e) => {
             const todoPackage = e.detail.todoPackage;
-            const todo = this.todoService.findTodoById(todoPackage.todoId);
+            const todo = this.todoService.findIntentionById(todoPackage.todoId);
             this.todoView.displayTodoForm(todo);
         });
 
@@ -101,24 +101,24 @@ class TodoController {
 
         todoCompletedList.addEventListener("clear-completed-todos", (e) => {
             const todoPackage = e.detail.todoPackage;
-            this.todoService.clearCompletedTodos(todoPackage.currentFilter);
+            this.todoService.clearCompletedFilteredIntentions(todoPackage.currentFilter);
             this.#refreshUI();
         })
 
     }
 
     #handleDeleteTodo(id) {
-        this.todoService.deleteTodo(id);
+        this.todoService.deleteIntention(id);
         this.#refreshUI();
     }
 
     #handleEditTodo(todoId, todoEntries) {
-        this.todoService.editTodo(todoId, todoEntries);
+        this.todoService.editIntention(todoId, todoEntries);
         this.#refreshUI();
     }
 
     #handleCreateTodo(todoEntries) {
-        this.todoService.createTodo(todoEntries);
+        this.todoService.createIntention(todoEntries);
         this.#refreshUI();
     }
 
@@ -129,8 +129,8 @@ class TodoController {
     }
 
     #refreshUI() {
-        this.todoView.displayActiveTodos(this.todoService.allActiveTodos);
-        this.todoView.displayCompletedTodos(this.todoService.allCompletedTodos);
+        this.todoView.displayActiveTodos(this.todoService.allActiveIntentions);
+        this.todoView.displayCompletedTodos(this.todoService.allCompletedIntentions);
         this.todoView.displayTodoCounter(
             this.todoService.currentFilter,
             this.todoService.filteredCompletedCount
