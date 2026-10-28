@@ -43,106 +43,106 @@
 */
 
 class IntentionController {
-    constructor(todoService, todoView) {
-        this.todoService = todoService;
-        this.todoView = todoView;
+    constructor(intentionService, intentionView) {
+        this.intentionService = intentionService;
+        this.intentionView = intentionView;
 
-        const todoDialog = this.todoView.todoDialog;
+        const intentionDialog = this.intentionView.intentionDialog;
 
-        todoDialog.addEventListener("save-todo", (e) => {
-            const todoPackage = e.detail.todoPackage;
+        intentionDialog.addEventListener("save-todo", (e) => {
+            const intentionPackage = e.detail.todoPackage;
 
-            if (todoPackage.todoId) {
-                this.#handleEditTodo(todoPackage.todoId, todoPackage.todoEntries);
-                todoView.closeTodoDialog(todoDialog);
+            if (intentionPackage.todoId) {
+                this.#handleEditIntention(intentionPackage.todoId, intentionPackage.todoEntries);
+                intentionView.closeTodoDialog(intentionDialog);
 
             } else {
-                this.#handleCreateTodo(todoPackage.todoEntries);
-                todoView.closeTodoDialog(todoDialog);
+                this.#handleCreateIntention(intentionPackage.todoEntries);
+                intentionView.closeTodoDialog(intentionDialog);
             }
         });
 
-        todoDialog.addEventListener("close", () => {
-            todoView.closeTodoDialog(todoDialog)
+        intentionDialog.addEventListener("close", () => {
+            intentionView.closeTodoDialog(intentionDialog)
         });
 
-        const addTodoButton = this.todoView.addTodoButton;
-        const todayButton = this.todoView.filterTodayButton;
-        const upcomingButton = this.todoView.filterUpcomingButton;
+        const addIntentionButton = this.intentionView.addIntentionButton;
+        const todayButton = this.intentionView.filterTodayButton;
+        const upcomingButton = this.intentionView.filterUpcomingButton;
 
-        addTodoButton.addEventListener("click", () => {
-            this.todoView.displayTodoForm();
+        addIntentionButton.addEventListener("click", () => {
+            this.intentionView.displayTodoForm();
         });
 
         todayButton.addEventListener("click", () => {
-            this.todoService.setFilter("today");
+            this.intentionService.setFilter("today");
             this.#refreshUI()
         });
 
         upcomingButton.addEventListener("click", () => {
-            this.todoService.setFilter("upcoming");
+            this.intentionService.setFilter("upcoming");
             this.#refreshUI();
         })
 
-        const todoListsContainer = this.todoView.todoListsContainer;
-        const todoActiveList = this.todoView.todoActiveList;
-        const todoCompletedList = this.todoView.todoCompletedList;
+        const intentionListContainer = this.intentionView.intentionListsContainer;
+        const intentionActiveList = this.intentionView.intentionActiveList;
+        const intentionCompletedList = this.intentionView.intentionCompletedList;
 
-        todoListsContainer.addEventListener("move-todo-item", (e) => {
-            const todoPackage = e.detail.todoPackage;
-            this.todoService.moveIntention(todoPackage.todoId, todoPackage.newCompletedStatus);
+        intentionListContainer.addEventListener("move-todo-item", (e) => {
+            const intentionPackage = e.detail.todoPackage;
+            this.intentionService.moveIntention(intentionPackage.todoId, intentionPackage.newCompletedStatus);
             this.#refreshUI();
         });
 
-        todoActiveList.addEventListener("view-todo-item", (e) => {
-            const todoPackage = e.detail.todoPackage;
-            const todo = this.todoService.findIntentionById(todoPackage.todoId);
-            this.todoView.displayOneActiveTodo(todo);
+        intentionActiveList.addEventListener("view-todo-item", (e) => {
+            const intentionPackage = e.detail.todoPackage;
+            const intention = this.intentionService.findIntentionById(intentionPackage.todoId);
+            this.intentionView.displayOneActiveTodo(intention);
         });
 
-        todoActiveList.addEventListener("edit-todo-item", (e) => {
-            const todoPackage = e.detail.todoPackage;
-            const todo = this.todoService.findIntentionById(todoPackage.todoId);
-            this.todoView.displayTodoForm(todo);
+        intentionActiveList.addEventListener("edit-todo-item", (e) => {
+            const intentionPackage = e.detail.todoPackage;
+            const intention = this.intentionService.findIntentionById(intentionPackage.todoId);
+            this.intentionView.displayTodoForm(intention);
         });
 
-        todoActiveList.addEventListener("delete-todo-item", (e) => {
-            const todoPackage = e.detail.todoPackage;
-            this.#handleDeleteTodo(todoPackage.todoId);
+        intentionActiveList.addEventListener("delete-todo-item", (e) => {
+            const intentionPackage = e.detail.todoPackage;
+            this.#handleDeleteIntention(intentionPackage.todoId);
         });
 
-        todoCompletedList.addEventListener("clear-completed-todos", () => {
-            this.todoService.clearCompletedFilteredIntentions();
+        intentionCompletedList.addEventListener("clear-completed-todos", () => {
+            this.intentionService.clearCompletedFilteredIntentions();
             this.#refreshUI();
         })
 
     }
 
-    #handleDeleteTodo(id) {
-        this.todoService.deleteIntention(id);
+    #handleDeleteIntention(id) {
+        this.intentionService.deleteIntention(id);
         this.#refreshUI();
     }
 
-    #handleEditTodo(todoId, todoEntries) {
-        this.todoService.editIntention(todoId, todoEntries);
+    #handleEditIntention(intentionId, intentionEntries) {
+        this.intentionService.editIntention(intentionId, intentionEntries);
         this.#refreshUI();
     }
 
-    #handleCreateTodo(todoEntries) {
-        this.todoService.createIntention(todoEntries);
+    #handleCreateIntention(intentionEntries) {
+        this.intentionService.createIntention(intentionEntries);
         this.#refreshUI();
     }
 
 
     initialize() {
-        this.todoService.load();
+        this.intentionService.load();
         this.#refreshUI();
     }
 
     #refreshUI() {
-        this.todoView.displayActiveTodos(this.todoService.allActiveIntentions);
-        this.todoView.displayCompletedTodos(this.todoService.allCompletedIntentions);
-        this.todoView.displayTodoCounter(this.todoService.filteredCompletedCount);
+        this.intentionView.displayActiveTodos(this.intentionService.allActiveIntentions);
+        this.intentionView.displayCompletedTodos(this.intentionService.allCompletedIntentions);
+        this.intentionView.displayTodoCounter(this.intentionService.filteredCompletedCount);
     }
 }
 

@@ -32,29 +32,29 @@
 */
 
 class IntentionView {
-    #completedTodoElements = []
+    #completedIntentionElements = []
     #counterElement;
 
-    constructor(todoListsContainer, todoActiveList, todoCompletedList, todoDialog, addTodoButton, filterTodayButton, filterUpcomingButton) {
-        this.todoListsContainer = todoListsContainer;
-        this.todoActiveList = todoActiveList;
-        this.todoCompletedList = todoCompletedList;
-        this.todoDialog = todoDialog;
-        this.addTodoButton = addTodoButton;
+    constructor(intentionListsContainer, intentionActiveList, intentionCompletedList, intentionDialog, addIntentionButton, filterTodayButton, filterUpcomingButton) {
+        this.intentionListsContainer = intentionListsContainer;
+        this.intentionActiveList = intentionActiveList;
+        this.intentionCompletedList = intentionCompletedList;
+        this.intentionDialog = intentionDialog;
+        this.addIntentionButton = addIntentionButton;
         this.filterTodayButton = filterTodayButton;
         this.filterUpcomingButton = filterUpcomingButton;
     }
 
     displayTodoForm( todoData = {} ) {
-        const todoForm = document.createElement("todo-form");
-        todoForm.formData = todoData;
-        this.todoDialog.appendChild(todoForm);
-        this.todoDialog.showModal();
+        const intentionForm = document.createElement("todo-form");
+        intentionForm.formData = todoData;
+        this.intentionDialog.appendChild(intentionForm);
+        this.intentionDialog.showModal();
     }
 
     closeTodoDialog(todoDialog) {
         todoDialog.close();
-        this.todoDialog.innerHTML = "";
+        this.intentionDialog.innerHTML = "";
     }
     
     displayTodoCounter(numberOfCompletedTodos) {
@@ -67,11 +67,11 @@ class IntentionView {
         }
         this.#counterElement = todoCounter;
 
-        this.todoCompletedList.prepend(todoCounter);
+        this.intentionCompletedList.prepend(todoCounter);
     }
 
     #removeCompletedTodoElements() {
-        for (const completeTodo of this.#completedTodoElements) {
+        for (const completeTodo of this.#completedIntentionElements) {
             completeTodo.remove();
         }
     }
@@ -82,18 +82,18 @@ class IntentionView {
         for (const completedTodo of completedTodos) {
             const completedTodoItem = document.createElement("todo-item");
             completedTodoItem.todoData = completedTodo;
-            this.#completedTodoElements.push(completedTodoItem);
-            this.todoCompletedList.appendChild(completedTodoItem);
+            this.#completedIntentionElements.push(completedTodoItem);
+            this.intentionCompletedList.appendChild(completedTodoItem);
         }
     }
 
     displayActiveTodos(activeTodos) {
-        this.todoActiveList.innerHTML = "";
+        this.intentionActiveList.innerHTML = "";
 
         for (const activeTodo of activeTodos) {
             const todoItem = document.createElement("todo-item");
             todoItem.todoData = activeTodo;
-            this.todoActiveList.appendChild(todoItem);
+            this.intentionActiveList.appendChild(todoItem);
         }
     }
     
@@ -101,7 +101,7 @@ class IntentionView {
         const todoTemplate = document.createElement("todo-template");
         todoTemplate.id = "template";
         todoTemplate.templateData = activeTodo;
-        this.todoActiveList.appendChild(todoTemplate);
+        this.intentionActiveList.appendChild(todoTemplate);
     }
 }
 
