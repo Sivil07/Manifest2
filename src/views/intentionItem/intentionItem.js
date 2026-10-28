@@ -43,7 +43,7 @@ template.innerHTML = `
 </div>
 `
 class IntentionItem extends HTMLElement {
-    #todoId;
+    #intentionId;
 
     constructor() {
         super();
@@ -62,36 +62,36 @@ class IntentionItem extends HTMLElement {
         dueDate.textContent = getCompletedByDayOfWeek(intention.dueDate);
         input.checked = intention.isChecked;
         
-        this.#todoId = intention.id;
+        this.#intentionId = intention.id;
 
         if (intention.isChecked) taskContent.setAttribute("part", "task-content checked")
     }
 
     connectedCallback() {
-        const todoInput = this.shadowRoot.querySelector(`[part="complete-todo"]`);
-        todoInput.addEventListener("change", (e) => {
+        const intentionInput = this.shadowRoot.querySelector(`[part="complete-todo"]`);
+        intentionInput.addEventListener("change", (e) => {
             const newCompletedStatus = e.target.checked;
-            const todoPackage = {
+            const intentionPackage = {
                 newCompletedStatus: newCompletedStatus,
-                todoId: this.#todoId,
+                intentionId: this.#intentionId,
             }
             this.dispatchEvent( new CustomEvent( "move-todo-item", {
                 bubbles: true,
                 detail: {
-                    todoPackage: todoPackage
+                    intentionPackage: intentionPackage
                 }
             }))
         })
         
-        const todoContent = this.shadowRoot.querySelector(`[part~="task-content"]`);
-        todoContent.addEventListener("click", () => {
-            const todoPackage = {
-                todoId: this.#todoId,
+        const intentionContent = this.shadowRoot.querySelector(`[part~="task-content"]`);
+        intentionContent.addEventListener("click", () => {
+            const intentionPackage = {
+                intentionId: this.#intentionId,
             }
             this.dispatchEvent( new CustomEvent( "view-todo-item", {
                 bubbles: true,
                 detail: {
-                    todoPackage: todoPackage
+                    intentionPackage: intentionPackage
                 }
             }))
         })
