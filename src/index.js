@@ -7,8 +7,6 @@ import "./views/todoItem/todoItem.js";
 import "./views/todoForm/todoForm.js";
 import "./views/todoTemplate/todoTemplate.js";
 import "./views/todoCounter/todoCounter.js";
-import "./views/todoProgress/todoProgress.js";
-import "./views/todoProgress/todoProgress.css";
 import IntentionView from "./views/intentionView.js";
 import IntentionService from "./services/intentionService.js";
 import IntentionController from "./controllers/intentionController.js";
