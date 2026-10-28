@@ -1,29 +1,30 @@
 import { getCompletedByDayOfWeek } from "../../utils/date.js";
 
 /*
-    A TodoItem is the on screen version of a single Todo object. A todo holds the
-    data, and a TodoItem defines how that data appears and how the user interacts with
-    it.
+    An IntentionItem is the on screen version of a single intention object. An intention
+    holds the data, and an intention-item defines how that data appears and how the user 
+    interacts with it. It shows a checkbox, the title, the reason and a tag with the 
+    due date.
 
-    A TodoItem is given a todo object through the todoData setter, fills in its UI (title, reason,
-    checked state) and remembers only the todo's id and checked status. It never modifies 
-    a todo itself. When something changes in the UI, the id and checked state are passed to the 
-    controller and service to identify the actual Todo, so the change can be applied in state
-    before the UI is updated.
+    An IntentionItem is given an Intention object through the IntentionData setter. It 
+    fills its UI and remembers on the intention's id. It never modifies the intention
+    itself. When the user does something, the IntentionItem announces it with the custom
+    event that carries the id, so the controller can hand it to the service to find the 
+    actual intention and change it in state before the view redraws the UI.
 
-    When a user does something, the item announces it with a custom event and the controller decides
-    what to do. The events include:
-        -move-todo-item: the checkbox's state was change (checked or unchecked)
-        -view-todo-item: the todo's text was clicked.
-    Each event carries information that identifies the todo, so the controller can hand it to the TodoService.
-    to identify and perform what ever action it needs to perform for the state before the TodoView 
-    refreshes the UI. 
+    The events it sends are:
+        - move-intention-item: the checkbox was toggled. The event carries the new checked 
+          status (true or false) from the checkbox with the it
+        - view-intention-item: the intention's text was clicked.
 
-    Overall, a TodoItem is the UI representation of a Todo. It stores the a todo object's id so it can
-    identify which Todo object it represents. However, it does not update itself when the underlying Todo
-    object changes. A TodoItem is simply a snapshot of the data at the moment it was rendered. After any
-    state change in the TodoService, the TodoView clears the lists and create new TodoItems with the updated
-    data so the UI reflects the current state.
+    Both events carries information that identifies the intention, so the controller can hand 
+    it to the IntentionService to identify and perform what ever action it needs to perform for
+    the state before the IntentionView refreshes the UI.
+
+    Overall, an IntentionItem is a snapshot of the data from an Intention object at the moment it
+    was rendered. It does not update itself when the underlying intention object changes. After
+    every change in the service, the view clears the list a and creates new IntentionItems from
+    the update data, so the UI always reflect the current state.
 
 */
 
