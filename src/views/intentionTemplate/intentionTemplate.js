@@ -60,7 +60,7 @@ class IntentionTemplate extends HTMLElement {
             const intentionPackage = {
                 intentionId: this.intentionId,
             }
-            this.dispatchEvent( new CustomEvent( "delete-todo-item", {
+            this.dispatchEvent( new CustomEvent( "delete-intention-item", {
                 bubbles: true,
                 detail: {
                     intentionPackage: intentionPackage
@@ -73,7 +73,7 @@ class IntentionTemplate extends HTMLElement {
             const intentionPackage = {
                 intentionId: this.intentionId,
             }
-            this.dispatchEvent( new CustomEvent("edit-todo-item", {
+            this.dispatchEvent( new CustomEvent("edit-intention-item", {
                 bubbles: true,
                 detail: {
                     intentionPackage: intentionPackage

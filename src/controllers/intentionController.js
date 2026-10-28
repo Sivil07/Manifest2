@@ -100,13 +100,13 @@ class IntentionController {
             this.intentionView.displayOneActiveIntention(intention);
         });
 
-        intentionActiveList.addEventListener("edit-todo-item", (e) => {
+        intentionActiveList.addEventListener("edit-intention-item", (e) => {
             const intentionPackage = e.detail.intentionPackage;
             const intention = this.intentionService.findIntentionById(intentionPackage.intentionId);
             this.intentionView.displayIntentionForm(intention);
         });
 
-        intentionActiveList.addEventListener("delete-todo-item", (e) => {
+        intentionActiveList.addEventListener("delete-intention-item", (e) => {
             const intentionPackage = e.detail.intentionPackage;
             this.#handleDeleteIntention(intentionPackage.intentionId);
         });
