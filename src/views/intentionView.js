@@ -63,7 +63,7 @@ class IntentionView {
 
         const intentionCounter = document.createElement("intention-counter");
         intentionCounter.intentionCount = {
-            completedTodoNum: numberOfCompletedIntentions
+            completedIntentionNum: numberOfCompletedIntentions
         }
         this.#counterElement = intentionCounter;
 

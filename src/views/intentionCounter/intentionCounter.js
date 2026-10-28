@@ -14,7 +14,7 @@ class IntentionCounter extends HTMLElement {
         shadow.append(template.content.cloneNode(true));
     }
 
-    set intentionCount({ completedTodoNum: completedIntentionNum }) {
+    set intentionCount({ completedIntentionNum }) {
         const counter = this.shadowRoot.querySelector([`[part="counter"]`]);
         counter.textContent = `Completed - ${completedIntentionNum}`
     }
