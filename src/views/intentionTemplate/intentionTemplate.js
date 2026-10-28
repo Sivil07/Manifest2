@@ -24,8 +24,8 @@ template.innerHTML = `
 </div>
 `
 
-class TodoTemplate extends HTMLElement {
-    #todoId;
+class IntentionTemplate extends HTMLElement {
+    intentionId;
 
     constructor() {
         super();
@@ -33,19 +33,19 @@ class TodoTemplate extends HTMLElement {
         shadow.append(template.content.cloneNode(true));
     }
 
-    set templateData(todoData) {
+    set templateData(intentionData) {
         const title = this.shadowRoot.querySelector(`[part="template-title"]`);
         const reason = this.shadowRoot.querySelector(`[part="template-reason"]`);
         const dueDate = this.shadowRoot.querySelector(`[part~="template-due-date"]`);
         const description = this.shadowRoot.querySelector(`[part="template-desc"]`);
-        title.textContent = todoData.title;
-        reason.textContent = todoData.reason;
-        dueDate.textContent = getCompletedByDayOfWeek(todoData.dueDate);
+        title.textContent = intentionData.title;
+        reason.textContent = intentionData.reason;
+        dueDate.textContent = getCompletedByDayOfWeek(intentionData.dueDate);
 
-        const isEmptyString = todoData.description === undefined || todoData.description.length === 0;
-        description.textContent = (isEmptyString) ? "No Description yet" : todoData.description;
+        const isEmptyString = intentionData.description === undefined || intentionData.description.length === 0;
+        description.textContent = (isEmptyString) ? "No Description yet" : intentionData.description;
 
-        this.#todoId = todoData.id;
+        this.intentionId = intentionData.id;
     }
 
     connectedCallback() {
@@ -57,30 +57,30 @@ class TodoTemplate extends HTMLElement {
 
         const deleteButton = this.shadowRoot.querySelector(`[part~="delete-todo"]`);
         deleteButton.addEventListener("click", () => {
-            const todoPackage = {
-                todoId: this.#todoId,
+            const intentionPackage = {
+                intentionId: this.intentionId,
             }
             this.dispatchEvent( new CustomEvent( "delete-todo-item", {
                 bubbles: true,
                 detail: {
-                    todoPackage: todoPackage
+                    intentionPackage: intentionPackage
                 }
             }))
         });
 
         const editButton = this.shadowRoot.querySelector(`[part~="edit-todo"]`);
         editButton.addEventListener("click", () => {
-            const todoPackage = {
-                todoId: this.#todoId,
+            const intentionPackage = {
+                intentionId: this.intentionId,
             }
             this.dispatchEvent( new CustomEvent("edit-todo-item", {
                 bubbles: true,
                 detail: {
-                    todoPackage: todoPackage
+                    intentionPackage: intentionPackage
                 }
             }))
         })
     }
 }
 
-customElements.define("todo-template", TodoTemplate);
+customElements.define("intention-template", IntentionTemplate);

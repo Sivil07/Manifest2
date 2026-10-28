@@ -98,7 +98,7 @@ class IntentionView {
     }
     
     displayOneActiveIntention(activeIntention) {
-        const intentionTemplate = document.createElement("todo-template");
+        const intentionTemplate = document.createElement("intention-template");
         intentionTemplate.id = "template";
         intentionTemplate.templateData = activeIntention;
         this.intentionActiveList.appendChild(intentionTemplate);

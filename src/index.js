@@ -1,11 +1,11 @@
 import "../public/css/base.css";
 import "./views/intentionItem/intentionItem.css";
-import "./views/todoTemplate/todoTemplate.css";
+import "./views/intentionTemplate/intentionTemplate.css";
 import "./views/todoForm/todoForm.css";
 import "./views/intentionCounter/intentionCounter.css"
 import "./views/intentionItem/intentionItem.js";
 import "./views/todoForm/todoForm.js";
-import "./views/todoTemplate/todoTemplate.js";
+import "./views/intentionTemplate/intentionTemplate.js";
 import "./views/intentionCounter/intentionCounter.js";
 import IntentionView from "./views/intentionView.js";
 import IntentionService from "./services/intentionService.js";

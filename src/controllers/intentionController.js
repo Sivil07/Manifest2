@@ -101,14 +101,14 @@ class IntentionController {
         });
 
         intentionActiveList.addEventListener("edit-todo-item", (e) => {
-            const intentionPackage = e.detail.todoPackage;
-            const intention = this.intentionService.findIntentionById(intentionPackage.todoId);
+            const intentionPackage = e.detail.intentionPackage;
+            const intention = this.intentionService.findIntentionById(intentionPackage.intentionId);
             this.intentionView.displayIntentionForm(intention);
         });
 
         intentionActiveList.addEventListener("delete-todo-item", (e) => {
-            const intentionPackage = e.detail.todoPackage;
-            this.#handleDeleteIntention(intentionPackage.todoId);
+            const intentionPackage = e.detail.intentionPackage;
+            this.#handleDeleteIntention(intentionPackage.intentionId);
         });
 
         intentionCompletedList.addEventListener("clear-completed-intentions", () => {
