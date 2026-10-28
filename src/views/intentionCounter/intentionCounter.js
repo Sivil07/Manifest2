@@ -6,7 +6,7 @@ template.innerHTML = `
 </div> 
 `
 
-class TodoCounter extends HTMLElement {
+class IntentionCounter extends HTMLElement {
     
     constructor() {
         super();
@@ -14,9 +14,9 @@ class TodoCounter extends HTMLElement {
         shadow.append(template.content.cloneNode(true));
     }
 
-    set todoCount({ completedTodoNum }) {
+    set intentionCount({ completedTodoNum: completedIntentionNum }) {
         const counter = this.shadowRoot.querySelector([`[part="counter"]`]);
-        counter.textContent = `Completed - ${completedTodoNum}`
+        counter.textContent = `Completed - ${completedIntentionNum}`
     }
 
     connectedCallback() {
@@ -29,4 +29,4 @@ class TodoCounter extends HTMLElement {
     }
 }
 
-customElements.define("todo-counter", TodoCounter);
+customElements.define("intention-counter", IntentionCounter);

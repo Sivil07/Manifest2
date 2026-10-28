@@ -61,8 +61,8 @@ class IntentionView {
         if (this.#counterElement !== undefined) this.#counterElement.remove();
         if (numberOfCompletedIntentions === 0) return;
 
-        const intentionCounter = document.createElement("todo-counter");
-        intentionCounter.todoCount = {
+        const intentionCounter = document.createElement("intention-counter");
+        intentionCounter.intentionCount = {
             completedTodoNum: numberOfCompletedIntentions
         }
         this.#counterElement = intentionCounter;
