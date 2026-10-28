@@ -54,16 +54,16 @@ class IntentionController {
 
             if (intentionPackage.todoId) {
                 this.#handleEditIntention(intentionPackage.todoId, intentionPackage.todoEntries);
-                intentionView.closeTodoDialog(intentionDialog);
+                intentionView.closeIntentionDialog(intentionDialog);
 
             } else {
                 this.#handleCreateIntention(intentionPackage.todoEntries);
-                intentionView.closeTodoDialog(intentionDialog);
+                intentionView.closeIntentionDialog(intentionDialog);
             }
         });
 
         intentionDialog.addEventListener("close", () => {
-            intentionView.closeTodoDialog(intentionDialog)
+            intentionView.closeIntentionDialog(intentionDialog)
         });
 
         const addIntentionButton = this.intentionView.addIntentionButton;
@@ -71,7 +71,7 @@ class IntentionController {
         const upcomingButton = this.intentionView.filterUpcomingButton;
 
         addIntentionButton.addEventListener("click", () => {
-            this.intentionView.displayTodoForm();
+            this.intentionView.displayIntentionForm();
         });
 
         todayButton.addEventListener("click", () => {
@@ -97,13 +97,13 @@ class IntentionController {
         intentionActiveList.addEventListener("view-todo-item", (e) => {
             const intentionPackage = e.detail.todoPackage;
             const intention = this.intentionService.findIntentionById(intentionPackage.todoId);
-            this.intentionView.displayOneActiveTodo(intention);
+            this.intentionView.displayOneActiveIntention(intention);
         });
 
         intentionActiveList.addEventListener("edit-todo-item", (e) => {
             const intentionPackage = e.detail.todoPackage;
             const intention = this.intentionService.findIntentionById(intentionPackage.todoId);
-            this.intentionView.displayTodoForm(intention);
+            this.intentionView.displayIntentionForm(intention);
         });
 
         intentionActiveList.addEventListener("delete-todo-item", (e) => {
@@ -140,9 +140,9 @@ class IntentionController {
     }
 
     #refreshUI() {
-        this.intentionView.displayActiveTodos(this.intentionService.allActiveIntentions);
-        this.intentionView.displayCompletedTodos(this.intentionService.allCompletedIntentions);
-        this.intentionView.displayTodoCounter(this.intentionService.filteredCompletedCount);
+        this.intentionView.displayActiveIntentions(this.intentionService.allActiveIntentions);
+        this.intentionView.displayCompletedIntentions(this.intentionService.allCompletedIntentions);
+        this.intentionView.displayIntentionCounter(this.intentionService.filteredCompletedCount);
     }
 }
 
