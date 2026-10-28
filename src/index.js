@@ -7,6 +7,8 @@ import "./views/todoItem/todoItem.js";
 import "./views/todoForm/todoForm.js";
 import "./views/todoTemplate/todoTemplate.js";
 import "./views/todoCounter/todoCounter.js";
+import "./views/todoProgress/todoProgress.js";
+import "./views/todoProgress/todoProgress.css";
 import TodoView from "./views/todoView.js";
 import TodoService from "./services/todoService.js";
 import TodoController from "./controllers/todoController.js";

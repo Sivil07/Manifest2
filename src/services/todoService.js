@@ -1,4 +1,4 @@
-import Todo from "../models/todo.js";
+import Intention from "../models/intention.js";
 import { starterData } from "../starterData.js";
 import { getCurrentDate } from "../utils/date.js";
 
@@ -109,7 +109,7 @@ class TodoService {
 
 
     createTodo(todoEntries) {
-        const todo = new Todo(todoEntries);
+        const todo = new Intention(todoEntries);
         this.#allTodos.push(todo);
         this.#saveAllTodos();
     }
@@ -141,7 +141,7 @@ class TodoService {
         const todoData = savedAllTodoData === null ? starterData : JSON.parse(savedAllTodoData);
         this.setFilter();
         todoData.forEach((savedTodoData) => {
-            const todo = new Todo(savedTodoData);
+            const todo = new Intention(savedTodoData);
             this.#allTodos.push(todo);
         })
 
