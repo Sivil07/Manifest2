@@ -6,6 +6,11 @@ function getNextDay() {
     });
 }
 
+function getPreviousDay() {
+    const previousDay = add( new Date(), {days: -1});
+    return format( new Date(previousDay), "yyyy-MM-dd" )
+}
+
 function setMinDate() {
     const minDate = format( new Date(getNextDay()), "yyyy-LL-dd")
     return minDate;
@@ -23,5 +28,6 @@ function getCurrentDate() {
 export {
     setMinDate,
     getCompletedByDayOfWeek,
-    getCurrentDate
+    getCurrentDate,
+    getPreviousDay
 }
