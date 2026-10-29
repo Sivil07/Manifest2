@@ -1,3 +1,5 @@
+import { getCurrentDate } from "../utils/date.js";
+
 /*
     An intention defines the core piece of data that moves around the app. It represents
     a single task in the user's list and stores the essential information that
@@ -27,13 +29,14 @@
 
 */
 class Intention {
-    constructor({ id = crypto.randomUUID(), title, reason, isChecked = false, dueDate, description = "" }) {
+    constructor({ id = crypto.randomUUID(), title, reason, isChecked = false, dueDate, description = ""}) {
         this.id = id;
         this.title = title;
         this.reason = reason;
         this.isChecked = isChecked;
         this.dueDate = dueDate;
-        this.description = description
+        this.description = description;
+        this.createdAt = getCurrentDate()
     }
     
     applyUpdates({ title, reason, dueDate, description }) {
