@@ -143,6 +143,10 @@ class IntentionController {
         this.intentionView.displayActiveIntentions(this.intentionService.allActiveIntentions);
         this.intentionView.displayCompletedIntentions(this.intentionService.allCompletedIntentions);
         this.intentionView.displayIntentionCounter(this.intentionService.filteredCompletedCount);
+        this.intentionView.displayDailyCount(
+            this.intentionService.dailyCount,
+            this.intentionService.dailyMaxCount
+        )
     }
 }
 
