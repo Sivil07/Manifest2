@@ -34,6 +34,7 @@
 class IntentionView {
     #completedIntentionElements = []
     #counterElement;
+    #dailyCountElement;
 
     constructor(intentionListsContainer, intentionActiveList, intentionCompletedList, intentionDialog, addIntentionButton, filterTodayButton, filterUpcomingButton) {
         this.intentionListsContainer = intentionListsContainer;
@@ -43,6 +44,17 @@ class IntentionView {
         this.addIntentionButton = addIntentionButton;
         this.filterTodayButton = filterTodayButton;
         this.filterUpcomingButton = filterUpcomingButton;
+    }
+
+    displayDailyCount(count, maxCount) {
+        if (this.#dailyCountElement !== undefined) this.#dailyCountElement.remove();
+        const dailyCountElement = document.createElement("intention-progress");
+        dailyCountElement.progress = {
+            count: count,
+            maxCount: maxCount
+        };
+        this.#dailyCountElement = dailyCountElement
+        document.body.prepend(dailyCountElement);
     }
 
     displayIntentionForm( intentionData = {} ) {
