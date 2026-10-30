@@ -50,6 +50,7 @@ class IntentionService {
 
     dailyMaxCount = 7
 
+    /* Calculates the number of intentions created for the current day */
     get dailyCount() {
         let count = 0
         this.#allIntentions.forEach((intention) => {
