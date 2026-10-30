@@ -3,10 +3,12 @@ import "./views/intentionItem/intentionItem.css";
 import "./views/intentionTemplate/intentionTemplate.css";
 import "./views/intentionForm/intentionForm.css";
 import "./views/intentionCounter/intentionCounter.css"
+import "./views/intentionProgress/intentionProgress.css";
 import "./views/intentionItem/intentionItem.js";
 import "./views/intentionForm/intentionForm.js";
 import "./views/intentionTemplate/intentionTemplate.js";
 import "./views/intentionCounter/intentionCounter.js";
+import "./views/intentionProgress/intentionProgress.js";
 import IntentionView from "./views/intentionView.js";
 import IntentionService from "./services/intentionService.js";
 import IntentionController from "./controllers/intentionController.js";
