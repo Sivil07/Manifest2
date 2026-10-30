@@ -48,6 +48,18 @@ class IntentionService {
     /* Defines the number of completed intentions in the current filter */
     filteredCompletedCount;
 
+    dailyMaxCount = 7
+
+    get dailyCount() {
+        let count = 0
+        this.#allIntentions.forEach((intention) => {
+            const isCreatedToday = intention.createdAt === getCurrentDate();
+            if (isCreatedToday) count++   
+        });
+        
+        return count;
+    }
+
     /* Incomplete intentions that match the current filter */
     get allActiveIntentions() {
         return this.#allIntentions.filter((intention) => {
