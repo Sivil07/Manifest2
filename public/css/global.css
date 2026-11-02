@@ -38,14 +38,14 @@ body {
   padding: var(--section-padding);
 }
 
-/* Header Section - Shared Styles */
+/* Header Section: Shared Styles */
 
 #logo-symbol,
 #logo-name {
   font-size: 1.5rem;
 }
 
-/* Header Section - Logo Contents */
+/* Header Section: Logo Contents */
 
 #logo-contents {
   display: flex;
@@ -75,7 +75,7 @@ body {
   grid-area: Main-Nav;
 }
 
-/* Main Nav - Shared Styles */
+/* Main Nav: Shared Styles */
 
 #add-intention span,
 #nav-projects,
@@ -83,7 +83,7 @@ body {
   display: none;
 }
 
-/* Main Nav - Add Intention */
+/* Main Nav: Add Intention */
 
 #add-intention {
   border: none;
@@ -99,7 +99,7 @@ body {
   cursor: pointer;
 }
 
-/* Main Nav - Nav Sections */
+/* Main Nav: Nav Sections */
 
 #nav-sections {
   display: grid;
@@ -113,6 +113,7 @@ body {
   border-radius: 0.5rem;
   border: none;
   font-size: 0.75rem;
+  cursor: pointer;
 }
 
 /* Media Queries */
@@ -123,7 +124,7 @@ body {
       "Header-Section Main-Content"
       "Main-Nav Main-Content";
     grid-template-columns: var(--sidebar-width);
-    grid-template-rows: max-content max-content;
+    grid-template-rows: max-content 1fr;
   }
 
   /* Header Section */
@@ -142,19 +143,20 @@ body {
     padding: 1rem;
   }
 
-  /* Main Nav - Add Intention */
+  /* Main Nav: Add Intention */
   #add-intention {
     position: static;
     transform: none;
     padding: 0.5rem;
     border-radius: 0.5rem;
+    font-size: 1rem;
   }
 
   #add-intention span {
     display: revert;
   }
 
-  /* Main Nav - Nav Section */
+  /* Main Nav: Nav Section */
 
   #nav-sections {
     padding: 0;
@@ -165,6 +167,14 @@ body {
   .nav-action {
     display: flex;
     justify-content: space-between;
+    font-size: 1rem;
+    border: none;
+    padding: 0.75rem 0;
+    background-color: transparent;
+  }
+
+  .nav-action:hover {
+    background-color: var(--clr-lavender);
   }
 
   .project-action {
@@ -173,5 +183,57 @@ body {
 
   .count {
     display: revert;
+  }
+
+  /* Main Nav:  Nav Projects */
+  #nav-projects {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* Main Nav: Nav Projects - Project Header */
+  #projects-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  #projects-title {
+    text-transform: uppercase;
+  }
+
+  #projects-add {
+    padding: 0.3rem 0.7rem;
+    border-radius: 0.5rem;
+    border: none;
+    background-color: var(--clr-lavender);
+    color: var(--clr-logo-primary);
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  /* Main Nav: Nav Projects - Projects List */
+
+  #project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .project-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+  }
+
+  .project-item:hover {
+    background-color: var(--clr-lavender);
   }
 }
