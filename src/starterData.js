@@ -101,11 +101,11 @@ const intentionStarterData = [
 
 const projectStarterData = [
     {
-        projectId: "p4",
+        id: "p4",
         projectName: "Personal"
     },
     {
-        projectId: "p1",
+        id: "p1",
         projectName: "Finance"
     }
 ]
