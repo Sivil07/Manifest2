@@ -29,7 +29,7 @@ import { getCurrentDate } from "../utils/date.js";
 
 */
 class Intention {
-    constructor({ id = crypto.randomUUID(), title, reason, isChecked = false, dueDate, description = "", createdAt = getCurrentDate()}) {
+    constructor({ id = crypto.randomUUID(), title, reason, isChecked = false, dueDate, description = "", createdAt = getCurrentDate(), projectId}) {
         this.id = id;
         this.title = title;
         this.reason = reason;
@@ -37,6 +37,7 @@ class Intention {
         this.dueDate = dueDate;
         this.description = description;
         this.createdAt = createdAt
+        this.projectId = projectId;
     }
     
     applyUpdates({ title, reason, dueDate, description }) {

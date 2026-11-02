@@ -8,26 +8,92 @@
 </head>
 
 <body>
-    <dialog id="my-dialog" closedby="any">
+    <header id="logo-section">
+        <div id="logo-contents">
+            <span id="logo-symbol">+</span>
+            <p id="logo-name">manifest</p>
+        </div>
+    </header>
+    <main id="main-content">
+        dd
+    </main>
+    <nav id="main-nav">
+        <button id="add-intention">+ <span>Add Intention</span></button>
+        <div id="nav-sections">
+            <button type="button" class="nav-action" data-action="today">
+                <p class="nav-label">Today</p>
+                <p class="count" data-count="today-count">4</p>
+            </button>
+            <button type="button" class="nav-action" data-action="upcoming">
+                <p class="nav-label">Upcoming</p>
+                <p class="count" data-count="upcoming-count">4</p>
+            </button>
+            <button type="button" class="nav-action" data-action="inbox">
+                <p class="nav-label">Inbox</p>
+                <p class="count" data-count="inbox-count">4</p>
+            </button>
+            <button type="button" class="nav-action project-action" data-action="project">
+                <p class="nav-label">Projects</p>
+            </button>
+        </div>
+        <div id="nav-projects">
+            <div id="projects-header">
+                <p id="projects-title">Projects</p>
+                <button type="button" id="projects-add">+</button>
+            </div>
+            <div id="project-list">
+                <button type="button" class="project-item">
+                    <span class="project-color"></span>
+                    <span class="project-name">Work</span>
+                    <span class="projects-count">2</span>
+                </button>
+                <button type="button" class="project-item">
+                    <span class="project-color"></span>
+                    <span class="project-name">Work</span>
+                    <span class="projects-count">2</span>
+                </button>
+                <button type="button" class="project-item">
+                    <span class="project-color"></span>
+                    <span class="project-name">Work</span>
+                    <span class="projects-count">2</span>
+                </button>
+            </div>
 
-    </dialog>
-    <button type="button" id="filter-today" class="todo-action">Today</button>
+        </div>
+    </nav>
+
+
+    <!-- Before Experiment -->
+
+    <!-- <intention-progress></intention-progress> -->
+    <!-- <section id="progress-card">
+        <div id="progress-contents">
+            <p id="progress-tagline">Turn intentions into action.</p>
+            <p id="progress-text">3 of 7 manifested</p>
+            <div class="progress-container">
+                <progress id="progress-bar" value="1" max="7"></progress>
+            </div>
+        </div>
+    </section> -->
+    <!-- <dialog id="my-dialog" closedby="any">
+
+    </dialog> -->
+    <!-- <button type="button" id="filter-today" class="todo-action">Today</button>
     <button type="button" id="filter-upcoming" class="todo-action">Upcoming</button>
-    <button type="button" id="add-todo" class="todo-action">Create Todo</button>
-    <section id="todo-lists">
+    <button type="button" id="add-todo" class="todo-action">Create Todo</button> -->
+    <!-- <section id="todo-lists">
         <div id="active-todo-list">
 
         </div>
         <todo-item></todo-item>
         <div id="completed-todo-list">
-            <!-- <todo-counter></todo-counter> -->
-            <!-- <div id="completed-counter">
+            <todo-counter></todo-counter>
+            <div id="completed-counter">
                 <p id="counter">Completed - </p>
                 <button id="clear-todos">Clear Completed</button>
-            </div> -->
-
+            </div>
         </div>
-    </section>
+    </section> -->
 
 </body>
 
