@@ -3,8 +3,8 @@ const template = document.createElement("template");
 template.innerHTML = `
 <button type="button" part="project-link">
     <span part="project-color"></span>
-    <p part="project-name">Work</p>
-    <p part="projects-count">2</p>
+    <p part="project-name"></p>
+    <p part="projects-count"></p>
 </button>
 `
 
