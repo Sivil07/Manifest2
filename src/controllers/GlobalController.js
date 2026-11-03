@@ -8,10 +8,11 @@ class GlobalController {
         const navSectionsContainer = this.sideBarView.navSectionsContainer;
 
         navSectionsContainer.addEventListener("click", (e) => {
+            if (e.target === navSectionsContainer) return;
+
             const navButton = e.target.closest("button");
             const displayOption = navButton.dataset.action;
             this.#chooseDisplay(displayOption)
-
         })
     }
 
