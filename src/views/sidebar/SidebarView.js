@@ -28,6 +28,7 @@ class SideBarView {
         projectGroups.forEach((group) => {
             const projectItem = document.createElement("project-item");
             projectItem.projectData = group;
+            projectItem.classList.add("project-contents")
             this.projectListContainer.appendChild(projectItem)
         })  
     }

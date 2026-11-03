@@ -1,0 +1,25 @@
+/* Styling For Project List Contents */
+
+/* Component Styling */
+
+.project-contents {
+    display: flex;
+}
+
+/* Nested Styling */
+
+project-item::part(project-item) {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  flex: 1;
+}
+
+project-item:hover::part(project-item) {
+    background-color: var(--clr-lavender);
+}

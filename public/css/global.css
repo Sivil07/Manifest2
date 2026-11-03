@@ -222,18 +222,4 @@ body {
     gap: 1rem;
   }
 
-  .project-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    border: none;
-    cursor: pointer;
-    background-color: transparent;
-  }
-
-  .project-item:hover {
-    background-color: var(--clr-lavender);
-  }
 }
