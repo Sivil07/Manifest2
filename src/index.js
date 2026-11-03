@@ -32,6 +32,7 @@ import "../public/css/fonts.css";
 import "../public/css/global.css";
 import "./views/sidebar/project-link.css";
 import "./views/sidebar/ProjectLink.js";
+import "./views/main/ProjectItem.js"
 import SideBarView from "./views/sidebar/SidebarView.js";
 import MainContentView from "./views/main/MainContentView.js";
 import IntentionExperiment from "./services/IntentionExperiment.js";
