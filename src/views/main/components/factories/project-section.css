@@ -25,6 +25,9 @@
 
 .project-collection {
     grid-area: Project-Collection;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .add-project {

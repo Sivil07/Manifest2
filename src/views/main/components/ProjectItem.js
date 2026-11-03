@@ -2,7 +2,7 @@ const template = document.createElement("template");
 
 template.innerHTML = `
 <button type="button" part="project-action">
-    <span part="project-color"></span>
+    <span part="project-color">dff</span>
     <div part="project-data">
         <p part="project-name"></p>
         <p part="project-count"></p>
