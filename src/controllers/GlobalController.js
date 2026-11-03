@@ -10,9 +10,29 @@ class GlobalController {
         navSectionsContainer.addEventListener("click", (e) => {
             const navButton = e.target.closest("button");
             const displayOption = navButton.dataset.action;
+            this.#chooseDisplay(displayOption)
 
         })
+    }
 
+    #chooseDisplay(displayOption) {
+        switch (displayOption) {
+            case "today":
+                break;
+            case "upcoming":
+                break;
+            case "inbox":
+                break;
+            case "project":
+                this.#showProjectDisplay();
+                break;
+            default:
+        }
+    }
+
+    #showProjectDisplay() {
+        const projects = this.#processGroupIntentionsByCounts();
+        this.mainContainerView.renderProjects(projects);
     }
 
     #processGroupIntentionsByCounts() {
