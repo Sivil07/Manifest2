@@ -30,16 +30,21 @@
 
 import "../public/css/fonts.css";
 import "../public/css/global.css";
-import "./views/sidebar/project-link/project-link.css";
-import "./views/sidebar/project-link/ProjectLink.js";
+import "./views/sidebar/project-link.css";
+import "./views/sidebar/ProjectLink.js";
 import SideBarView from "./views/sidebar/SidebarView.js";
+import MainContentView from "./views/main/MainContentView.js";
 import IntentionExperiment from "./services/IntentionExperiment.js";
 import ProjectService from "./services/ProjectService.js";
 import GlobalController from "./controllers/GlobalController.js";
 
 const sideBarView = new SideBarView(
     document.querySelector("#nav-sections"),
-    document.querySelector("#project-list")
+    document.querySelector("#project-list"),
+)
+
+const mainContainerView = new MainContentView(
+    document.querySelector("#main-content")
 )
 
 const intentionService = new IntentionExperiment()
@@ -48,7 +53,8 @@ const projectService = new ProjectService()
 const globalController = new GlobalController( 
     intentionService,
     projectService,
-    sideBarView
+    sideBarView,
+    mainContainerView
  )
 
 globalController.initialize();
