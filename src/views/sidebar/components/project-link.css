@@ -1,18 +1,13 @@
-/* Styling For Project List Contents */
-
-/* Component Styling */
+/* Sidebar Container (static): Project List (static) - Project-Links (dynamic/custom element) */
 
 .project-contents {
     display: flex;
 }
 
-/* Nested Styling */
-
 project-link::part(project-link) {
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 0.5rem;
   border-radius: 0.5rem;
   border: none;
   cursor: pointer;
@@ -22,4 +17,16 @@ project-link::part(project-link) {
 
 project-link:hover::part(project-link) {
     background-color: var(--clr-lavender);
+}
+
+project-link::part(project-name) {
+    font-weight: bold;
+    font-size: 1rem;
+
+}
+
+project-link::part(project-color) {
+    width: var(--sidebar-project-clr-size);
+    aspect-ratio: 1;
+    border-radius: 50%;
 }

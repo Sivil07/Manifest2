@@ -2,7 +2,7 @@ const template = document.createElement("template");
 
 template.innerHTML = `
 <button type="button" part="project-link">
-    <span part="project-color"></span>
+    <div part="project-color"></div>
     <p part="project-name"></p>
     <p part="projects-count"></p>
 </button>
@@ -28,9 +28,11 @@ class ProjectLink extends HTMLElement {
     set projectData(projectGroup) {
         const projectName = this.shadowRoot.querySelector(`[part="project-name"]`);
         const projectCount = this.shadowRoot.querySelector(`[part="projects-count"]`);
+        const projectColor = this.shadowRoot.querySelector(`[part="project-color"]`);
 
         projectName.textContent = projectGroup.project.projectName;
         projectCount.textContent = projectGroup.intentions.length;
+        projectColor.style.backgroundColor = projectGroup.project.projectColor;
 
         this.#projectId = projectGroup.project.id;
     }
