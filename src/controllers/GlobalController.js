@@ -13,8 +13,14 @@ class GlobalController {
 
     }
 
+    #processGroupIntentionsByCounts() {
+        const result = this.projectService.groupIntentionsByProject(this.intentionService.allActiveIntentions);
+        return result
+    }
+
     #refreshSideBar() {
-        this.sideBarView.applyNavCounts(this.intentionService.getActiveCounts);
+        this.sideBarView.renderNavCounts(this.intentionService.getActiveCounts);
+        this.sideBarView.renderProjectList(this.#processGroupIntentionsByCounts())
     }
 
     #refreshUI() {
