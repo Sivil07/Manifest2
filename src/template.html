@@ -8,6 +8,43 @@
 </head>
 
 <body>
+    <dialog id="my-dialog">
+        <form id="project-form">
+            <h2 class="form-header">New Project</h2>
+            <label for="project-name-input" class="name-input">
+                Project name
+                <input type="text" id="project-name-input" placeholder="Side Projects" name="project-name">
+            </label>
+            <div id="project-color-section">
+                <p id="project-color-header">Color</p>
+                <div id="project-color-options">
+                    <label for="option-purple" class="option">
+                        <input type="radio" id="option-purple" class="radio-input"  name="project-color" value="purple">
+                    </label>
+                    <label for="option-teal" class="option">
+                        <input type="radio" id="option-teal" class="radio-input"  name="project-color" value="teal">
+                    </label>
+                    <label for="option-orange" class="option">
+                        <input type="radio" id="option-orange" class="radio-input"  name="project-color" value="orange">
+                    </label>
+                    <label for="option-pink" class="option">
+                        <input type="radio" id="option-pink" class="radio-input"  name="project-color" value="pink">
+                    </label>
+                    <label for="option-red" class="option">
+                        <input type="radio" id="option-red" class="radio-input"  name="project-color" value="red">
+                    </label>
+                    <label for="option-blue" class="option">
+                        <input type="radio" id="option-blue" class="radio-input"  name="project-color" value="blue">
+                    </label>
+                </div>
+            </div>
+            <div id="form-buttons">
+                <button type="button" class="button">Cancel</button>
+                <button type="submit" class="button" id="submit-new-project">Create Project</button>
+            </div>
+        </form>
+
+    </dialog>
     <header id="logo-section">
         <div id="logo-contents">
             <span id="logo-symbol">+</span>

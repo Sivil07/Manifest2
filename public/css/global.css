@@ -8,6 +8,20 @@
   box-sizing: border-box;
 }
 
+/* input[type="radio"] {
+  appearance: none;
+} */
+
+dialog {
+  margin: auto;
+  width: 100%;
+  max-width: none;
+  inset-block-start: auto;
+  border: none;
+  border-radius: 2rem 2rem 0 0;
+  padding: 2rem;
+}
+
 :root {
   --clr-logo-primary: #6c35f5;
   --clr-page-bg: #f7f3ff;
@@ -32,6 +46,107 @@ body {
     "Main-Content"
     "Main-Nav";
   grid-template-rows: max-content 1fr max-content;
+}
+
+#my-dialog::backdrop {
+  backdrop-filter: blur(10px);
+}
+
+#project-form {
+  display: grid;
+  grid-template-rows: repeat(4, max-content);
+  gap: 1rem;
+}
+
+.name-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#project-name-input {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--clr-lavender);
+}
+
+#project-name-input::placeholder {
+  font-size: 1rem;
+}
+
+#project-color-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#project-color-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.option {
+  padding: 0.5rem;
+  background-color: red;
+  border-radius: 50%;
+  width: 50px;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.radio-input {
+  cursor: pointer;
+}
+
+.option:has(.radio-input:focus)::after {
+  content: "";
+  position: absolute;
+  /* background-color: green; */
+  border: 1px solid black;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  inset: 0;
+  transform: scale(1.15);
+}
+
+/* .option:has(.radio-input:focus) {
+  padding: 3rem;
+  border: 1px solid black;
+} */
+
+#form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.button {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background-color: transparent;
+  cursor: pointer;
+  border: 1px solid var(--clr-lavender);
+  color: var(--clr-logo-primary);
+}
+
+#submit-new-project {
+  background-color: var(--clr-logo-primary);
+  color: var(--clr-white);
+  border: none;
+}
+
+@media (min-width: 768px) {
+  dialog {
+    width: 50%;
+    inset-block-start: 0;
+
+  }
 }
 
 /* Header Section */
@@ -227,5 +342,4 @@ body {
     flex-direction: column;
     gap: 1rem;
   }
-
 }
