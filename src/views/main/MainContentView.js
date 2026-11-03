@@ -1,6 +1,7 @@
 import { renderAddProjectButton } from "./components/factories/add-project-button.js";
 import { renderProjectCollection } from "./components/factories/project-collection.js";
 import { renderHeader } from "./components/factories/project-header.js";
+import { renderProjectSection } from "./components/factories/project-section.js";
 
 class MainContentView {
     constructor(mainContentContainer) {
@@ -9,7 +10,9 @@ class MainContentView {
     
     renderProjects(projectGroups) {
         this.mainContentContainer.innerHTML = "";
-        this.mainContentContainer.appendChild( renderHeader() )
+        const projectSection = renderProjectSection();
+
+        projectSection.appendChild(renderHeader())
 
         const projectCollection = renderProjectCollection();
 
@@ -19,9 +22,11 @@ class MainContentView {
             projectItem.classList.add("project-item");
             projectCollection.appendChild(projectItem);
         })
-        this.mainContentContainer.appendChild(projectCollection);
 
-        this.mainContentContainer.appendChild(renderAddProjectButton());
+        projectSection.appendChild(projectCollection)
+
+        projectSection.appendChild(renderAddProjectButton())
+        this.mainContentContainer.appendChild(projectSection);
     }
 }
 
