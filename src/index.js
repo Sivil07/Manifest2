@@ -30,8 +30,8 @@
 
 import "../public/css/fonts.css";
 import "../public/css/global.css";
-import "./views/sidebar/project-item/project-item.css";
-import "./views/sidebar/project-item/ProjectItem.js";
+import "./views/sidebar/project-link/project-link.css";
+import "./views/sidebar/project-link/ProjectLink.js";
 import SideBarView from "./views/sidebar/SidebarView.js";
 import IntentionExperiment from "./services/IntentionExperiment.js";
 import ProjectService from "./services/ProjectService.js";

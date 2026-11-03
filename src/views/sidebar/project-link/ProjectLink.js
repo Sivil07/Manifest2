@@ -1,14 +1,14 @@
 const template = document.createElement("template");
 
 template.innerHTML = `
-<button type="button" part="project-item">
+<button type="button" part="project-link">
     <span part="project-color"></span>
     <p part="project-name">Work</p>
     <p part="projects-count">2</p>
 </button>
 `
 
-class ProjectItem extends HTMLElement {
+class ProjectLink extends HTMLElement {
     #projectId;
 
     constructor() {
@@ -17,7 +17,7 @@ class ProjectItem extends HTMLElement {
         shadow.append(template.content.cloneNode(true));
     }
 
-    /*  Updates the ProjectItem's display based on the provided 
+    /*  Updates the ProjectLink's display based on the provided 
         projectGroup data.
 
         Sets the project name and the number of active intentions 
@@ -37,4 +37,4 @@ class ProjectItem extends HTMLElement {
 }
 
 
-customElements.define("project-item", ProjectItem);
+customElements.define("project-link", ProjectLink);

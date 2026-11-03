@@ -26,10 +26,10 @@ class SideBarView {
     renderProjectList(projectGroups) {
         this.projectListContainer.innerHTML = "";
         projectGroups.forEach((group) => {
-            const projectItem = document.createElement("project-item");
-            projectItem.projectData = group;
-            projectItem.classList.add("project-contents")
-            this.projectListContainer.appendChild(projectItem)
+            const projectLink = document.createElement("project-link");
+            projectLink.projectData = group;
+            projectLink.classList.add("project-contents")
+            this.projectListContainer.appendChild(projectLink)
         })  
     }
 }

@@ -8,7 +8,7 @@
 
 /* Nested Styling */
 
-project-item::part(project-item) {
+project-link::part(project-link) {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -20,6 +20,6 @@ project-item::part(project-item) {
   flex: 1;
 }
 
-project-item:hover::part(project-item) {
+project-link:hover::part(project-link) {
     background-color: var(--clr-lavender);
 }
