@@ -30,13 +30,15 @@
 
 import "../public/css/fonts.css";
 import "../public/css/global.css";
+import "./views/sidebar/ProjectItem.js";
 import SideBarView from "./views/sidebar/SidebarView.js";
 import IntentionExperiment from "./services/IntentionExperiment.js";
 import ProjectService from "./services/ProjectService.js";
 import GlobalController from "./controllers/GlobalController.js";
 
 const sideBarView = new SideBarView(
-    document.querySelector("#nav-sections")
+    document.querySelector("#nav-sections"),
+    document.querySelector("#project-list")
 )
 
 const intentionService = new IntentionExperiment()
