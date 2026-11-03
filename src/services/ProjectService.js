@@ -4,6 +4,33 @@ import { projectStarterData } from "../starterData.js";
 class ProjectService {
     #allProjects = [];
 
+    /* Groups active intentions by their associated project. 
+       
+       Creates an entry for each project and adds the intentions that 
+       belong to that project.
+       
+       Returns an array where each item contains a project and the
+       list of active intentions that belong to it. 
+       
+       Will be used to in the SideBarView to display each project's name
+       along with the number of active intentions
+        */
+    
+    groupIntentionsByProject(activeIntentions) {
+        const projectGroups = new Map();
+        for (const project of this.#allProjects) {
+            projectGroups.set(project.id, { project, intentions: [] })
+        }
+
+        for (const intention of activeIntentions) {
+            const entry = projectGroups.get(intention.projectId)
+            if (entry) entry.intentions.push(intention)
+        }
+
+        const result = [ ...projectGroups.values() ]
+        return result;
+    }
+
     #saveAllProjects() {
         localStorage.setItem("all-projects", JSON.stringify(this.#allProjects));
     }
