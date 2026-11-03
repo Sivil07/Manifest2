@@ -1,35 +1,41 @@
 /* Main Content Container (static): Project-Section (dynamic) - Project Item (dynamic/custom element) */
 
 .project-item {
-    display: flex;
-    border-radius: 1rem;
+  display: flex;
+  border-radius: 1rem;
 }
 
 project-item::part(project-action) {
-    padding: 1rem;
-    flex: 1;
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    border: 1px solid var(--clr-lavender);
-    background-color: var(--clr-white);
-    cursor: pointer;
-    border-radius: 1rem;
+  padding: 1rem;
+  flex: 1;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  border: 1px solid var(--clr-lavender);
+  background-color: var(--clr-white);
+  cursor: pointer;
+  border-radius: 1rem;
+}
+
+project-item::part(project-color) {
+  width: var(--sidebar-project-clr-size);
+  aspect-ratio: 1;
+  border-radius: 50%;
 }
 
 project-item::part(project-data) {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 project-item::part(project-name) {
-    margin: 0;
-    font-weight: bold;
-    font-size: 1.1rem;
+  margin: 0;
+  font-weight: bold;
+  font-size: 1.1rem;
 }
 
 project-item::part(project-count) {
-    margin: 0;
-    color: var( --clr-muted);
+  margin: 0;
+  color: var(--clr-muted);
 }
