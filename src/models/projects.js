@@ -1,7 +1,8 @@
 class Project {
-    constructor({id = crypto.randomUUID() , projectName}) {
+    constructor({id = crypto.randomUUID() , projectName, projectColor}) {
         this.id = id;
         this.projectName = projectName;
+        this.projectColor = projectColor;
     }
 }
 

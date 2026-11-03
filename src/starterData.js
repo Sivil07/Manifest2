@@ -102,11 +102,13 @@ const intentionStarterData = [
 const projectStarterData = [
     {
         id: "p4",
-        projectName: "Personal"
+        projectName: "Personal",
+        projectColor: "#8B5CF6"
     },
     {
         id: "p1",
-        projectName: "Finance"
+        projectName: "Finance",
+        projectColor: "#14B8A6"
     }
 ]
 
