@@ -14,9 +14,11 @@
   --clr-lavender: #ded2f8;
   --clr-white: #ffffff;
   --clr-lavender: #ded2f8;
+  --clr-purple-dark: #412459;
   --clr-muted: rgb(95, 92, 92);
   --section-padding: 1rem;
   --sidebar-width: 220px;
+  --third-column-width: 500px;
 }
 
 body {
@@ -64,6 +66,9 @@ body {
 
 #main-content {
   grid-area: Main-Content;
+  padding: 1rem 2rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Main Nav Section */
