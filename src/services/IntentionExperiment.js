@@ -33,6 +33,21 @@ class IntentionExperiment {
         }
     }
 
+    /* Returns all intentions that are still active.
+       An intention is considered active when it is not completed.
+       
+       This includes today, upcoming, and inbox intentions.
+       
+       This will be used by Project service to group intentions under their
+       designated project
+    */
+    get allActiveIntentions() {
+        return this.#allIntentions.filter((intention) => {
+            const isCompleted = !intention.isChecked;
+            return isCompleted;
+        });
+    }
+
     #saveAllIntentions() {
         localStorage.setItem("all-intentions", JSON.stringify(this.#allIntentions));
     }
