@@ -17,28 +17,29 @@ template.innerHTML = `
     <h2 part="form-header">New Project</h2>
     <label for="project-name-input-link" part="project-name-label">
         Project name
-        <input type="text" part="project-name-input" id="project-name-input-link" placeholder="Side Projects" name="project-name">
+        <p part="form-error" hidden>A project with this name already exists.</p>
+        <input type="text" part="project-name-input" id="project-name-input-link" placeholder="Side Projects" name="project-name" required>
     </label>
     <div part="project-color-section">
         <p part="project-color-header">Color</p>
         <div part="project-color-options">
             <label for="option-purple" part="project-color-option" class="color-option" style="background-color: #6c35f5">
-                <input type="radio" id="option-purple" part="project-color-input" class="color-input" name="project-color" value="purple">
+                <input type="radio" id="option-purple" part="project-color-input" class="color-input" name="project-color" value="#6c35f5" required>
             </label>
             <label for="option-teal" part="project-color-option" class="color-option" style="background-color: #14B8A6">
-                <input type="radio" id="option-teal" part="project-color-input" class="color-input" name="project-color" value="teal">
+                <input type="radio" id="option-teal" part="project-color-input" class="color-input" name="project-color" value="#14B8A6">
             </label>
             <label for="option-orange" part="project-color-option" class="color-option" style="background-color: #FFA500">
-                <input type="radio" id="option-orange" part="project-color-input" class="color-input" name="project-color" value="orange">
+                <input type="radio" id="option-orange" part="project-color-input" class="color-input" name="project-color" value="#FFA500">
             </label>
-            <label for="option-pink" part="project-color-option" class="color-option" style="background-color: #FFA500">
-                <input type="radio" id="option-pink" part="project-color-input" class="color-input" name="project-color" value="pink">
+            <label for="option-pink" part="project-color-option" class="color-option" style="background-color: #FFC0CB">
+                <input type="radio" id="option-pink" part="project-color-input" class="color-input" name="project-color" value="#FFC0CB">
             </label>
             <label for="option-red" part="project-color-option" class="color-option" style="background-color: #EF4444">
-                <input type="radio" id="option-red" part="project-color-input" class="color-input" name="project-color" value="red">
+                <input type="radio" id="option-red" part="project-color-input" class="color-input" name="project-color" value="#EF4444">
             </label>
             <label for="option-blue" part="project-color-option" class="color-option" style="background-color: #3B82F6">
-                <input type="radio" id="option-blue" part="project-color-input" class="color-input" name="project-color" value="blue">
+                <input type="radio" id="option-blue" part="project-color-input" class="color-input" name="project-color" value="#3B82F6">
             </label>
         </div>
     </div>
@@ -65,6 +66,11 @@ class ProjectForm extends HTMLElement {
                 })
             )
         })
+
+        const projectForm = this.shadowRoot.querySelector(`[part="project-form-contents"]`);
+        projectForm.addEventListener("submit", (e) => {
+            e.preventDefault()
+        });
     }
 }
 

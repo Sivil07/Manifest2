@@ -77,3 +77,9 @@ project-form::part(submit-new-project) {
   color: var(--clr-white);
   border: none;
 }
+
+/* Project Form Error */
+
+project-form::part(form-error) {
+  color: red;
+}
