@@ -17,7 +17,7 @@ template.innerHTML = `
         <textarea part="intention-input form-desc-input" id="input-desc" name="desc" rows="4" minlength="5"
             maxlength="100"></textarea>
     </div>
-    <div part="select-group form-group"
+    <div part="select-group form-group">
         <label part="form-label" for="input-select">Project (Optional)</label>
         <select name="projects-options" id="input-select" part="intention-input">
             <option value="" selected>No Project</option>
@@ -25,7 +25,7 @@ template.innerHTML = `
             <option value="personal">Personal</option>
         </select>
     </div>
-    <div id="date-group form-group">
+    <div part="date-group form-group">
         <label part="form-label" for="input-date">Due Date</label>
         <input id="input-date" part="intention-input" type="date" name="dueDate" required>
     </div>
