@@ -48,6 +48,7 @@ import GlobalController from "./controllers/GlobalController.js";
 const sideBarView = new SideBarView(
     document.querySelector("#nav-sections"),
     document.querySelector("#project-list"),
+    document.querySelector("#projects-add")
 )
 
 const mainContainerView = new MainContentView(

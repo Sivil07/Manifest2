@@ -13,6 +13,11 @@ class GlobalController {
 
         body.addEventListener("close-form", () => {
             this.dialogView.closeDialog()
+        });
+
+        const sideBarAddProjectButton = this.sideBarView.projectsAddButton;
+        sideBarAddProjectButton.addEventListener("click", () => {
+            this.dialogView.renderProjectForm();
         })
 
         const navSectionsContainer = this.sideBarView.navSectionsContainer;
