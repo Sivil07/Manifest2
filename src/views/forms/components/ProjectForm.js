@@ -57,6 +57,11 @@ class ProjectForm extends HTMLElement {
         shadow.append(template.content.cloneNode(true));
     }
 
+    showError() {
+        const formError = this.shadowRoot.querySelector(`[part="form-error"]`);
+        formError.hidden = false;
+    }
+
     connectedCallback() {
         const cancelButton = this.shadowRoot.querySelector(`[part~="cancel-project"]`);
         cancelButton.addEventListener("click", () => {
