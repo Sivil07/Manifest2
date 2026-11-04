@@ -14,8 +14,7 @@ class ProjectService {
        
        Will be used to in the SideBarView to display each project's name
        along with the number of active intentions
-        */
-    
+    */
     groupIntentionsByProject(activeIntentions) {
         const projectGroups = new Map();
         for (const project of this.#allProjects) {
@@ -31,21 +30,16 @@ class ProjectService {
         return result;
     }
 
+    createProject(projectPackage) {
+        const project = new Project(projectPackage);
+        this.#allProjects.push(project);
+        this.#saveAllProjects();
+    }
+
     /*  Checks for whether a project name already exists. (true or false) */ 
     hasDuplicate(projectName) {
         const hasDuplicate = (project) => projectName.toLowerCase() === project.projectName.toLowerCase();
         return this.#allProjects.some((hasDuplicate));
-
-        // this.#allProjects.forEach((project) => {
-        //     console.log(` Form Value - ${projectName.toLowerCase()} | Project Value - ${project.projectName.toLowerCase()} `)
-            // console.log(typeof(projectName))
-            // console.log(typeof(project.projectName))
-            // const formValue = projectName.toLowerCase()
-            // const projectValue = project.projectName.toLowerCase()
-            // if (formValue === projectValue) return true;
-            // if (projectName.toLowerCase() === project.projectName.toLowerCase()) return true
-        // });
-        // return false 
     }
 
     #saveAllProjects() {
