@@ -43,7 +43,7 @@ template.innerHTML = `
         </div>
     </div>
     <div part="form-actions">
-        <button type="button" part="form-action">Cancel</button>
+        <button type="button" part="form-action cancel-project">Cancel</button>
         <button type="submit" part="form-action submit-new-project">Create Project</button>
     </div>
 </form>
@@ -54,6 +54,17 @@ class ProjectForm extends HTMLElement {
         super();
         const shadow = this.attachShadow({ mode: "open" });
         shadow.append(template.content.cloneNode(true));
+    }
+
+    connectedCallback() {
+        const cancelButton = this.shadowRoot.querySelector(`[part~="cancel-project"]`);
+        cancelButton.addEventListener("click", () => {
+            this.dispatchEvent(
+                new CustomEvent("close-form", {
+                    bubbles: true
+                })
+            )
+        })
     }
 }
 

@@ -30,7 +30,7 @@ template.innerHTML = `
         <input id="input-date" part="intention-input" type="date" name="dueDate" required>
     </div>
     <div part="form-actions">
-        <button part="form-action">Cancel</button>
+        <button part="form-action cancel-intention">Cancel</button>
         <button part="form-action submit-intention" type="submit">Add Intention</button>
     </div>
     <p part="form-note">No project? It goes to your Inbox.</p>
@@ -41,6 +41,17 @@ class IntentionFormNew extends HTMLElement {
         super();
         const shadow = this.attachShadow({ mode: "open" });
         shadow.append(template.content.cloneNode(true));
+    }
+
+    connectedCallback() {
+        const cancelButton = this.shadowRoot.querySelector(`[part~="cancel-intention"]`);
+        cancelButton.addEventListener("click", () => {
+            this.dispatchEvent(
+                new CustomEvent("close-form", {
+                    bubbles: true
+                })
+            )
+        })
     }
 }
 
