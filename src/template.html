@@ -8,43 +8,6 @@
 </head>
 
 <body>
-    <!-- <dialog id="my-dialog">
-        <form id="project-form">
-            <h2 class="form-header">New Project</h2>
-            <label for="project-name-input" class="name-input">
-                Project name
-                <input type="text" id="project-name-input" placeholder="Side Projects" name="project-name">
-            </label>
-            <div id="project-color-section">
-                <p id="project-color-header">Color</p>
-                <div id="project-color-options">
-                    <label for="option-purple" class="option">
-                        <input type="radio" id="option-purple" class="radio-input"  name="project-color" value="purple">
-                    </label>
-                    <label for="option-teal" class="option">
-                        <input type="radio" id="option-teal" class="radio-input"  name="project-color" value="teal">
-                    </label>
-                    <label for="option-orange" class="option">
-                        <input type="radio" id="option-orange" class="radio-input"  name="project-color" value="orange">
-                    </label>
-                    <label for="option-pink" class="option">
-                        <input type="radio" id="option-pink" class="radio-input"  name="project-color" value="pink">
-                    </label>
-                    <label for="option-red" class="option">
-                        <input type="radio" id="option-red" class="radio-input"  name="project-color" value="red">
-                    </label>
-                    <label for="option-blue" class="option">
-                        <input type="radio" id="option-blue" class="radio-input"  name="project-color" value="blue">
-                    </label>
-                </div>
-            </div>
-            <div id="form-buttons">
-                <button type="button" class="button">Cancel</button>
-                <button type="submit" class="button" id="submit-new-project">Create Project</button>
-            </div>
-        </form>
-
-    </dialog> -->
     <header id="logo-section">
         <div id="logo-contents">
             <span id="logo-symbol">+</span>
@@ -98,9 +61,50 @@
 
         </div>
     </nav>
-      <dialog>
-        <project-form id="project-form"></project-form>
+    <dialog id="form-dialog">
+        <div id="intention-form">
+            <form action="" id="intention-form-contents">
+                <h2 class="form-header">New Intention</h2>
+                <div id="title-group" class="form-group">
+                    <label class="form-label" for="input-title">What do you intend to do?</label>
+                    <input id="input-title" class="intention-input" type="text" placeholder="Call the dentist" name="title"
+                        minlength="5" maxlength="20" required>
+                </div>
+                <div id="reason-group" class="form-group">
+                    <label class="form-label" for="input-reason">Why does it matter?</label>
+                    <input id="input-reason" class="intention-input" type="text" placeholder="Your reason" name="reason" minlength="5"
+                        maxlength="20" required>
+                </div>
+                <div id="desc-group" class="form-group">
+                    <label class="form-label" for="input-desc">Description (Optional)</label>
+                    <textarea class="form-desc-input intention-input" id="input-desc" name="desc" rows="4" minlength="5"
+                        maxlength="100"></textarea>
+                </div>
+                <div id="select-group" class="form-group">
+                    <label class="form-label" for="input-select">Project (Optional)</label>
+                    <select name="projects-options" id="input-select" class="intention-input">
+                        <option value="" selected>No Project</option>
+                        <option value="finance">Finance</option>
+                        <option value="personal">Personal</option>
+                    </select>
+
+                </div>
+                <div id="date-group" class="form-group">
+                    <label class="form-label" for="input-date">Due Date</label>
+                    <!-- <span class="form-reminder remove-reminder">Due today todos need a new date. Tomorrow is selected,
+                        but you can change it.</span> -->
+                    <input id="input-date" class="intention-input" type="date" name="dueDate" required>
+                </div>
+                <div class="form-actions">
+                    <button class="form-action">Cancel</button>
+                    <button class="form-action submit-add-intention"  type="submit">Add Intention</button>
+                </div>
+                <p class="form-note">No project? It goes to your Inbox.</p>
+            </form>
+        </div>
+
     </dialog>
+
 
 
     <!-- Before Experiment -->

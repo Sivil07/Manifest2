@@ -14,6 +14,123 @@ dialog {
   backdrop-filter: blur(10px);
 }
 
+/* For Intention Dialog (will remove after testing) */
+
+#intention-form-contents {
+  display: grid;
+  grid-template-areas:
+    "Form-Header Form-Header"
+    "Title-Input Title-Input"
+    "Reason-Input Reason-Input"
+    "Desc-Input Desc-Input"
+    "Select-Input Date-Input"
+    "Form-Actions Form-Actions"
+    "Form-Note Form-Note";
+  grid-template-rows: repeat(7, max-content);
+  gap: 1rem;
+}
+
+/* Form Header */
+
+.form-header {
+    grid-area: Form-Header
+}
+
+/* Form Groups */
+
+#title-group {
+    grid-area: Title-Input;
+}
+
+#reason-group {
+    grid-area: Reason-Input;
+}
+
+#desc-group {
+    grid-area: Desc-Input;
+}
+
+#select-group {
+    grid-area: Select-Input;
+}
+
+#date-group {
+    grid-area: Date-Input;
+}
+
+
+
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Form Inputs */
+
+.form-label {
+  font-weight: bold;
+}
+
+.intention-input {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--clr-lavender);
+  font-size: 1rem;
+}
+
+.intention-input::placeholder {
+  font-size: 1rem;
+}
+
+.intention-input:focus {
+  outline: 1px solid var(--clr-logo-primary);
+}
+
+/* Form Desc */
+.form-desc-input {
+  resize: none;
+}
+
+/* Form Select */
+
+#input-select {
+    background-color: transparent;
+}
+
+/* Form Actions */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  grid-area: Form-Actions;
+}
+
+.form-action {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background-color: transparent;
+  cursor: pointer;
+  border: 1px solid var(--clr-lavender);
+  color: var(--clr-logo-primary);
+}
+
+.submit-add-intention {
+  background-color: var(--clr-logo-primary);
+  color: var(--clr-white);
+  border: none;
+}
+
+
+.form-input {
+    grid-area: Form-Note;
+}
+
+/* Media Queries */
+
 @media (min-width: 768px) {
   dialog {
     width: 50%;
