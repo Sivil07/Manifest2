@@ -6,6 +6,15 @@ class GlobalController {
         this.mainContainerView = mainContainerView;
         this.dialogView = dialogView;
 
+        const body = this.dialogView.body;
+        body.addEventListener("open-project-form", () =>{
+            this.dialogView.renderProjectForm();
+        });
+
+        body.addEventListener("close-form", () => {
+            this.dialogView.closeDialog()
+        })
+
         const navSectionsContainer = this.sideBarView.navSectionsContainer;
 
         navSectionsContainer.addEventListener("click", (e) => {
