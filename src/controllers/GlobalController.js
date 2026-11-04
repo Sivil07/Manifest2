@@ -17,12 +17,15 @@ class GlobalController {
 
         body.addEventListener("save-project", (e) => {
             const projectPackage = e.detail.projectPackage;
-            const hasDuplicate = this.projectService.hasDuplicate(projectPackage["project-name"]);
+            const hasDuplicate = this.projectService.hasDuplicate(projectPackage.projectName);
             if (hasDuplicate) {
                 this.dialogView.showError();
                 return;
             }
 
+            this.projectService.createProject(projectPackage);
+            this.dialogView.closeDialog();
+            this.#refreshSideBar();
         });
 
         const sideBarAddProjectButton = this.sideBarView.projectsAddButton;
