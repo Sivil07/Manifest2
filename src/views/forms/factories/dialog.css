@@ -1,0 +1,6 @@
+
+/* Body (static): Form Dialog (dynamic) */
+
+#form-dialog::backdrop {
+    backdrop-filter: blur(10px);
+}
