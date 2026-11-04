@@ -18,28 +18,28 @@ template.innerHTML = `
     <label for="project-name-input-link" part="project-name-label">
         Project name
         <p part="form-error" hidden>A project with this name already exists.</p>
-        <input type="text" part="project-name-input" id="project-name-input-link" placeholder="Side Projects" name="project-name" required>
+        <input type="text" part="project-name-input" id="project-name-input-link" placeholder="Side Projects" name="projectName" required>
     </label>
     <div part="project-color-section">
         <p part="project-color-header">Color</p>
         <div part="project-color-options">
             <label for="option-purple" part="project-color-option" class="color-option" style="background-color: #6c35f5">
-                <input type="radio" id="option-purple" part="project-color-input" class="color-input" name="project-color" value="#6c35f5" required>
+                <input type="radio" id="option-purple" part="project-color-input" class="color-input" name="projectColor" value="#6c35f5" required>
             </label>
             <label for="option-teal" part="project-color-option" class="color-option" style="background-color: #14B8A6">
-                <input type="radio" id="option-teal" part="project-color-input" class="color-input" name="project-color" value="#14B8A6">
+                <input type="radio" id="option-teal" part="project-color-input" class="color-input" name="projectColor" value="#14B8A6">
             </label>
             <label for="option-orange" part="project-color-option" class="color-option" style="background-color: #FFA500">
-                <input type="radio" id="option-orange" part="project-color-input" class="color-input" name="project-color" value="#FFA500">
+                <input type="radio" id="option-orange" part="project-color-input" class="color-input" name="projectColor" value="#FFA500">
             </label>
             <label for="option-pink" part="project-color-option" class="color-option" style="background-color: #FFC0CB">
-                <input type="radio" id="option-pink" part="project-color-input" class="color-input" name="project-color" value="#FFC0CB">
+                <input type="radio" id="option-pink" part="project-color-input" class="color-input" name="projectColor" value="#FFC0CB">
             </label>
             <label for="option-red" part="project-color-option" class="color-option" style="background-color: #EF4444">
-                <input type="radio" id="option-red" part="project-color-input" class="color-input" name="project-color" value="#EF4444">
+                <input type="radio" id="option-red" part="project-color-input" class="color-input" name="projectColor" value="#EF4444">
             </label>
             <label for="option-blue" part="project-color-option" class="color-option" style="background-color: #3B82F6">
-                <input type="radio" id="option-blue" part="project-color-input" class="color-input" name="project-color" value="#3B82F6">
+                <input type="radio" id="option-blue" part="project-color-input" class="color-input" name="projectColor" value="#3B82F6">
             </label>
         </div>
     </div>
@@ -59,7 +59,9 @@ class ProjectForm extends HTMLElement {
 
     showError() {
         const formError = this.shadowRoot.querySelector(`[part="form-error"]`);
+        const nameInput = this.shadowRoot.querySelector(`[part="project-name-input"]`);
         formError.hidden = false;
+        nameInput.value = "";
     }
 
     connectedCallback() {
