@@ -1,0 +1,108 @@
+/* Body (static): Dialog (dynamic) - Intention-Form (dynamic/custom element) */
+
+intention-form::part(intention-form-contents) {
+  display: grid;
+  grid-template-areas:
+    "Form-Header Form-Header"
+    "Title-Input Title-Input"
+    "Reason-Input Reason-Input"
+    "Desc-Input Desc-Input"
+    "Select-Input Date-Input"
+    "Form-Actions Form-Actions"
+    "Form-Note Form-Note";
+  grid-template-rows: repeat(7, max-content);
+  gap: 1rem;
+}
+
+/* All Sections */
+
+intention-form::part(form-header) {
+  grid-area: Form-Header;
+}
+
+intention-form::part(title-group) {
+  grid-area: Title-Input;
+}
+
+intention-form::part(reason-group) {
+  grid-area: Reason-Input;
+}
+
+intention-form::part(desc-group) {
+  grid-area: Desc-Input;
+}
+
+intention-form::part(select-group) {
+  grid-area: Select-Input;
+}
+
+intention-form::part(date-group) {
+  grid-area: Date-Input;
+}
+
+intention-form::part() {
+  grid-area: Form-Actions;
+}
+
+intention-form::part(form-note) {
+  grid-area: Form-Note;
+}
+
+/* Intention Form Groups */
+
+intention-form::part(form-group) {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Intention Labels */
+
+intention-form::part(form-label) {
+  font-weight: bold;
+}
+
+/* Intention Inputs */
+
+intention-form::part(intention-input) {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--clr-lavender);
+  font-size: 1rem;
+  background-color: transparent;
+}
+
+intention-form::part(intention-input):focus {
+  outline: 1px solid var(--clr-logo-primary);
+}
+
+/* Intention Form - TextArea */
+
+intention-form::part(form-desc-input) {
+  resize: none;
+}
+
+/* Intention Form - Form Actions */
+
+intention-form::part(form-actions) {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  grid-area: Form-Actions;
+}
+
+intention-form::part(form-action) {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background-color: transparent;
+  cursor: pointer;
+  border: 1px solid var(--clr-lavender);
+  color: var(--clr-logo-primary);
+}
+
+intention-form::part(submit-intention) {
+  background-color: var(--clr-logo-primary);
+  color: var(--clr-white);
+  border: none;
+}

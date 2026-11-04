@@ -23,7 +23,6 @@ class GlobalController {
         const sideBarAddIntentionButton = this.sideBarView.intentionsAddButton;
         sideBarAddIntentionButton.addEventListener("click", () => {
             this.dialogView.renderIntentionForm();
-
         });
 
         const navSectionsContainer = this.sideBarView.navSectionsContainer;
