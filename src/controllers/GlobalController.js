@@ -17,7 +17,11 @@ class GlobalController {
 
         body.addEventListener("save-project", (e) => {
             const projectPackage = e.detail.projectPackage;
-            console.log(projectPackage)
+            const hasDuplicate = this.projectService.hasDuplicate(projectPackage["project-name"]);
+            if (hasDuplicate) {
+                console.log("yes")
+                return;
+            }
 
         });
 

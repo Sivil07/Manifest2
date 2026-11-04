@@ -31,6 +31,23 @@ class ProjectService {
         return result;
     }
 
+    /*  Checks for whether a project name already exists. (true or false) */ 
+    hasDuplicate(projectName) {
+        const hasDuplicate = (project) => projectName.toLowerCase() === project.projectName.toLowerCase();
+        return this.#allProjects.some((hasDuplicate));
+
+        // this.#allProjects.forEach((project) => {
+        //     console.log(` Form Value - ${projectName.toLowerCase()} | Project Value - ${project.projectName.toLowerCase()} `)
+            // console.log(typeof(projectName))
+            // console.log(typeof(project.projectName))
+            // const formValue = projectName.toLowerCase()
+            // const projectValue = project.projectName.toLowerCase()
+            // if (formValue === projectValue) return true;
+            // if (projectName.toLowerCase() === project.projectName.toLowerCase()) return true
+        // });
+        // return false 
+    }
+
     #saveAllProjects() {
         localStorage.setItem("all-projects", JSON.stringify(this.#allProjects));
     }
