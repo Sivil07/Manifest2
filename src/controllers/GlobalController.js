@@ -15,6 +15,12 @@ class GlobalController {
             this.dialogView.closeDialog()
         });
 
+        body.addEventListener("save-project", (e) => {
+            const projectPackage = e.detail.projectPackage;
+            console.log(projectPackage)
+
+        });
+
         const sideBarAddProjectButton = this.sideBarView.projectsAddButton;
         sideBarAddProjectButton.addEventListener("click", () => {
             this.dialogView.renderProjectForm();

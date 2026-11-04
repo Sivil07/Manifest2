@@ -69,7 +69,16 @@ class ProjectForm extends HTMLElement {
 
         const projectForm = this.shadowRoot.querySelector(`[part="project-form-contents"]`);
         projectForm.addEventListener("submit", (e) => {
-            e.preventDefault()
+            e.preventDefault();
+            const data = new FormData(projectForm);
+            const entries = Object.fromEntries(data.entries());
+            this.dispatchEvent( new CustomEvent("save-project", {
+                    bubbles: true,
+                    detail: {
+                        projectPackage: entries
+                    }
+                })
+            )
         });
     }
 }
