@@ -20,6 +20,12 @@ class GlobalController {
             this.dialogView.renderProjectForm();
         })
 
+        const sideBarAddIntentionButton = this.sideBarView.intentionsAddButton;
+        sideBarAddIntentionButton.addEventListener("click", () => {
+            console.log("test")
+
+        });
+
         const navSectionsContainer = this.sideBarView.navSectionsContainer;
 
         navSectionsContainer.addEventListener("click", (e) => {

@@ -1,8 +1,9 @@
 class SideBarView {
-    constructor(navSectionsContainer, projectListContainer, projectsAddButton) {
+    constructor(navSectionsContainer, projectListContainer, projectsAddButton, intentionsAddButton) {
         this.navSectionsContainer = navSectionsContainer;
         this.projectListContainer = projectListContainer;
         this.projectsAddButton = projectsAddButton;
+        this.intentionsAddButton = intentionsAddButton;
     }
 
     /* Updates the the nav button counts so the UI reflects the 
