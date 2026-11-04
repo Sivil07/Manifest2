@@ -19,7 +19,7 @@ class GlobalController {
             const projectPackage = e.detail.projectPackage;
             const hasDuplicate = this.projectService.hasDuplicate(projectPackage["project-name"]);
             if (hasDuplicate) {
-                console.log("yes")
+                this.dialogView.showError();
                 return;
             }
 

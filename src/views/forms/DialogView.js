@@ -2,9 +2,14 @@ import { renderDialog } from "./factories/dialog.js";
 
 class DialogView {
     #dialog;
+    #form;
 
     constructor() {
         this.body = document.body
+    }
+
+    showError() {
+        this.#form.showError()
     }
 
     renderProjectForm() {
@@ -13,6 +18,7 @@ class DialogView {
         const projectDialog = renderDialog();
         const projectForm = document.createElement("project-form");
         projectDialog.appendChild(projectForm);
+        this.#form = projectForm;
         this.#dialog = projectDialog;
         document.body.appendChild(projectDialog)
         projectDialog.showModal();
@@ -24,6 +30,7 @@ class DialogView {
         const intentionDialog = renderDialog();
         const intentionForm = document.createElement("intention-form");
         intentionDialog.appendChild(intentionForm);
+        this.#form = intentionForm;
         this.#dialog = intentionDialog;
         document.body.appendChild(intentionDialog);
         intentionDialog.showModal()
@@ -32,6 +39,7 @@ class DialogView {
     closeDialog() {
         this.#dialog.close()
         this.#dialog.remove();
+        this.#form = undefined;
     }
 }
 
