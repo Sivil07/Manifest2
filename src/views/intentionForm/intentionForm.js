@@ -76,4 +76,4 @@ class IntentionForm extends HTMLElement {
     }
 }
 
-customElements.define("intention-form", IntentionForm);
+customElements.define("intention-form-old", IntentionForm);

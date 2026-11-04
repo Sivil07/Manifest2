@@ -36,6 +36,7 @@ import "./views/main/components/ProjectItem.js"
 import "./views/main/components/project-item.css";
 import "./views/forms/components/ProjectForm.js";
 import "./views/forms/components/project-form.css";
+import "./views/forms/components/IntentionFormNew.js";
 import "./views/forms/factories/dialog.css";
 import "./views/main/components/factories/project-section.css";
 import SideBarView from "./views/sidebar/SidebarView.js";
@@ -69,7 +70,7 @@ const globalController = new GlobalController(
  )
 
 
-const formDialog = document.querySelector("dialog");
-formDialog.showModal();
+// const formDialog = document.querySelector("dialog");
+// formDialog.showModal();
 
 globalController.initialize();
