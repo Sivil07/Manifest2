@@ -1,0 +1,79 @@
+/* Body (static): Dialog (dynamic) - Project-Form (dynamic/custom element) */
+
+
+project-form::part(project-form-contents) {
+  display: grid;
+  grid-template-rows: repeat(4, max-content);
+  gap: 1rem;
+}
+
+/* Project Name Input Section */
+
+project-form::part(project-name-label) {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+project-form::part(project-name-input) {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--clr-lavender);
+}
+
+project-form::part(project-name-input)::placeholder {
+  font-size: 1rem;
+}
+
+/* Project Color Inputs Section */
+
+project-form::part(project-color-section) {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+project-form::part(project-color-options) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+project-form::part(project-color-option) {
+  padding: 0.5rem;
+  border-radius: 50%;
+  width: var(--project-color-option-size);
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+}
+
+project-form::part(project-color-input) {
+  cursor: pointer;
+}
+
+/* Project Form Actions Section */
+
+project-form::part(form-actions) {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+project-form::part(form-action) {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background-color: transparent;
+  cursor: pointer;
+  border: 1px solid var(--clr-lavender);
+  color: var(--clr-logo-primary);
+}
+
+project-form::part(submit-new-project) {
+  background-color: var(--clr-logo-primary);
+  color: var(--clr-white);
+  border: none;
+}

@@ -34,6 +34,7 @@ dialog {
   --section-padding: 1rem;
   --sidebar-width: 220px;
   --third-column-width: 500px;
+  --project-color-option-size: 50px;
 }
 
 body {
@@ -52,7 +53,7 @@ body {
   backdrop-filter: blur(10px);
 }
 
-#project-form {
+/* #project-form {
   display: grid;
   grid-template-rows: repeat(4, max-content);
   gap: 1rem;
@@ -105,7 +106,7 @@ body {
 .option:has(.radio-input:focus)::after {
   content: "";
   position: absolute;
-  /* background-color: green; */
+  background-color: green;
   border: 1px solid black;
   width: 100%;
   aspect-ratio: 1;
@@ -114,10 +115,10 @@ body {
   transform: scale(1.15);
 }
 
-/* .option:has(.radio-input:focus) {
+.option:has(.radio-input:focus) {
   padding: 3rem;
   border: 1px solid black;
-} */
+}
 
 #form-buttons {
   display: flex;
@@ -139,7 +140,7 @@ body {
   background-color: var(--clr-logo-primary);
   color: var(--clr-white);
   border: none;
-}
+} */
 
 @media (min-width: 768px) {
   dialog {
