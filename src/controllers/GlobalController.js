@@ -1,9 +1,10 @@
 class GlobalController {
-    constructor(intentionService, projectService, sideBarView, mainContainerView) {
+    constructor(intentionService, projectService, sideBarView, mainContainerView, dialogView) {
         this.intentionService = intentionService;
         this.projectService = projectService;
         this.sideBarView = sideBarView;
         this.mainContainerView = mainContainerView;
+        this.dialogView = dialogView;
 
         const navSectionsContainer = this.sideBarView.navSectionsContainer;
 

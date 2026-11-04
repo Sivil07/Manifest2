@@ -34,9 +34,13 @@ import "./views/sidebar/components/project-link.css";
 import "./views/sidebar/components/ProjectLink.js";
 import "./views/main/components/ProjectItem.js"
 import "./views/main/components/project-item.css";
+import "./views/forms/components/ProjectForm.js";
+import "./views/forms/components/project-form.css";
+import "./views/forms/factories/dialog.css";
 import "./views/main/components/factories/project-section.css";
 import SideBarView from "./views/sidebar/SidebarView.js";
 import MainContentView from "./views/main/MainContentView.js";
+import DialogView from "./views/forms/DialogView.js";
 import IntentionExperiment from "./services/IntentionExperiment.js";
 import ProjectService from "./services/ProjectService.js";
 import GlobalController from "./controllers/GlobalController.js";
@@ -50,6 +54,8 @@ const mainContainerView = new MainContentView(
     document.querySelector("#main-content")
 )
 
+const dialogView = new DialogView()
+
 const intentionService = new IntentionExperiment()
 const projectService = new ProjectService()
 
@@ -57,7 +63,8 @@ const globalController = new GlobalController(
     intentionService,
     projectService,
     sideBarView,
-    mainContainerView
+    mainContainerView,
+    dialogView
  )
 
 globalController.initialize();
