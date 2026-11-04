@@ -1,6 +1,22 @@
-
 /* Body (static): Form Dialog (dynamic) */
 
+dialog {
+  margin: auto;
+  width: 100%;
+  max-width: none;
+  inset-block-start: auto;
+  border: none;
+  border-radius: 2rem 2rem 0 0;
+  padding: 2rem;
+}
+
 #form-dialog::backdrop {
-    backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+@media (min-width: 768px) {
+  dialog {
+    width: 50%;
+    inset-block-start: 0;
+  }
 }
