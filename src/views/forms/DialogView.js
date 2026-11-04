@@ -18,6 +18,17 @@ class DialogView {
         projectDialog.showModal();
     }
 
+    renderIntentionForm() {
+        if (this.#dialog !== undefined) this.#dialog.remove();
+
+        const intentionDialog = renderDialog();
+        const intentionForm = document.createElement("intention-form");
+        intentionDialog.appendChild(intentionForm);
+        this.#dialog = intentionDialog;
+        document.body.appendChild(intentionDialog);
+        intentionDialog.showModal()
+    }
+
     closeDialog() {
         this.#dialog.close()
         this.#dialog.remove();
