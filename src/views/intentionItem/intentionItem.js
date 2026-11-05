@@ -99,4 +99,4 @@ class IntentionItem extends HTMLElement {
     }
 }
 
-customElements.define("intention-item", IntentionItem);
+customElements.define("intention-item-old", IntentionItem);

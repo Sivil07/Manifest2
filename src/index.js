@@ -38,6 +38,8 @@ import "./views/forms/components/ProjectForm.js";
 import "./views/forms/components/project-form.css";
 import "./views/forms/components/IntentionFormNew.js";
 import "./views/forms/components/intention-form.css";
+import "./views/main/components/IntentionItemNew.js";
+import "./views/main/components/intention-item.css";
 import "./views/forms/factories/dialog.css";
 import "./views/main/components/factories/project-section.css";
 import SideBarView from "./views/sidebar/SidebarView.js";
