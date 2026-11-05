@@ -8,7 +8,7 @@ class MainContentView {
         this.mainContentContainer = mainContentContainer;
     }
     
-    renderProjects(projectGroups) {
+    renderProjectView(projectGroups) {
         this.mainContentContainer.innerHTML = "";
         const projectSection = renderProjectSection();
 
