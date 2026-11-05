@@ -30,9 +30,9 @@ class GlobalController {
 
         const mainContainer = this.mainContainerView.mainContentContainer;
         mainContainer.addEventListener("view-project", (e) => {
-            console.log("here")
-            const projectId = e.detail.projectId;
-    
+            const project = this.projectService.getProjectById(e.detail.projectId)
+            const intentions = this.intentionService.getIntentionsByProjectId(e.detail.projectId);
+            const projectDetails = { project, intentions }
         });
 
         const sideBarAddProjectButton = this.sideBarView.projectsAddButton;

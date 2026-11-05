@@ -36,6 +36,12 @@ class ProjectService {
         this.#saveAllProjects();
     }
 
+    getProjectById(id) {
+        const project = this.#allProjects.find((project) => project.id === id);
+        return project;
+    }
+    
+
     /*  Checks for whether a project name already exists. (true or false) */ 
     hasDuplicate(projectName) {
         const hasDuplicate = (project) => projectName.toLowerCase() === project.projectName.toLowerCase();

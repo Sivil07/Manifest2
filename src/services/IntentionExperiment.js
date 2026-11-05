@@ -48,6 +48,11 @@ class IntentionExperiment {
         });
     }
 
+    getIntentionsByProjectId(projectId) {
+        const intentions = this.#allIntentions.filter((intention) => intention.projectId === projectId);
+        return intentions;
+    }
+
     #saveAllIntentions() {
         localStorage.setItem("all-intentions", JSON.stringify(this.#allIntentions));
     }
