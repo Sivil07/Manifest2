@@ -1,6 +1,6 @@
-/* Main Content Container (static) - Project Section (dynamic) */
+/* Main Content Container (static) - Section (dynamic) (used in projects, inbox, and upcoming displays) */
 
-#project-section {
+.section {
   flex: 1;
   display: grid;
   gap: 1rem;
@@ -30,6 +30,8 @@
     gap: 1rem;
 }
 
+/* Unique to the Projects Display */
+
 .add-project {
     grid-area: Add-Project;
     background-color: var(--clr-white);
@@ -43,7 +45,7 @@
 
 
 @media (min-width: 1040px) {
-  #project-section {
+  .section {
     grid-template-areas:
       "Header"
       "Collection"

@@ -1,9 +1,9 @@
-function renderProjectSection() {
+function renderSection() {
     const projectSection = document.createElement("section");
-    projectSection.id = "project-section"
+    projectSection.classList.add("section")
     return projectSection;
 }
 
 export {
-    renderProjectSection
+    renderSection
 }

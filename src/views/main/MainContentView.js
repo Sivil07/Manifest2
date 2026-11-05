@@ -1,7 +1,7 @@
 import { renderAddProjectButton } from "./components/factories/add-project-button.js";
 import { renderCollection } from "./components/factories/collection.js";
 import { renderHeader } from "./components/factories/header.js";
-import { renderProjectSection } from "./components/factories/project-section.js";
+import { renderSection } from "./components/factories/section.js";
 
 class MainContentView {
     constructor(mainContentContainer) {
@@ -9,7 +9,7 @@ class MainContentView {
     }
     renderProjectView(projectGroups) {
         this.mainContentContainer.innerHTML = "";
-        const projectSection = renderProjectSection();
+        const projectSection = renderSection();
 
         projectSection.appendChild(renderHeader("Projects", "Everything you intend."))
 
