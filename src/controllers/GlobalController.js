@@ -28,6 +28,13 @@ class GlobalController {
             this.#refreshSideBar();
         });
 
+        const mainContainer = this.mainContainerView.mainContentContainer;
+        mainContainer.addEventListener("view-project", (e) => {
+            console.log("here")
+            const projectId = e.detail.projectId;
+    
+        });
+
         const sideBarAddProjectButton = this.sideBarView.projectsAddButton;
         sideBarAddProjectButton.addEventListener("click", () => {
             this.dialogView.renderProjectForm();

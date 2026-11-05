@@ -27,8 +27,21 @@ class ProjectItem extends HTMLElement {
         projectName.textContent = projectGroup.project.projectName;
         projectCount.textContent = `${projectGroup.intentions.length} Intentions`;
         projectColor.style.backgroundColor = projectGroup.project.projectColor;
-        
+
         this.#projectId = projectGroup.project.id;
+    }
+
+    connectedCallback() {
+        const projectAction = this.shadowRoot.querySelector(`[part="project-action"]`);
+        projectAction.addEventListener("click", () => {
+            this.dispatchEvent(new CustomEvent("view-project", {
+                bubbles: true,
+                detail: {
+                    projectId: this.#projectId
+                }
+            }))
+        });
+
     }
 }
 
