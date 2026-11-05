@@ -31,10 +31,15 @@ class GlobalController {
         const mainContainer = this.mainContainerView.mainContentContainer;
         mainContainer.addEventListener("view-project", (e) => {
             const project = this.projectService.getProjectById(e.detail.projectId)
-            const intentions = this.intentionService.getIntentionsByProjectId(e.detail.projectId);
-            const projectDetails = { project, intentions }
-            mainContainerView.renderSpecificProjectView(projectDetails);
-            this.#refreshSideBar();
+            const activeIntentions = this.intentionService.getIntentionsByProjectIdAndType("active", e.detail.projectId);
+            const completedIntentions = this.intentionService.getIntentionsByProjectIdAndType("completed", e.detail.projectId);
+            const projectDetails = { project, activeIntentions, completedIntentions };
+            // const intentions = this.intentionService.getIntentionsByProjectId(e.detail.projectId);
+            // const projectDetails = { project, intentions }
+            // mainContainerView.renderSpecificProjectView(projectDetails);
+            // const test = this.intentionService.getIntentionsByProjectIdAndType("completed", "p4");
+            // console.table(test)
+            // this.#refreshSideBar();
         });
 
         const sideBarAddProjectButton = this.sideBarView.projectsAddButton;

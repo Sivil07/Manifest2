@@ -29,30 +29,30 @@ class MainContentView {
         this.mainContentContainer.appendChild(projectSection);
     }
 
-    renderSpecificProjectView(projectDetails) {
-        this.mainContentContainer.innerHTML = "";
+    // renderSpecificProjectView(projectDetails) {
+    //     this.mainContentContainer.innerHTML = "";
 
-        const section = renderSection();
+    //     const section = renderSection();
 
-        section.appendChild(renderSpecificProjectHeader(
-            projectDetails.project.projectName,
-            projectDetails.project.projectColor
-        ))
+    //     section.appendChild(renderSpecificProjectHeader(
+    //         projectDetails.project.projectName,
+    //         projectDetails.project.projectColor
+    //     ))
 
-        const collection = renderCollection();
+    //     const collection = renderCollection();
 
-        projectDetails.intentions.forEach((intention) => {
-            const intentionItem = document.createElement("intention-item");
-            intentionItem.intentionData = {
-                intention,
-                projectName: projectDetails.project.projectName
-            }
-            collection.appendChild(intentionItem)
-        });
+    //     projectDetails.intentions.forEach((intention) => {
+    //         const intentionItem = document.createElement("intention-item");
+    //         intentionItem.intentionData = {
+    //             intention,
+    //             projectName: projectDetails.project.projectName
+    //         }
+    //         collection.appendChild(intentionItem)
+    //     });
 
-        section.appendChild(collection);
-        this.mainContentContainer.appendChild(section);
-    }
+    //     section.appendChild(collection);
+    //     this.mainContentContainer.appendChild(section);
+    // }
 }
 
 export default MainContentView;

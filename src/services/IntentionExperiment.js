@@ -48,10 +48,39 @@ class IntentionExperiment {
         });
     }
 
-    getIntentionsByProjectId(projectId) {
-        const intentions = this.#allIntentions.filter((intention) => intention.projectId === projectId);
-        return intentions;
+    /* Returns all intentions for a specific project that's filtered by
+       their completed status.
+
+       Passing "active" returns all unchecked intentions for a specified 
+       project
+
+       Passing "completed" returns all checked intentions for a specified
+       project.
+
+       This is used when rendering a specific project so that active and 
+       completed intentions can be displayed in separate sections of the page.
+    */
+    getIntentionsByProjectIdAndType(type, projectId) {
+        const isActive = (intention) => (!intention.isChecked && intention.projectId === projectId)
+        const isCompleted = (intention) => (intention.isChecked && intention.projectId === projectId)
+
+        // for (const intention of this.#allIntentions) {
+        //     const title = intention.title;
+        //     const isChecked = intention.isChecked
+        //     const projectId = intention.projectId;
+        //     console.log(` Title: ${title} | Completed? : ${isChecked} | projectId: ${projectId}`);
+        // }
+        // const newArray = this.#allIntentions.filter(isActive);
+        // console.log(newArray)
+
+        if (type === "active") return this.#allIntentions.filter(isActive);
+        if (type === "completed") return this.#allIntentions.filter(isCompleted);
     }
+
+    // getIntentionsByProjectId(projectId) {
+    //     const intentions = this.#allIntentions.filter((intention) => intention.projectId === projectId);
+    //     return intentions;
+    // }
 
     #saveAllIntentions() {
         localStorage.setItem("all-intentions", JSON.stringify(this.#allIntentions));
