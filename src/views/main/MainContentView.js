@@ -41,9 +41,14 @@ class MainContentView {
 
         const collection = renderCollection();
 
-        // projectDetails.intentions.forEach((intention) => {
-
-        // });
+        projectDetails.intentions.forEach((intention) => {
+            const intentionItem = document.createElement("intention-item");
+            intentionItem.intentionData = {
+                intention,
+                projectName: projectDetails.project.projectName
+            }
+            collection.appendChild(intentionItem)
+        });
 
         section.appendChild(collection);
         this.mainContentContainer.appendChild(section);

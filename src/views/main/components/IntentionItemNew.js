@@ -23,7 +23,15 @@ class IntentionItemNew extends HTMLElement {
     }
 
     set intentionData(data) {
+        const title = this.shadowRoot.querySelector(`[part="intention-title"]`);
+        const reason = this.shadowRoot.querySelector(`[part="intention-reason"]`);
+        const projectName = this.shadowRoot.querySelector(`[part~="project-name"]`);
+        const dueDate = this.shadowRoot.querySelector(`[part~="due-date"]`);
 
+        title.textContent = data.intention.title;
+        reason.textContent = data.intention.reason;
+        projectName.textContent = data.projectName;
+        dueDate.textContent = data.intention.dueDate;
     }
 }
 
