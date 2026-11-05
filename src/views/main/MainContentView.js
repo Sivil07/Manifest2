@@ -1,6 +1,7 @@
 import { renderAddProjectButton } from "./components/factories/add-project-button.js";
 import { renderCollection } from "./components/factories/collection.js";
 import { renderHeader } from "./components/factories/header.js";
+import { renderSpecificProjectHeader } from "./components/factories/specific-project-header.js";
 import { renderSection } from "./components/factories/section.js";
 
 class MainContentView {
@@ -26,6 +27,26 @@ class MainContentView {
 
         projectSection.appendChild(renderAddProjectButton())
         this.mainContentContainer.appendChild(projectSection);
+    }
+
+    renderSpecificProjectView(projectDetails) {
+        this.mainContentContainer.innerHTML = "";
+
+        const section = renderSection();
+
+        section.appendChild(renderSpecificProjectHeader(
+            projectDetails.project.projectName,
+            projectDetails.project.projectColor
+        ))
+
+        const collection = renderCollection();
+
+        // projectDetails.intentions.forEach((intention) => {
+
+        // });
+
+        section.appendChild(collection);
+        this.mainContentContainer.appendChild(section);
     }
 }
 

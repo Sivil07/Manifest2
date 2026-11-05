@@ -30,7 +30,7 @@
     gap: 1rem;
 }
 
-/* Unique to the Projects Display */
+/* Unique to the All Projects Display */
 
 .add-project {
     grid-area: Add-Project;
@@ -43,10 +43,21 @@
     text-align: left;
 }
 
-/* Unique to Specific Projects */
+/* Unique to SPECIFIC Project Display */
 
+.project-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
 
+.project-color {
+  width: var(--project-color-specific-size);
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
 
+/* Media Queries */
 
 @media (min-width: 1040px) {
   .section {
