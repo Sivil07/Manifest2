@@ -35,7 +35,7 @@ intention-item::part(intention-text) {
   text-align: left;
   gap: 0.85rem;
   cursor: pointer;
-  grid-area: Todo-Content;
+  grid-area: Intention-Text;
 }
 
 intention-item::part(intention-title) {
@@ -51,7 +51,9 @@ intention-item::part(intention-reason) {
 /* Intention Item - Tags Section */
 
 intention-item::part(intention-tags) {
-  grid-area: Todo-Tags;
+  grid-area: Intention-Tags;
+  display: flex;
+  gap: 1rem;
 }
 
 intention-item::part(tag) {
