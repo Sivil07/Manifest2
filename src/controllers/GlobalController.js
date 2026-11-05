@@ -33,6 +33,8 @@ class GlobalController {
             const project = this.projectService.getProjectById(e.detail.projectId)
             const intentions = this.intentionService.getIntentionsByProjectId(e.detail.projectId);
             const projectDetails = { project, intentions }
+            mainContainerView.renderSpecificProjectView(projectDetails);
+            this.#refreshSideBar();
         });
 
         const sideBarAddProjectButton = this.sideBarView.projectsAddButton;
@@ -65,15 +67,15 @@ class GlobalController {
             case "inbox":
                 break;
             case "project":
-                this.#showProjectView();
+                this.#showProjectsView();
                 break;
             default:
         }
     }
 
-    #showProjectView() {
+    #showProjectsView() {
         const projects = this.#processGroupIntentionsByCounts();
-        this.mainContainerView.renderProjectView(projects);
+        this.mainContainerView.renderProjectsView(projects);
     }
 
     #processGroupIntentionsByCounts() {
