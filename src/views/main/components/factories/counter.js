@@ -13,11 +13,12 @@ function renderCounter(count) {
     completedCounter.classList.add("completed-counter");
 
     const counter = document.createElement("p");
-    counter.textContent = count;
+    counter.classList.add("counter");
+    counter.textContent = `Completed - ${count}`
 
     const clearIntentions = document.createElement("button");
     clearIntentions.classList.add("clear-intentions")
-    clearIntentions.textContent = "Clear Completed"
+    clearIntentions.textContent = "Clear completed"
     clearIntentions.type = "button";
 
     completedCounter.append(counter, clearIntentions);
