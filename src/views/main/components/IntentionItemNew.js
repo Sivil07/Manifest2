@@ -16,6 +16,8 @@ template.innerHTML = `
 `
 
 class IntentionItemNew extends HTMLElement {
+    #intentionId;
+    #intentionProjectId
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: "open" });
@@ -27,11 +29,34 @@ class IntentionItemNew extends HTMLElement {
         const reason = this.shadowRoot.querySelector(`[part="intention-reason"]`);
         const projectName = this.shadowRoot.querySelector(`[part~="project-name"]`);
         const dueDate = this.shadowRoot.querySelector(`[part~="due-date"]`);
+        const checkBox = this.shadowRoot.querySelector(`[part="input-check"]`)
 
         title.textContent = data.intention.title;
         reason.textContent = data.intention.reason;
         projectName.textContent = data.projectName;
         dueDate.textContent = data.intention.dueDate;
+        checkBox.checked = data.intention.isChecked;
+
+        this.#intentionId = data.intention.id;
+        this.#intentionProjectId = data.intention.projectId
+    }
+
+    connectedCallback() {
+        const checkBox = this.shadowRoot.querySelector(`[part="input-check"]`);
+        checkBox.addEventListener("change", (e) => {
+            const newCompletedStatus = e.target.checked;
+            const intentionPackage = {
+                newCompletedStatus: newCompletedStatus,
+                intentionId: this.#intentionId,
+                projectId: this.#intentionProjectId
+            }
+            this.dispatchEvent(new CustomEvent("move-intention-item", {
+                bubbles: true,
+                detail: {
+                    intentionPackage: intentionPackage
+                }
+            }))
+        });
     }
 }
 
