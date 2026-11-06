@@ -64,15 +64,6 @@ class IntentionExperiment {
         const isActive = (intention) => (!intention.isChecked && intention.projectId === projectId)
         const isCompleted = (intention) => (intention.isChecked && intention.projectId === projectId)
 
-        // for (const intention of this.#allIntentions) {
-        //     const title = intention.title;
-        //     const isChecked = intention.isChecked
-        //     const projectId = intention.projectId;
-        //     console.log(` Title: ${title} | Completed? : ${isChecked} | projectId: ${projectId}`);
-        // }
-        // const newArray = this.#allIntentions.filter(isActive);
-        // console.log(newArray)
-
         if (type === "active") return this.#allIntentions.filter(isActive);
         if (type === "completed") return this.#allIntentions.filter(isCompleted);
     }
@@ -81,6 +72,20 @@ class IntentionExperiment {
     //     const intentions = this.#allIntentions.filter((intention) => intention.projectId === projectId);
     //     return intentions;
     // }
+
+    
+
+    moveIntention({intentionId, projectId, newCompletedStatus}) {
+        const intention = this.findIntentionByIdAndProjectId(intentionId, projectId);
+        intention.setCompletedStatus(newCompletedStatus);
+        this.#saveAllIntentions();
+    }
+
+    findIntentionByIdAndProjectId(id, projectId) {
+        const findIntention = (intention) => (intention.id === id && intention.projectId === projectId);
+        const intention = this.#allIntentions.find(findIntention);
+        return intention;
+    }
 
     #saveAllIntentions() {
         localStorage.setItem("all-intentions", JSON.stringify(this.#allIntentions));
