@@ -62,6 +62,7 @@ class GlobalController {
             const completedCount = completedIntentions.length;
             const projectDetails = { project, activeIntentions, completedIntentions, completedCount };
             mainContainerView.renderSpecificProjectPage(projectDetails);
+            this.#refreshSideBar()
         });
 
         /* Sidebar Events (interactions via static nodes in navBar) */
