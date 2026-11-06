@@ -6,7 +6,6 @@ import { renderSection } from "./components/factories/section.js";
 import { renderActiveList, renderCompletedList } from "./components/factories/intention-lists.js";
 import { renderCounter } from "./components/factories/counter.js";
 
-
 class MainContentView {
     #completedElements = [];
     #counterElement;
@@ -17,7 +16,7 @@ class MainContentView {
 
     /* Methods for rendering pages */
 
-    renderProjectsView(projectGroups) {
+    renderProjectsPage(projectGroups) {
         this.mainContentContainer.innerHTML = "";
         const projectSection = renderSection();
 
@@ -116,32 +115,6 @@ class MainContentView {
         return counter;
     }
 
-
-
-    // renderSpecificProjectView(projectDetails) {
-    //     this.mainContentContainer.innerHTML = "";
-
-    //     const section = renderSection();
-
-    //     section.appendChild(renderSpecificProjectHeader(
-    //         projectDetails.project.projectName,
-    //         projectDetails.project.projectColor
-    //     ))
-
-    //     const collection = renderCollection();
-
-    //     projectDetails.intentions.forEach((intention) => {
-    //         const intentionItem = document.createElement("intention-item");
-    //         intentionItem.intentionData = {
-    //             intention,
-    //             projectName: projectDetails.project.projectName
-    //         }
-    //         collection.appendChild(intentionItem)
-    //     });
-
-    //     section.appendChild(collection);
-    //     this.mainContentContainer.appendChild(section);
-    // }
 }
 
 export default MainContentView;

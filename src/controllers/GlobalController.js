@@ -78,19 +78,19 @@ class GlobalController {
             case "inbox":
                 break;
             case "project":
-                this.#showProjectsView();
+                this.#showProjectsPage();
                 break;
             default:
         }
     }
 
-    #showProjectsView() {
+    #showProjectsPage() {
         const projects = this.#processGroupIntentionsByCounts();
-        this.mainContainerView.renderProjectsView(projects);
+        this.mainContainerView.renderProjectsPage(projects);
     }
 
     /* Some helper methods */
-    
+
     #processGroupIntentionsByCounts() {
         const result = this.projectService.groupIntentionsByProject(this.intentionService.allActiveIntentions);
         return result;
