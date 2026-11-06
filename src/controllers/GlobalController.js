@@ -16,7 +16,7 @@ class GlobalController {
 
         /* Global Events (Form Actions via body) */
 
-        body.addEventListener("open-project-form", () =>{
+        body.addEventListener("open-project-form", () => {
             this.dialogView.renderProjectForm();
         });
 
@@ -43,6 +43,22 @@ class GlobalController {
             const project = this.projectService.getProjectById(e.detail.projectId)
             const activeIntentions = this.intentionService.getIntentionsByProjectIdAndType("active", e.detail.projectId);
             const completedIntentions = this.intentionService.getIntentionsByProjectIdAndType("completed", e.detail.projectId);
+            const completedCount = completedIntentions.length;
+            const projectDetails = { project, activeIntentions, completedIntentions, completedCount };
+            mainContainerView.renderSpecificProjectPage(projectDetails);
+        });
+
+        mainContainer.addEventListener("move-intention-item", (e) => {
+            /* This Might change once I work on upcoming/inbox/today page 
+               will need to track the created section node when on a specific
+               project page and do an if check to see if its undefined to perform
+               either rendering a project's active/completed intentions or upcoming/
+               inbox/today's active/completed intentions. */
+            const intentionPackage = e.detail.intentionPackage;
+            this.intentionService.moveIntention(intentionPackage)
+            const project = this.projectService.getProjectById(intentionPackage.projectId);
+            const activeIntentions = this.intentionService.getIntentionsByProjectIdAndType("active", intentionPackage.projectId);
+            const completedIntentions = this.intentionService.getIntentionsByProjectIdAndType("completed", intentionPackage.projectId);
             const completedCount = completedIntentions.length;
             const projectDetails = { project, activeIntentions, completedIntentions, completedCount };
             mainContainerView.renderSpecificProjectPage(projectDetails);
