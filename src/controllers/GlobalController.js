@@ -45,7 +45,7 @@ class GlobalController {
             const completedIntentions = this.intentionService.getIntentionsByProjectIdAndType("completed", e.detail.projectId);
             const completedCount = completedIntentions.length;
             const projectDetails = { project, activeIntentions, completedIntentions, completedCount };
-            // mainContainerView.renderSpecificProjectView(projectDetails);
+            mainContainerView.renderSpecificProjectPage(projectDetails);
         });
 
         /* Sidebar Events (interactions via static nodes in navBar) */
