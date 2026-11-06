@@ -6,7 +6,16 @@ class GlobalController {
         this.mainContainerView = mainContainerView;
         this.dialogView = dialogView;
 
+        /* Static Nodes */
+
         const body = this.dialogView.body;
+        const mainContainer = this.mainContainerView.mainContentContainer;
+        const sideBarAddProjectButton = this.sideBarView.projectsAddButton;
+        const sideBarAddIntentionButton = this.sideBarView.intentionsAddButton;
+        const navSectionsContainer = this.sideBarView.navSectionsContainer;
+
+        /* Global Events (Form Actions via body) */
+
         body.addEventListener("open-project-form", () =>{
             this.dialogView.renderProjectForm();
         });
@@ -28,43 +37,40 @@ class GlobalController {
             this.#refreshSideBar();
         });
 
-        const mainContainer = this.mainContainerView.mainContentContainer;
+        /* Main Container Events (interactions via mainContainer) */
+
         mainContainer.addEventListener("view-project", (e) => {
             const project = this.projectService.getProjectById(e.detail.projectId)
             const activeIntentions = this.intentionService.getIntentionsByProjectIdAndType("active", e.detail.projectId);
             const completedIntentions = this.intentionService.getIntentionsByProjectIdAndType("completed", e.detail.projectId);
-            const projectDetails = { project, activeIntentions, completedIntentions };
-            // const intentions = this.intentionService.getIntentionsByProjectId(e.detail.projectId);
-            // const projectDetails = { project, intentions }
+            const completedCount = completedIntentions.length;
+            const projectDetails = { project, activeIntentions, completedIntentions, completedCount };
             // mainContainerView.renderSpecificProjectView(projectDetails);
-            // const test = this.intentionService.getIntentionsByProjectIdAndType("completed", "p4");
-            // console.table(test)
-            // this.#refreshSideBar();
         });
 
-        const sideBarAddProjectButton = this.sideBarView.projectsAddButton;
+        /* Sidebar Events (interactions via static nodes in navBar) */
+
         sideBarAddProjectButton.addEventListener("click", () => {
             this.dialogView.renderProjectForm();
         })
 
-        const sideBarAddIntentionButton = this.sideBarView.intentionsAddButton;
         sideBarAddIntentionButton.addEventListener("click", () => {
             this.dialogView.renderIntentionForm();
         });
-
-        const navSectionsContainer = this.sideBarView.navSectionsContainer;
 
         navSectionsContainer.addEventListener("click", (e) => {
             if (e.target === navSectionsContainer) return;
 
             const navButton = e.target.closest("button");
-            const displayOption = navButton.dataset.action;
-            this.#chooseDisplay(displayOption)
+            const pageOption = navButton.dataset.action;
+            this.#choosePage(pageOption)
         })
     }
 
-    #chooseDisplay(displayOption) {
-        switch (displayOption) {
+    /* Navigation Methods (transitioning to another "page") */
+
+    #choosePage(pageOption) {
+        switch (pageOption) {
             case "today":
                 break;
             case "upcoming":
@@ -83,10 +89,14 @@ class GlobalController {
         this.mainContainerView.renderProjectsView(projects);
     }
 
+    /* Some helper methods */
+    
     #processGroupIntentionsByCounts() {
         const result = this.projectService.groupIntentionsByProject(this.intentionService.allActiveIntentions);
         return result;
     }
+
+    /* Methods for updating UI after changes made to state */
 
     #refreshSideBar() {
         this.sideBarView.renderNavCounts(this.intentionService.getActiveCounts);
@@ -96,6 +106,8 @@ class GlobalController {
     #refreshUI() {
 
     }
+
+    /* Initialization */
 
     initialize() {
         this.intentionService.loadIntentions();
