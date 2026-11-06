@@ -36,6 +36,18 @@ class ProjectLink extends HTMLElement {
 
         this.#projectId = projectGroup.project.id;
     }
+
+    connectedCallback() {
+        const projectLink = this.shadowRoot.querySelector(`[part="project-link"]`);
+        projectLink.addEventListener("click", () => {
+            this.dispatchEvent(new CustomEvent( "view-project", {
+                bubbles: true,
+                detail: {
+                    projectId: this.#projectId
+                }
+            }))
+        });
+    }
 }
 
 
