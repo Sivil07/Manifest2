@@ -90,15 +90,20 @@ class GlobalController {
     #choosePage(pageOption) {
         switch (pageOption) {
             case "today":
+                this.intentionService.setFilter("today")
                 break;
             case "upcoming":
+                this.intentionService.setFilter("upcoming")
                 break;
             case "inbox":
+                this.intentionService.setFilter("inbox")
                 break;
             case "project":
+                this.intentionService.setFilter("project")
                 this.#showProjectsPage();
                 break;
             default:
+                this.intentionService.setFilter("today")
         }
     }
 
