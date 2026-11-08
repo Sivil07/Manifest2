@@ -34,10 +34,13 @@ class ProjectItem extends HTMLElement {
     connectedCallback() {
         const projectAction = this.shadowRoot.querySelector(`[part="project-action"]`);
         projectAction.addEventListener("click", () => {
+            const projectPackage = {
+                projectId: this.#projectId
+            }
             this.dispatchEvent(new CustomEvent("view-project", {
                 bubbles: true,
                 detail: {
-                    projectId: this.#projectId
+                    projectPackage: projectPackage
                 }
             }))
         });

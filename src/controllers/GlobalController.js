@@ -38,15 +38,17 @@ class GlobalController {
         });
 
         body.addEventListener("view-project", (e) => {
-            const activeIntentions = this.intentionService.getIntentionsByProjectIdAndType("active", e.detail.projectId);
-            const completedIntentions = this.intentionService.getIntentionsByProjectIdAndType("completed", e.detail.projectId);
+            const projectPackage = e.detail.projectPackage;
+            this.#reRenderCurrentPage(projectPackage);
+            // const activeIntentions = this.intentionService.getIntentionsByProjectIdAndType("active", e.detail.projectId);
+            // const completedIntentions = this.intentionService.getIntentionsByProjectIdAndType("completed", e.detail.projectId);
 
-            const project = this.projectService.getProjectById(e.detail.projectId);
-            const transformedActive = this.projectService.transformIntentionList(activeIntentions)
-            const transformedCompleted = this.projectService.transformIntentionList(completedIntentions)
-            const completedCount = transformedCompleted.length;
-            const projectDetails = { project, transformedActive, transformedCompleted, completedCount };
-            mainContainerView.renderSpecificProjectPage(projectDetails);
+            // const project = this.projectService.getProjectById(e.detail.projectId);
+            // const transformedActive = this.projectService.transformIntentionList(activeIntentions)
+            // const transformedCompleted = this.projectService.transformIntentionList(completedIntentions)
+            // const completedCount = transformedCompleted.length;
+            // const projectDetails = { project, transformedActive, transformedCompleted, completedCount };
+            // mainContainerView.renderSpecificProjectPage(projectDetails);
         })
 
         /* Main Container Events (interactions via mainContainer) */
@@ -54,24 +56,25 @@ class GlobalController {
         mainContainer.addEventListener("move-intention-item", (e) => {
             const intentionPackage = e.detail.intentionPackage;
             this.intentionService.moveIntention(intentionPackage)
+            this.#reRenderCurrentPage(intentionPackage);
 
-            const isSpecificPage = (this.mainContainerView.specificPageElement !== undefined)
-            if (isSpecificPage) {
-                const activeIntentions = this.intentionService.getIntentionsByProjectIdAndType("active", intentionPackage.projectId);
-                const completedIntentions = this.intentionService.getIntentionsByProjectIdAndType("completed", intentionPackage.projectId);
+            // const isSpecificPage = (this.mainContainerView.specificPageElement !== undefined)
+            // if (isSpecificPage) {
+            //     const activeIntentions = this.intentionService.getIntentionsByProjectIdAndType("active", intentionPackage.projectId);
+            //     const completedIntentions = this.intentionService.getIntentionsByProjectIdAndType("completed", intentionPackage.projectId);
 
-                const project = this.projectService.getProjectById(intentionPackage.projectId);
-                const transformedActive = this.projectService.transformIntentionList(activeIntentions)
-                const transformedCompleted = this.projectService.transformIntentionList(completedIntentions)
-                const completedCount = transformedCompleted.length;
-                const projectDetails = { project, transformedActive, transformedCompleted, completedCount };
-                mainContainerView.renderSpecificProjectPage(projectDetails);
-                this.#refreshSideBar()
-                return;
-            }
+            //     const project = this.projectService.getProjectById(intentionPackage.projectId);
+            //     const transformedActive = this.projectService.transformIntentionList(activeIntentions)
+            //     const transformedCompleted = this.projectService.transformIntentionList(completedIntentions)
+            //     const completedCount = transformedCompleted.length;
+            //     const projectDetails = { project, transformedActive, transformedCompleted, completedCount };
+            //     mainContainerView.renderSpecificProjectPage(projectDetails);
+            //     this.#refreshSideBar()
+            //     return;
+            // }
 
-            this.#choosePage(this.intentionService.currentFilter)
-            this.#refreshSideBar()
+            // this.#choosePage(this.intentionService.currentFilter)
+            // this.#refreshSideBar()
         });
 
         /* Sidebar Events (interactions via static nodes in navBar) */
@@ -94,6 +97,22 @@ class GlobalController {
     }
 
     /* Navigation Methods (transitioning to another "page") */
+
+    #reRenderCurrentPage(intentionPackage = null) {
+        const isSpecificPage = (this.mainContainerView.specificPageElement !== undefined)
+        const isProjectPage = (this.mainContainerView.projectPageElement !== undefined);
+
+        if (isSpecificPage || isProjectPage) {
+            const projectDetails = this.#buildProjectDetails(intentionPackage)
+            this.mainContainerView.renderSpecificProjectPage(projectDetails);
+            this.#refreshSideBar()
+            return;
+        }
+
+        this.#choosePage(this.intentionService.currentFilter)
+        this.#refreshSideBar()
+    }
+
 
     #choosePage(pageOption) {
         switch (pageOption) {
@@ -122,11 +141,30 @@ class GlobalController {
     }
 
     #showUpcomingPage() {
+        const intentionDetails = this.#buildFilteredIntentionDetails();
+        this.mainContainerView.renderUpcomingPage(intentionDetails)
+    }
+
+    /* Page data builder methods */
+
+    #buildProjectDetails(intentionPackage) {
+        const activeIntentions = this.intentionService.getIntentionsByProjectIdAndType("active", intentionPackage.projectId);
+        const completedIntentions = this.intentionService.getIntentionsByProjectIdAndType("completed", intentionPackage.projectId);
+
+        const project = this.projectService.getProjectById(intentionPackage.projectId);
+        const transformedActive = this.projectService.transformIntentionList(activeIntentions)
+        const transformedCompleted = this.projectService.transformIntentionList(completedIntentions)
+        const completedCount = transformedCompleted.length;
+        const projectDetails = { project, transformedActive, transformedCompleted, completedCount };
+        return projectDetails;
+    }
+
+    #buildFilteredIntentionDetails() {
         const transformedActive = this.projectService.transformIntentionList(this.intentionService.filteredActiveIntentions)
         const transformedCompleted = this.projectService.transformIntentionList(this.intentionService.filteredCompletedIntentions)
         const completedCount = transformedCompleted.length;
         const intentionDetails = { transformedActive, transformedCompleted, completedCount }
-        this.mainContainerView.renderUpcomingPage(intentionDetails)
+        return intentionDetails;
     }
 
 

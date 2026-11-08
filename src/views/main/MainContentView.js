@@ -10,6 +10,7 @@ class MainContentView {
     #completedElements = [];
     #counterElement;
     specificPageElement;
+    projectPageElement;
 
     constructor(mainContentContainer) {
         this.mainContentContainer = mainContentContainer;
@@ -37,12 +38,15 @@ class MainContentView {
         projectSection.appendChild(projectCollection)
 
         projectSection.appendChild(renderAddProjectButton())
+
+        this.projectPageElement = projectSection
         this.mainContentContainer.appendChild(projectSection);
     }
 
     renderUpcomingPage(intentionDetails) {
         this.mainContentContainer.innerHTML = "";
         this.specificPageElement = undefined;
+        this.projectPageElement = undefined;
 
         const upcomingSection = renderSection();
         upcomingSection.appendChild(renderHeader("Upcoming"));
