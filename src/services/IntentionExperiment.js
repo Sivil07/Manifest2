@@ -8,7 +8,7 @@ class IntentionExperiment {
     /* Gets the number of intentions that are active in each category.
        The nav buttons need these numbers so they can show the current
        counts for today, upcoming and inbox */
-    get getActiveCounts() {
+    get navActiveCounts() {
         const todayIntentions = this.#allIntentions.filter((intention) => {
             const isToday = intention.dueDate === getCurrentDate();
             const isCompleted = !intention.isChecked;
@@ -73,9 +73,7 @@ class IntentionExperiment {
     //     return intentions;
     // }
 
-    
-
-    moveIntention({intentionId, projectId, newCompletedStatus}) {
+    moveIntention({ intentionId, projectId, newCompletedStatus }) {
         const intention = this.findIntentionByIdAndProjectId(intentionId, projectId);
         intention.setCompletedStatus(newCompletedStatus);
         this.#saveAllIntentions();

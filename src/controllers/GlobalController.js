@@ -103,22 +103,22 @@ class GlobalController {
     }
 
     #showProjectsPage() {
-        const projects = this.#processGroupIntentionsByCounts();
+        const projects = this.getProjectGroups();
         this.mainContainerView.renderProjectsPage(projects);
     }
 
     /* Some helper methods */
 
-    #processGroupIntentionsByCounts() {
-        const result = this.projectService.groupIntentionsByProject(this.intentionService.allActiveIntentions);
-        return result;
+    getProjectGroups() {
+        const projectGroups = this.projectService.groupIntentionsByProject(this.intentionService.allActiveIntentions);
+        return projectGroups;
     }
 
     /* Methods for updating UI after changes made to state */
 
     #refreshSideBar() {
-        this.sideBarView.renderNavCounts(this.intentionService.getActiveCounts);
-        this.sideBarView.renderProjectList(this.#processGroupIntentionsByCounts())
+        this.sideBarView.renderNavCounts(this.intentionService.navActiveCounts);
+        this.sideBarView.renderProjectList(this.getProjectGroups())
     }
 
     #refreshUI() {
