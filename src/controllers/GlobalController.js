@@ -52,19 +52,25 @@ class GlobalController {
         /* Main Container Events (interactions via mainContainer) */
 
         mainContainer.addEventListener("move-intention-item", (e) => {
-            /* This Might change once I work on upcoming/inbox/today page 
-               will need to track the created section node when on a specific
-               project page and do an if check to see if its undefined to perform
-               either rendering a project's active/completed intentions or upcoming/
-               inbox/today's active/completed intentions. */
             const intentionPackage = e.detail.intentionPackage;
             this.intentionService.moveIntention(intentionPackage)
-            const project = this.projectService.getProjectById(intentionPackage.projectId);
-            const activeIntentions = this.intentionService.getIntentionsByProjectIdAndType("active", intentionPackage.projectId);
-            const completedIntentions = this.intentionService.getIntentionsByProjectIdAndType("completed", intentionPackage.projectId);
-            const completedCount = completedIntentions.length;
-            const projectDetails = { project, activeIntentions, completedIntentions, completedCount };
-            mainContainerView.renderSpecificProjectPage(projectDetails);
+
+            const isSpecificPage = (this.mainContainerView.specificPageElement !== undefined)
+            if (isSpecificPage) {
+                const activeIntentions = this.intentionService.getIntentionsByProjectIdAndType("active", intentionPackage.projectId);
+                const completedIntentions = this.intentionService.getIntentionsByProjectIdAndType("completed", intentionPackage.projectId);
+
+                const project = this.projectService.getProjectById(intentionPackage.projectId);
+                const transformedActive = this.projectService.transformIntentionList(activeIntentions)
+                const transformedCompleted = this.projectService.transformIntentionList(completedIntentions)
+                const completedCount = transformedCompleted.length;
+                const projectDetails = { project, transformedActive, transformedCompleted, completedCount };
+                mainContainerView.renderSpecificProjectPage(projectDetails);
+                this.#refreshSideBar()
+                return;
+            }
+
+            this.#choosePage(this.intentionService.currentFilter)
             this.#refreshSideBar()
         });
 
@@ -96,6 +102,7 @@ class GlobalController {
                 break;
             case "upcoming":
                 this.intentionService.setFilter("upcoming")
+                this.#showUpcomingPage()
                 break;
             case "inbox":
                 this.intentionService.setFilter("inbox")
@@ -113,6 +120,15 @@ class GlobalController {
         const projects = this.getProjectGroups();
         this.mainContainerView.renderProjectsPage(projects);
     }
+
+    #showUpcomingPage() {
+        const transformedActive = this.projectService.transformIntentionList(this.intentionService.filteredActiveIntentions)
+        const transformedCompleted = this.projectService.transformIntentionList(this.intentionService.filteredCompletedIntentions)
+        const completedCount = transformedCompleted.length;
+        const intentionDetails = { transformedActive, transformedCompleted, completedCount }
+        this.mainContainerView.renderUpcomingPage(intentionDetails)
+    }
+
 
     /* Some helper methods */
 
