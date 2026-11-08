@@ -9,6 +9,7 @@ import { renderCounter } from "./components/factories/counter.js";
 class MainContentView {
     #completedElements = [];
     #counterElement;
+    specificPageElement;
 
     constructor(mainContentContainer) {
         this.mainContentContainer = mainContentContainer;
@@ -18,6 +19,8 @@ class MainContentView {
 
     renderProjectsPage(projectGroups) {
         this.mainContentContainer.innerHTML = "";
+        this.specificPageElement = undefined;
+        
         const projectSection = renderSection();
 
         projectSection.appendChild(renderHeader("Projects", "Everything you intend."))
@@ -60,6 +63,7 @@ class MainContentView {
 
         intentionCollection.append(activeList, completedList);
         section.appendChild(intentionCollection)
+
         this.specificPageElement = section;
         this.mainContentContainer.appendChild(section);
     }
