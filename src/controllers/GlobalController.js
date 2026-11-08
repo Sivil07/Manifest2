@@ -38,13 +38,15 @@ class GlobalController {
         });
 
         body.addEventListener("view-project", (e) => {
-            const project = this.projectService.getProjectById(e.detail.projectId)
             const activeIntentions = this.intentionService.getIntentionsByProjectIdAndType("active", e.detail.projectId);
             const completedIntentions = this.intentionService.getIntentionsByProjectIdAndType("completed", e.detail.projectId);
-            const completedCount = completedIntentions.length;
-            const projectDetails = { project, activeIntentions, completedIntentions, completedCount };
-            mainContainerView.renderSpecificProjectPage(projectDetails);
 
+            const project = this.projectService.getProjectById(e.detail.projectId);
+            const transformedActive = this.projectService.transformIntentionList(activeIntentions)
+            const transformedCompleted = this.projectService.transformIntentionList(completedIntentions)
+            const completedCount = transformedCompleted.length;
+            const projectDetails = { project, transformedActive, transformedCompleted, completedCount };
+            mainContainerView.renderSpecificProjectPage(projectDetails);
         })
 
         /* Main Container Events (interactions via mainContainer) */

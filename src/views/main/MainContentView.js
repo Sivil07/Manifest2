@@ -49,39 +49,38 @@ class MainContentView {
         const intentionCollection = renderCollection();
         const activeList = this.renderActiveIntentions(
             renderActiveList(),
-            projectDetails.activeIntentions,
-            projectDetails.project.projectName
+            projectDetails.transformedActive
         )
 
         const completedList = this.renderCompletedIntentions(
             renderCompletedList(),
-            projectDetails.completedIntentions,
-            projectDetails.completedCount,
-            projectDetails.project.projectName
+            projectDetails.transformedCompleted,
+            projectDetails.completedCount
         )
 
         intentionCollection.append(activeList, completedList);
         section.appendChild(intentionCollection)
+        this.specificPageElement = section;
         this.mainContentContainer.appendChild(section);
     }
 
     /* Methods for rendering intentions */
 
-    renderActiveIntentions(activeNode, activeIntentions, projectName) {
+    renderActiveIntentions(activeNode, activeIntentions) {
         activeNode.innerHTML = "";
 
-        activeIntentions.forEach((intention) => {
+        activeIntentions.forEach((intentionBlock) => {
             const intentionItem = document.createElement("intention-item");
             intentionItem.intentionData = {
-                intention,
-                projectName: projectName
+                intention: intentionBlock.intention,
+                projectName: intentionBlock.projectName
             }
             activeNode.appendChild(intentionItem)
         });
         return activeNode;
     }
 
-    renderCompletedIntentions(completedNode, completedIntentions, completedCount, projectName) {
+    renderCompletedIntentions(completedNode, completedIntentions, completedCount) {
         completedNode.innerHTML = "";
 
         const counter = this.renderCompletedCount(completedCount);
@@ -89,11 +88,11 @@ class MainContentView {
         /* Only display the counter when completed intentions exist. */
         if (counter !== undefined) completedNode.prepend(counter)
 
-        completedIntentions.forEach((intention) => {
+        completedIntentions.forEach((intentionBlock) => {
             const intentionItem = document.createElement("intention-item");
             intentionItem.intentionData = {
-                intention,
-                projectName: projectName
+                intention: intentionBlock.intention,
+                projectName: intentionBlock.projectName
             }
             completedNode.appendChild(intentionItem)
             this.#completedElements.push(intentionItem);

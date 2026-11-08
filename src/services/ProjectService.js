@@ -26,8 +26,28 @@ class ProjectService {
             if (entry) entry.intentions.push(intention)
         }
 
-        const result = [ ...projectGroups.values() ]
+        const result = [...projectGroups.values()]
         return result;
+    }
+
+    /* Transforms a list of intentions (active or completed)
+
+       Each intention is paired with its associated project name so 
+       both pieces of information can be displayed from a single object.
+
+       This prevents the rendering methods for active and completed
+       intentions from requiring a projectName argument since each
+       intention object will have their projectName attached already.
+    */
+    transformIntentionList(intentionList) {
+        let activeOrCompletedList = []
+        intentionList.forEach((intention) => {
+            const project = this.getProjectById(intention.projectId);
+            const projectName = (project === undefined) ? "" : project.projectName;
+            const intentionDetails = { projectName, intention }
+            activeOrCompletedList.push(intentionDetails)
+        });
+        return activeOrCompletedList;
     }
 
     createProject(projectPackage) {
@@ -40,9 +60,9 @@ class ProjectService {
         const project = this.#allProjects.find((project) => project.id === id);
         return project;
     }
-    
 
-    /*  Checks for whether a project name already exists. (true or false) */ 
+
+    /*  Checks for whether a project name already exists. (true or false) */
     hasDuplicate(projectName) {
         const hasDuplicate = (project) => projectName.toLowerCase() === project.projectName.toLowerCase();
         return this.#allProjects.some((hasDuplicate));
