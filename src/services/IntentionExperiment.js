@@ -44,6 +44,14 @@ class IntentionExperiment {
         })
     }
 
+    get filteredCompletedIntentions() {
+        return this.#allIntentions.filter((intention) => {
+            const matchesCurrentFilter = this.#matchesFilter(intention);
+            const isCompleted = intention.isChecked;
+            return matchesCurrentFilter && isCompleted;
+        })
+    }
+
     /* Returns all intentions that are still active.
        An intention is considered active when it is not completed.
        
