@@ -110,7 +110,7 @@ class GlobalController {
     /* Some helper methods */
 
     getProjectGroups() {
-        const projectGroups = this.projectService.groupIntentionsByProject(this.intentionService.allActiveIntentions);
+        const projectGroups = this.projectService.groupIntentionsByProject(this.intentionService.unfilteredActiveIntentions);
         return projectGroups;
     }
 

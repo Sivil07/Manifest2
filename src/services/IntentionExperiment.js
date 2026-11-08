@@ -5,6 +5,9 @@ import { getCurrentDate } from "../utils/date.js";
 class IntentionExperiment {
     #allIntentions = []
 
+    /* Defines which group the user is viewing. Either "today" or "upcoming" */
+    currentFilter;
+
     /* Gets the number of intentions that are active in each category.
        The nav buttons need these numbers so they can show the current
        counts for today, upcoming and inbox */
@@ -41,7 +44,7 @@ class IntentionExperiment {
        This will be used by Project service to group intentions under their
        designated project
     */
-    get allActiveIntentions() {
+    get unfilteredActiveIntentions() {
         return this.#allIntentions.filter((intention) => {
             const isCompleted = !intention.isChecked;
             return isCompleted;
