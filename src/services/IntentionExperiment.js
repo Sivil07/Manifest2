@@ -36,6 +36,14 @@ class IntentionExperiment {
         }
     }
 
+    get filteredActiveIntentions() {
+        return this.#allIntentions.filter((intention) => {
+            const matchesCurrentFilter = this.#matchesFilter(intention);
+            const isCompleted = !intention.isChecked;
+            return matchesCurrentFilter && isCompleted;
+        })
+    }
+
     /* Returns all intentions that are still active.
        An intention is considered active when it is not completed.
        
@@ -50,6 +58,19 @@ class IntentionExperiment {
             return isCompleted;
         });
     }
+
+    /* Determines whether an intention belongs to the current filter based on the dueDate */
+    #matchesFilter(intention) {
+        const today = getCurrentDate();
+        if (this.currentFilter === "today") return intention.dueDate === today;
+        if (this.currentFilter === "upcoming") return intention.dueDate !== today;
+    }
+
+    /* Chooses which group of intentions are shown */
+    setFilter(filterOption = "today") {
+        this.currentFilter = filterOption
+    }
+
 
     /* Returns all intentions for a specific project that's filtered by
        their completed status.
