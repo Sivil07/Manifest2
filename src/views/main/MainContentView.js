@@ -20,7 +20,7 @@ class MainContentView {
     renderProjectsPage(projectGroups) {
         this.mainContentContainer.innerHTML = "";
         this.specificPageElement = undefined;
-        
+
         const projectSection = renderSection();
 
         projectSection.appendChild(renderHeader("Projects", "Everything you intend."))
@@ -38,6 +38,30 @@ class MainContentView {
 
         projectSection.appendChild(renderAddProjectButton())
         this.mainContentContainer.appendChild(projectSection);
+    }
+
+    renderUpcomingPage(intentionDetails) {
+        this.mainContentContainer.innerHTML = "";
+        this.specificPageElement = undefined;
+
+        const upcomingSection = renderSection();
+        upcomingSection.appendChild(renderHeader("Upcoming"));
+
+        const intentionCollection = renderCollection();
+        const activeList = this.renderActiveIntentions(
+            renderActiveList(),
+            intentionDetails.transformedActive
+        )
+
+        const completedList = this.renderCompletedIntentions(
+            renderCompletedList(),
+            intentionDetails.transformedCompleted,
+            intentionDetails.completedCount
+        )
+
+        intentionCollection.append(activeList, completedList);
+        upcomingSection.appendChild(intentionCollection)
+        this.mainContentContainer.appendChild(upcomingSection);
     }
 
     renderSpecificProjectPage(projectDetails) {
