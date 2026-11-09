@@ -12,6 +12,16 @@ class DialogView {
         this.#form.showError()
     }
 
+    renderIntentionTemplate(templateDetails) {
+        const intentionTemplate = document.createElement("intention-template");
+        intentionTemplate.classList.add("intention-template");
+        intentionTemplate.templateData = {
+            projectName: templateDetails.projectName,
+            intention: templateDetails.intention
+        }
+        document.body.appendChild(intentionTemplate);
+    }
+
     renderProjectForm() {
         if (this.#dialog !== undefined) this.#dialog.remove();
 

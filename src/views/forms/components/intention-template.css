@@ -1,0 +1,109 @@
+/* Body (static): Intention-Template (dynamic/custom element) */
+
+.intention-template {
+  position: fixed;
+  inset: 0;
+  background-color: var(--clr-white);
+  gap: 1rem;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-areas: "Template-Contents Close-Container";
+  grid-template-columns: minmax(200px, 1fr) 1fr;
+  grid-template-rows: max-content;
+  z-index: 9;
+}
+
+/* Template Contents Section */
+
+intention-template::part(template-contents) {
+  grid-area: Template-Contents;
+  display: grid;
+  grid-template-areas:
+    "Intention-Tags"
+    "Intention-Display"
+    "Intention-Desc"
+    "Template-Actions";
+  grid-template-rows: repeat(3, max-content);
+  gap: 1rem;
+}
+
+/* Template Contents - Tags */
+
+intention-template::part(template-tags) {
+  display: flex;
+}
+
+intention-template::part(temp-tag) {
+  margin: 0;
+  background-color: var(--clr-lavender);
+  padding: 0.3rem;
+  border-radius: 0.5rem;
+  color: var(--clr-logo-primary)
+}
+
+/* Template Contents - Display */
+
+intention-template::part(template-title) {
+  margin: 0;
+}
+
+intention-template::part(template-reason) {
+  margin: 0;
+  color: var(--clr-muted);
+}
+
+/* Template Contents - Desc */
+
+intention-template::part(template-desc-container) {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+intention-template::part(template-desc-header) {
+  margin: 0;
+  color: var(--clr-muted);
+  text-transform: uppercase;
+}
+
+intention-template::part(template-desc) {
+  margin: 0;
+}
+
+/* Template Contents - Actions */
+
+intention-template::part(template-actions) {
+  display: flex;
+  gap: 1rem;
+}
+
+intention-template::part(temp-action) {
+  width: max-content;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border: 1px solid var(--clr-lavender);
+  color: var(--clr-logo-primary);
+  background-color: transparent;
+}
+
+intention-template::part(edit-intention) {
+  color: var(--clr-white);
+  background-color: var(--clr-logo-primary);
+}
+
+intention-template::part(delete-intention) {
+  color: var(--clr-delete-button);
+}
+
+/* Close Template Section */
+
+intention-template::part(close-container) {
+  grid-area: Close-Container;
+  text-align: right;
+}
+
+intention-template::part(close-template) {
+  background-color: var(--clr-lavender);
+}
