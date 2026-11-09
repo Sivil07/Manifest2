@@ -22,6 +22,14 @@ function renderCounter(count) {
     clearIntentions.type = "button";
 
     completedCounter.append(counter, clearIntentions);
+
+    clearIntentions.addEventListener("click", () => {
+        clearIntentions.dispatchEvent(
+            new CustomEvent( "clear-completed-intentions", {
+                bubbles: true
+            })
+        )
+    })
     return completedCounter
 }
 
