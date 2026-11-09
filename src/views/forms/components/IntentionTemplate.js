@@ -46,6 +46,13 @@ class IntentionTemplate extends HTMLElement {
 
         this.#intentionId = intentionData.intention.id;
     }
+
+    connectedCallback() {
+        const closeButton = this.shadowRoot.querySelector(`[part~="close-template"]`);
+        closeButton.addEventListener("click", () => {
+            this.remove()
+        });
+    }
 }
 
 customElements.define("intention-template", IntentionTemplate);
