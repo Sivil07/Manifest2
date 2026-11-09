@@ -4,12 +4,12 @@ template.innerHTML = `
     <h2 part="form-header">New Intention</h2>
     <div part="title-group form-group">
         <label part="form-label" for="input-title">What do you intend to do?</label>
-        <input id="input-title" part="intention-input" type="text" placeholder="Call the dentist" name="title"
+        <input id="input-title" part="intention-input form-title" type="text" placeholder="Call the dentist" name="title"
             minlength="5" maxlength="20" required>
     </div>
     <div part="reason-group form-group">
         <label part="form-label" for="input-reason">Why does it matter?</label>
-        <input id="input-reason" part="intention-input" type="text" placeholder="Your reason" name="reason" minlength="5"
+        <input id="input-reason" part="intention-input form-reason" type="text" placeholder="Your reason" name="reason" minlength="5"
             maxlength="20" required>
     </div>
     <div part="desc-group form-group">
@@ -27,7 +27,7 @@ template.innerHTML = `
     </div>
     <div part="date-group form-group">
         <label part="form-label" for="input-date">Due Date</label>
-        <input id="input-date" part="intention-input" type="date" name="dueDate" required>
+        <input id="input-date" part="intention-input form-date" type="date" name="dueDate" required>
     </div>
     <div part="form-actions">
         <button part="form-action cancel-intention">Cancel</button>
@@ -37,10 +37,29 @@ template.innerHTML = `
 </form>
 `
 class IntentionFormNew extends HTMLElement {
+    #intentionId;
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: "open" });
         shadow.append(template.content.cloneNode(true));
+    }
+
+    set formData({ title = "", reason = "", id = undefined, dueDate = "", description = "" } = {}) {
+        const header = this.shadowRoot.querySelector(`[part="form-header"]`);
+        const submitButton = this.shadowRoot.querySelector(`[part~="submit-intention"]`)
+        const intentionTitle = this.shadowRoot.querySelector(`[part~="form-title"]`);
+        const intentionReason = this.shadowRoot.querySelector(`[part~="form-reason"]`);
+        const intentionDesc = this.shadowRoot.querySelector(`[part~="form-desc-input"]`);
+        const intentionDate = this.shadowRoot.querySelector(`[part~="form-date"]`);
+
+        this.#intentionId = id;
+
+        header.textContent = this.#intentionId ? "Edit Intention" : "New Intention";
+        submitButton.textContent = this.#intentionId ? "Save Changes" : "Add Intention";
+        intentionTitle.value = title;
+        intentionReason.value = reason;
+        intentionDesc.value = description;
+        intentionDate.value = dueDate;
     }
 
     connectedCallback() {
