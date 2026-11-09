@@ -56,6 +56,15 @@ class GlobalController {
             this.#reRenderCurrentPage(intentionPackage);
         });
 
+        mainContainer.addEventListener("view-intention-item", (e) => {
+            const intentionPackage = e.detail.intentionPackage;
+            const intention = this.intentionService.findIntentionById(intentionPackage.intentionId);
+            const project = this.projectService.getProjectById(intentionPackage.projectId)
+            const projectName = project !== undefined ? project.projectName : "";
+            const templatePackage = { projectName, intention }
+            this.dialogView.renderIntentionTemplate(templatePackage)
+        });
+
         /* Sidebar Events (interactions via static nodes in navBar) */
 
         sideBarAddProjectButton.addEventListener("click", () => {
