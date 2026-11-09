@@ -59,6 +59,11 @@ class DialogView {
         this.#dialog.remove();
         this.#form = undefined;
     }
+
+    closeOverlays() {
+        this.closeTemplate()
+        this.closeDialog()
+    }
 }
 
 export default DialogView;
