@@ -78,10 +78,8 @@ class GlobalController {
     /* Navigation Methods (transitioning to another "page") */
 
     #reRenderCurrentPage(intentionPackage = null) {
-        const isSpecificPage = (this.mainContainerView.specificPageElement !== undefined)
-        const isProjectPage = (this.mainContainerView.projectPageElement !== undefined);
-
-        if (isSpecificPage || isProjectPage) {
+        const hasProjectId = (intentionPackage.projectId !== undefined) ? intentionPackage.projectId : false
+        if ( hasProjectId ) {
             const projectDetails = this.#buildProjectDetails(intentionPackage)
             this.mainContainerView.renderSpecificProjectPage(projectDetails);
             this.#refreshSideBar()

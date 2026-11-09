@@ -9,8 +9,6 @@ import { renderCounter } from "./components/factories/counter.js";
 class MainContentView {
     #completedElements = [];
     #counterElement;
-    specificPageElement;
-    projectPageElement;
     currentProjectId;
 
     constructor(mainContentContainer) {
@@ -21,7 +19,6 @@ class MainContentView {
 
     renderProjectsPage(projectGroups) {
         this.mainContentContainer.innerHTML = "";
-        this.specificPageElement = undefined;
         this.currentProjectId = undefined;
 
         const projectSection = renderSection();
@@ -41,14 +38,11 @@ class MainContentView {
 
         projectSection.appendChild(renderAddProjectButton())
 
-        this.projectPageElement = projectSection
         this.mainContentContainer.appendChild(projectSection);
     }
 
     renderUpcomingPage(intentionDetails) {
         this.mainContentContainer.innerHTML = "";
-        this.specificPageElement = undefined;
-        this.projectPageElement = undefined;
         this.currentProjectId = undefined;
 
         const upcomingSection = renderSection();
@@ -73,7 +67,6 @@ class MainContentView {
 
     renderSpecificProjectPage(projectDetails) {
         this.mainContentContainer.innerHTML = "";
-        this.projectPageElement = undefined;
 
         const section = renderSection();
         section.appendChild(renderSpecificProjectHeader(
@@ -96,7 +89,6 @@ class MainContentView {
         intentionCollection.append(activeList, completedList);
         section.appendChild(intentionCollection)
 
-        this.specificPageElement = section;
         this.currentProjectId = projectDetails.project.id;
         this.mainContentContainer.appendChild(section);
     }
