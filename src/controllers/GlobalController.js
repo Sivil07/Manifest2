@@ -54,7 +54,7 @@ class GlobalController {
             const intentionPackage = e.detail.intentionPackage;
             const intention = this.intentionService.findIntentionById(intentionPackage.intentionId);
             const project = this.projectService.getProjectById(intentionPackage.projectId)
-            const projectId = project !== undefined ? project.id : undefined;
+            const projectId = project !== undefined ? project.id : "";
             const projectOptions = this.projectService.projectOptions
             const formPackage = { projectId, projectOptions, ...intention }
             this.dialogView.renderIntentionForm(formPackage);

@@ -45,7 +45,7 @@ class IntentionFormNew extends HTMLElement {
         shadow.append(template.content.cloneNode(true));
     }
 
-    set formData({ projectOptions = [], title = "", reason = "", id = undefined, projectId = undefined, dueDate = "", description = "" } = {}) {
+    set formData({ projectOptions = [], title = "", reason = "", id = undefined, projectId = "", dueDate = "", description = "" } = {}) {
         const header = this.shadowRoot.querySelector(`[part="form-header"]`);
         const submitButton = this.shadowRoot.querySelector(`[part~="submit-intention"]`)
         const intentionTitle = this.shadowRoot.querySelector(`[part~="form-title"]`);
