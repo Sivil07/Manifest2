@@ -75,7 +75,7 @@ class IntentionExperiment {
         if (this.currentFilter === "today") return intention.dueDate === today;
         if (this.currentFilter === "upcoming") return intention.dueDate !== today;
         if (this.currentFilter === "inbox") return intention.projectId === "";
-        
+
         /* Used when the user is on a specific project page.
            The general projects page does not display intentions or allow intentions
            to be cleared, so the check logic is not needed besides this one for
@@ -133,6 +133,12 @@ class IntentionExperiment {
         const intention = this.findIntentionByIdAndProjectId(intentionId, projectId);
         intention.setCompletedStatus(newCompletedStatus);
         this.#saveAllIntentions();
+    }
+
+
+    findIntentionById(id) {
+        const intention = this.#allIntentions.find((intention) => intention.id === id);
+        return intention;
     }
 
     findIntentionByIdAndProjectId(id, projectId) {
