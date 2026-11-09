@@ -3,6 +3,7 @@ import { renderDialog } from "./factories/dialog.js";
 class DialogView {
     #dialog;
     #form;
+    #template;
 
     constructor() {
         this.body = document.body
@@ -19,6 +20,7 @@ class DialogView {
             projectName: templateDetails.projectName,
             intention: templateDetails.intention
         }
+        this.#template = intentionTemplate;
         document.body.appendChild(intentionTemplate);
     }
 
@@ -44,6 +46,11 @@ class DialogView {
         this.#dialog = intentionDialog;
         document.body.appendChild(intentionDialog);
         intentionDialog.showModal()
+    }
+
+    closeTemplate() {
+        this.#template.remove()
+        this.#template = undefined;
     }
 
     closeDialog() {
