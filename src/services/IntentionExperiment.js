@@ -147,6 +147,12 @@ class IntentionExperiment {
         return intention;
     }
 
+    createIntention(intentionEntries) {
+        const intention = new Intention(intentionEntries);
+        this.#allIntentions.push(intention);
+        this.#saveAllIntentions();
+    }
+
     editIntention(id, intentionEntries) {
         const intention = this.findIntentionById(id);
         intention.applyUpdates(intentionEntries);
