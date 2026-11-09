@@ -147,6 +147,12 @@ class IntentionExperiment {
         return intention;
     }
 
+    deleteIntention(id) {
+        const intentionIndex = this.#allIntentions.findIndex((intention) => intention.id === id);
+        this.#allIntentions.splice(intentionIndex, 1);
+        this.#saveAllIntentions();
+    }
+
     #saveAllIntentions() {
         localStorage.setItem("all-intentions", JSON.stringify(this.#allIntentions));
     }
