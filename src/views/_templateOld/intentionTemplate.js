@@ -24,7 +24,7 @@ template.innerHTML = `
 </div>
 `
 
-class IntentionTemplate extends HTMLElement {
+class oldTemplate extends HTMLElement {
     intentionId;
 
     constructor() {
@@ -83,4 +83,4 @@ class IntentionTemplate extends HTMLElement {
     }
 }
 
-customElements.define("intention-template", IntentionTemplate);
+customElements.define("old-template", oldTemplate);
