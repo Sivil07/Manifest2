@@ -4,6 +4,11 @@ import { projectStarterData } from "../starterData.js";
 class ProjectService {
     #allProjects = [];
 
+    get projectNames() {
+        const projectNames = this.#allProjects.map((project) => project.projectName);
+        return projectNames
+    }
+
     /* Groups active intentions by their associated project. 
        
        Creates an entry for each project and adds the intentions that 
