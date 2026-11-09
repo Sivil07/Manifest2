@@ -16,12 +16,12 @@ template.innerHTML = `
     </div>
     <div part="desc-group form-group">
         <label part="form-label" for="input-desc">Description (Optional)</label>
-        <textarea part="intention-input form-desc-input" id="input-desc" name="desc" rows="4" minlength="5"
+        <textarea part="intention-input form-desc-input" id="input-desc" name="description" rows="4" minlength="5"
             maxlength="100"></textarea>
     </div>
     <div part="select-group form-group">
         <label part="form-label" for="input-select">Project (Optional)</label>
-        <select name="projects-options" id="input-select" part="intention-input form-select">
+        <select name="projectId" id="input-select" part="intention-input form-select">
             <option value="" selected>No Project</option>
         </select>
     </div>
@@ -76,6 +76,27 @@ class IntentionFormNew extends HTMLElement {
 
     connectedCallback() {
         const cancelButton = this.shadowRoot.querySelector(`[part~="cancel-intention"]`);
+        const form = this.shadowRoot.querySelector(`[part="intention-form-contents"]`);
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const data = new FormData(form);
+            const entries = Object.fromEntries(data.entries());
+            const hasIntentionId = this.#intentionId;
+            const intentionPackage = {
+                entries: entries,
+                hasIntentionId: hasIntentionId,
+                projectId: this.#projectId
+            }
+            
+            this.dispatchEvent(new CustomEvent("save-intention", {
+                bubbles: true,
+                detail: {
+                    intentionPackage: intentionPackage
+                }
+            }))
+        })
+
         cancelButton.addEventListener("click", () => {
             this.dispatchEvent(
                 new CustomEvent("close-form", {
