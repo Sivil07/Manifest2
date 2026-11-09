@@ -37,6 +37,21 @@ class GlobalController {
             this.#refreshSideBar();
         });
 
+        body.addEventListener("save-intention", (e) => {
+            const intentionPackage = e.detail.intentionPackage;
+            const projectPackage = { projectId: this.mainContainerView.currentProjectId }
+            if (intentionPackage.hasIntentionId) {
+                this.intentionService.editIntention(intentionPackage.hasIntentionId, intentionPackage.entries);
+                this.dialogView.closeOverlays()
+                this.#reRenderCurrentPage(projectPackage);
+                return;
+            }
+
+            this.intentionService.createIntention(intentionPackage.entries);
+            this.dialogView.closeDialog();
+            this.#reRenderCurrentPage(projectPackage);
+        })
+
         body.addEventListener("view-project", (e) => {
             const projectPackage = e.detail.projectPackage;
             this.#reRenderCurrentPage(projectPackage);
