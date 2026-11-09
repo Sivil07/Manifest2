@@ -1,3 +1,5 @@
+import { renderProjectOption } from "../factories/select-option.js";
+
 const template = document.createElement("template");
 template.innerHTML = `
 <form part="intention-form-contents">
@@ -19,10 +21,8 @@ template.innerHTML = `
     </div>
     <div part="select-group form-group">
         <label part="form-label" for="input-select">Project (Optional)</label>
-        <select name="projects-options" id="input-select" part="intention-input">
+        <select name="projects-options" id="input-select" part="intention-input form-select">
             <option value="" selected>No Project</option>
-            <option value="finance">Finance</option>
-            <option value="personal">Personal</option>
         </select>
     </div>
     <div part="date-group form-group">
@@ -44,12 +44,13 @@ class IntentionFormNew extends HTMLElement {
         shadow.append(template.content.cloneNode(true));
     }
 
-    set formData({ title = "", reason = "", id = undefined, dueDate = "", description = "" } = {}) {
+    set formData({ projectName = "", projectNames = [], title = "", reason = "", id = undefined, dueDate = "", description = "" } = {}) {
         const header = this.shadowRoot.querySelector(`[part="form-header"]`);
         const submitButton = this.shadowRoot.querySelector(`[part~="submit-intention"]`)
         const intentionTitle = this.shadowRoot.querySelector(`[part~="form-title"]`);
         const intentionReason = this.shadowRoot.querySelector(`[part~="form-reason"]`);
         const intentionDesc = this.shadowRoot.querySelector(`[part~="form-desc-input"]`);
+        const intentionProject = this.shadowRoot.querySelector(`[part~="form-select"]`);
         const intentionDate = this.shadowRoot.querySelector(`[part~="form-date"]`);
 
         this.#intentionId = id;
@@ -59,7 +60,17 @@ class IntentionFormNew extends HTMLElement {
         intentionTitle.value = title;
         intentionReason.value = reason;
         intentionDesc.value = description;
+        this.appendProjectOptions(projectNames, intentionProject)
+        intentionProject.value = projectName;
         intentionDate.value = dueDate;
+    }
+
+    appendProjectOptions(projectNames, select) {
+
+        projectNames.forEach((projectName) => {
+            const option = renderProjectOption(projectName);
+            select.appendChild(option)
+        })
     }
 
     connectedCallback() {
