@@ -90,7 +90,9 @@ class GlobalController {
         })
 
         sideBarAddIntentionButton.addEventListener("click", () => {
-            this.dialogView.renderIntentionForm();
+            const projectOptions = this.projectService.projectOptions;
+            const formPackage = { projectOptions }
+            this.dialogView.renderIntentionForm(formPackage);
         });
 
         navSectionsContainer.addEventListener("click", (e) => {
