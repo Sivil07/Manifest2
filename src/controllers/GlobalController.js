@@ -50,6 +50,19 @@ class GlobalController {
             this.dialogView.closeTemplate();
         });
 
+        body.addEventListener("edit-intention-item", (e) => {
+            const intentionPackage = e.detail.intentionPackage;
+            const intention = this.intentionService.findIntentionById(intentionPackage.intentionId);
+            
+            const project = this.projectService.getProjectById(intentionPackage.projectId)
+            const projectName = project !== undefined ? project.projectName : "";
+            const projectNames = this.projectService.projectNames
+            const formPackage = { projectName, projectNames, ...intention }
+            // console.log(formPackage)
+            this.dialogView.renderIntentionForm(formPackage);
+
+        });
+
         /* Main Container Events (interactions via mainContainer) */
 
         mainContainer.addEventListener("move-intention-item", (e) => {
@@ -96,7 +109,7 @@ class GlobalController {
 
     #reRenderCurrentPage(intentionPackage = null) {
         const hasProjectId = (intentionPackage.projectId !== undefined) ? intentionPackage.projectId : false
-        if ( hasProjectId ) {
+        if (hasProjectId) {
             const projectDetails = this.#buildProjectDetails(intentionPackage)
             this.mainContainerView.renderSpecificProjectPage(projectDetails);
             this.#refreshSideBar()
