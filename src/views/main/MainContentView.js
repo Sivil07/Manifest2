@@ -11,6 +11,7 @@ class MainContentView {
     #counterElement;
     specificPageElement;
     projectPageElement;
+    currentProjectId;
 
     constructor(mainContentContainer) {
         this.mainContentContainer = mainContentContainer;
@@ -21,6 +22,7 @@ class MainContentView {
     renderProjectsPage(projectGroups) {
         this.mainContentContainer.innerHTML = "";
         this.specificPageElement = undefined;
+        this.currentProjectId = undefined;
 
         const projectSection = renderSection();
 
@@ -47,6 +49,7 @@ class MainContentView {
         this.mainContentContainer.innerHTML = "";
         this.specificPageElement = undefined;
         this.projectPageElement = undefined;
+        this.currentProjectId = undefined;
 
         const upcomingSection = renderSection();
         upcomingSection.appendChild(renderHeader("Upcoming"));
@@ -70,6 +73,7 @@ class MainContentView {
 
     renderSpecificProjectPage(projectDetails) {
         this.mainContentContainer.innerHTML = "";
+        this.projectPageElement = undefined;
 
         const section = renderSection();
         section.appendChild(renderSpecificProjectHeader(
@@ -93,6 +97,7 @@ class MainContentView {
         section.appendChild(intentionCollection)
 
         this.specificPageElement = section;
+        this.currentProjectId = projectDetails.project.id;
         this.mainContentContainer.appendChild(section);
     }
 

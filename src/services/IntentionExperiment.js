@@ -67,18 +67,26 @@ class IntentionExperiment {
         });
     }
 
-    /* Determines whether an intention belongs to the current filter based on the dueDate */
-    #matchesFilter(intention) {
+    /* Determines whether an intention belongs to the active page the user is on.
+       The matching logic varies depending on the current filter selected by the 
+       user (today, upcoming, inbox or specific project) */
+    #matchesFilter(intention, projectId = null) {
         const today = getCurrentDate();
         if (this.currentFilter === "today") return intention.dueDate === today;
         if (this.currentFilter === "upcoming") return intention.dueDate !== today;
+        if (this.currentFilter === "inbox") return intention.projectId === "";
+        
+        /* Used when the user is on a specific project page.
+           The general projects page does not display intentions or allow intentions
+           to be cleared, so the check logic is not needed besides this one for
+           specific project pages. */
+        return intention.isChecked && intention.projectId == projectId
     }
 
     /* Chooses which group of intentions are shown */
     setFilter(filterOption = "today") {
         this.currentFilter = filterOption
     }
-
 
     /* Returns all intentions for a specific project that's filtered by
        their completed status.
@@ -98,6 +106,22 @@ class IntentionExperiment {
 
         if (type === "active") return this.#allIntentions.filter(isActive);
         if (type === "completed") return this.#allIntentions.filter(isCompleted);
+    }
+
+
+    /* Removes completed intentions that match the currently active view.
+       This can be a standard filter (today/upcoming/inbox) or a specific project. */
+    clearCompletedIntentions(projectId = null) {
+        /* Checks for whether the intentions is completed and belongs
+           to the current filter. */
+        const isCompletedAndMatchesFilter = (intention) => (intention.isChecked && this.#matchesFilter(intention, projectId));
+
+        /* Keep intentions that do not match the completed criteria.
+           So remove only intentions that are both completed and match the filter. */
+        const remainingIntentions = this.#allIntentions.filter((intention) => !isCompletedAndMatchesFilter(intention));
+
+        this.#allIntentions = remainingIntentions;
+        this.#saveAllIntentions();
     }
 
     // getIntentionsByProjectId(projectId) {
