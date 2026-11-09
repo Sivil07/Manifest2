@@ -53,14 +53,11 @@ class GlobalController {
         body.addEventListener("edit-intention-item", (e) => {
             const intentionPackage = e.detail.intentionPackage;
             const intention = this.intentionService.findIntentionById(intentionPackage.intentionId);
-            
             const project = this.projectService.getProjectById(intentionPackage.projectId)
-            const projectName = project !== undefined ? project.projectName : "";
-            const projectNames = this.projectService.projectNames
-            const formPackage = { projectName, projectNames, ...intention }
-            // console.log(formPackage)
+            const projectId = project !== undefined ? project.id : undefined;
+            const projectOptions = this.projectService.projectOptions
+            const formPackage = { projectId, projectOptions, ...intention }
             this.dialogView.renderIntentionForm(formPackage);
-
         });
 
         /* Main Container Events (interactions via mainContainer) */

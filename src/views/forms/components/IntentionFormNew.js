@@ -38,13 +38,14 @@ template.innerHTML = `
 `
 class IntentionFormNew extends HTMLElement {
     #intentionId;
+    #projectId;
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: "open" });
         shadow.append(template.content.cloneNode(true));
     }
 
-    set formData({ projectName = "", projectNames = [], title = "", reason = "", id = undefined, dueDate = "", description = "" } = {}) {
+    set formData({ projectOptions = [], title = "", reason = "", id = undefined, projectId = undefined, dueDate = "", description = "" } = {}) {
         const header = this.shadowRoot.querySelector(`[part="form-header"]`);
         const submitButton = this.shadowRoot.querySelector(`[part~="submit-intention"]`)
         const intentionTitle = this.shadowRoot.querySelector(`[part~="form-title"]`);
@@ -54,21 +55,21 @@ class IntentionFormNew extends HTMLElement {
         const intentionDate = this.shadowRoot.querySelector(`[part~="form-date"]`);
 
         this.#intentionId = id;
+        this.#projectId = projectId;
 
         header.textContent = this.#intentionId ? "Edit Intention" : "New Intention";
         submitButton.textContent = this.#intentionId ? "Save Changes" : "Add Intention";
         intentionTitle.value = title;
         intentionReason.value = reason;
         intentionDesc.value = description;
-        this.appendProjectOptions(projectNames, intentionProject)
-        intentionProject.value = projectName;
+        this.appendProjectOptions(projectOptions, intentionProject)
+        intentionProject.value = projectId;
         intentionDate.value = dueDate;
     }
 
-    appendProjectOptions(projectNames, select) {
-
-        projectNames.forEach((projectName) => {
-            const option = renderProjectOption(projectName);
+    appendProjectOptions(projectOptions, select) {
+        projectOptions.forEach((optionData) => {
+            const option = renderProjectOption(optionData);
             select.appendChild(option)
         })
     }
