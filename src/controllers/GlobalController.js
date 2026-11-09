@@ -42,6 +42,14 @@ class GlobalController {
             this.#reRenderCurrentPage(projectPackage);
         })
 
+        body.addEventListener("delete-intention-item", (e) => {
+            const intentionPackage = e.detail.intentionPackage;
+            this.intentionService.deleteIntention(intentionPackage.intentionId);
+            const projectPackage = { projectId: this.mainContainerView.currentProjectId }
+            this.#reRenderCurrentPage(projectPackage);
+            this.dialogView.closeTemplate();
+        });
+
         /* Main Container Events (interactions via mainContainer) */
 
         mainContainer.addEventListener("move-intention-item", (e) => {
