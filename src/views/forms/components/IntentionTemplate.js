@@ -46,6 +46,7 @@ class IntentionTemplate extends HTMLElement {
         description.textContent = (isEmptyString) ? "No Description yet" : intentionData.intention.description;
 
         this.#intentionId = intentionData.intention.id;
+        this.#projectId = intentionData.intention.projectId;
     }
 
     connectedCallback() {
