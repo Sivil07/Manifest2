@@ -24,6 +24,7 @@ template.innerHTML = `
 
 class IntentionTemplate extends HTMLElement {
     #intentionId;
+    #projectId;
 
     constructor() {
         super();
@@ -50,10 +51,24 @@ class IntentionTemplate extends HTMLElement {
     connectedCallback() {
         const closeButton = this.shadowRoot.querySelector(`[part~="close-template"]`);
         const deleteButton = this.shadowRoot.querySelector(`[part~="delete-intention"]`);
+        const editButton = this.shadowRoot.querySelector(`[part~="edit-intention"]`);
 
         closeButton.addEventListener("click", () => {
             this.remove()
         });
+
+        editButton.addEventListener("click", () => {
+            const intentionPackage = {
+                intentionId: this.#intentionId,
+                projectId: this.#projectId
+            }
+            this.dispatchEvent(new CustomEvent("edit-intention-item", {
+                bubbles: true,
+                detail: {
+                    intentionPackage: intentionPackage
+                }
+            }))
+        })
 
         deleteButton.addEventListener("click", () => {
             const intentionPackage = {
