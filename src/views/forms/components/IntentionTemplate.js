@@ -49,8 +49,22 @@ class IntentionTemplate extends HTMLElement {
 
     connectedCallback() {
         const closeButton = this.shadowRoot.querySelector(`[part~="close-template"]`);
+        const deleteButton = this.shadowRoot.querySelector(`[part~="delete-intention"]`);
+
         closeButton.addEventListener("click", () => {
             this.remove()
+        });
+
+        deleteButton.addEventListener("click", () => {
+            const intentionPackage = {
+                intentionId: this.#intentionId
+            }
+            this.dispatchEvent(new CustomEvent("delete-intention-item", {
+                bubbles: true,
+                detail: {
+                    intentionPackage: intentionPackage
+                }
+            }))
         });
     }
 }
