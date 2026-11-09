@@ -40,11 +40,12 @@ class Intention {
         this.projectId = projectId;
     }
     
-    applyUpdates({ title, reason, dueDate, description }) {
+    applyUpdates({ title, reason, dueDate, description, projectId }) {
         this.title = title;
         this.reason = reason;
         this.dueDate = dueDate;
         this.description = description;
+        this.projectId = projectId;
     }
 
     setCompletedStatus(checkedData) {
