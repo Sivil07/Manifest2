@@ -43,6 +43,8 @@ class IntentionItemNew extends HTMLElement {
 
     connectedCallback() {
         const checkBox = this.shadowRoot.querySelector(`[part="input-check"]`);
+        const intentionTextButton = this.shadowRoot.querySelector(`[part="intention-text"]`);
+
         checkBox.addEventListener("change", (e) => {
             const newCompletedStatus = e.target.checked;
             const intentionPackage = {
@@ -57,6 +59,19 @@ class IntentionItemNew extends HTMLElement {
                 }
             }))
         });
+
+        intentionTextButton.addEventListener("click", () => {
+            const intentionPackage = {
+                intentionId: this.#intentionId,
+                projectId: this.#intentionProjectId
+            }
+            this.dispatchEvent(new CustomEvent("view-intention-item", {
+                bubbles: true,
+                detail: {
+                    intentionPackage: intentionPackage
+                }
+            }))
+        })
     }
 }
 
