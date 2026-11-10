@@ -53,6 +53,7 @@ intention-item::part(intention-reason) {
 intention-item::part(intention-tags) {
   grid-area: Intention-Tags;
   display: flex;
+  align-items: center;
   gap: 1rem;
 }
 
@@ -64,6 +65,15 @@ intention-item::part(tag) {
   font-weight: bold;
   border-radius: 1rem;
   margin: 0;
+}
+
+intention-item::part(sort-button) {
+  padding: 0.5rem;
+  border-radius: 1rem;
+  background-color: var(--clr-lavender);
+  color: var(--clr-logo-primary);
+  border: none;
+  cursor: pointer;
 }
 
 /* intention-item::part(todo-tags) {
