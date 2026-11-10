@@ -1,15 +1,15 @@
 function renderMoveToProjectButton() {
-    const sortButton = document.createElement("button");
-    sortButton.setAttribute("part", "sort-button");
-    sortButton.type = "button";
-    sortButton.textContent = "Sort";
+    const moveToButton = document.createElement("button");
+    moveToButton.setAttribute("part", "move-button tag temp-action");
+    moveToButton.type = "button";
+    moveToButton.textContent = "Move to...";
 
-    sortButton.addEventListener("click", () => {
-        sortButton.dispatchEvent( new CustomEvent("forward-move-event", {
+    moveToButton.addEventListener("click", () => {
+        moveToButton.dispatchEvent( new CustomEvent("forward-move-event", {
             bubbles: true
         }))
     });
-    return sortButton;
+    return moveToButton;
 
 }
 

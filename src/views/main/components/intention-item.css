@@ -67,11 +67,7 @@ intention-item::part(tag) {
   margin: 0;
 }
 
-intention-item::part(sort-button) {
-  padding: 0.5rem;
-  border-radius: 1rem;
-  background-color: var(--clr-lavender);
-  color: var(--clr-logo-primary);
+intention-item::part(move-button) {
   border: none;
   cursor: pointer;
 }
