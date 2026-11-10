@@ -1,4 +1,4 @@
-import { renderAddProjectButton } from "./components/factories/add-project-button.js";
+import { renderAddProjectButton } from "./components/factories/button-actions.js";
 import { renderCollection } from "./components/factories/collection.js";
 import { renderHeader, renderSpecificProjectHeader } from "./components/factories/header.js";
 import { renderSection } from "./components/factories/section.js";

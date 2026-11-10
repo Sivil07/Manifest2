@@ -1,4 +1,4 @@
-import { renderMoveToProjectButton } from "./factories/move-to-project-button.js";
+import { renderMoveToProjectButton } from "./factories/button-actions.js";
 
 const template = document.createElement("template");
 template.innerHTML = `

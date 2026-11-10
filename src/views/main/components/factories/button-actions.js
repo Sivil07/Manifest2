@@ -1,3 +1,17 @@
+function renderMoveToProjectButton() {
+    const moveToButton = document.createElement("button");
+    moveToButton.setAttribute("part", "move-button tag temp-action");
+    moveToButton.type = "button";
+    moveToButton.textContent = "Move to...";
+
+    moveToButton.addEventListener("click", () => {
+        moveToButton.dispatchEvent(new CustomEvent("forward-move-event", {
+            bubbles: true
+        }))
+    });
+    return moveToButton;
+}
+
 /* Creates the "+ New Project" button used within the project display.
    
    When the button is clicked the "open-project-form" event will
@@ -17,7 +31,7 @@ function renderAddProjectButton() {
 
     addProject.addEventListener("click", () => {
         addProject.dispatchEvent(
-            new CustomEvent( "open-project-form", {
+            new CustomEvent("open-project-form", {
                 bubbles: true
             })
         )
@@ -27,5 +41,6 @@ function renderAddProjectButton() {
 }
 
 export {
+    renderMoveToProjectButton,
     renderAddProjectButton
 }
