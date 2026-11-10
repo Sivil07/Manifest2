@@ -1,4 +1,5 @@
 import { renderProjectOption } from "../factories/select-option.js";
+import { setMinDate, getCurrentDate } from "../../../utils/date.js";
 
 const template = document.createElement("template");
 template.innerHTML = `
@@ -27,6 +28,7 @@ template.innerHTML = `
     </div>
     <div part="date-group form-group">
         <label part="form-label" for="input-date">Due Date</label>
+        <p part="form-reminder" hidden>Due today? Tomorrow is selected by default, but you can change it.</p>
         <input id="input-date" part="intention-input form-date" type="date" name="dueDate" required>
     </div>
     <div part="form-actions">
@@ -64,7 +66,12 @@ class IntentionFormNew extends HTMLElement {
         intentionDesc.value = description;
         this.appendProjectOptions(projectOptions, intentionProject)
         intentionProject.value = projectId;
-        intentionDate.value = dueDate;
+        intentionDate.value = dueDate
+
+        intentionDate.min = setMinDate()
+        const isDueToday = (dueDate !== "" && dueDate === getCurrentDate())
+        intentionDate.value = isDueToday ? setMinDate() : dueDate;  
+        if (isDueToday) this.showReminder()
     }
 
     appendProjectOptions(projectOptions, select) {
@@ -72,6 +79,11 @@ class IntentionFormNew extends HTMLElement {
             const option = renderProjectOption(optionData);
             select.appendChild(option)
         })
+    }
+
+    showReminder() {
+        const reminder = this.shadowRoot.querySelector(`[part="form-reminder"]`);
+        reminder.hidden = false;
     }
 
     connectedCallback() {
