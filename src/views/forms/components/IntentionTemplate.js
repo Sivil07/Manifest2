@@ -1,3 +1,5 @@
+import { renderMoveToProjectButton } from "../../main/components/factories/move-to-project-button.js";
+
 const template = document.createElement("template");
 template.innerHTML = `
 <div part="template-contents">
@@ -38,6 +40,8 @@ class IntentionTemplate extends HTMLElement {
         const dueDate = this.shadowRoot.querySelector(`[part~="temp-due-date"]`);
         const description = this.shadowRoot.querySelector(`[part="template-desc"]`);
 
+        this.#addMoveToProjectButton();
+
         title.textContent = intentionData.intention.title;
         reason.textContent = `Intention: ${intentionData.intention.reason}`
         dueDate.textContent = intentionData.intention.dueDate;
@@ -47,6 +51,13 @@ class IntentionTemplate extends HTMLElement {
 
         this.#intentionId = intentionData.intention.id;
         this.#projectId = intentionData.intention.projectId;
+    }
+
+    #addMoveToProjectButton() {
+        const templateActions = this.shadowRoot.querySelector(`[part="template-actions"]`);
+        const deleteButton = this.shadowRoot.querySelector(`[part~="delete-intention"]`);
+        const moveToButton = renderMoveToProjectButton();
+        templateActions.insertBefore(moveToButton, deleteButton)
     }
 
     connectedCallback() {
