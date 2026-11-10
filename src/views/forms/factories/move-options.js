@@ -1,4 +1,4 @@
-function renderRadioInput(projectId, count) {
+function renderRadioInput(projectId, count, isCurrentProject) {
     const radio = document.createElement("input");
     radio.type = "radio";
     radio.id = `radio-${count}`
@@ -6,6 +6,7 @@ function renderRadioInput(projectId, count) {
     radio.classList.add("highlight-radio")
     radio.name = "projectId"; // can throw an error if the Intention model "projectId" name is changed.
     radio.value = projectId;
+    radio.checked = isCurrentProject
     return radio;
 }
 
@@ -14,6 +15,15 @@ function renderProjectName(projectName) {
     nameElement.setAttribute("part", "move-project-name");
     nameElement.textContent = projectName
     return nameElement;
+}
+
+function renderProjectStatus(intentionProjectId, projectId) {
+    const status = document.createElement("p");
+    status.setAttribute("part", "project-status");
+
+    const isCurrentProject = intentionProjectId === projectId;
+    status.textContent = isCurrentProject ? "Current" : "";
+    return { status, isCurrentProject }
 }
 
 function renderProjectColor(colorHexValue) {
@@ -34,25 +44,29 @@ function renderProjectDetails(projectName, colorHexValue) {
     return projectDetails
 }
 
-function renderProjectOptionInfo(projectId, projectName, colorHexValue, count) {
+function renderProjectOptionInfo(projectId, projectName, colorHexValue, count, isCurrentProject) {
     const projectOption = document.createElement("div");
     const projectDetails = renderProjectDetails(projectName, colorHexValue)
-    const radio = renderRadioInput(projectId, count);
+    const radio = renderRadioInput(projectId, count, isCurrentProject);
 
     projectOption.setAttribute("part", "project-option-info");
     projectOption.append(projectDetails, radio);
     return projectOption;
 }
 
-function renderProjectOption(projectId, projectName, colorHexValue, count) {
+function renderProjectOption(projectId, intentionProjectId, projectName, colorHexValue, count) {
     const label = document.createElement("label");
-    const projectOption = renderProjectOptionInfo(projectId, projectName, colorHexValue, count);
+    const statusObj = renderProjectStatus(intentionProjectId, projectId);
+
+    const projectStatus = statusObj.status
+    const projectOptionInfo = renderProjectOptionInfo(projectId, projectName, colorHexValue, count, statusObj.isCurrentProject);
+
 
     label.htmlFor = `radio-${count}`
     label.classList.add("highlight-label");
     label.setAttribute("part", "project-option");
 
-    label.appendChild(projectOption);
+    label.append(projectOptionInfo, projectStatus);
     return label;
 }
 
