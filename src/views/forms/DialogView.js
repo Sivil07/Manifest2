@@ -21,7 +21,7 @@ class DialogView {
             intention: templateDetails.intention
         }
         this.#template = intentionTemplate;
-        document.body.appendChild(intentionTemplate);
+        this.body.appendChild(intentionTemplate);
     }
 
     renderProjectForm() {
@@ -32,7 +32,7 @@ class DialogView {
         projectDialog.appendChild(projectForm);
         this.#form = projectForm;
         this.#dialog = projectDialog;
-        document.body.appendChild(projectDialog)
+        this.body.appendChild(projectDialog)
         projectDialog.showModal();
     }
 
@@ -45,8 +45,21 @@ class DialogView {
         intentionDialog.appendChild(intentionForm);
         this.#form = intentionForm;
         this.#dialog = intentionDialog;
-        document.body.appendChild(intentionDialog);
+        this.body.appendChild(intentionDialog);
         intentionDialog.showModal()
+    }
+
+    renderMoveForm(formPackage) {
+        if (this.#dialog !== undefined) this.#dialog.remove();
+
+        const moveDialog = renderDialog();
+        const moveForm = document.createElement("move-to-form");
+        moveForm.formData = formPackage;
+        moveDialog.appendChild(moveForm)
+        this.#form = moveForm;
+        this.#dialog = moveDialog;
+        this.body.appendChild(moveDialog);
+        moveDialog.showModal()
     }
 
     closeTemplate() {
