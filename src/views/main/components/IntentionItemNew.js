@@ -95,7 +95,7 @@ class IntentionItemNew extends HTMLElement {
             }))
         })
 
-        intentionTags.addEventListener("forward-to-intention-item", () => {
+        intentionTags.addEventListener("forward-move-event", () => {
             const intentionPackage = {
                 intentionId: this.#intentionId
             }

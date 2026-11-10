@@ -5,7 +5,7 @@ function renderMoveToProjectButton() {
     sortButton.textContent = "Sort";
 
     sortButton.addEventListener("click", () => {
-        sortButton.dispatchEvent( new CustomEvent("forward-to-intention-item", {
+        sortButton.dispatchEvent( new CustomEvent("forward-move-event", {
             bubbles: true
         }))
     });
