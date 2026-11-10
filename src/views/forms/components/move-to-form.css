@@ -33,7 +33,7 @@ move-to-form::part(project-options) {
 move-to-form::part(project-option) {
   display: flex;
   justify-content: space-between;
-  padding: 0.5rem;
+  padding: 0 0.5rem;
   border-radius: 0.5rem;
   align-items: center;
 }
@@ -44,10 +44,15 @@ move-to-form::part(project-option-info) {
   gap: 1rem;
 }
 
+move-to-form::part(project-details) {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 move-to-form::part(project-color) {
   width: 10px;
   aspect-ratio: 1;
-  background-color: red;
   border-radius: 50%;
 }
 
