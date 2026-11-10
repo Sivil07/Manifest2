@@ -96,15 +96,25 @@ class MoveToForm extends HTMLElement {
         const projectOptions = this.shadowRoot.querySelector(`[part="project-options"]`);
         
         const projects = data.projectOptions;
+        
         let projectCount = 1;
+        const inboxOption = this.createInboxOption(intention.projectId, projectCount);
+        projectCount++
+        projectOptions.appendChild(inboxOption)
         projects.forEach((project) => {
             const { projectId, projectName, projectColor, } = project;
             const projectOption = renderProjectOption(projectId, projectName, projectColor, projectCount)
             projectOptions.appendChild(projectOption)
             projectCount++
-
         });
-        console.log(projectOptions)
+    }
+
+    createInboxOption(projectCount) {
+        const projectId = "";
+        const projectName = "Inbox";
+        const projectColor = "#808080";
+        const inboxOption = renderProjectOption(projectId, projectName, projectColor, projectCount);
+        return inboxOption;
     }
 }
 
