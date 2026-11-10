@@ -1,3 +1,6 @@
+import { renderProjectOption } from "../factories/move-options.js";
+
+
 const template = document.createElement("template");
 template.innerHTML = `
 <style>
@@ -13,36 +16,38 @@ template.innerHTML = `
         <p part="subtitle">Choose a project for this intention</p>
     </div>
     <div part="project-options">
-        <label for="radio-1" part="project-option" class="highlight-label">
-            <div part="project-option-info">
-                <div part="project-color"></div>
-                Inbox
-                <input type="radio" id="radio-1" part="project-radio" class="highlight-radio" name="projectId" value="projectColor">
-            </div>
-            <p part="project-status">Current</p>
-        </label>
-        <label for="radio-2" part="project-option" class="highlight-label">
-            <div part="project-option-info">
-                <div part="project-color"></div>
-                Work
-                <input type="radio" id="radio-2" part="project-radio" class="highlight-radio" name="projectId" value="projectColor">
-            </div>
-            <p part="project-status"></p>
-        </label>
-        <label for="radio-3" part="project-option" class="highlight-label">
-            <div part="project-option-info">
-                <div part="project-color"></div>
-                Home
-                <input type="radio" id="radio-3" part="project-radio" class="highlight-radio" name="projectId" value="projectColor">
-            </div>
-            <p part="project-status"></p>
-        </label>
+
     </div>
     <div part="move-form-actions">
         <button type="button" part="move-action cancel-move">Cancel</button>
         <button type="submit" part="move-action submit-move">Move</button>
     </div>
 `
+
+        // <label for="radio-1" part="project-option" class="highlight-label">
+        //     <div part="project-option-info">
+        //         <div part="project-color"></div>
+        //         Inbox
+        //         <input type="radio" id="radio-1" part="project-radio" class="highlight-radio" name="projectId" value="projectColor">
+        //     </div>
+        //     <p part="project-status">Current</p>
+        // </label>
+        // <label for="radio-2" part="project-option" class="highlight-label">
+        //     <div part="project-option-info">
+        //         <div part="project-color"></div>
+        //         Work
+        //         <input type="radio" id="radio-2" part="project-radio" class="highlight-radio" name="projectId" value="projectColor">
+        //     </div>
+        //     <p part="project-status"></p>
+        // </label>
+        // <label for="radio-3" part="project-option" class="highlight-label">
+        //     <div part="project-option-info">
+        //         <div part="project-color"></div>
+        //         Home
+        //         <input type="radio" id="radio-3" part="project-radio" class="highlight-radio" name="projectId" value="projectColor">
+        //     </div>
+        //     <p part="project-status"></p>
+        // </label>
 
         // <form action="" class="move-to-form">
         //     <div class="form-header">
@@ -85,6 +90,21 @@ class MoveToForm extends HTMLElement {
         super();
         const shadow = this.attachShadow({ mode: "open" });
         shadow.append(template.content.cloneNode(true));
+    }
+
+    set formData(data) {
+        const projectOptions = this.shadowRoot.querySelector(`[part="project-options"]`);
+        
+        const projects = data.projectOptions;
+        let projectCount = 1;
+        projects.forEach((project) => {
+            const { projectId, projectName, projectColor, } = project;
+            const projectOption = renderProjectOption(projectId, projectName, projectColor, projectCount)
+            projectOptions.appendChild(projectOption)
+            projectCount++
+
+        });
+        console.log(projectOptions)
     }
 }
 
