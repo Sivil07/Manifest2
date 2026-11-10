@@ -75,6 +75,14 @@ class GlobalController {
             this.dialogView.renderIntentionForm(formPackage);
         });
 
+        body.addEventListener("open-move-form", (e) => {
+            const intentionPackage = e.detail.intentionPackage;
+            const intention = this.intentionService.findIntentionById(intentionPackage.intentionId);
+            const projectOptions = this.projectService.projectOptions;
+            const formPackage = { intention, projectOptions }
+            this.dialogView.renderMoveForm(formPackage)
+        })
+
         /* Main Container Events (interactions via mainContainer) */
 
         mainContainer.addEventListener("move-intention-item", (e) => {
@@ -97,14 +105,6 @@ class GlobalController {
             const templatePackage = { projectName, intention }
             this.dialogView.renderIntentionTemplate(templatePackage)
         });
-
-        mainContainer.addEventListener("open-move-form", (e) => {
-            const intentionPackage = e.detail.intentionPackage;
-            const intention = this.intentionService.findIntentionById(intentionPackage.intentionId);
-            const projectOptions = this.projectService.projectOptions;
-            const formPackage = { intention, projectOptions }
-            this.dialogView.renderMoveForm(formPackage)
-        })
 
         /* Sidebar Events (interactions via static nodes in navBar) */
 

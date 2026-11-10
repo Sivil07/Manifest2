@@ -64,9 +64,22 @@ class IntentionTemplate extends HTMLElement {
         const closeButton = this.shadowRoot.querySelector(`[part~="close-template"]`);
         const deleteButton = this.shadowRoot.querySelector(`[part~="delete-intention"]`);
         const editButton = this.shadowRoot.querySelector(`[part~="edit-intention"]`);
+        const templateActions = this.shadowRoot.querySelector(`[part="template-actions"]`);
+
+        templateActions.addEventListener("forward-move-event", () => {
+            const intentionPackage = {
+                intentionId: this.#intentionId
+            }
+            this.dispatchEvent( new CustomEvent( "open-move-form", {
+                bubbles: true,
+                detail: {
+                    intentionPackage: intentionPackage
+                }
+            } ) )
+        })
 
         closeButton.addEventListener("click", () => {
-            this.remove()
+            
         });
 
         editButton.addEventListener("click", () => {
