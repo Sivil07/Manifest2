@@ -79,7 +79,7 @@ class IntentionTemplate extends HTMLElement {
         })
 
         closeButton.addEventListener("click", () => {
-            
+            this.remove()
         });
 
         editButton.addEventListener("click", () => {
