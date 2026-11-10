@@ -3,11 +3,10 @@ import { renderCollection } from "./components/factories/collection.js";
 import { renderHeader } from "./components/factories/header.js";
 import { renderSpecificProjectHeader } from "./components/factories/specific-project-header.js";
 import { renderSection } from "./components/factories/section.js";
-import { renderActiveList, renderCompletedList } from "./components/factories/intention-lists.js";
+import { buildActiveList, buildCompletedList } from "./components/factories/intention-lists.js";
 import { renderCounter } from "./components/factories/counter.js";
 
 class MainContentView {
-    #completedElements = [];
     #counterElement;
     currentProjectId;
 
@@ -49,16 +48,12 @@ class MainContentView {
         upcomingSection.appendChild(renderHeader("Upcoming"));
 
         const intentionCollection = renderCollection();
-        const activeList = this.renderActiveIntentions(
-            renderActiveList(),
-            intentionDetails.transformedActive
-        )
+        const activeList = buildActiveList(intentionDetails.transformedActive)
+        const completedList = buildCompletedList(intentionDetails.transformedCompleted)
+        const counter = this.renderCompletedCount(intentionDetails.completedCount);
 
-        const completedList = this.renderCompletedIntentions(
-            renderCompletedList(),
-            intentionDetails.transformedCompleted,
-            intentionDetails.completedCount
-        )
+        /* Only display the counter when completed intentions exist. */
+        if (counter !== undefined) completedList.prepend(counter);
 
         intentionCollection.append(activeList, completedList);
         upcomingSection.appendChild(intentionCollection)
@@ -73,16 +68,12 @@ class MainContentView {
         inboxSection.appendChild(renderHeader("Inbox"));
 
         const intentionCollection = renderCollection();
-        const activeList = this.renderActiveIntentions(
-            renderActiveList(),
-            intentionDetails.transformedActive
-        )
+        const activeList = buildActiveList(intentionDetails.transformedActive)
+        const completedList = buildCompletedList(intentionDetails.transformedCompleted)
+        const counter = this.renderCompletedCount(intentionDetails.completedCount);
 
-        const completedList = this.renderCompletedIntentions(
-            renderCompletedList(),
-            intentionDetails.transformedCompleted,
-            intentionDetails.completedCount
-        )
+        /* Only display the counter when completed intentions exist. */
+        if (counter !== undefined) completedList.prepend(counter);
 
         intentionCollection.append(activeList, completedList);
         inboxSection.appendChild(intentionCollection)
@@ -99,58 +90,18 @@ class MainContentView {
         ))
 
         const intentionCollection = renderCollection();
-        const activeList = this.renderActiveIntentions(
-            renderActiveList(),
-            projectDetails.transformedActive
-        )
+        const activeList = buildActiveList(projectDetails.transformedActive)
+        const completedList = buildCompletedList(projectDetails.transformedCompleted)
+        const counter = this.renderCompletedCount(projectDetails.completedCount);
 
-        const completedList = this.renderCompletedIntentions(
-            renderCompletedList(),
-            projectDetails.transformedCompleted,
-            projectDetails.completedCount
-        )
+        /* Only display the counter when completed intentions exist. */
+        if (counter !== undefined) completedList.prepend(counter);
 
         intentionCollection.append(activeList, completedList);
         section.appendChild(intentionCollection)
 
         this.currentProjectId = projectDetails.project.id;
         this.mainContentContainer.appendChild(section);
-    }
-
-    /* Methods for rendering intentions */
-
-    renderActiveIntentions(activeNode, activeIntentions) {
-        activeNode.innerHTML = "";
-
-        activeIntentions.forEach((intentionBlock) => {
-            const intentionItem = document.createElement("intention-item");
-            intentionItem.intentionData = {
-                intention: intentionBlock.intention,
-                projectName: intentionBlock.projectName
-            }
-            activeNode.appendChild(intentionItem)
-        });
-        return activeNode;
-    }
-
-    renderCompletedIntentions(completedNode, completedIntentions, completedCount) {
-        completedNode.innerHTML = "";
-
-        const counter = this.renderCompletedCount(completedCount);
-
-        /* Only display the counter when completed intentions exist. */
-        if (counter !== undefined) completedNode.prepend(counter)
-
-        completedIntentions.forEach((intentionBlock) => {
-            const intentionItem = document.createElement("intention-item");
-            intentionItem.intentionData = {
-                intention: intentionBlock.intention,
-                projectName: intentionBlock.projectName
-            }
-            completedNode.appendChild(intentionItem)
-            this.#completedElements.push(intentionItem);
-        });
-        return completedNode;
     }
 
     /* Methods for rendering components */
@@ -166,7 +117,6 @@ class MainContentView {
 
         return counter;
     }
-
 }
 
 export default MainContentView;

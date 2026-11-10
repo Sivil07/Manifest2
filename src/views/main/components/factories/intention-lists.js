@@ -17,7 +17,34 @@ function renderCompletedList() {
     return completedList;
 }
 
+function buildActiveList(activeIntentions) {
+    const activeNode = renderActiveList();
+    activeIntentions.forEach((intentionBlock) => {
+        const intentionItem = document.createElement("intention-item");
+        intentionItem.intentionData = {
+            intention: intentionBlock.intention,
+            projectName: intentionBlock.projectName
+        }
+        activeNode.appendChild(intentionItem)
+    });
+    return activeNode;
+}
+
+function buildCompletedList(completedIntentions) {
+    const completedNode = renderCompletedList();
+
+    completedIntentions.forEach((intentionBlock) => {
+        const intentionItem = document.createElement("intention-item");
+        intentionItem.intentionData = {
+            intention: intentionBlock.intention,
+            projectName: intentionBlock.projectName
+        }
+        completedNode.appendChild(intentionItem)
+    });
+    return completedNode;
+}
+
 export {
-    renderActiveList,
-    renderCompletedList 
+    buildActiveList,
+    buildCompletedList
 }
