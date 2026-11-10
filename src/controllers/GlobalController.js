@@ -84,6 +84,20 @@ class GlobalController {
             this.dialogView.renderMoveForm(formPackage)
         })
 
+        body.addEventListener("update-intention-project", (e) => {
+            const intentionPackage = e.detail.intentionPackage;
+            const projectPackage = { projectId: this.mainContainerView.currentProjectId }
+            this.intentionService.moveIntentionToProject(intentionPackage.intentionId, intentionPackage.projectId);
+            if (intentionPackage.isTemplateOpen) {
+                this.dialogView.closeOverlays()
+                this.#reRenderCurrentPage(projectPackage);
+                return;
+            }
+
+            this.dialogView.closeDialog();
+            this.#reRenderCurrentPage(projectPackage);
+        })
+
         /* Main Container Events (interactions via mainContainer) */
 
         mainContainer.addEventListener("move-intention-item", (e) => {
