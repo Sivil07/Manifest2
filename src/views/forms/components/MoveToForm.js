@@ -7,6 +7,10 @@ template.innerHTML = `
     .highlight-label:has(.highlight-radio:focus) {
         background-color: var(--clr-lavender);
     }
+    
+    .highlight-label:has(.highlight-radio:checked) {
+        background-color: var(--clr-lavender);
+    } 
 </style>
 
 
@@ -96,6 +100,7 @@ class MoveToForm extends HTMLElement {
         const projectOptions = this.shadowRoot.querySelector(`[part="project-options"]`);
         
         const projects = data.projectOptions;
+        const intention = data.intention;
         
         let projectCount = 1;
         const inboxOption = this.createInboxOption(intention.projectId, projectCount);
@@ -103,17 +108,17 @@ class MoveToForm extends HTMLElement {
         projectOptions.appendChild(inboxOption)
         projects.forEach((project) => {
             const { projectId, projectName, projectColor, } = project;
-            const projectOption = renderProjectOption(projectId, projectName, projectColor, projectCount)
+            const projectOption = renderProjectOption(projectId, intention.projectId, projectName, projectColor, projectCount)
             projectOptions.appendChild(projectOption)
             projectCount++
         });
     }
 
-    createInboxOption(projectCount) {
+    createInboxOption(intentionProjectId, projectCount) {
         const projectId = "";
         const projectName = "Inbox";
         const projectColor = "#808080";
-        const inboxOption = renderProjectOption(projectId, projectName, projectColor, projectCount);
+        const inboxOption = renderProjectOption(projectId, intentionProjectId, projectName, projectColor, projectCount);
         return inboxOption;
     }
 }
