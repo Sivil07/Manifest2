@@ -12,12 +12,14 @@ intention-form::part(intention-form-contents) {
     "Form-Note Form-Note";
   grid-template-rows: repeat(7, max-content);
   gap: 1rem;
+  align-items: center;
 }
 
 /* All Sections */
 
 intention-form::part(form-header) {
   grid-area: Form-Header;
+  margin: 0;
 }
 
 intention-form::part(title-group) {
@@ -105,4 +107,11 @@ intention-form::part(submit-intention) {
   background-color: var(--clr-logo-primary);
   color: var(--clr-white);
   border: none;
+}
+
+/* Intention Form - Form Reminder */
+
+intention-form::part(form-reminder) {
+  color: green;
+  margin: 0;
 }
