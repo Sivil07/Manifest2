@@ -76,7 +76,7 @@ const globalController = new GlobalController(
  )
 
 
-// const formDialog = document.querySelector("dialog");
-// formDialog.showModal();
+const formDialog = document.querySelector("dialog");
+formDialog.showModal();
 
 globalController.initialize();

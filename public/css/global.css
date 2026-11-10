@@ -41,6 +41,99 @@ body {
   grid-template-rows: max-content 1fr max-content;
 }
 
+.move-to-form {
+  display: grid;
+  grid-template-rows: repeat(3, max-content);
+  gap: 0.5rem;
+}
+
+.form-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.radio-groups {
+  display: grid;
+  grid-template-rows: 1fr;
+  gap: 0.5rem;
+}
+
+.intention-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.color {
+  width: 10px;
+  aspect-ratio: 1;
+  background-color: red;
+  border-radius: 50%;
+}
+
+.selected {
+  font-size: 0.7rem;
+}
+
+.input-radio {
+  /* background-color: var(--clr-muted); */
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  align-items: center;
+}
+
+.input-radio:has(.my-radio:focus) {
+  background-color: red;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.action {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background-color: transparent;
+  cursor: pointer;
+  border: 1px solid var(--clr-lavender);
+  color: var(--clr-logo-primary);
+}
+
+.submit-move {
+  background-color: var(--clr-logo-primary);
+  color: var(--clr-white);
+  border: none;
+}
+
+/* intention-form::part(form-actions) {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  grid-area: Form-Actions;
+}
+
+intention-form::part(form-action) {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background-color: transparent;
+  cursor: pointer;
+  border: 1px solid var(--clr-lavender);
+  color: var(--clr-logo-primary);
+}
+
+intention-form::part(submit-intention) {
+  background-color: var(--clr-logo-primary);
+  color: var(--clr-white);
+  border: none;
+} */
+
 /* Header Section */
 
 #logo-section {

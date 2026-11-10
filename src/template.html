@@ -61,6 +61,46 @@
 
         </div>
     </nav>
+    <dialog id="form-dialog">
+        <form action="" class="move-to-form">
+            <div class="form-header">
+                <h2 class="title">Move To...</h2>
+                <p class="subtitle">Choose a project for this intention</p>
+            </div>
+            <div class="radio-groups">
+                <label for="radio-1" class="input-radio">
+                    <div class="intention-info">
+                        <div class="color"></div>
+                        Inbox
+                        <input type="radio" id="radio-1" class="my-radio" name="projectId" value="projectColor">
+                    </div>
+                    <p class="selected">Current</p>
+                </label>
+                <label for="radio-2" class="input-radio">
+                    <div class="intention-info">
+                        <div class="color"></div>
+                        Work
+                        <input type="radio" id="radio-2" class="my-radio" name="projectId" value="projectColor">
+                    </div>
+                    <p class="selected"></p>
+                </label>
+                <label for="radio-3" class="input-radio">
+                    <div class="intention-info">
+                        <div class="color"></div>
+                        Home
+                        <input type="radio" id="radio-3" class="my-radio" name="projectId" value="projectColor">
+                    </div>
+                    <p class="selected"></p>
+                </label>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="action cancel-move">Cancel</button>
+                <button type="submit" class="action submit-move">Move</button>
+            </div>
+
+    </dialog>
+
+    </form>
     <!-- <dialog id="form-dialog">
         <div id="intention-form">
             <form action="" id="intention-form-contents">
