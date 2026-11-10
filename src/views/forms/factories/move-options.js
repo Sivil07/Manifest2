@@ -6,7 +6,7 @@ function renderRadioInput(projectId, count, isCurrentProject) {
     radio.classList.add("highlight-radio")
     radio.name = "projectId"; // can throw an error if the Intention model "projectId" name is changed.
     radio.value = projectId;
-    radio.checked = isCurrentProject
+    radio.checked = isCurrentProject // comes from renderProjectStatus (compares the specific intentionProjectId with the projectId from the array of projects)
     return radio;
 }
 
