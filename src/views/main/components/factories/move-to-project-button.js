@@ -3,6 +3,12 @@ function renderMoveToProjectButton() {
     sortButton.setAttribute("part", "sort-button");
     sortButton.type = "button";
     sortButton.textContent = "Sort";
+
+    sortButton.addEventListener("click", () => {
+        sortButton.dispatchEvent( new CustomEvent("forward-to-intention-item", {
+            bubbles: true
+        }))
+    });
     return sortButton;
 
 }
