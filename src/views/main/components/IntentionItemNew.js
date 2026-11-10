@@ -1,3 +1,5 @@
+import { renderMoveToProjectButton } from "./factories/move-to-project-button.js";
+
 const template = document.createElement("template");
 template.innerHTML = `
 <div part="intention-contents">
@@ -9,7 +11,7 @@ template.innerHTML = `
         <p part="intention-reason">I want To Be Able To fly</p>
     </button>
     <div part="intention-tags">
-        <p part="tag project-name">Work</p>
+        <p part="tag project-name"></p>
         <p part="tag due-date">Fri - Nov 3rd</p>
     </div>
 </div>
@@ -27,18 +29,37 @@ class IntentionItemNew extends HTMLElement {
     set intentionData(data) {
         const title = this.shadowRoot.querySelector(`[part="intention-title"]`);
         const reason = this.shadowRoot.querySelector(`[part="intention-reason"]`);
-        const projectName = this.shadowRoot.querySelector(`[part~="project-name"]`);
         const dueDate = this.shadowRoot.querySelector(`[part~="due-date"]`);
-        const checkBox = this.shadowRoot.querySelector(`[part="input-check"]`)
+        const checkBox = this.shadowRoot.querySelector(`[part="input-check"]`);
+        const projectName = this.shadowRoot.querySelector(`[part~="project-name"]`);
 
         title.textContent = data.intention.title;
         reason.textContent = data.intention.reason;
-        projectName.textContent = data.projectName;
         dueDate.textContent = data.intention.dueDate;
         checkBox.checked = data.intention.isChecked;
+        projectName.textContent = data.projectName;
+        // console.log(data.projectName)
+
+
+        const hasProjectName = (data.projectName !== "");
+        // console.log(hasProjectName)
+        this.#updateProjectTag(hasProjectName, projectName, data.projectName)
+        
 
         this.#intentionId = data.intention.id;
         this.#intentionProjectId = data.intention.projectId
+    }
+
+    #updateProjectTag(hasProjectName, projectElement, projectName) {
+        if (!hasProjectName) {
+            const intentionTags = this.shadowRoot.querySelector(`[part="intention-tags"]`);
+            const moveToButton = renderMoveToProjectButton();
+            projectElement.remove();
+            intentionTags.prepend(moveToButton)
+            return;
+        }
+
+        projectElement.textContent = projectName;
     }
 
     connectedCallback() {
