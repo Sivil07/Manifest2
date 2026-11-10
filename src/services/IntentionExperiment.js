@@ -159,6 +159,12 @@ class IntentionExperiment {
         this.#saveAllIntentions();
     }
 
+    moveIntentionToProject(id, projectId) {
+        const intention = this.findIntentionById(id);
+        intention.moveToProject(projectId);
+        this.#saveAllIntentions();
+    }
+
     deleteIntention(id) {
         const intentionIndex = this.#allIntentions.findIndex((intention) => intention.id === id);
         this.#allIntentions.splice(intentionIndex, 1);
