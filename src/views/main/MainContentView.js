@@ -1,7 +1,6 @@
 import { renderAddProjectButton } from "./components/factories/add-project-button.js";
 import { renderCollection } from "./components/factories/collection.js";
-import { renderHeader } from "./components/factories/header.js";
-import { renderSpecificProjectHeader } from "./components/factories/specific-project-header.js";
+import { renderHeader, renderSpecificProjectHeader } from "./components/factories/header.js";
 import { renderSection } from "./components/factories/section.js";
 import { buildActiveList, buildCompletedList } from "./components/factories/intention-lists.js";
 import { renderCounter } from "./components/factories/counter.js";

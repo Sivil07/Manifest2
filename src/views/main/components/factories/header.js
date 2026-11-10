@@ -1,40 +1,45 @@
-// function renderHeader() {
-//     const container = document.createElement("div");
-//     container.classList.add("header")
-
-//     const p = document.createElement("p");
-//     p.textContent = "Everything you intend.";
-//     p.classList.add("subtitle");
-//     container.appendChild(p)
-
-//     const h2 = document.createElement("h1");
-//     h2.textContent = "Projects"
-//     h2.classList.add("title")
-//     container.appendChild(h2)
-
-//     return container;
-// }
+function renderPageLabel(pageName) {
+    const pageLabel = document.createElement("h2");
+    pageLabel.classList.add("title");
+    pageLabel.textContent = pageName;
+    return pageLabel;
+}
 
 function renderHeader(titleText, subtitleText) {
     const container = document.createElement("div");
     container.classList.add("header")
 
     if (subtitleText) {
-        const p = document.createElement("p");
-        p.textContent = subtitleText
-        p.classList.add("subtitle");
-        container.appendChild(p);
+        const subtitle = document.createElement("p");
+        subtitle.textContent = subtitleText
+        subtitle.classList.add("subtitle");
+        container.appendChild(subtitle);
     }
 
-    const h2 = document.createElement("h1");
-    h2.textContent = titleText
-    h2.classList.add("title")
-    container.appendChild(h2);
-    
+    const pageLabel = renderPageLabel(titleText);
+    container.appendChild(pageLabel);
+
     return container;
+}
+
+function renderSpecificProjectHeader(titleText, projectColor) {
+    const container = document.createElement("div");
+    container.classList.add("project-header");
+
+    const color = document.createElement("div");
+    color.classList.add("project-color");
+    color.style.backgroundColor = projectColor;
+    container.appendChild(color)
+
+    const pageLabel = renderPageLabel(titleText);
+
+    container.appendChild(pageLabel);
+
+    return container
 }
 
 
 export {
-    renderHeader
+    renderHeader,
+    renderSpecificProjectHeader
 }
