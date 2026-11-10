@@ -6,7 +6,7 @@ class ProjectService {
 
     get projectOptions() {
         const projectOptions = this.#allProjects.map((project) => {
-            return {projectId: project.id, projectName: project.projectName}
+            return {projectId: project.id, projectName: project.projectName, projectColor: project.projectColor}
         });
         return projectOptions;
     }
