@@ -100,7 +100,10 @@ class GlobalController {
 
         mainContainer.addEventListener("open-move-form", (e) => {
             const intentionPackage = e.detail.intentionPackage;
-            console.log(intentionPackage)
+            const intention = this.intentionService.findIntentionById(intentionPackage.intentionId);
+            const projectOptions = this.projectService.projectOptions;
+            const formPackage = { intention, projectOptions }
+            this.dialogView.renderMoveForm(formPackage)
         })
 
         /* Sidebar Events (interactions via static nodes in navBar) */
