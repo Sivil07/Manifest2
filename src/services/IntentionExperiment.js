@@ -72,8 +72,8 @@ class IntentionExperiment {
        user (today, upcoming, inbox or specific project) */
     #matchesFilter(intention, projectId = null) {
         const today = getCurrentDate();
-        if (this.currentFilter === "today") return intention.dueDate === today;
-        if (this.currentFilter === "upcoming") return intention.dueDate !== today;
+        if (this.currentFilter === "today") return intention.dueDate === today && intention.projectId !== "";
+        if (this.currentFilter === "upcoming") return intention.dueDate !== today && intention.projectId !== "";
         if (this.currentFilter === "inbox") return intention.projectId === "";
 
         /* Used when the user is on a specific project page.
