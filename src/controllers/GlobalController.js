@@ -103,7 +103,8 @@ class GlobalController {
         mainContainer.addEventListener("move-intention-item", (e) => {
             const intentionPackage = e.detail.intentionPackage;
             this.intentionService.moveIntention(intentionPackage)
-            this.#reRenderCurrentPage(intentionPackage);
+            const projectPackage = { projectId: this.mainContainerView.currentProjectId }
+            this.#reRenderCurrentPage(projectPackage);
         });
 
         mainContainer.addEventListener("clear-completed-intentions", () => {
