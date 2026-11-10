@@ -146,6 +146,7 @@ class GlobalController {
                 break;
             case "inbox":
                 this.intentionService.setFilter("inbox")
+                this.#showInboxPage();
                 break;
             case "project":
                 this.intentionService.setFilter("project")
@@ -164,6 +165,11 @@ class GlobalController {
     #showUpcomingPage() {
         const intentionDetails = this.#buildFilteredIntentionDetails();
         this.mainContainerView.renderUpcomingPage(intentionDetails)
+    }
+
+    #showInboxPage() {
+        const intentionDetails = this.#buildFilteredIntentionDetails();
+        this.mainContainerView.renderInboxPage(intentionDetails)
     }
 
     /* Page data builder methods */

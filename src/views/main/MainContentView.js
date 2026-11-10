@@ -65,6 +65,30 @@ class MainContentView {
         this.mainContentContainer.appendChild(upcomingSection);
     }
 
+    renderInboxPage(intentionDetails) {
+        this.mainContentContainer.innerHTML = "";
+        this.currentProjectId = undefined;
+
+        const inboxSection = renderSection();
+        inboxSection.appendChild(renderHeader("Inbox"));
+
+        const intentionCollection = renderCollection();
+        const activeList = this.renderActiveIntentions(
+            renderActiveList(),
+            intentionDetails.transformedActive
+        )
+
+        const completedList = this.renderCompletedIntentions(
+            renderCompletedList(),
+            intentionDetails.transformedCompleted,
+            intentionDetails.completedCount
+        )
+
+        intentionCollection.append(activeList, completedList);
+        inboxSection.appendChild(intentionCollection)
+        this.mainContentContainer.appendChild(inboxSection);
+    }
+
     renderSpecificProjectPage(projectDetails) {
         this.mainContentContainer.innerHTML = "";
 
