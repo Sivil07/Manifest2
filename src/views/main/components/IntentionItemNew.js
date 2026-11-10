@@ -96,10 +96,17 @@ class IntentionItemNew extends HTMLElement {
         })
 
         intentionTags.addEventListener("forward-to-intention-item", () => {
-            console.log("yes")
+            const intentionPackage = {
+                intentionId: this.#intentionId
+            }
+            this.dispatchEvent( new CustomEvent("open-move-form", {
+                bubbles: true,
+                detail: {
+                    intentionPackage: intentionPackage
+                }
+            }))
         })
     }
 }
-
 
 customElements.define("intention-item", IntentionItemNew);

@@ -98,6 +98,11 @@ class GlobalController {
             this.dialogView.renderIntentionTemplate(templatePackage)
         });
 
+        mainContainer.addEventListener("open-move-form", (e) => {
+            const intentionPackage = e.detail.intentionPackage;
+            console.log(intentionPackage)
+        })
+
         /* Sidebar Events (interactions via static nodes in navBar) */
 
         sideBarAddProjectButton.addEventListener("click", () => {
