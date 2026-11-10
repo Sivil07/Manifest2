@@ -77,8 +77,4 @@ const globalController = new GlobalController(
     dialogView
  )
 
-
-const formDialog = document.querySelector("dialog");
-formDialog.showModal();
-
 globalController.initialize();
