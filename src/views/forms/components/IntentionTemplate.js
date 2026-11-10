@@ -67,8 +67,10 @@ class IntentionTemplate extends HTMLElement {
         const templateActions = this.shadowRoot.querySelector(`[part="template-actions"]`);
 
         templateActions.addEventListener("forward-move-event", () => {
+            const isTemplateOpen = true;
             const intentionPackage = {
-                intentionId: this.#intentionId
+                intentionId: this.#intentionId,
+                isTemplateOpen: isTemplateOpen
             }
             this.dispatchEvent( new CustomEvent( "open-move-form", {
                 bubbles: true,

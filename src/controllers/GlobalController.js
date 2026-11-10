@@ -79,7 +79,8 @@ class GlobalController {
             const intentionPackage = e.detail.intentionPackage;
             const intention = this.intentionService.findIntentionById(intentionPackage.intentionId);
             const projectOptions = this.projectService.projectOptions;
-            const formPackage = { intention, projectOptions }
+            const isTemplateOpen = intentionPackage.isTemplateOpen === undefined ? false : intentionPackage.isTemplateOpen
+            const formPackage = { isTemplateOpen, intention, projectOptions }
             this.dialogView.renderMoveForm(formPackage)
         })
 
