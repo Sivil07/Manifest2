@@ -25,16 +25,17 @@ class GlobalController {
         });
 
         body.addEventListener("save-project", (e) => {
-            const projectPackage = e.detail.projectPackage;
-            const hasDuplicate = this.projectService.hasDuplicate(projectPackage.projectName);
+            const dataPackage = e.detail.projectPackage;
+            const projectPackage = { projectId: this.mainContainerView.currentProjectId }
+            const hasDuplicate = this.projectService.hasDuplicate(dataPackage.projectName);
             if (hasDuplicate) {
                 this.dialogView.showError();
                 return;
             }
 
-            this.projectService.createProject(projectPackage);
+            this.projectService.createProject(dataPackage);
             this.dialogView.closeDialog();
-            this.#refreshSideBar();
+            this.#reRenderCurrentPage(projectPackage);
         });
 
         body.addEventListener("save-intention", (e) => {
