@@ -8,10 +8,20 @@ intention-item::part(intention-contents) {
   grid-template-columns: max-content 1fr;
   grid-template-rows: repeat(2, max-content);
   gap: 0.85rem;
-  background-color: var(--clr-white);
+  /* background-color: var(--clr-white); */
   border: 1px solid var(--clr-lavender);
   padding: 0.75rem;
   border-radius: 1rem;
+}
+
+intention-item::part(active) {
+  background-color: var(--clr-white);
+
+}
+
+intention-item::part(completed) {
+  background-color: transparent;
+
 }
 
 /* Intention Item - Checkbox Section */
@@ -72,16 +82,4 @@ intention-item::part(move-button) {
   cursor: pointer;
 }
 
-/* intention-item::part(todo-tags) {
-  grid-area: Todo-Tags;
-}
-
-intention-item::part(tag) {
-  background-color: var(--clr-lavender);
-  color: var(--clr-logo-primary);
-  font-size: 0.8rem;
-  padding: 0.1rem 0.5rem;
-  font-weight: bold;
-  border-radius: 1rem;
-  margin: 0;
-} */
+/* For Intentions that are completed */

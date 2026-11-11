@@ -39,6 +39,7 @@ function buildCompletedList(completedIntentions) {
             intention: intentionBlock.intention,
             projectName: intentionBlock.projectName
         }
+        intentionItem.classList.add("transparent")
         completedNode.appendChild(intentionItem)
     });
     return completedNode;

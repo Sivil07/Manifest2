@@ -32,18 +32,19 @@ class IntentionItemNew extends HTMLElement {
         const dueDate = this.shadowRoot.querySelector(`[part~="due-date"]`);
         const checkBox = this.shadowRoot.querySelector(`[part="input-check"]`);
         const projectName = this.shadowRoot.querySelector(`[part~="project-name"]`);
+        const intentionContents = this.shadowRoot.querySelector(`[part~="intention-contents"]`)
 
         title.textContent = data.intention.title;
         reason.textContent = data.intention.reason;
         dueDate.textContent = data.intention.dueDate;
         checkBox.checked = data.intention.isChecked;
         projectName.textContent = data.projectName;
-        // console.log(data.projectName)
-
 
         const hasProjectName = (data.projectName !== "");
-        // console.log(hasProjectName)
         this.#updateProjectTag(hasProjectName, projectName, data.projectName)
+
+        const status = data.intention.isChecked ? "completed" : "active";
+        intentionContents.setAttribute("part", `intention-contents ${status}`)
         
 
         this.#intentionId = data.intention.id;
