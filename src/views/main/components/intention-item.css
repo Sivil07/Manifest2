@@ -81,6 +81,11 @@ intention-item::part(tag) {
   margin: 0;
 }
 
+intention-item::part(due-date) {
+  background-color: var(--clr-due-bg);
+  color: var(--clr-due-txt);
+}
+
 intention-item::part(move-button) {
   border: none;
   cursor: pointer;

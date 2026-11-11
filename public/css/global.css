@@ -20,7 +20,6 @@ progress {
   background-color: transparent;
 }
 
-
 :root {
   --clr-logo-primary: #6c35f5;
   --clr-page-bg: #f7f3ff;
@@ -31,6 +30,8 @@ progress {
   --clr-purple-darkest: #21102f;
   --clr-muted: rgb(95, 92, 92);
   --clr-delete-button: rgb(180, 31, 31);
+  --clr-due-txt: #ac6413;
+  --clr-due-bg: #ffe2c2;
   --sidebar-project-clr-size: 15px;
   --section-padding: 1rem;
   --sidebar-width: 220px;
