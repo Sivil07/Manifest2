@@ -26,13 +26,13 @@ class IntentionExperiment {
        counts for today, upcoming and inbox */
     get navActiveCounts() {
         const todayIntentions = this.#allIntentions.filter((intention) => {
-            const isToday = intention.dueDate === getCurrentDate();
+            const isToday = (intention.dueDate === getCurrentDate() && intention.projectId !== "");
             const isCompleted = !intention.isChecked;
             return isToday && isCompleted;
         });
 
         const upcomingIntentions = this.#allIntentions.filter((intention) => {
-            const isUpcoming = intention.dueDate !== getCurrentDate();
+            const isUpcoming = (intention.dueDate !== getCurrentDate() && intention.projectId !== "");
             const isCompleted = !intention.isChecked;
             return isUpcoming && isCompleted;
         });
