@@ -53,6 +53,10 @@ intention-item::part(intention-title) {
   margin: 0;
 }
 
+intention-item::part(strike-through) {
+  text-decoration: line-through;
+}
+
 intention-item::part(intention-reason) {
   color: var(--clr-muted);
   margin: 0;

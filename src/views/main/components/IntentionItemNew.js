@@ -45,7 +45,10 @@ class IntentionItemNew extends HTMLElement {
 
         const status = data.intention.isChecked ? "completed" : "active";
         intentionContents.setAttribute("part", `intention-contents ${status}`)
-        
+
+        const textDecoration = data.intention.isChecked ? "strike-through" : "";
+        title.setAttribute("part", `intention-title ${textDecoration}`)
+
 
         this.#intentionId = data.intention.id;
         this.#intentionProjectId = data.intention.projectId
@@ -100,7 +103,7 @@ class IntentionItemNew extends HTMLElement {
             const intentionPackage = {
                 intentionId: this.#intentionId
             }
-            this.dispatchEvent( new CustomEvent("open-move-form", {
+            this.dispatchEvent(new CustomEvent("open-move-form", {
                 bubbles: true,
                 detail: {
                     intentionPackage: intentionPackage
