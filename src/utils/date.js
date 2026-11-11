@@ -1,36 +1,36 @@
-import { add, format } from "date-fns";
+import { add, format, formatDate } from "date-fns";
 
 function getNextDay() {
-    return add( new Date(), {
+    return add(new Date(), {
         days: 1
     });
 }
 
 function getPreviousDay() {
-    const previousDay = add( new Date(), {days: -1});
-    return format( new Date(previousDay), "yyyy-MM-dd" )
+    const previousDay = add(new Date(), { days: -1 });
+    return format(new Date(previousDay), "yyyy-MM-dd")
 }
 
 function setMinDate() {
-    const minDate = format( new Date(getNextDay()), "yyyy-LL-dd")
+    const minDate = format(new Date(getNextDay()), "yyyy-LL-dd")
     return minDate;
 }
 
 function getCompletedByDayOfWeek(completedDate) {
-    const day = format( new Date(completedDate), "EEE"  )
+    const day = format(new Date(completedDate), "EEE")
     return day;
 }
 
 function getCurrentDate() {
-    return format( new Date(), "yyyy-MM-dd");
+    return format(new Date(), "yyyy-MM-dd");
 }
 
 function getWelcomeDate() {
-    return format( new Date(), "EEEE, LLL L" );
-} 
+    return format(new Date(), "EEEE, LLL L");
+}
 
 function getDayPeriod() {
-    return format( new Date(), "BBBB")
+    return format(new Date(), "BBBB")
 }
 
 function getWelcomeMessage() {
@@ -39,10 +39,9 @@ function getWelcomeMessage() {
     return message;
 }
 
-
 function getGreetingForDayPeriod(dayPeriod) {
     let welcomeMessage;
-    switch(dayPeriod) {
+    switch (dayPeriod) {
         case "in the morning":
             welcomeMessage = "Good Morning"
             break;
@@ -59,11 +58,26 @@ function getGreetingForDayPeriod(dayPeriod) {
     return welcomeMessage;
 }
 
+function getDateParts(dueDate) {
+    const [rawYear, rawMonth, rawDay] = dueDate.split("-")
+    const year = parseInt(rawYear)
+    const month = parseInt(rawMonth) - 1;
+    const day = parseInt(rawDay)
+    return [ year, month, day ];
+}
+
+function formatDueDateTag(dueDate) {
+    const dateParts = getDateParts(dueDate);
+    const formattedDate = format(new Date(...dateParts), "MMM d")
+    return formattedDate;
+}
+
 export {
     setMinDate,
     getCompletedByDayOfWeek,
     getCurrentDate,
     getPreviousDay,
     getWelcomeDate,
-    getWelcomeMessage
+    getWelcomeMessage,
+    formatDueDateTag
 }

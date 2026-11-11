@@ -1,4 +1,5 @@
 import { renderMoveToProjectButton } from "./factories/button-actions.js";
+import { formatDueDateTag } from "../../../utils/date.js";
 
 const template = document.createElement("template");
 template.innerHTML = `
@@ -36,7 +37,7 @@ class IntentionItemNew extends HTMLElement {
 
         title.textContent = data.intention.title;
         reason.textContent = data.intention.reason;
-        dueDate.textContent = data.intention.dueDate;
+        dueDate.textContent = formatDueDateTag(data.intention.dueDate);
         checkBox.checked = data.intention.isChecked;
         projectName.textContent = data.projectName;
 
