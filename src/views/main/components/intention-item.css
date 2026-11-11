@@ -89,6 +89,8 @@ intention-item::part(due-date) {
 intention-item::part(move-button) {
   border: none;
   cursor: pointer;
+  background-color: var(--clr-move-tag-bg);
+  color: var(--clr-move-tag-text);
 }
 
 /* For Intentions that are completed */

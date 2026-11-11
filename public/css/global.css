@@ -32,6 +32,8 @@ progress {
   --clr-delete-button: rgb(180, 31, 31);
   --clr-due-txt: #ac6413;
   --clr-due-bg: #ffe2c2;
+  --clr-move-tag-text: #418b3b;
+  --clr-move-tag-bg: #bef8b6;
   --sidebar-project-clr-size: 15px;
   --section-padding: 1rem;
   --sidebar-width: 220px;

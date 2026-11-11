@@ -45,9 +45,9 @@ move-to-form::part(project-option-info) {
 }
 
 move-to-form::part(project-details) {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 move-to-form::part(project-color) {
@@ -79,7 +79,7 @@ move-to-form::part(move-action) {
 }
 
 move-to-form::part(submit-move) {
-  background-color: var(--clr-logo-primary);
-  color: var(--clr-white);
+  background-color: var(--clr-move-tag-bg);
+  color: var(--clr-move-tag-text);
   border: none;
 }

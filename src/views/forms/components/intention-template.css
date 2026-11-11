@@ -38,7 +38,7 @@ intention-template::part(temp-tag) {
   background-color: var(--clr-lavender);
   padding: 0.3rem;
   border-radius: 0.5rem;
-  color: var(--clr-logo-primary)
+  color: var(--clr-logo-primary);
 }
 
 /* Template Contents - Display */
@@ -95,6 +95,10 @@ intention-template::part(edit-intention) {
 
 intention-template::part(delete-intention) {
   color: var(--clr-delete-button);
+}
+
+intention-template::part(move-button) {
+  color: var(--clr-move-tag-text);
 }
 
 /* Close Template Section */
