@@ -31,6 +31,7 @@ intention-template::part(template-contents) {
 
 intention-template::part(template-tags) {
   display: flex;
+  gap: 1rem;
 }
 
 intention-template::part(temp-tag) {

@@ -5,7 +5,8 @@ const template = document.createElement("template");
 template.innerHTML = `
 <div part="template-contents">
     <div part="template-tags">
-        <p part="temp-tag temp-due-date">November 3rd</p>
+        <p part="temp-tag temp-project"></p>
+        <p part="temp-tag temp-due-date"></p>
     </div>
     <div part="template-display">
         <h2 part="template-title">Do MY Assignment Tonight</h2>
@@ -35,23 +36,26 @@ class IntentionTemplate extends HTMLElement {
         shadow.append(template.content.cloneNode(true));
     }
 
-    set templateData(intentionData) {
+    set templateData(data) {
         const title = this.shadowRoot.querySelector(`[part="template-title"]`);
         const reason = this.shadowRoot.querySelector(`[part="template-reason"]`);
         const dueDate = this.shadowRoot.querySelector(`[part~="temp-due-date"]`);
         const description = this.shadowRoot.querySelector(`[part="template-desc"]`);
+        const project = this.shadowRoot.querySelector(`[part~="temp-project"]`)
 
         this.#addMoveToProjectButton();
 
-        title.textContent = intentionData.intention.title;
-        reason.textContent = `Intention: ${intentionData.intention.reason}`
-        dueDate.textContent = formatDueDateTag(intentionData.intention.dueDate);
+        title.textContent = data.intention.title;
+        reason.textContent = `Intention: ${data.intention.reason}`
+        dueDate.textContent = formatDueDateTag(data.intention.dueDate);
 
-        const isEmptyString = intentionData.intention.description === undefined || intentionData.intention.description.length === 0;
-        description.textContent = (isEmptyString) ? "No Description yet" : intentionData.intention.description;
+        const isEmptyString = data.intention.description === undefined || data.intention.description.length === 0;
+        description.textContent = (isEmptyString) ? "No Description yet" : data.intention.description;
 
-        this.#intentionId = intentionData.intention.id;
-        this.#projectId = intentionData.intention.projectId;
+        project.textContent = data.projectName !== "" ? data.projectName : "Inbox";
+
+        this.#intentionId = data.intention.id;
+        this.#projectId = data.intention.projectId;
     }
 
     #addMoveToProjectButton() {
