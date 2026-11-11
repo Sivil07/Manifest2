@@ -4,6 +4,8 @@ import { renderHeader, renderSpecificProjectHeader } from "./components/factorie
 import { renderSection } from "./components/factories/section.js";
 import { buildActiveList, buildCompletedList } from "./components/factories/intention-lists.js";
 import { renderCounter } from "./components/factories/counter.js";
+import { getWelcomeDate, getWelcomeMessage } from "../../utils/date.js";
+import { buildProgressCard } from "./components/factories/progress.js";
 
 class MainContentView {
     #counterElement;
@@ -15,28 +17,37 @@ class MainContentView {
 
     /* Methods for rendering pages */
 
-    renderProjectsPage(projectGroups) {
+    renderTodayPage(intentionDetails) {
         this.mainContentContainer.innerHTML = "";
         this.currentProjectId = undefined;
 
-        const projectSection = renderSection("project-page");
+        const todaySection = renderSection("today-page");
 
-        projectSection.appendChild(renderHeader("projects-header", "Projects", "Everything you intend."))
+        todaySection.appendChild(renderHeader(
+            "greeting-header",
+            getWelcomeMessage(),
+            getWelcomeDate()
+        ))
 
-        const projectCollection = renderCollection("project-collection");
+        const progressCard = buildProgressCard();
+        todaySection.appendChild(progressCard)
 
-        projectGroups.forEach((group) => {
-            const projectItem = document.createElement("project-item");
-            projectItem.projectData = group;
-            projectItem.classList.add("project-item");
-            projectCollection.appendChild(projectItem);
-        })
+        todaySection.appendChild(renderHeader("today-header", "Today"));
 
-        projectSection.appendChild(projectCollection)
+        const intentionCollection = renderCollection("today-collection");
+        const activeList = buildActiveList(intentionDetails.transformedActive)
+        const completedList = buildCompletedList(intentionDetails.transformedCompleted)
+        const counter = this.renderCompletedCount(intentionDetails.completedCount);
 
-        projectSection.appendChild(renderAddProjectButton())
+        /* Only display the counter when completed intentions exist. */
+        if (counter !== undefined) completedList.prepend(counter);
 
-        this.mainContentContainer.appendChild(projectSection);
+        intentionCollection.append(activeList, completedList);
+
+        todaySection.appendChild(intentionCollection)
+
+        this.mainContentContainer.appendChild(todaySection);
+
     }
 
     renderUpcomingPage(intentionDetails) {
@@ -77,6 +88,30 @@ class MainContentView {
         intentionCollection.append(activeList, completedList);
         inboxSection.appendChild(intentionCollection)
         this.mainContentContainer.appendChild(inboxSection);
+    }
+
+    renderProjectsPage(projectGroups) {
+        this.mainContentContainer.innerHTML = "";
+        this.currentProjectId = undefined;
+
+        const projectSection = renderSection("project-page");
+
+        projectSection.appendChild(renderHeader("projects-header", "Projects", "Everything you intend."))
+
+        const projectCollection = renderCollection("project-collection");
+
+        projectGroups.forEach((group) => {
+            const projectItem = document.createElement("project-item");
+            projectItem.projectData = group;
+            projectItem.classList.add("project-item");
+            projectCollection.appendChild(projectItem);
+        })
+
+        projectSection.appendChild(projectCollection)
+
+        projectSection.appendChild(renderAddProjectButton())
+
+        this.mainContentContainer.appendChild(projectSection);
     }
 
     renderSpecificProjectPage(projectDetails) {

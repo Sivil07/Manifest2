@@ -163,6 +163,7 @@ class GlobalController {
         switch (pageOption) {
             case "today":
                 this.intentionService.setFilter("today")
+                this.#showTodayPage();
                 break;
             case "upcoming":
                 this.intentionService.setFilter("upcoming")
@@ -178,7 +179,13 @@ class GlobalController {
                 break;
             default:
                 this.intentionService.setFilter("today")
+                this.#showTodayPage()
         }
+    }
+
+    #showTodayPage() {
+        const intentionDetails = this.#buildFilteredIntentionDetails();
+        this.mainContainerView.renderTodayPage(intentionDetails)
     }
 
     #showProjectsPage() {
