@@ -46,6 +46,15 @@ function renderDeleteProjectButton() {
     deleteProjectButton.classList.add("delete-project");
     deleteProjectButton.type = "button";
     deleteProjectButton.textContent = "Delete Project";
+
+    deleteProjectButton.addEventListener("click", () => {
+        deleteProjectButton.dispatchEvent(
+            new CustomEvent("delete-project", {
+                bubbles: true
+            })
+        )
+    })
+    
     return deleteProjectButton
 
 
