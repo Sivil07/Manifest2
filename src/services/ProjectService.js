@@ -11,6 +11,10 @@ class ProjectService {
         return projectOptions;
     }
 
+    get numberOfProjects() {
+        return this.#allProjects.length;
+    }
+
     /* Groups active intentions by their associated project. 
        
        Creates an entry for each project and adds the intentions that 

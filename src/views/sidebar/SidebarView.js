@@ -7,14 +7,17 @@ class SideBarView {
     }
 
     /* Updates the the nav button counts so the UI reflects the 
-       latest active intention counts for today, upcoming and inbox  */
-    renderNavCounts({ todayCount, upcomingCount, inboxCount }) {
+       latest active intention counts for today, upcoming, inbox.
+       It also displays the number of projects a user has.  */
+    renderNavCounts({ todayCount, upcomingCount, inboxCount, projectCount }) {
         const todayElement = this.navSectionsContainer.querySelector(`[data-count="today-count"]`);
         const upcomingElement = this.navSectionsContainer.querySelector(`[data-count="upcoming-count"]`);
         const inboxElement = this.navSectionsContainer.querySelector(`[data-count="inbox-count"]`);
+        const projectElement = this.navSectionsContainer.querySelector(`[data-count="project-count"]`)
         todayElement.textContent = todayCount;
         upcomingElement.textContent = upcomingCount;
         inboxElement.textContent = inboxCount;
+        projectElement.textContent = projectCount
     }
 
     /* Renders the list of projects within the sidebar.

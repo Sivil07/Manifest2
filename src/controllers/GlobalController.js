@@ -246,7 +246,12 @@ class GlobalController {
     /* Methods for updating UI after changes made to state */
 
     #refreshSideBar() {
-        this.sideBarView.renderNavCounts(this.intentionService.navActiveCounts);
+        const sidebarPackage = {
+            projectCount: this.projectService.numberOfProjects,
+            ...this.intentionService.navActiveCounts
+        }
+
+        this.sideBarView.renderNavCounts(sidebarPackage);
         this.sideBarView.renderProjectList(this.getProjectGroups())
     }
 

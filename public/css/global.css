@@ -300,9 +300,6 @@ intention-form::part(submit-intention) {
     background-color: var(--clr-lavender);
   }
 
-  .project-action {
-    display: none;
-  }
 
   .count {
     display: revert;
