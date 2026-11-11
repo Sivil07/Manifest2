@@ -22,14 +22,12 @@ class MainContentView {
         this.currentProjectId = undefined;
 
         const todaySection = renderSection("today-page");
-
         todaySection.appendChild(renderHeader(
             "greeting-header",
             getWelcomeMessage(),
             getWelcomeDate()
         ))
 
-        console.log(intentionPackage.count ,intentionPackage.maxCount)
         const progressCard = buildProgressCard(intentionPackage.count, intentionPackage.maxCount);
         todaySection.appendChild(progressCard)
         todaySection.appendChild(renderHeader("today-header", "Today"));
@@ -37,14 +35,14 @@ class MainContentView {
         const intentionCollection = renderCollection("today-collection");
         const activeList = buildActiveList(intentionPackage.transformedActive)
         const completedList = buildCompletedList(intentionPackage.transformedCompleted)
+        
         const counter = this.renderCompletedCount(intentionPackage.completedCount);
-
         /* Only display the counter when completed intentions exist. */
         if (counter !== undefined) completedList.prepend(counter);
 
-        intentionCollection.append(activeList, completedList);
+        const populatedCollection = this.populateIntentionCollection(activeList, completedList, intentionCollection)
 
-        todaySection.appendChild(intentionCollection)
+        todaySection.appendChild(populatedCollection)
 
         this.mainContentContainer.appendChild(todaySection);
 
@@ -60,13 +58,14 @@ class MainContentView {
         const intentionCollection = renderCollection("upcoming-collection");
         const activeList = buildActiveList(intentionDetails.transformedActive)
         const completedList = buildCompletedList(intentionDetails.transformedCompleted)
+        
         const counter = this.renderCompletedCount(intentionDetails.completedCount);
-
         /* Only display the counter when completed intentions exist. */
         if (counter !== undefined) completedList.prepend(counter);
 
-        intentionCollection.append(activeList, completedList);
-        upcomingSection.appendChild(intentionCollection)
+        const populatedCollection = this.populateIntentionCollection(activeList, completedList, intentionCollection)
+
+        upcomingSection.appendChild(populatedCollection)
         this.mainContentContainer.appendChild(upcomingSection);
     }
 
@@ -80,13 +79,15 @@ class MainContentView {
         const intentionCollection = renderCollection("inbox-collection");
         const activeList = buildActiveList(intentionDetails.transformedActive)
         const completedList = buildCompletedList(intentionDetails.transformedCompleted)
+        
         const counter = this.renderCompletedCount(intentionDetails.completedCount);
-
         /* Only display the counter when completed intentions exist. */
         if (counter !== undefined) completedList.prepend(counter);
 
-        intentionCollection.append(activeList, completedList);
-        inboxSection.appendChild(intentionCollection)
+        const populatedCollection = this.populateIntentionCollection(activeList, completedList, intentionCollection)
+
+        // intentionCollection.append(activeList, completedList);
+        inboxSection.appendChild(populatedCollection)
         this.mainContentContainer.appendChild(inboxSection);
     }
 
@@ -95,7 +96,6 @@ class MainContentView {
         this.currentProjectId = undefined;
 
         const projectSection = renderSection("project-page");
-
         projectSection.appendChild(renderHeader("projects-header", "Projects", "Everything you intend."))
 
         const projectCollection = renderCollection("project-collection");
@@ -108,7 +108,6 @@ class MainContentView {
         })
 
         projectSection.appendChild(projectCollection)
-
         projectSection.appendChild(renderAddProjectButton())
 
         this.mainContentContainer.appendChild(projectSection);
@@ -132,9 +131,9 @@ class MainContentView {
         /* Only display the counter when completed intentions exist. */
         if (counter !== undefined) completedList.prepend(counter);
 
-        intentionCollection.append(activeList, completedList);
-        section.appendChild(intentionCollection)
+        const populatedCollection = this.populateIntentionCollection(activeList, completedList, intentionCollection)
 
+        section.appendChild(populatedCollection)
         section.appendChild(renderDeleteProjectButton())
 
         this.currentProjectId = projectDetails.project.id;
@@ -149,6 +148,21 @@ class MainContentView {
 
         const counter = renderCounter(completedCount);
         return counter;
+    }
+
+    /* Method for assembling collections */
+
+    populateIntentionCollection(activeList, completedList, intentionCollection) {
+        const isEmpty = !activeList.hasChildNodes() && !completedList.hasChildNodes();
+        if (isEmpty) {
+            const emptyMessage = document.createElement("p")
+            emptyMessage.classList.add("empty-message")
+            emptyMessage.textContent = "Nothing here yet. Add your first intention with +."
+            intentionCollection.appendChild(emptyMessage)
+        }
+
+        intentionCollection.append(activeList, completedList)
+        return intentionCollection;
     }
 }
 
