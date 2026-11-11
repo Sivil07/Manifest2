@@ -40,7 +40,18 @@ function renderAddProjectButton() {
     return addProject;
 }
 
+
+function renderDeleteProjectButton() {
+    const deleteProjectButton = document.createElement("button");
+    deleteProjectButton.classList.add("delete-project");
+    deleteProjectButton.type = "button";
+    deleteProjectButton.textContent = "Delete Project";
+    return deleteProjectButton
+
+
+}
 export {
     renderMoveToProjectButton,
-    renderAddProjectButton
+    renderAddProjectButton,
+    renderDeleteProjectButton
 }

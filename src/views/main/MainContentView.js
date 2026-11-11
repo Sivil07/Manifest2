@@ -6,6 +6,7 @@ import { buildActiveList, buildCompletedList } from "./components/factories/inte
 import { renderCounter } from "./components/factories/counter.js";
 import { getWelcomeDate, getWelcomeMessage } from "../../utils/date.js";
 import { buildProgressCard } from "./components/factories/progress.js";
+import { renderDeleteProjectButton } from "./components/factories/button-actions.js";
 
 class MainContentView {
     currentProjectId;
@@ -133,6 +134,8 @@ class MainContentView {
 
         intentionCollection.append(activeList, completedList);
         section.appendChild(intentionCollection)
+
+        section.appendChild(renderDeleteProjectButton())
 
         this.currentProjectId = projectDetails.project.id;
         this.mainContentContainer.appendChild(section);
