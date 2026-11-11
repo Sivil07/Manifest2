@@ -12,12 +12,23 @@
   appearance: none;
 } */
 
+progress {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  background-color: transparent;
+}
+
+
 :root {
   --clr-logo-primary: #6c35f5;
   --clr-page-bg: #f7f3ff;
   --clr-white: #ffffff;
+  --clr-orange: #f9b66b;
   --clr-lavender: #ded2f8;
   --clr-purple-dark: #412459;
+  --clr-purple-darkest: #21102f;
   --clr-muted: rgb(95, 92, 92);
   --clr-delete-button: rgb(180, 31, 31);
   --sidebar-project-clr-size: 15px;
@@ -26,6 +37,8 @@
   --third-column-width: 500px;
   --project-color-option-size: 50px;
   --project-color-specific-size: 30px;
+  --progress-card-width: 500px;
+  --size-progress-bar: 10px;
 }
 
 body {
