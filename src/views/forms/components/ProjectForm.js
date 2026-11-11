@@ -1,6 +1,10 @@
 const template = document.createElement("template");
 template.innerHTML = `
 <style>
+    input[type="radio"] {
+        appearance: none;
+    }
+
     .color-option:has(.color-input:focus)::after {
         content: "";
         position: absolute;

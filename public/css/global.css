@@ -8,9 +8,9 @@
   box-sizing: border-box;
 }
 
-/* input[type="radio"] {
+input[type="radio"] {
   appearance: none;
-} */
+}
 
 progress {
   -webkit-appearance: none;
