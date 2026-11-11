@@ -185,7 +185,9 @@ class GlobalController {
 
     #showTodayPage() {
         const intentionDetails = this.#buildFilteredIntentionDetails();
-        this.mainContainerView.renderTodayPage(intentionDetails)
+        const counts = { count: this.intentionService.dailyCount, maxCount: this.intentionService.dailyMaxCount }
+        const intentionPackage = { ...intentionDetails, ...counts }
+        this.mainContainerView.renderTodayPage(intentionPackage)
     }
 
     #showProjectsPage() {

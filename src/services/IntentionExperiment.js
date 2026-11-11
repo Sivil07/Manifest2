@@ -8,6 +8,19 @@ class IntentionExperiment {
     /* Defines which group the user is viewing. Either "today" or "upcoming" */
     currentFilter;
 
+    dailyMaxCount = 7
+
+    /* Calculates the number of intentions created for the current day */
+    get dailyCount() {
+        let count = 0
+        this.#allIntentions.forEach((intention) => {
+            const isCreatedToday = intention.createdAt === getCurrentDate();
+            if (isCreatedToday) count++
+        });
+
+        return count;
+    }
+
     /* Gets the number of intentions that are active in each category.
        The nav buttons need these numbers so they can show the current
        counts for today, upcoming and inbox */

@@ -16,7 +16,7 @@ class MainContentView {
 
     /* Methods for rendering pages */
 
-    renderTodayPage(intentionDetails) {
+    renderTodayPage(intentionPackage) {
         this.mainContentContainer.innerHTML = "";
         this.currentProjectId = undefined;
 
@@ -28,15 +28,15 @@ class MainContentView {
             getWelcomeDate()
         ))
 
-        const progressCard = buildProgressCard();
+        console.log(intentionPackage.count ,intentionPackage.maxCount)
+        const progressCard = buildProgressCard(intentionPackage.count, intentionPackage.maxCount);
         todaySection.appendChild(progressCard)
-
         todaySection.appendChild(renderHeader("today-header", "Today"));
 
         const intentionCollection = renderCollection("today-collection");
-        const activeList = buildActiveList(intentionDetails.transformedActive)
-        const completedList = buildCompletedList(intentionDetails.transformedCompleted)
-        const counter = this.renderCompletedCount(intentionDetails.completedCount);
+        const activeList = buildActiveList(intentionPackage.transformedActive)
+        const completedList = buildCompletedList(intentionPackage.transformedCompleted)
+        const counter = this.renderCompletedCount(intentionPackage.completedCount);
 
         /* Only display the counter when completed intentions exist. */
         if (counter !== undefined) completedList.prepend(counter);
