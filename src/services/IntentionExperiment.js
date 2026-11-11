@@ -201,6 +201,7 @@ class IntentionExperiment {
         this.#allIntentions = [];
         const savedAllIntentionData = localStorage.getItem("all-intentions")
         const intentionData = savedAllIntentionData === null ? intentionStarterData : JSON.parse(savedAllIntentionData);
+        this.setFilter()
         intentionData.forEach((savedIntentionData) => {
             const intention = new Intention(savedIntentionData);
             this.#allIntentions.push(intention);

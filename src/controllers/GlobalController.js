@@ -167,7 +167,7 @@ class GlobalController {
     }
 
 
-    #choosePage(pageOption) {
+    #choosePage(pageOption = "today") {
         switch (pageOption) {
             case "today":
                 this.intentionService.setFilter("today")
@@ -255,17 +255,13 @@ class GlobalController {
         this.sideBarView.renderProjectList(this.getProjectGroups())
     }
 
-    #refreshUI() {
-
-    }
-
     /* Initialization */
 
     initialize() {
         this.intentionService.loadIntentions();
         this.projectService.loadProjects();
         this.#refreshSideBar();
-        this.#refreshUI();
+        this.#choosePage()
     }
 }
 
