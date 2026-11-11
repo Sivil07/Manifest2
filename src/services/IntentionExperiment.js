@@ -184,6 +184,13 @@ class IntentionExperiment {
         this.#saveAllIntentions();
     }
 
+    deleteIntentionsByProjectId(projectId) {
+        const doesNotBelongToProject = (intention) => (intention.projectId !== projectId)
+        const remainingIntentions = this.#allIntentions.filter(doesNotBelongToProject);
+        this.#allIntentions = remainingIntentions;
+        this.#saveAllIntentions();
+    }
+
     #saveAllIntentions() {
         localStorage.setItem("all-intentions", JSON.stringify(this.#allIntentions));
     }

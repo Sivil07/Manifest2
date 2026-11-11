@@ -6,7 +6,7 @@ class ProjectService {
 
     get projectOptions() {
         const projectOptions = this.#allProjects.map((project) => {
-            return {projectId: project.id, projectName: project.projectName, projectColor: project.projectColor}
+            return { projectId: project.id, projectName: project.projectName, projectColor: project.projectColor }
         });
         return projectOptions;
     }
@@ -66,6 +66,12 @@ class ProjectService {
     getProjectById(id) {
         const project = this.#allProjects.find((project) => project.id === id);
         return project;
+    }
+
+    deleteProject(id) {
+        const projectIndex = this.#allProjects.findIndex((project) => project.id === id);
+        this.#allProjects.splice(projectIndex, 1);
+        this.#saveAllProjects();
     }
 
 

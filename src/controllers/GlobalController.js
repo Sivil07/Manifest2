@@ -122,6 +122,14 @@ class GlobalController {
             this.dialogView.renderIntentionTemplate(templatePackage)
         });
 
+        mainContainer.addEventListener("delete-project", () => {
+            const projectId = this.mainContainerView.currentProjectId;
+            this.projectService.deleteProject(projectId);
+            this.intentionService.deleteIntentionsByProjectId(projectId);
+            this.#choosePage("project")
+            this.#refreshSideBar();
+        })
+
         /* Sidebar Events (interactions via static nodes in navBar) */
 
         sideBarAddProjectButton.addEventListener("click", () => {
