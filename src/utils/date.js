@@ -25,9 +25,45 @@ function getCurrentDate() {
     return format( new Date(), "yyyy-MM-dd");
 }
 
+function getWelcomeDate() {
+    return format( new Date(), "EEEE, LLL L" );
+} 
+
+function getDayPeriod() {
+    return format( new Date(), "BBBB")
+}
+
+function getWelcomeMessage() {
+    const dayPeriod = getDayPeriod()
+    const message = getGreetingForDayPeriod(dayPeriod)
+    return message;
+}
+
+
+function getGreetingForDayPeriod(dayPeriod) {
+    let welcomeMessage;
+    switch(dayPeriod) {
+        case "in the morning":
+            welcomeMessage = "Good Morning"
+            break;
+        case "in the afternoon":
+            welcomeMessage = "Good Afternoon"
+            break;
+        case "in the evening":
+        case "at night":
+            welcomeMessage = "Good Evening"
+            break
+        default:
+            welcomeMessage = "Welcome"
+    }
+    return welcomeMessage;
+}
+
 export {
     setMinDate,
     getCompletedByDayOfWeek,
     getCurrentDate,
-    getPreviousDay
+    getPreviousDay,
+    getWelcomeDate,
+    getWelcomeMessage
 }
