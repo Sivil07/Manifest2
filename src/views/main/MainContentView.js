@@ -8,7 +8,6 @@ import { getWelcomeDate, getWelcomeMessage } from "../../utils/date.js";
 import { buildProgressCard } from "./components/factories/progress.js";
 
 class MainContentView {
-    #counterElement;
     currentProjectId;
 
     constructor(mainContentContainer) {
@@ -142,14 +141,10 @@ class MainContentView {
     /* Methods for rendering components */
 
     renderCompletedCount(completedCount) {
-        /* Remove the existing counter before rendering a new one.
-           No counter is rendered when there are no completed intentions. */
-        if (this.#counterElement !== undefined) this.#counterElement.remove();
+        /* No counter is rendered when there are no completed intentions. */
         if (completedCount === 0) return;
 
         const counter = renderCounter(completedCount);
-        this.#counterElement = counter;
-
         return counter;
     }
 }
