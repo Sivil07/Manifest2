@@ -5,9 +5,9 @@ function renderPageLabel(pageName) {
     return pageLabel;
 }
 
-function renderHeader(titleText, subtitleText) {
+function renderHeader(className, titleText, subtitleText) {
     const container = document.createElement("div");
-    container.classList.add("header")
+    container.classList.add(className)
 
     if (subtitleText) {
         const subtitle = document.createElement("p");
@@ -22,9 +22,9 @@ function renderHeader(titleText, subtitleText) {
     return container;
 }
 
-function renderSpecificProjectHeader(titleText, projectColor) {
+function renderSpecificProjectHeader(className, titleText, projectColor) {
     const container = document.createElement("div");
-    container.classList.add("project-header");
+    container.classList.add(className);
 
     const color = document.createElement("div");
     color.classList.add("project-color");

@@ -1,36 +1,6 @@
-/* Main Content Container (static) - Section (dynamic) (used in projects, inbox, and upcoming displays) */
+/* Main Content Container (static) - Section (dynamic) (used in today, upcoming, inbox, general project and specific project pages) */
 
-.section {
-  flex: 1;
-  display: grid;
-  gap: 1rem;
-  grid-template-areas:
-    "Header"
-    "Collection"
-    "Add-Project";
-  grid-template-rows: repeat(3, max-content);
-  grid-template-columns: 1fr;
-}
-
-.header {
-  grid-area: Header;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.subtitle {
-  color: var(--clr-muted);
-}
-
-.collection {
-  grid-area: Collection;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-/* Unique to Pages that can have active and completed intentions listed */
+/* Unique to today, upcoming, inbox and SPECIFIC project page*/
 
 .active-list {
   display: flex;
@@ -66,20 +36,107 @@
   font-size: 0.9rem;
 }
 
-/* intention-counter::part(completed-counter) {
-    display: flex;
-    justify-content: space-between;
+/* Upcoming Page Styling */
+
+.upcoming-page {
+  flex: 1;
+  display: grid;
+  gap: 1rem;
+  grid-template-areas:
+    "Upcoming-Header"
+    "Upcoming-Collection";
+  grid-template-rows: repeat(2, max-content);
+  grid-template-columns: 1fr;
 }
 
-intention-counter::part(clear-todos) {
-    margin: 0;
-    padding: 0;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-} */
+.upcoming-header {
+  grid-area: Upcoming-Header;
+}
 
-/* Unique to the All Projects Display */
+.upcoming-collection {
+  grid-area: Upcoming-Collection;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 1040px) {
+  .upcoming-page {
+    grid-template-areas:
+      "Upcoming-Header"
+      "Upcoming-Collection";
+    grid-template-columns: 1fr var(--third-column-width);
+  }
+}
+
+/* Inbox Page Styling */
+
+.inbox-page {
+  flex: 1;
+  display: grid;
+  gap: 1rem;
+  grid-template-areas:
+    "Inbox-Header"
+    "Inbox-Collection";
+  grid-template-rows: repeat(2, max-content);
+  grid-template-columns: 1fr;
+}
+
+.inbox-header {
+  grid-area: Inbox-Header;
+}
+
+.inbox-collection {
+  grid-area: Inbox-Collection;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 1040px) {
+  .inbox-page {
+    grid-template-areas:
+      "Inbox-Header"
+      "Inbox-Collection";
+    grid-template-columns: 1fr var(--third-column-width);
+  }
+}
+
+/* General Project Page Styling */
+
+.project-page {
+  flex: 1;
+  display: grid;
+  gap: 1rem;
+  grid-template-areas:
+    "Project-Header"
+    "Project-Collection"
+    "Add-Project";
+  grid-template-rows: repeat(3, max-content);
+  grid-template-columns: 1fr;
+}
+
+.projects-header {
+  grid-area: Project-Header;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Unique to General Project Page */
+
+.subtitle {
+  color: var(--clr-muted);
+}
+
+.project-collection {
+  grid-area: Project-Collection;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Unique to the General Project Page */
 
 .add-project {
   grid-area: Add-Project;
@@ -92,11 +149,40 @@ intention-counter::part(clear-todos) {
   text-align: left;
 }
 
-/* Unique to SPECIFIC Project Display */
+@media (min-width: 1040px) {
+  .project-page {
+    grid-template-areas:
+      "Header"
+      "Collection"
+      "Add-Project";
+    grid-template-columns: 1fr var(--third-column-width);
+  }
+}
 
-.project-header {
+/* Specific Project Page Styling */
+
+.specific-project-page {
+  flex: 1;
+  display: grid;
+  gap: 1rem;
+  grid-template-areas:
+    "Specific-Header"
+    "Specific-Collection";
+  grid-template-rows: repeat(2, max-content);
+  grid-template-columns: 1fr;
+}
+
+.specific-header {
   display: flex;
   align-items: center;
+  gap: 1rem;
+  grid-area: Specific-Header;
+}
+
+.specific-collection {
+  grid-area: Specific-Collection;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
 }
 
@@ -106,14 +192,11 @@ intention-counter::part(clear-todos) {
   border-radius: 50%;
 }
 
-/* Media Queries */
-
 @media (min-width: 1040px) {
-  .section {
+  .specific-project-page {
     grid-template-areas:
-      "Header"
-      "Collection"
-      "Add-Project";
+      "Specific-Header"
+      "Specific-Collection";
     grid-template-columns: 1fr var(--third-column-width);
   }
 }

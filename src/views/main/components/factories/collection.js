@@ -1,6 +1,6 @@
-function renderCollection() {
+function renderCollection(className) {
     const collection = document.createElement("div");
-    collection.classList.add("collection");
+    collection.classList.add(className);
     return collection;
 }
 

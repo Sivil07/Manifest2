@@ -19,11 +19,11 @@ class MainContentView {
         this.mainContentContainer.innerHTML = "";
         this.currentProjectId = undefined;
 
-        const projectSection = renderSection();
+        const projectSection = renderSection("project-page");
 
-        projectSection.appendChild(renderHeader("Projects", "Everything you intend."))
+        projectSection.appendChild(renderHeader("projects-header", "Projects", "Everything you intend."))
 
-        const projectCollection = renderCollection();
+        const projectCollection = renderCollection("project-collection");
 
         projectGroups.forEach((group) => {
             const projectItem = document.createElement("project-item");
@@ -43,10 +43,10 @@ class MainContentView {
         this.mainContentContainer.innerHTML = "";
         this.currentProjectId = undefined;
 
-        const upcomingSection = renderSection();
-        upcomingSection.appendChild(renderHeader("Upcoming"));
+        const upcomingSection = renderSection("upcoming-page");
+        upcomingSection.appendChild(renderHeader("upcoming-header", "Upcoming"));
 
-        const intentionCollection = renderCollection();
+        const intentionCollection = renderCollection("upcoming-collection");
         const activeList = buildActiveList(intentionDetails.transformedActive)
         const completedList = buildCompletedList(intentionDetails.transformedCompleted)
         const counter = this.renderCompletedCount(intentionDetails.completedCount);
@@ -63,10 +63,10 @@ class MainContentView {
         this.mainContentContainer.innerHTML = "";
         this.currentProjectId = undefined;
 
-        const inboxSection = renderSection();
-        inboxSection.appendChild(renderHeader("Inbox"));
+        const inboxSection = renderSection("inbox-page");
+        inboxSection.appendChild(renderHeader("inbox-header", "Inbox"));
 
-        const intentionCollection = renderCollection();
+        const intentionCollection = renderCollection("inbox-collection");
         const activeList = buildActiveList(intentionDetails.transformedActive)
         const completedList = buildCompletedList(intentionDetails.transformedCompleted)
         const counter = this.renderCompletedCount(intentionDetails.completedCount);
@@ -82,13 +82,14 @@ class MainContentView {
     renderSpecificProjectPage(projectDetails) {
         this.mainContentContainer.innerHTML = "";
 
-        const section = renderSection();
+        const section = renderSection("specific-project-page");
         section.appendChild(renderSpecificProjectHeader(
+            "specific-header",
             projectDetails.project.projectName,
             projectDetails.project.projectColor
         ))
 
-        const intentionCollection = renderCollection();
+        const intentionCollection = renderCollection("specific-collection");
         const activeList = buildActiveList(projectDetails.transformedActive)
         const completedList = buildCompletedList(projectDetails.transformedCompleted)
         const counter = this.renderCompletedCount(projectDetails.completedCount);
