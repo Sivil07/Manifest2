@@ -152,8 +152,8 @@
 @media (min-width: 1040px) {
   .project-page {
     grid-template-areas:
-      "Header"
-      "Collection"
+      "Project-Header"
+      "Project-Collection"
       "Add-Project";
     grid-template-columns: 1fr var(--third-column-width);
   }
