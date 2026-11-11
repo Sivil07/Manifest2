@@ -1,4 +1,5 @@
 import { renderMoveToProjectButton } from "../../main/components/factories/button-actions.js";
+import { formatDueDateTag } from "../../../utils/date.js";
 
 const template = document.createElement("template");
 template.innerHTML = `
@@ -44,7 +45,7 @@ class IntentionTemplate extends HTMLElement {
 
         title.textContent = intentionData.intention.title;
         reason.textContent = `Intention: ${intentionData.intention.reason}`
-        dueDate.textContent = intentionData.intention.dueDate;
+        dueDate.textContent = formatDueDateTag(intentionData.intention.dueDate);
 
         const isEmptyString = intentionData.intention.description === undefined || intentionData.intention.description.length === 0;
         description.textContent = (isEmptyString) ? "No Description yet" : intentionData.intention.description;

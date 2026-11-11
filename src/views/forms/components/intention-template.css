@@ -41,6 +41,11 @@ intention-template::part(temp-tag) {
   color: var(--clr-logo-primary);
 }
 
+intention-template::part(temp-due-date) {
+  background-color: var(--clr-due-bg);
+  color: var(--clr-due-txt);
+}
+
 /* Template Contents - Display */
 
 intention-template::part(template-title) {
