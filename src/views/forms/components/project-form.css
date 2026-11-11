@@ -7,6 +7,10 @@ project-form::part(project-form-contents) {
   gap: 1rem;
 }
 
+project-form::part(form-header) {
+  margin: 0;
+}
+
 /* Project Name Input Section */
 
 project-form::part(project-name-label) {
@@ -24,6 +28,11 @@ project-form::part(project-name-input) {
 project-form::part(project-name-input)::placeholder {
   font-size: 1rem;
 }
+
+project-form::part(project-name-input):focus {
+  outline: 1px solid var(--clr-logo-primary);
+}
+
 
 /* Project Color Inputs Section */
 
