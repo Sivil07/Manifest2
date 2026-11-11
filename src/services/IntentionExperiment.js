@@ -12,12 +12,13 @@ class IntentionExperiment {
 
     /* Calculates the number of intentions created for the current day */
     get dailyCount() {
-        let count = 0
+        let rawCount = 0
         this.#allIntentions.forEach((intention) => {
             const isCreatedToday = intention.createdAt === getCurrentDate();
-            if (isCreatedToday) count++
+            if (isCreatedToday) rawCount++
         });
 
+        const count = rawCount > this.dailyMaxCount ? this.dailyMaxCount : rawCount
         return count;
     }
 
