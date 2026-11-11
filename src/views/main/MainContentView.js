@@ -35,7 +35,7 @@ class MainContentView {
         const intentionCollection = renderCollection("today-collection");
         const activeList = buildActiveList(intentionPackage.transformedActive)
         const completedList = buildCompletedList(intentionPackage.transformedCompleted)
-        
+
         const counter = this.renderCompletedCount(intentionPackage.completedCount);
         /* Only display the counter when completed intentions exist. */
         if (counter !== undefined) completedList.prepend(counter);
@@ -58,7 +58,7 @@ class MainContentView {
         const intentionCollection = renderCollection("upcoming-collection");
         const activeList = buildActiveList(intentionDetails.transformedActive)
         const completedList = buildCompletedList(intentionDetails.transformedCompleted)
-        
+
         const counter = this.renderCompletedCount(intentionDetails.completedCount);
         /* Only display the counter when completed intentions exist. */
         if (counter !== undefined) completedList.prepend(counter);
@@ -79,7 +79,7 @@ class MainContentView {
         const intentionCollection = renderCollection("inbox-collection");
         const activeList = buildActiveList(intentionDetails.transformedActive)
         const completedList = buildCompletedList(intentionDetails.transformedCompleted)
-        
+
         const counter = this.renderCompletedCount(intentionDetails.completedCount);
         /* Only display the counter when completed intentions exist. */
         if (counter !== undefined) completedList.prepend(counter);
@@ -107,7 +107,9 @@ class MainContentView {
             projectCollection.appendChild(projectItem);
         })
 
-        projectSection.appendChild(projectCollection)
+        const populatedCollection = this.populateProjectCollection(projectCollection);
+
+        projectSection.appendChild(populatedCollection)
         projectSection.appendChild(renderAddProjectButton())
 
         this.mainContentContainer.appendChild(projectSection);
@@ -155,14 +157,28 @@ class MainContentView {
     populateIntentionCollection(activeList, completedList, intentionCollection) {
         const isEmpty = !activeList.hasChildNodes() && !completedList.hasChildNodes();
         if (isEmpty) {
-            const emptyMessage = document.createElement("p")
-            emptyMessage.classList.add("empty-message")
-            emptyMessage.textContent = "Nothing here yet. Add your first intention with +."
+            const emptyMessage = this.renderEmptyMessage("Nothing here yet. Add your first intention with +.")
             intentionCollection.appendChild(emptyMessage)
         }
 
         intentionCollection.append(activeList, completedList)
         return intentionCollection;
+    }
+
+    populateProjectCollection(projectCollection) {
+        const isEmpty = !projectCollection.hasChildNodes();
+        if (isEmpty) {
+            const emptyMessage = this.renderEmptyMessage("Nothing here yet. Add your first project with +.")
+            projectCollection.appendChild(emptyMessage)
+        }
+        return projectCollection;
+    }
+
+    renderEmptyMessage(message) {
+        const emptyMessage = document.createElement("p")
+        emptyMessage.classList.add("empty-message")
+        emptyMessage.textContent = message;
+        return emptyMessage;
     }
 }
 
