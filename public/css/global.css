@@ -296,7 +296,7 @@ intention-form::part(submit-intention) {
     background-color: transparent;
   }
 
-  .nav-action:hover {
+  .nav-action:focus {
     background-color: var(--clr-lavender);
   }
 
