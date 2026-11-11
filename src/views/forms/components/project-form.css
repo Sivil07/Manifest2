@@ -33,6 +33,10 @@ project-form::part(project-color-section) {
   gap: 0.5rem;
 }
 
+project-form::part(project-color-header) {
+  margin: 0;
+}
+
 project-form::part(project-color-options) {
   display: flex;
   flex-wrap: wrap;
