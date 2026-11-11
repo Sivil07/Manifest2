@@ -29,7 +29,9 @@ progress {
   --clr-purple-dark: #412459;
   --clr-purple-darkest: #21102f;
   --clr-muted: rgb(95, 92, 92);
-  --clr-delete-button: rgb(180, 31, 31);
+  --clr-template-delete-txt: rgb(180, 31, 31);
+  --clr-add-project-button-bg: #b8c5ed;
+  --clr-delete-project-button-bg: #f7aaaa;
   --clr-due-txt: #ac6413;
   --clr-due-bg: #ffe2c2;
   --clr-move-tag-text: #418b3b;

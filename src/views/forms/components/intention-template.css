@@ -100,7 +100,7 @@ intention-template::part(edit-intention) {
 }
 
 intention-template::part(delete-intention) {
-  color: var(--clr-delete-button);
+  color: var(--clr-template-delete-txt);
 }
 
 intention-template::part(move-button) {

@@ -140,7 +140,7 @@
 
 .add-project {
   grid-area: Add-Project;
-  background-color: var(--clr-white);
+  background-color: var(--clr-add-project-button-bg);
   border-radius: 1rem;
   border: 1px solid var(--clr-purple-dark);
   font-size: 1.2rem;
@@ -167,8 +167,9 @@
   gap: 1rem;
   grid-template-areas:
     "Specific-Header"
-    "Specific-Collection";
-  grid-template-rows: repeat(2, max-content);
+    "Specific-Collection"
+    "Delete-Project";
+  grid-template-rows: repeat(3, max-content);
   grid-template-columns: 1fr;
 }
 
@@ -186,6 +187,17 @@
   gap: 1rem;
 }
 
+.delete-project {
+  grid-area: Delete-Project;
+  background-color: var(--clr-delete-project-button-bg);
+  border-radius: 1rem;
+  border: 1px solid var(--clr-purple-dark);
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  text-align: left;
+}
+
 .project-color {
   width: var(--project-color-specific-size);
   aspect-ratio: 1;
@@ -196,7 +208,8 @@
   .specific-project-page {
     grid-template-areas:
       "Specific-Header"
-      "Specific-Collection";
+      "Specific-Collection"
+      "Delete-Project";
     grid-template-columns: 1fr var(--third-column-width);
   }
 }
