@@ -8,6 +8,25 @@ import { getWelcomeDate, getWelcomeMessage } from "../../utils/date.js";
 import { buildProgressCard } from "./components/factories/progress.js";
 import { renderDeleteProjectButton } from "./components/factories/button-actions.js";
 
+
+/*  
+    MainContentView is the first of three views that render whole sections of the application. 
+    It receives a static node from the page called "main-content" and renders everything 
+    inside of it. The GlobalController uses the same node to watch for user actions.
+
+    It renders the today, upcoming, inbox, general projects and specific project pages. 
+    It assembles each page from factory functions and custom elements. It only draws 
+    what it is given. It never reads or changes the application's data.
+
+    currentProjectId records which page is showing. It is undefined for the today, 
+    upcoming, inbox and general projects pages because they list intentions 
+    from many projects. On a specific project page it holds that project's id. This 
+    tells the GlobalController that a specific project page is showing and which 
+    one to reRender after a change in state.
+
+    Overall, the MainContentView manages the structure and rendering of the "main-content" 
+    section based on the page the user wants to see.
+*/
 class MainContentView {
     currentProjectId;
 
@@ -86,7 +105,6 @@ class MainContentView {
 
         const populatedCollection = this.populateIntentionCollection(activeList, completedList, intentionCollection)
 
-        // intentionCollection.append(activeList, completedList);
         inboxSection.appendChild(populatedCollection)
         this.mainContentContainer.appendChild(inboxSection);
     }
@@ -152,6 +170,13 @@ class MainContentView {
         return counter;
     }
 
+    renderEmptyMessage(message) {
+        const emptyMessage = document.createElement("p")
+        emptyMessage.classList.add("empty-message")
+        emptyMessage.textContent = message;
+        return emptyMessage;
+    }
+
     /* Method for assembling collections */
 
     populateIntentionCollection(activeList, completedList, intentionCollection) {
@@ -172,13 +197,6 @@ class MainContentView {
             projectCollection.appendChild(emptyMessage)
         }
         return projectCollection;
-    }
-
-    renderEmptyMessage(message) {
-        const emptyMessage = document.createElement("p")
-        emptyMessage.classList.add("empty-message")
-        emptyMessage.textContent = message;
-        return emptyMessage;
     }
 }
 
