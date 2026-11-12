@@ -1,8 +1,33 @@
 import Project from "../models/projects.js"
 import { projectStarterData } from "../starterData.js";
 
+/*  
+    The ProjectService manages the application's projects. This includes creating,
+    deleting, saving and looking them up by id. It also pairs project information with
+    intentions it is given. This is so the views can show each project's name and the 
+    intentions that belong to it.
+
+    Like the IntentionService, this is the only place that knows where project data is stored. 
+    It keeps them in one private list "allProjects" as Project instances, and saves them 
+    to localStorage under "all-projects", and rebuilds the Project instances on each page reload.
+
+    What is different is how it relates to intentions. The ProjectService does now own intentions.
+    A project does not know which intentions belong to it. Each intention stores its project's id. The
+    methods that combine the two (groupIntentionsByProject, transformIntentionList) work only with the 
+    intentions that controller passes in. The ProjectService and IntentionService do not know about 
+    each other.
+
+    This also means deleting a project removes only the project. The controller is responsible for 
+    removing that project's intentions through the IntentionService.
+
+    The ProjectService only have one rule. A project names must be unique through the hasDuplicate
+    method.
+*/
+
 class ProjectService {
     #allProjects = [];
+
+    /* Project statistics and display data */
 
     get projectOptions() {
         const projectOptions = this.#allProjects.map((project) => {
@@ -14,6 +39,8 @@ class ProjectService {
     get numberOfProjects() {
         return this.#allProjects.length;
     }
+
+    /* Project and intention transformations */
 
     /* Groups active intentions by their associated project. 
        
@@ -61,15 +88,12 @@ class ProjectService {
         return activeOrCompletedList;
     }
 
+    /* Project state changes */
+
     createProject(projectPackage) {
         const project = new Project(projectPackage);
         this.#allProjects.push(project);
         this.#saveAllProjects();
-    }
-
-    getProjectById(id) {
-        const project = this.#allProjects.find((project) => project.id === id);
-        return project;
     }
 
     deleteProject(id) {
@@ -78,16 +102,28 @@ class ProjectService {
         this.#saveAllProjects();
     }
 
+    /* Project lookups */
+
+    getProjectById(id) {
+        const project = this.#allProjects.find((project) => project.id === id);
+        return project;
+    }
+
+    /* Project validations */
 
     /*  Checks for whether a project name already exists. (true or false) */
     hasDuplicate(projectName) {
-        const hasDuplicate = (project) => projectName.toLowerCase() === project.projectName.toLowerCase();
-        return this.#allProjects.some((hasDuplicate));
+        const foundDuplicate = (project) => projectName.toLowerCase() === project.projectName.toLowerCase();
+        return this.#allProjects.some((foundDuplicate));
     }
+
+    /* Persistence */
 
     #saveAllProjects() {
         localStorage.setItem("all-projects", JSON.stringify(this.#allProjects));
     }
+
+    /* Initialization */
 
     /* Loads the saved projects (or starter data on the first use) and rebuilds them
    as Projects  */
