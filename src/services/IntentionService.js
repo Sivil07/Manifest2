@@ -2,7 +2,42 @@ import Intention from "../models/intention.js";
 import { intentionStarterData } from "../starterData.js";
 import { getCurrentDate } from "../utils/date.js";
 
-class IntentionExperiment {
+/*
+    The IntentionService manages the application intentions. This includes
+    creating, editing, moving, deleting and saving them. It decides which intentions
+    belong to the page the user is viewing.
+
+    This is the only place where intentions are stored. The controller asks the service
+    to perform the operations above or to read the intention data to pass the results
+    to the views. The views never talks to the service directly. It only receives the
+    data it needs and displays it. Neither the views or controller touches the localStorage
+    or changes the Intention objects themselves.
+
+    All intentions live in one private list "allIntentions" as real Intention instances. There 
+    are no separate lists for active or completed intentions. The getters build them by filtering 
+    the single list, so completing an intention only changes its checked state.
+
+    Which intentions belong on a page depends on the current filter:
+
+        - "today": has a project and is due today
+        - "upcoming": has a project is not due today
+        - "inbox": has no project (an empty projectId)
+        
+    A specific project page is not a filter. It finds its intentions by
+    the project's id.
+
+    Intentions are saved together in localStorage under "all-intentions". The localStorage
+    persists the intentions as JSON objects which causes them to lose their "Intention" identify and 
+    behavior so the service rebuilds them into Intention instances on every load. The 
+    "intentionStarterData" is used on the first load. Every change made is saved right away. 
+
+    Overall, the IntentionService manages the intention Data. It holds the data in memory, applies
+    the rules for which intentions belongs where. It handles changing, selecting and saving them
+    as well. This means the controller and views will never have to. The IntentionService does
+    this for intentions and the ProjectService will do the same for projects.
+*/
+
+class IntentionService {
     #allIntentions = []
 
     /* Defines which group the user is viewing. Either "today" or "upcoming" */
@@ -213,4 +248,4 @@ class IntentionExperiment {
 
 }
 
-export default IntentionExperiment;
+export default IntentionService;

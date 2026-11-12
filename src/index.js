@@ -49,7 +49,7 @@ import "./views/main/components/factories/section.css";
 import SideBarView from "./views/sidebar/SidebarView.js";
 import MainContentView from "./views/main/MainContentView.js";
 import DialogView from "./views/forms/DialogView.js";
-import IntentionExperiment from "./services/IntentionExperiment.js";
+import IntentionService from "./services/IntentionService.js";
 import ProjectService from "./services/ProjectService.js";
 import GlobalController from "./controllers/GlobalController.js";
 
@@ -66,7 +66,7 @@ const mainContainerView = new MainContentView(
 
 const dialogView = new DialogView()
 
-const intentionService = new IntentionExperiment()
+const intentionService = new IntentionService()
 const projectService = new ProjectService()
 
 const globalController = new GlobalController( 
