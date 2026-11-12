@@ -103,7 +103,7 @@ class GlobalController {
 
         mainContainer.addEventListener("move-intention-item", (e) => {
             const intentionPackage = e.detail.intentionPackage;
-            this.intentionService.moveIntention(intentionPackage)
+            this.intentionService.changeCompletionStatus(intentionPackage)
             const projectPackage = { projectId: this.mainContainerView.currentProjectId }
             this.#reRenderCurrentPage(projectPackage);
         });

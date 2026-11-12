@@ -22,7 +22,7 @@ import { getCurrentDate } from "../utils/date.js";
         - "today": has a project and is due today
         - "upcoming": has a project is not due today
         - "inbox": has no project (an empty projectId)
-        
+
     A specific project page is not a filter. It finds its intentions by
     the project's id.
 
@@ -40,10 +40,10 @@ import { getCurrentDate } from "../utils/date.js";
 class IntentionService {
     #allIntentions = []
 
-    /* Defines which group the user is viewing. Either "today" or "upcoming" */
     currentFilter;
-
     dailyMaxCount = 7
+
+    /* Progress and statistics */
 
     /* Calculates the number of intentions created for the current day */
     get dailyCount() {
@@ -85,6 +85,8 @@ class IntentionService {
         }
     }
 
+    /* Filtered intention lists */
+
     get filteredActiveIntentions() {
         return this.#allIntentions.filter((intention) => {
             const matchesCurrentFilter = this.#matchesFilter(intention);
@@ -116,9 +118,11 @@ class IntentionService {
         });
     }
 
+    /* Filtering rules */
+
     /* Determines whether an intention belongs to the active page the user is on.
-       The matching logic varies depending on the current filter selected by the 
-       user (today, upcoming, inbox or specific project) */
+   The matching logic varies depending on the current filter selected by the 
+   user (today, upcoming, inbox or specific project) */
     #matchesFilter(intention, projectId = null) {
         const today = getCurrentDate();
         if (this.currentFilter === "today") return intention.dueDate === today && intention.projectId !== "";
@@ -157,6 +161,7 @@ class IntentionService {
         if (type === "completed") return this.#allIntentions.filter(isCompleted);
     }
 
+    /* Intention state changes */
 
     /* Removes completed intentions that match the currently active view.
        This can be a standard filter (today/upcoming/inbox) or a specific project. */
@@ -173,27 +178,10 @@ class IntentionService {
         this.#saveAllIntentions();
     }
 
-    // getIntentionsByProjectId(projectId) {
-    //     const intentions = this.#allIntentions.filter((intention) => intention.projectId === projectId);
-    //     return intentions;
-    // }
-
-    moveIntention({ intentionId, projectId, newCompletedStatus }) {
+    changeCompletionStatus({ intentionId, projectId, newCompletedStatus }) {
         const intention = this.findIntentionByIdAndProjectId(intentionId, projectId);
         intention.setCompletedStatus(newCompletedStatus);
         this.#saveAllIntentions();
-    }
-
-
-    findIntentionById(id) {
-        const intention = this.#allIntentions.find((intention) => intention.id === id);
-        return intention;
-    }
-
-    findIntentionByIdAndProjectId(id, projectId) {
-        const findIntention = (intention) => (intention.id === id && intention.projectId === projectId);
-        const intention = this.#allIntentions.find(findIntention);
-        return intention;
     }
 
     createIntention(intentionEntries) {
@@ -227,9 +215,26 @@ class IntentionService {
         this.#saveAllIntentions();
     }
 
+    /* Intention lookups through ids */
+
+    findIntentionById(id) {
+        const intention = this.#allIntentions.find((intention) => intention.id === id);
+        return intention;
+    }
+
+    findIntentionByIdAndProjectId(id, projectId) {
+        const findIntention = (intention) => (intention.id === id && intention.projectId === projectId);
+        const intention = this.#allIntentions.find(findIntention);
+        return intention;
+    }
+
+    /* Persistence */
+
     #saveAllIntentions() {
         localStorage.setItem("all-intentions", JSON.stringify(this.#allIntentions));
     }
+
+    /* Initialization */
 
     /* Loads the saved intentions (or starter data on the first use) and rebuilds them
    as Intentions  */
@@ -245,7 +250,6 @@ class IntentionService {
 
         if (savedAllIntentionData === null) this.#saveAllIntentions();
     }
-
 }
 
 export default IntentionService;
