@@ -1,7 +1,7 @@
 import { getCurrentDate } from "../utils/date.js";
 
 /*
-    An Intention is one of the core data models of the application. 
+    An Intention is the first core data models of the application. 
 
     It represents a single task created by the user and defines the complete
     shape of the task as an "Intention" as it passes throughout the system. 
@@ -18,7 +18,7 @@ import { getCurrentDate } from "../utils/date.js";
     an intention to a project.
 
     Overall, the Intention model acts as a single source of truth for an individual 
-    intention while other portions like the services, controllers and views handle 
+    intention while other portions like the services, views and controller handle 
     other application behavior and data presentation.
 */
 class Intention {
