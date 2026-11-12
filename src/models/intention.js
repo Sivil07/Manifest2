@@ -1,32 +1,25 @@
 import { getCurrentDate } from "../utils/date.js";
 
 /*
-    An intention defines the core piece of data that moves around the app. It represents
-    a single task in the user's list and stores the essential information that
-    describes the task. This includes: its id, the title, reason, dueDate, description if its 
-    completed. 
-    
-    Defining the Intention's shape in one place ensures, the service, the controller
-    and the view all rely on the same fields when accessing or manipulating intention data.
+    An Intention is one of the core data models of the application. 
 
-    An Intention knows nothing about how it is stored, displayed or interacted with. Each
-    part of the app handles it in its own way:
-    
-        - The IntentionService creates, stores, updates and saves Intentions. Saved data is stored
-          as JSON, so the service reconstructs real Intention instances when the app loads.
-        - The IntentionController coordinates user actions by passing a Intention's id or updated
-          fields between the view and the service in response to user actions.
-        - The IntentionView and IntentionItem display a Intention's data. The IntentionItem is a snapshot of
-          a Intention at the moment it was rendered and is recreated whenever the underlying Todo
-          changes.
-          
-    The Intention's method's only update its own fields. Decisions about which lists a Intention belongs
-    to, how it moves between lists, and when it is saved are handled entirely by the IntentionService.
-    
-    Overall, the Intention model serves as the source of truth for a single task. It defines that data
-    that flows through the system while the service manages its state, the view renders the UI
-    and the controller coordinates interactions between the UI and the state.
+    It represents a single task created by the user and defines the complete
+    shape of the task as an "Intention" as it passes throughout the system. 
 
+    Defining this structure in one place ensures that the controller, services, 
+    views and components all work with the same structure for the data when
+    accessing or manipulating intention data.
+
+    The Intention model does not manage storage, rendering, filtering or 
+    state.
+    
+    An intention only manages updates to its own properties through methods such
+    as updating the intention details, changing the completed status or assigning
+    an intention to a project.
+
+    Overall, the Intention model acts as a single source of truth for an individual 
+    intention while other portions like the services, controllers and views handle 
+    other application behavior and data presentation.
 */
 class Intention {
     constructor({ id = crypto.randomUUID(), title, reason, isChecked = false, dueDate, description = "", createdAt = getCurrentDate(), projectId}) {
@@ -40,7 +33,7 @@ class Intention {
         this.projectId = projectId;
     }
     
-    /* Used in IntentionForm */
+    /* Updates the details of an intention (used in IntentionForm) */
     applyUpdates({ title, reason, dueDate, description, projectId }) {
         this.title = title;
         this.reason = reason;
@@ -49,11 +42,12 @@ class Intention {
         this.projectId = projectId
     }
 
-    /* Used in MoveToForm */
+    /* Assigns the intention to a project or inbox (used in MoveToForm) */
     moveToProject(projectId) {
         this.projectId = projectId
     }
 
+    /* Updates the intention's completion status (used in IntentionForm) */
     setCompletedStatus(checkedData) {
         this.isChecked = checkedData;
     }
