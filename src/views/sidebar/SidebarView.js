@@ -1,3 +1,24 @@
+/*
+    SidebarView is the second of three views that render whole sections of the application. 
+    It receives static nodes from the page and renders the parts of the sidebar that 
+    change with the data. This includes the counts on the nav buttons and the list of projects.
+
+    The nav buttons themselves are written in the HTML file and never reRendered. This 
+    view only updates the number of active intentions for the today, upcoming and inbox 
+    pages and the number of projects (renderNavCounts), and rebuilds the project list 
+    (renderProjectList) from the data it is given. It never reads or changes the application's
+    data.
+
+    The view also receives two add buttons (projectsAddButton and intentionsAddButton). 
+    It does not use them itself. It holds them so the GlobalController can watch 
+    them for clicks to open either the IntentionForm for intentions or the ProjectForm 
+    for projects.
+
+    Overall, the SidebarView keeps the sidebar's counts and project list in sync with the 
+    latest data changes while managing the structure and rendering of the static 
+    dom nodes passed to it.
+*/
+
 class SideBarView {
     constructor(navSectionsContainer, projectListContainer, projectsAddButton, intentionsAddButton) {
         this.navSectionsContainer = navSectionsContainer;
@@ -5,6 +26,8 @@ class SideBarView {
         this.projectsAddButton = projectsAddButton;
         this.intentionsAddButton = intentionsAddButton;
     }
+
+    /* Methods for rendering statistics */
 
     /* Updates the the nav button counts so the UI reflects the 
        latest active intention counts for today, upcoming, inbox.
@@ -19,6 +42,8 @@ class SideBarView {
         inboxElement.textContent = inboxCount;
         projectElement.textContent = projectCount
     }
+
+    /* Methods for rendering components */
 
     /* Renders the list of projects within the sidebar.
        Clears the current project list container and then creates a 

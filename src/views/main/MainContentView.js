@@ -8,7 +8,6 @@ import { getWelcomeDate, getWelcomeMessage } from "../../utils/date.js";
 import { buildProgressCard } from "./components/factories/progress.js";
 import { renderDeleteProjectButton } from "./components/factories/button-actions.js";
 
-
 /*  
     MainContentView is the first of three views that render whole sections of the application. 
     It receives a static node from the page called "main-content" and renders everything 
@@ -28,7 +27,7 @@ import { renderDeleteProjectButton } from "./components/factories/button-actions
     section based on the page the user wants to see.
 */
 class MainContentView {
-    currentProjectId;
+    currentProjectId; // important for the reRender method to reRender a page from GlobalController
 
     constructor(mainContentContainer) {
         this.mainContentContainer = mainContentContainer;
