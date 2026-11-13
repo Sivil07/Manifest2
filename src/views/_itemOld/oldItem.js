@@ -1,7 +1,35 @@
 import { getCompletedByDayOfWeek } from "../../utils/date.js";
 
 /*
-    An IntentionItem is the on screen version of a single intention object. An intention
+    An IntentionItem is a custom element that displays a single intention and 
+    lets the user interact with it. An Intention holds the data and the 
+    IntentionItem defines how that data appears and how the user acts on it.
+    In this case, an <intention-item> shows a checkbox, the title, the reason and
+    a tag with the associate project or moveTo button if present and the due data
+
+    The item is given an Intention through the intentionData setter, which filles the 
+    UI and stores the intention's id. The item never changes the Intention. It only
+    displays the information the intention has. When the user does something, it announces
+    it with a custom event that carries only the intention's id and new information for the 
+    intention like th checked status. The controller handles that information to the 
+    IntentionService which finds the real intention and changes it before the page 
+    is reRendered. 
+
+    The events bubble up, so the controller can listen for them on a static container
+    
+
+
+
+
+
+
+
+
+
+
+
+
+An IntentionItem is the on screen version of a single intention object. An intention
     holds the data, and an intention-item defines how that data appears and how the user 
     interacts with it. It shows a checkbox, the title, the reason and a tag with the 
     due date.

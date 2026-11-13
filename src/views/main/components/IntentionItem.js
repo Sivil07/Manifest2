@@ -1,6 +1,44 @@
 import { renderMoveToProjectButton } from "./factories/button-actions.js";
 import { formatDueDateTag } from "../../../utils/date.js";
 
+/* 
+    An IntentionItem is a custom element that displays a single intention and lets
+    the user interact with it. An intention holds the data and the IntentionItem defines
+    how that data appears on how the user acts on it. An <intention-item> shows a checkbox,
+    the title, the reason, the due data and a project tag. When an intention has no project,
+    the tag is replaced with a move-to button so the user can sort it.
+
+    An <intention-item> is given its data through the IntentionData setter, which expects 
+    an Intention and the name of its project. It fills the UI and stores the intention's 
+    id and projectId. The setter is called once per <intention-item>. It never changes the 
+    Intention itself. When the user does something, it announces it with a custom event that
+    carries the ids and any new information, such as the checked status. The controller passes
+    that to the IntentionService, which finds the real intention and changes it before the page
+    is reRendered. 
+
+    The events bubble up so the controller can listen on them through the MainContentView that 
+    will have the <intention-item>s nested inside. The events include:
+
+        -move-intention-item: the checkbox was toggled so the detail carries the intention's id,
+         its projectId and the new checked status (true or false)/
+        -view-intention-item: the title and reason were clicked. The detail carries the intention's 
+         and projectId.
+        -open-move-form: the move-tot button was clicked. The detail carries the intention's id. 
+    
+    The move-to button is created by a factory function that does not know which intention it belongs
+    to. When clicked, it dispatches a forward-move-event, which the parent item inside the <intention-item>
+    listens for it and re-dispatches it as an open-move-forward event with the intention's id attached.
+
+    Each element in the shadow dom has a part attribute so the external stylesheet can style it 
+    with the it. 
+
+    Overall, an IntentionItem is a snapshot of an intention at that moment it was rendered. It does
+    not update itself when the intention changes. After every change in the service, the view clears
+    its section and create new <intention-items> from the update data so the screen shows the current 
+    state.
+*/
+
+
 const template = document.createElement("template");
 template.innerHTML = `
 <div part="intention-contents">
@@ -18,7 +56,7 @@ template.innerHTML = `
 </div>
 `
 
-class IntentionItemNew extends HTMLElement {
+class IntentionItem extends HTMLElement {
     #intentionId;
     #intentionProjectId
     constructor() {
@@ -27,6 +65,7 @@ class IntentionItemNew extends HTMLElement {
         shadow.append(template.content.cloneNode(true));
     }
 
+    /* Sets the intention's data within the IntentionItem, updating its content and appearance. */
     set intentionData(data) {
         const title = this.shadowRoot.querySelector(`[part="intention-title"]`);
         const reason = this.shadowRoot.querySelector(`[part="intention-reason"]`);
@@ -57,6 +96,7 @@ class IntentionItemNew extends HTMLElement {
 
     #updateProjectTag(hasProjectName, projectElement, projectName) {
         if (!hasProjectName) {
+            // Replace the project tag with a button to assign a project.
             const intentionTags = this.shadowRoot.querySelector(`[part="intention-tags"]`);
             const moveToButton = renderMoveToProjectButton();
             projectElement.remove();
@@ -114,4 +154,4 @@ class IntentionItemNew extends HTMLElement {
     }
 }
 
-customElements.define("intention-item", IntentionItemNew);
+customElements.define("intention-item", IntentionItem);
