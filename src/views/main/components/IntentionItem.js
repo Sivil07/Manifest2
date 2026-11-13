@@ -65,7 +65,7 @@ class IntentionItem extends HTMLElement {
         shadow.append(template.content.cloneNode(true));
     }
 
-    /* Sets the intention's data within the IntentionItem, updating its content and appearance. */
+    /* Sets an intention's data within a IntentionItem, updating its content and appearance. */
     set intentionData(data) {
         const title = this.shadowRoot.querySelector(`[part="intention-title"]`);
         const reason = this.shadowRoot.querySelector(`[part="intention-reason"]`);
