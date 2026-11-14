@@ -1,3 +1,22 @@
+/*
+    ProjectForm is a custom element used to create new projects.
+    It collects a project name and a project color selected from six 
+    predefined color options.
+
+    Unlike IntentionForm, which supports both creation and editing,
+    ProjectForm only supports creating new projects so it does not
+    require preloaded data.
+
+    When submitted, the form dispatches a save-project event containing 
+    the entered projectName and projectColor values.
+
+    If a duplicate project name is detected, the showError method displays 
+    the validation  message and clears the name field.
+
+    The component uses internal styles to hide the native radio button and 
+    provide custom focus styling for the color picker.
+*/
+
 const template = document.createElement("template");
 template.innerHTML = `
 <style>
