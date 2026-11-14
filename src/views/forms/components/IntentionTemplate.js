@@ -1,4 +1,4 @@
-import { renderMoveToProjectButton } from "../../main/components/factories/button-actions.js";
+import { renderMoveToProjectButton } from "../../main/factories/button-actions.js"; 
 import { formatDueDateTag } from "../../../utils/date.js";
 
 /*

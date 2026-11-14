@@ -26,7 +26,7 @@ import "./views/forms/components/move-to-form.css";
 /* Factory Styles */
 
 import "./views/forms/factories/dialog.css";
-import "./views/main/components/factories/section.css";
+import "./views/main/factories/section.css";
 
 /* Views */
 

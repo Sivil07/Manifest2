@@ -1,10 +1,10 @@
-import { renderAddProjectButton } from "./components/factories/button-actions.js";
-import { renderHeader, renderSpecificProjectHeader } from "./components/factories/header.js";
-import { renderSection } from "./components/factories/section.js";
-import { buildActiveList, buildCompletedList, renderCollection, renderCounter } from "./components/factories/collection-lists.js";
+import { renderAddProjectButton } from "./factories/button-actions.js";
+import { renderHeader, renderSpecificProjectHeader } from "./factories/header.js";
+import { renderSection } from "./factories/section.js";
+import { buildActiveList, buildCompletedList, renderCollection, renderCounter } from "./factories/collection-lists.js";
 import { getWelcomeDate, getWelcomeMessage } from "../../utils/date.js";
-import { buildProgressCard } from "./components/factories/progress.js";
-import { renderDeleteProjectButton } from "./components/factories/button-actions.js";
+import { buildProgressCard } from "./factories/progress.js";
+import { renderDeleteProjectButton } from "./factories/button-actions.js";
 
 /*  
     MainContentView is the first of three views that render whole sections of the application. 
