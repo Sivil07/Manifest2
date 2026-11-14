@@ -1,9 +1,35 @@
 import { renderProjectOption } from "../factories/move-options.js";
 
+/*
+    MoveToForm is a custom element that allows the user to change an intention's 
+    project assignment.
+
+    The form displays the Inbox and all available projects as a group of radio options. 
+    The intention's current location is automatically selected and marked as current 
+    when the form is rendered.
+
+    The formData setter receives the intention and available project data needed to build 
+    the selection list. It also tracks whether an IntentionTemplate is currently open so 
+    the controller can determine which UI elements should be refreshed or closed after the move
+    operation completes.
+
+    When submitted, the form dispatches an update-intention-project event containing the intention id, 
+    selected project id, and template state information. An empty project id represents the Inbox.
+
+    The component does not move intentions itself. Its responsibility is limited to presenting 
+    available destinations and collecting the user's selection.
+
+    The template contains internal styles that hide the native radio controls and provide custom 
+    styling for focused and selected project options like with the ProjectForm.
+*/
 
 const template = document.createElement("template");
 template.innerHTML = `
 <style>
+    input[type="radio"] {
+        appearance: none;
+    }
+        
     .highlight-label:has(.highlight-radio:focus) {
         background-color: var(--clr-lavender);
     }
@@ -12,7 +38,6 @@ template.innerHTML = `
         background-color: var(--clr-lavender);
     } 
 </style>
-
 
 <form part="move-to-form">
     <div part="move-to-header">
@@ -27,68 +52,6 @@ template.innerHTML = `
         <button type="submit" part="move-action submit-move">Move</button>
     </div>
 `
-
-// <label for="radio-1" part="project-option" class="highlight-label">
-//     <div part="project-option-info">
-//         <div part="project-color"></div>
-//         Inbox
-//         <input type="radio" id="radio-1" part="project-radio" class="highlight-radio" name="projectId" value="projectColor">
-//     </div>
-//     <p part="project-status">Current</p>
-// </label>
-// <label for="radio-2" part="project-option" class="highlight-label">
-//     <div part="project-option-info">
-//         <div part="project-color"></div>
-//         Work
-//         <input type="radio" id="radio-2" part="project-radio" class="highlight-radio" name="projectId" value="projectColor">
-//     </div>
-//     <p part="project-status"></p>
-// </label>
-// <label for="radio-3" part="project-option" class="highlight-label">
-//     <div part="project-option-info">
-//         <div part="project-color"></div>
-//         Home
-//         <input type="radio" id="radio-3" part="project-radio" class="highlight-radio" name="projectId" value="projectColor">
-//     </div>
-//     <p part="project-status"></p>
-// </label>
-
-// <form action="" class="move-to-form">
-//     <div class="form-header">
-//         <h2 class="title">Move To...</h2>
-//         <p class="subtitle">Choose a project for this intention</p>
-//     </div>
-//     <div class="radio-groups">
-//         <label for="radio-1" class="input-radio">
-//             <div class="intention-info">
-//                 <div class="color"></div>
-//                 Inbox
-//                 <input type="radio" id="radio-1" class="my-radio" name="projectId" value="projectColor">
-//             </div>
-//             <p class="selected">Current</p>
-//         </label>
-//         <label for="radio-2" class="input-radio">
-//             <div class="intention-info">
-//                 <div class="color"></div>
-//                 Work
-//                 <input type="radio" id="radio-2" class="my-radio" name="projectId" value="projectColor">
-//             </div>
-//             <p class="selected"></p>
-//         </label>
-//         <label for="radio-3" class="input-radio">
-//             <div class="intention-info">
-//                 <div class="color"></div>
-//                 Home
-//                 <input type="radio" id="radio-3" class="my-radio" name="projectId" value="projectColor">
-//             </div>
-//             <p class="selected"></p>
-//         </label>
-//     </div>
-//     <div class="form-actions">
-//         <button type="button" class="action cancel-move">Cancel</button>
-//         <button type="submit" class="action submit-move">Move</button>
-//     </div>
-
 class MoveToForm extends HTMLElement {
     #intentionId; 
     #isTemplateOpen;
@@ -98,6 +61,7 @@ class MoveToForm extends HTMLElement {
         shadow.append(template.content.cloneNode(true));
     }
 
+    /* Builds the move options and selects the intention's current location. */
     set formData(data) {
         const projectOptions = this.shadowRoot.querySelector(`[part="project-options"]`);
 

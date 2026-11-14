@@ -1,6 +1,32 @@
 import { renderMoveToProjectButton } from "../../main/components/factories/button-actions.js";
 import { formatDueDateTag } from "../../../utils/date.js";
 
+/*
+    IntentionTemplate is a custom element that displays the detailed view 
+    of a single intention. While IntentionItem represents an intention within
+    a list, IntentionTemplate presents information that is not visible from the
+    list view. This includes an intention's project assignment, due date, reason
+    and description.
+
+    The component receives an intention and project name through the templateData setter.
+    It does not directly modify intention data. Instead, it dispatches events that allow
+    the controller to coordinate edit, move and delete operations.
+
+    It dispatches the following events:
+        - edit-intention-item: carries the intention is and project id.
+        - delete-intention-item: carries the intention id
+        - open-move-form: carries the intention id and the isTemplate boolean
+          so the move event can determine whether the template is opened behind the form
+    
+    The Move To Project button is created through a factory function and does not know which intention
+    it belongs to. Similar to the IntentionItem, the button dispatches a forward-move-event so the 
+    <intention-template> can catch it and re-dispatch it to the controller with the information
+    attached.
+
+    Unlike the edit, move and delete actions, the close button simply removes the template from the 
+    page without dispatching an event.
+*/
+
 const template = document.createElement("template");
 template.innerHTML = `
 <div part="template-contents">
@@ -36,6 +62,7 @@ class IntentionTemplate extends HTMLElement {
         shadow.append(template.content.cloneNode(true));
     }
 
+    /* Updates the template's content using the supplied intention and project data. */
     set templateData(data) {
         const title = this.shadowRoot.querySelector(`[part="template-title"]`);
         const reason = this.shadowRoot.querySelector(`[part="template-reason"]`);
