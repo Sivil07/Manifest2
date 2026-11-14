@@ -1,3 +1,26 @@
+/*
+    ProjectLink is a custom element that represents a single project within 
+    the sidebar's project navigation.
+    
+    The SidebarView creates one ProjectLink for each project group and provides 
+    its data through the projectData setter. The component displays the project's 
+    color, name, and number of active intentions.
+
+    Unlike ProjectItem, which is rendered within the Projects page, ProjectLink is 
+    used exclusively for navigation. When selected, it dispatches a view-project 
+    event containing the project's id so the controller can load the corresponding 
+    specific project page.
+
+    The component does not retrieve project data itself and does not decide what 
+    happens when a project is selected. Its responsibility is limited to presenting 
+    project information and notifying the rest of the application when the user 
+    requests to view a project.
+
+    Like other custom elements in the application, ProjectLink is a snapshot of the 
+    data provided to it. The sidebar is rebuilt from the latest project data whenever 
+    the application state changes.
+*/
+
 const template = document.createElement("template");
 
 template.innerHTML = `
@@ -52,6 +75,5 @@ class ProjectLink extends HTMLElement {
         });
     }
 }
-
 
 customElements.define("project-link", ProjectLink);
