@@ -35,12 +35,12 @@ template.innerHTML = `
         <p part="temp-tag temp-due-date"></p>
     </div>
     <div part="template-display">
-        <h2 part="template-title">Do MY Assignment Tonight</h2>
-        <p part="template-reason">Because its due tomorrow</p>
+        <h2 part="template-title"></h2>
+        <p part="template-reason">/p>
     </div>
     <div part="template-desc-container">
         <p part="template-desc-header">description</p>
-        <p part="template-desc">Lots of Lots</p>
+        <p part="template-desc"></p>
     </div>
     <div part="template-actions">
         <button part="temp-action edit-intention">Edit</button>

@@ -36,7 +36,7 @@ import "./views/main/components/ProjectItem.js"
 import "./views/main/components/project-item.css";
 import "./views/forms/components/ProjectForm.js";
 import "./views/forms/components/project-form.css";
-import "./views/forms/components/IntentionFormNew.js";
+import "./views/forms/components/IntentionForm.js";
 import "./views/forms/components/intention-form.css";
 import "./views/main/components/IntentionItem.js";
 import "./views/main/components/intention-item.css";

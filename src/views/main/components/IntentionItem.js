@@ -46,12 +46,12 @@ template.innerHTML = `
         <input id="intention-check" type="checkbox" part="input-check">
     </label>
     <button type="button" part="intention-text">
-        <p part="intention-title">Commit Project</p>
-        <p part="intention-reason">I want To Be Able To fly</p>
+        <p part="intention-title"></p>
+        <p part="intention-reason"></p>
     </button>
     <div part="intention-tags">
         <p part="tag project-name"></p>
-        <p part="tag due-date">Fri - Nov 3rd</p>
+        <p part="tag due-date"></p>
     </div>
 </div>
 `
