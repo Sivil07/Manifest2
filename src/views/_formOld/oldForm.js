@@ -25,7 +25,7 @@ template.innerHTML = `
 </form>
 `
 
-class IntentionForm extends HTMLElement {
+class oldForm extends HTMLElement {
     #intentionId;
 
     constructor() {
@@ -76,4 +76,4 @@ class IntentionForm extends HTMLElement {
     }
 }
 
-customElements.define("intention-form-old", IntentionForm);
+customElements.define("intention-form-old", oldForm);

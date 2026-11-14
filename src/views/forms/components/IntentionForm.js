@@ -1,6 +1,47 @@
 import { renderProjectOption } from "../factories/select-option.js";
 import { setMinDate, getCurrentDate } from "../../../utils/date.js";
 
+/*
+    IntentionForm is a custom element responsible for collecting and editing 
+    intention data.
+
+    It is used for both creating new intentions and updating existing ones. 
+    The form determines which mode it is operating in from the data provided 
+    through the formData setter.
+
+    The component receives: 
+        - A list of projects used to build the project select menu.
+        - Existing intention data when editing.
+        - Empty values when creating a new intention.
+    
+    The form is responsible for:
+        - Rendering and populating the form fields.
+        - Building the project select options.
+        - Applying date validation and restrictions 
+        - Displaying form specific ui feedback
+        - Gathering form data for submission
+    
+    The form is not responsible for: 
+        - Creating intentions.
+        - Updating intentions.
+        - Saving data.
+        - Managing application state.
+    
+    These responsibilities belong to the GlobalController and the 
+    IntentionService.
+
+    When submitted, the form packages the user's input and dispatches a save-intention event. 
+    The controller decides whether the data should create a new intention or update 
+    an existing one.
+
+    When cancelled, the form dispatches close-form event so the dialog can be closed by 
+    the component that owns it.
+
+    Like the other custom elements in the application, IntentionForm acts as a temporary UI 
+    snapshot. It displays the data it is given, gathers user input, and communicates 
+    through events rather than directly interacting with services or localStorage.
+*/
+
 const template = document.createElement("template");
 template.innerHTML = `
 <form part="intention-form-contents">
@@ -38,7 +79,7 @@ template.innerHTML = `
     <p part="form-note">No project? It goes to your Inbox.</p>
 </form>
 `
-class IntentionFormNew extends HTMLElement {
+class IntentionForm extends HTMLElement {
     #intentionId;
     #projectId;
     constructor() {
@@ -47,6 +88,7 @@ class IntentionFormNew extends HTMLElement {
         shadow.append(template.content.cloneNode(true));
     }
 
+    /* Populates the form with intentionData and project options depending on creating or editing intentions. */ 
     set formData({ projectOptions = [], title = "", reason = "", id = undefined, projectId = "", dueDate = "", description = "" } = {}) {
         const header = this.shadowRoot.querySelector(`[part="form-header"]`);
         const submitButton = this.shadowRoot.querySelector(`[part~="submit-intention"]`)
@@ -119,4 +161,4 @@ class IntentionFormNew extends HTMLElement {
     }
 }
 
-customElements.define("intention-form", IntentionFormNew);
+customElements.define("intention-form", IntentionForm);
