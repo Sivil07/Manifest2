@@ -1,9 +1,7 @@
 import { renderAddProjectButton } from "./components/factories/button-actions.js";
-import { renderCollection } from "./components/factories/collection.js";
 import { renderHeader, renderSpecificProjectHeader } from "./components/factories/header.js";
 import { renderSection } from "./components/factories/section.js";
-import { buildActiveList, buildCompletedList } from "./components/factories/intention-lists.js";
-import { renderCounter } from "./components/factories/counter.js";
+import { buildActiveList, buildCompletedList, renderCollection, renderCounter } from "./components/factories/collection-lists.js";
 import { getWelcomeDate, getWelcomeMessage } from "../../utils/date.js";
 import { buildProgressCard } from "./components/factories/progress.js";
 import { renderDeleteProjectButton } from "./components/factories/button-actions.js";

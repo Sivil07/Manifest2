@@ -1,3 +1,5 @@
+/* Creates a Move To button that forwards move requests to its parent component. */
+
 function renderMoveToProjectButton() {
     const moveToButton = document.createElement("button");
     moveToButton.setAttribute("part", "move-button tag temp-action");
@@ -40,7 +42,7 @@ function renderAddProjectButton() {
     return addProject;
 }
 
-
+/* Creates a Delete Project button that dispatches delete-project when clicked. */
 function renderDeleteProjectButton() {
     const deleteProjectButton = document.createElement("button");
     deleteProjectButton.classList.add("delete-project");

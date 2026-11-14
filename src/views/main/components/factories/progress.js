@@ -1,3 +1,5 @@
+/* Progress card factories */
+
 function renderProgressContainer(count, maxCount) {
     const progressContainer = document.createElement("div");
     const progressBar = document.createElement("progress");
@@ -37,6 +39,7 @@ function renderProgressContents(count, maxCount) {
     return progressContents;
 }
 
+/* Builds a progress card showing the user's daily intention progress. */
 function buildProgressCard(count, maxCount) {
     const progressCard = document.createElement("div");
     const progressContents = renderProgressContents(count, maxCount);
