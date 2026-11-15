@@ -1,7 +1,7 @@
 /* Global Styles  */
 
 import "../public/css/fonts.css";
-import "../public/css/global.css";
+import "../public/css/base.css";
 
 /* Custom Elements */
 
