@@ -16,6 +16,8 @@ Manifest is a task management application built with JavaScript, Web Components,
 
 The goal of this project was to practice application architecture, state management, and Web Components while developing with vanilla JavaScript.
 
+🌐<a href="https://sivil07.github.io/Manifest2/" alt="Live Site">Live Site</a>
+
 ![Screenshot 1](./public/assets/imgs/screenshot_1.png)
 ![Screenshot 2](./public/assets/imgs/screenshot_2.png)
 ![Screenshot 3](./public/assets/imgs/screenshot_3.png)
