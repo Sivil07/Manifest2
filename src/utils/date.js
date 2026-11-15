@@ -1,5 +1,7 @@
 import { add, format } from "date-fns";
 
+/* Relative date helpers */
+
 function getNextDay() {
     return add(new Date(), {
         days: 1
@@ -24,6 +26,8 @@ function getCompletedByDayOfWeek(completedDate) {
 function getCurrentDate() {
     return format(new Date(), "yyyy-MM-dd");
 }
+
+/* Welcome message helpers */
 
 function getWelcomeDate() {
     return format(new Date(), "EEEE, LLL L");
@@ -57,6 +61,8 @@ function getGreetingForDayPeriod(dayPeriod) {
     }
     return welcomeMessage;
 }
+
+/* Date formatting helpers */
 
 function getDateParts(dueDate) {
     const [rawYear, rawMonth, rawDay] = dueDate.split("-")
