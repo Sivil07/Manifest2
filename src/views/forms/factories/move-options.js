@@ -18,6 +18,7 @@ function renderProjectName(projectName) {
     return nameElement;
 }
 
+/* Creates the status indicator and determines whether the project is the intention's current location. */
 function renderProjectStatus(intentionProjectId, projectId) {
     const status = document.createElement("p");
     status.setAttribute("part", "project-status");
@@ -55,6 +56,7 @@ function renderProjectOptionInfo(projectId, projectName, colorHexValue, count, i
     return projectOption;
 }
 
+/* Creates a selectable destination for MoveToForm and highlights the intention's current project. */
 function renderProjectOption(projectId, intentionProjectId, projectName, colorHexValue, count) {
     const label = document.createElement("label");
     const statusObj = renderProjectStatus(intentionProjectId, projectId);
