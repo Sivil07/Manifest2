@@ -1,3 +1,47 @@
+/*
+    The GlobalController the central coordinator of the application. It receives the user's 
+    actions, decides what should happen and coordinates the communication between the services 
+    and views to make it happen. It owns no application state of its own, does not render the
+    UI directly and never interacts with the localStorage.
+
+    The controller is the only layer that knows about both services and views. Services never 
+    communicate directly with views, views never communicate directly with services, and the 
+    services remain unaware of each other. When data must move between layers, the controller
+    acts as the intermediary.
+
+    For example, intention data from IntentionService is passed to ProjectService so project 
+    information can be paired with each intention for rendering. Likewise, when a project is 
+    deleted, the controller coordinates both ProjectService and IntentionService to remove the 
+    project and its associated intentions.
+
+    During construction, the controller attaches listeners to the application's static dom nodes. 
+    Custom events dispatched from custom elements bubble to either the body or the main content
+    container. This will allow the controller to respond to form submissions, project actions, 
+    intention actions, and navigation events.
+
+    Most controller operations follow the same pattern:
+
+        1. Read data from an event.
+        2. Ask a service to perform an operation.
+        3. Close any affected overlays.
+        4. reRender the current page.
+        5. Refresh the sidebar.
+    
+    Page rendering is determined by the currently selected page. For Today, Upcoming, Inbox, and Projects, 
+    the controller updates the IntentionService filter and renders the appropriate page. Specific project 
+    pages are handled separately using the currentProjectId maintained by MainContentView.
+
+    The controller also prepares data for rendering. Its build methods gather and transform information 
+    from the services into the data packages expected by the views so the views do not need to know where 
+    the data originated.
+
+    The initialize method runs once when the application starts. It loads data from both services, 
+    refreshes the sidebar, and displays the default Today page.
+
+    Overall, the GlobalController connects user interactions to application state and application state to 
+    the UI. this allows each layer of the architecture to remain focused on its own responsibilities.
+*/
+
 class GlobalController {
     constructor(intentionService, projectService, sideBarView, mainContainerView, dialogView) {
         this.intentionService = intentionService;
@@ -14,7 +58,7 @@ class GlobalController {
         const sideBarAddIntentionButton = this.sideBarView.intentionsAddButton;
         const navSectionsContainer = this.sideBarView.navSectionsContainer;
 
-        /* Global Events (Form Actions via body) */
+        /* Global Events (actions within body) */
 
         body.addEventListener("open-project-form", () => {
             this.dialogView.renderProjectForm();
@@ -99,7 +143,7 @@ class GlobalController {
             this.#reRenderCurrentPage(projectPackage);
         })
 
-        /* Main Container Events (interactions via mainContainer) */
+        /* Main Container Events (interactions within mainContainer) */
 
         mainContainer.addEventListener("move-intention-item", (e) => {
             const intentionPackage = e.detail.intentionPackage;
@@ -131,7 +175,7 @@ class GlobalController {
             this.#refreshSideBar();
         })
 
-        /* Sidebar Events (interactions via static nodes in navBar) */
+        /* Sidebar Events (interactions within navBar) */
 
         sideBarAddProjectButton.addEventListener("click", () => {
             this.dialogView.renderProjectForm();
