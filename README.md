@@ -99,7 +99,8 @@ When the application starts, each service checks `localStorage` for previously s
 
 This approach provides example data for the first time use while ensuring user created data persists between sessions.
 
-[!NOTE] The starter data intentionally includes intentions with different creation and due dates so the Today, Upcoming, Inbox, and Project views contain meaningful data on first launch.
+> [!NOTE]
+> The starter data intentionally includes intentions with different creation and due dates so the Today, Upcoming, Inbox, and Project views contain meaningful data on first launch.
 
 ## 📦 Getting Started
 
@@ -167,7 +168,7 @@ A list of commands you can perform.
 
 ## 🚀 Deployment
 
->[!NOTE]
+> [!NOTE]
 > These steps are only needed if you want to deploy your own version of the project to GitHub Pages. If you're just running the project locally, you can ignore this section.
 
 This project deploys to GitHub Pages from a `gh-page` branch and built from the bundled `dist/` directory.
