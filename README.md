@@ -104,6 +104,8 @@ This approach provides example data for the first time use while ensuring user c
 > [!NOTE]
 > The starter data intentionally includes intentions with different creation and due dates so the Today, Upcoming, Inbox, and Project views contain meaningful data on first launch.
 
+> [!WARNING]
+> Starter data is only loaded when no saved data exists in `localStorage`. To reload the starter data, remove Manifest's saved data from your browser's `localStorage` and refresh the page. This will also remove your saved intentions and projects.
 ## 📦 Getting Started
 
 ### 🧰 Prerequisites
